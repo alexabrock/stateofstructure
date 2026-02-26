@@ -1,10 +1,9 @@
 package com.hhu;
 
-import java.util.LinkedList;
+import com.hhu.datastructures.LinkedList;
 import java.util.List;
 
 import org.atpfivt.ljv.LJV;
-
 
 /**
  * Hello world!
@@ -13,6 +12,12 @@ import org.atpfivt.ljv.LJV;
 public class App {
     public static void main(String[] args) {
         System.out.println("Hello World!");
-        System.out.println(new LJV().drawGraph(List.of("Hello", "World")));
+        List<Integer> list = new LinkedList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+
+        System.out.println(list);
+
     }
 }

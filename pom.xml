@@ -37,27 +37,6 @@
 
   <build>
   <plugins>
-    <plugin>
-  <groupId>org.codehaus.mojo</groupId>
-  <artifactId>exec-maven-plugin</artifactId>
-  <version>3.1.0</version>
-
-  <executions>
-    <execution>
-      <id>run-app</id>
-      <goals>
-        <goal>java</goal>
-      </goals>
-      <configuration>
-        <mainClass>com.hhu.App</mainClass>
-
-        <fork>true</fork>
-
-        <jvmArgs>--add-opens=java.base/java.lang=ALL-UNNAMED</jvmArgs>
-      </configuration>
-    </execution>
-  </executions>
-</plugin>
 
     <plugin>
       <artifactId>maven-compiler-plugin</artifactId>
