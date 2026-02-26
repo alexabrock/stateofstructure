@@ -1,0 +1,12 @@
+mvn clean compile
+mvn exec:java
+
+mvn clean package dependency:copy-dependencies -DincludeScope=runtime
+java --add-opens=java.base/java.lang=ALL-UNNAMED -cp target\classes;target\dependency\* com.hhu.App
+
+
+java --add-opens=java.base/java.lang=ALL-UNNAMED `
+     -cp "target\classes;target\dependency\*" `
+     com.hhu.App
+
+java --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED -cp "target\classes;target\dependency\*" com.hhu.App
