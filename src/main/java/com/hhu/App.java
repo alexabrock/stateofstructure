@@ -1,7 +1,6 @@
 package com.hhu;
 
 import com.hhu.datastructures.LinkedList;
-import java.util.List;
 
 import org.atpfivt.ljv.LJV;
 
@@ -12,7 +11,7 @@ import org.atpfivt.ljv.LJV;
 public class App {
     public static void main(String[] args) {
         System.out.println("Hello World!");
-        List<Integer> list = new LinkedList<>();
+        LinkedList<Integer> list = new LinkedList<>();
         list.add(1);
         list.add(2);
         list.add(3);
