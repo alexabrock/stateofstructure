@@ -41,6 +41,8 @@ import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.function.Consumer;
 
+import com.hhu.util.IdGen;
+
 /**
  * Doubly-linked list implementation of the {@code List} and {@code Deque}
  * interfaces. Implements all optional list operations, and permits all
@@ -118,6 +120,12 @@ public class LinkedList<E>
      */
     transient Node<E> last;
 
+    /** ID Manager for individual nodes. Needed for Heap Visualization. Each Node gets an unique ID 
+     * The IDs are assigned in the methods like linkFirst, linkLast, linkBefore, which are the only methods that create new nodes. 
+     * The constructor of the Node class is modified to accept an ID as a parameter.
+     */
+    private final IdGen idGen = new IdGen();
+
     /*
      * void dataStructureInvariants() {
      * assert (size == 0)
@@ -145,7 +153,7 @@ public class LinkedList<E>
         addAll(c);
     }
 
-    //NEW: Needed, because both List and Deque have a reversed() method, and we want to avoid the diamond problem.
+    //Needed, because both List and Deque have a reversed() method, and we want to avoid the diamond problem.
     public LinkedList<E> reversed() {
         LinkedList<E> rev = new LinkedList<>();
         for (Node<E> x = last; x != null; x = x.prev) {
@@ -153,12 +161,15 @@ public class LinkedList<E>
         }
         return rev;
     }
+
+
+
     /**
      * Links e as first element.
      */
     private void linkFirst(E e) {
         final Node<E> f = first;
-        final Node<E> newNode = new Node<>(null, e, f);
+        final Node<E> newNode = new Node<>(null, e, f, idGen.nextId());
         first = newNode;
         if (f == null)
             last = newNode;
@@ -173,7 +184,7 @@ public class LinkedList<E>
      */
     void linkLast(E e) {
         final Node<E> l = last;
-        final Node<E> newNode = new Node<>(l, e, null);
+        final Node<E> newNode = new Node<>(l, e, null, idGen.nextId());
         last = newNode;
         if (l == null)
             first = newNode;
@@ -189,7 +200,7 @@ public class LinkedList<E>
     void linkBefore(E e, Node<E> succ) {
         // assert succ != null;
         final Node<E> pred = succ.prev;
-        final Node<E> newNode = new Node<>(pred, e, succ);
+        final Node<E> newNode = new Node<>(pred, e, succ,idGen.nextId());
         succ.prev = newNode;
         if (pred == null)
             first = newNode;
@@ -458,7 +469,7 @@ public class LinkedList<E>
         for (Object o : a) {
             @SuppressWarnings("unchecked")
             E e = (E) o;
-            Node<E> newNode = new Node<>(pred, e, null);
+            Node<E> newNode = new Node<>(pred, e, null, idGen.nextId());
             if (pred == null)
                 first = newNode;
             else
@@ -1010,11 +1021,18 @@ public class LinkedList<E>
         E item;
         Node<E> next;
         Node<E> prev;
+        long id;
+        
 
-        Node(Node<E> prev, E element, Node<E> next) {
+        Node(Node<E> prev, E element, Node<E> next, long id) {
             this.item = element;
             this.next = next;
             this.prev = prev;
+            this.id = id;
+        }
+
+        public long getId() {
+            return id;
         }
     }
 
