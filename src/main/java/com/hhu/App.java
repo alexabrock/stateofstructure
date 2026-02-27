@@ -1,7 +1,8 @@
 package com.hhu;
 
-import com.hhu.datastructures.LinkedList;
+import java.util.LinkedList;
 
+import org.atpfivt.ljv.Direction;
 import org.atpfivt.ljv.LJV;
 
 /**
@@ -18,5 +19,11 @@ public class App {
 
         System.out.println(list);
 
+        System.out.println(new LJV()
+                .setTreatAsPrimitive(Integer.class)
+                .setDirection(Direction.LR)
+                .drawGraph(list));
+
+        System.out.println("hellooooooo");
     }
 }
