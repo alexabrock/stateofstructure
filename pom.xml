@@ -18,19 +18,43 @@
   <dependencies>
 
 
-  <dependency>
-    <!-- Libary for visualization of Datastructures, Lightweight Java Visualizer-->
-    <groupId>org.atp-fivt</groupId>
-    <artifactId>ljv</artifactId>
-    <version>1.03</version>
-  </dependency>
+      <!-- Libary for visualization of Datastructures, Lightweight Java Visualizer-->
+    <dependency>
+      <groupId>org.atp-fivt</groupId>
+      <artifactId>ljv</artifactId>
+      <version>1.03</version>
+    </dependency>
 
+ <!-- Libary for Graph visualization. Graphviz Java-->
+    <dependency>
+      <groupId>guru.nidi</groupId>
+      <artifactId>graphviz-java</artifactId>
+      <version>0.18.1</version>
+    </dependency>
+    <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>1.2.13</version>
+    </dependency>
+
+
+    <!-- Libary for Graph visualization. Graphstream-->
+    <dependency>
+      <groupId>org.graphstream</groupId>
+      <artifactId>gs-core</artifactId>
+      <version>2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.graphstream</groupId>
+      <artifactId>gs-ui-swing</artifactId>
+      <version>2.0</version>
+    </dependency>
 
 
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
+      <version>4.13.2</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -43,16 +67,14 @@
   <version>3.1.0</version>
 
   <configuration>
-    <mainClass>com.hhu.App</mainClass>
-
-    <!-- JVM-Argumente als Liste (sauber) -->
-    <jvmArgs>
-      <jvmArg>--add-opens=java.base/java.lang=ALL-UNNAMED</jvmArg>
-      <jvmArg>--add-opens=java.base/java.util=ALL-UNNAMED</jvmArg>
-    </jvmArgs>
-
-    <!-- fork ist nötig, damit jvmArgs angewandt werden -->
-    <fork>true</fork>
+    <executable>java</executable>
+    <arguments>
+      <argument>--add-opens=java.base/java.lang=ALL-UNNAMED</argument>
+      <argument>--add-opens=java.base/java.util=ALL-UNNAMED</argument>
+      <argument>-cp</argument>
+      <classpath/>
+      <argument>com.hhu.GraphvizApp</argument>
+    </arguments>
   </configuration>
 
   <executions>
@@ -78,7 +100,7 @@
       <configuration>
         <transformers>
           <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-            <mainClass>com.hhu.App</mainClass>
+            <mainClass>com.hhu.GraphvizApp</mainClass>
           </transformer>
         </transformers>
       </configuration>
