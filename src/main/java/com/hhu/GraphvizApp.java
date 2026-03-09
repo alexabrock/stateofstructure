@@ -1,16 +1,9 @@
 package com.hhu;
 
 import java.awt.GraphicsEnvironment;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.LinkedList;
-
-import guru.nidi.graphviz.attribute.Color;
-import guru.nidi.graphviz.attribute.Rank;
-import guru.nidi.graphviz.attribute.Shape;
-import guru.nidi.graphviz.model.Graph;
-
-import static guru.nidi.graphviz.attribute.Rank.RankDir.LEFT_TO_RIGHT;
-import static guru.nidi.graphviz.model.Factory.graph;
-import static guru.nidi.graphviz.model.Factory.node;
 
 import com.hhu.views.application.Application;
 
@@ -23,46 +16,13 @@ public class GraphvizApp {
             return;
         }
 
-        LinkedList<Integer> list = new LinkedList<>();
-        list.add(1);
-        list.add(2);
-        list.add(3);
+        LinkedList<String> list = new LinkedList<>();
+        list.add("Hello");
+        list.add("Progra");
+        list.add("2026");
 
-        
-        String code = """
-                public class Demo {
-                    public static void main(String[] args) {
-                        LinkedList<Integer> list = new LinkedList<>();
-                        list.add(1);
-                        list.add(2);
-                        list.add(3);
-                        String dot = new LJV().drawGraph(list);
-                        System.out.println(dot);
-                    }
-                }""";
-
-        Application.startListApplication(code, list);
+        Path path = Paths.get("src/main/java/com/hhu/GraphvizApp.java");
+        Application.startListApplication(path, list);
     }
-
-
-
-
-
-
-    private static Graph buildGraphA() {
-        return graph("graphA").directed()
-                .graphAttr().with(Rank.dir(LEFT_TO_RIGHT))
-                .nodeAttr().with(Shape.RECTANGLE)
-                .with(
-                        node("Start").with(Color.GREEN3),
-                        node("Parse"),
-                        node("Validate"),
-                        node("Done").with(Color.BLUE))
-                .with(
-                        node("Start").link(node("Parse")),
-                        node("Parse").link(node("Validate")),
-                        node("Validate").link(node("Done")));
-    }
-
 
 }

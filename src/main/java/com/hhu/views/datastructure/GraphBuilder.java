@@ -18,10 +18,11 @@ public class GraphBuilder {
                 .nodeAttr().with(Shape.RECTANGLE);
 
         for (int i = 0; i < list.size(); i++) {
-            String nodeName = "Node" + list.get(i);
+            String nodeName = (String) list.get(i);
             g = g.with(node(nodeName));
             if (i > 0) {
-                g = g.with(node("Node" + list.get(i - 1)).link(node(nodeName)));
+                g = g.with(node((String) list.get(i - 1)).link(node(nodeName)));
+                g = g.with(node(nodeName).link(node((String) list.get(i - 1))));
             }
         }
         return g;
