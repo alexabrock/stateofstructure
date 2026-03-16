@@ -9,7 +9,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.BadLocationException;
@@ -68,13 +67,13 @@ public class PanelBuilder {
 
 
     private static JPanel createGraphPanel(String title, Graph graph) {
-        BufferedImage image = Graphviz.fromGraph(graph).width(550).render(Format.PNG).toImage();
+        BufferedImage image = Graphviz.fromGraph(graph).width(600).render(Format.PNG).toImage();
         return buildImagePanel(title, image);
     }
 
     private static JPanel createDotGraphPanel(String title, String dot) {
         try {
-            BufferedImage image = Graphviz.fromString(dot).width(550).render(Format.PNG).toImage();
+            BufferedImage image = Graphviz.fromString(dot).width(800).render(Format.PNG).toImage();
             return buildImagePanel(title, image);
         } catch (RuntimeException ex) {
             JLabel error = new JLabel("Could not render LJV DOT: " + ex.getMessage(), SwingConstants.CENTER);
