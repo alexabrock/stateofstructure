@@ -1,4 +1,7 @@
 package com.hhu.util;
+//Doesnt do much right now, will be a starting point for when I have 
+
+//added draw() calls from methods.
 
 public class StackReader {
     private final String[] stackLines;
@@ -18,7 +21,7 @@ public class StackReader {
         return String.join("\n", stackLines);
     }
 
-    
+
 
 
 }

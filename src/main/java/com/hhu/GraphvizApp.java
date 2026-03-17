@@ -6,12 +6,23 @@ import java.nio.file.Paths;
 import java.util.LinkedList;
 
 import com.hhu.datastructures.VLinkedList;
+import com.hhu.datastructures.VStack;
+import com.hhu.datastructures.VTreeMap;
 import com.hhu.views.application.Application;
 
 //Frame erstellen, der drei Bereiche hat: Links ein Bereich mit formatiertem Java-Code, in der Mitte eine Graphviz-Visualisierung eines einfachen gerichteten Graphen (Graph A) und rechts eine weitere Graphviz-Visualisierung eines anderen gerichteten Graphen (Graph B). 
 
 public class GraphvizApp {
     public static void main(String[] args) {
+        startVListApplication();
+
+        startVStackApplication();
+
+        startVTreeMapApplication();
+
+    }
+    
+    static void startVListApplication() {
         if (GraphicsEnvironment.isHeadless()) {
             System.out.println("Headless environment detected - Swing viewer is not available.");
             return;
@@ -25,5 +36,35 @@ public class GraphvizApp {
         Path path = Paths.get("src/main/java/com/hhu/GraphvizApp.java");
         Application.startListApplication(path, list);
     }
+    
 
+    static void startVStackApplication() {
+        if (GraphicsEnvironment.isHeadless()) {
+            System.out.println("Headless environment detected - Swing viewer is not available.");
+            return;
+        }
+
+        VStack<String> stack = new VStack<>();
+        stack.push("Hello");
+        stack.push("Progra");
+        stack.push("2026");
+
+        Path path = Paths.get("src/main/java/com/hhu/GraphvizApp.java");
+        Application.startListApplication(path, stack);
+    }
+
+    static void startVTreeMapApplication() {
+            if (GraphicsEnvironment.isHeadless()) {
+                System.out.println("Headless environment detected - Swing viewer is not available.");
+                return;
+            }
+    
+            VTreeMap<String, Integer> map = new VTreeMap<>();
+            map.put("hello", 1);
+            map.put("world", 2);
+            map.put("java", 3);
+    
+            Path path = Paths.get("src/main/java/com/hhu/GraphvizApp.java");
+            Application.startListApplication(path, map.entrySet());
+    }
 }
