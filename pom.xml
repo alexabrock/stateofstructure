@@ -78,6 +78,7 @@
     <arguments>
       <argument>--add-opens=java.base/java.lang=ALL-UNNAMED</argument>
       <argument>--add-opens=java.base/java.util=ALL-UNNAMED</argument>
+      <argument>--add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED</argument>
       <argument>-cp</argument>
       <classpath/>
       <argument>com.hhu.GraphvizApp</argument>

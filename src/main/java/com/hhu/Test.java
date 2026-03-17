@@ -4,7 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 
+import org.atpfivt.ljv.Direction;
 import org.atpfivt.ljv.LJV;
+
+import com.hhu.datastructures.VLinkedList;
 
 import guru.nidi.graphviz.attribute.Attributes;
 import guru.nidi.graphviz.attribute.Color;
@@ -26,12 +29,13 @@ import static guru.nidi.graphviz.model.Factory.to;
 
 public class Test {
     public static void main(String[] args) throws IOException {
-        LinkedList<Integer> list = new LinkedList<>();
-        list.add(1);
-        list.add(2);
-        list.add(3);
+        VLinkedList<String> list = new VLinkedList<>();
+        list.add("12");
+        list.add("22");
+        list.add("33");
 
-        String graphVizOutput = new LJV().drawGraph(list);
+        String graphVizOutput = new LJV()
+        .drawGraph(list);
         System.out.println(graphVizOutput);
 
         Graph g = graph("example1").directed()

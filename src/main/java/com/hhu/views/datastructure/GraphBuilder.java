@@ -2,6 +2,8 @@ package com.hhu.views.datastructure;
 
 import java.util.LinkedList;
 
+import com.hhu.datastructures.VLinkedList;
+
 import guru.nidi.graphviz.attribute.Rank;
 import guru.nidi.graphviz.attribute.Shape;
 import guru.nidi.graphviz.model.Graph;
@@ -12,7 +14,7 @@ import static guru.nidi.graphviz.model.Factory.node;
 
 public class GraphBuilder {
     
-        public static <E> Graph buildGraphFromList(LinkedList<E> list) {
+        public static <E> Graph buildGraphFromList(VLinkedList<String> list) {
         Graph g = graph("listGraph").directed()
                 .graphAttr().with(Rank.dir(LEFT_TO_RIGHT))
                 .nodeAttr().with(Shape.RECTANGLE);

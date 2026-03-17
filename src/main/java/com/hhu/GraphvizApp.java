@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.LinkedList;
 
+import com.hhu.datastructures.VLinkedList;
 import com.hhu.views.application.Application;
 
 //Frame erstellen, der drei Bereiche hat: Links ein Bereich mit formatiertem Java-Code, in der Mitte eine Graphviz-Visualisierung eines einfachen gerichteten Graphen (Graph A) und rechts eine weitere Graphviz-Visualisierung eines anderen gerichteten Graphen (Graph B). 
@@ -16,7 +17,7 @@ public class GraphvizApp {
             return;
         }
 
-        LinkedList<String> list = new LinkedList<>();
+        VLinkedList<String> list = new VLinkedList<>();
         list.add("Hello");
         list.add("Progra");
         list.add("2026");

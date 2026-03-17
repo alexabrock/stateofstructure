@@ -12,12 +12,13 @@ import org.atpfivt.ljv.LJV;
 
 import com.hhu.views.datastructure.GraphBuilder;
 import com.hhu.views.panelBuilder.PanelBuilder;
+import com.hhu.datastructures.VLinkedList;
 import com.hhu.util.FileReader;
 
 public class Application {
 
     /* Currently only tested on LinkedList */
-    public static <E> void startListApplication(Path path, LinkedList<E> list) {
+    public static <E> void startListApplication(Path path, VLinkedList<String> list) {
         String ljvDot = new LJV().setTreatAsPrimitive(Character.class).drawGraph(list);
         String code;
         try {
@@ -37,7 +38,7 @@ public class Application {
             frame.add(PanelBuilder.createMemoryPanel(ljvDot));
             frame.add(PanelBuilder.createDatastructurePanel(GraphBuilder.buildGraphFromList(list)));
 
-            frame.setSize(1700, 700);
+            frame.setSize(2700, 1700);
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
         });
