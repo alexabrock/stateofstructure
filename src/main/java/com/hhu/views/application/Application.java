@@ -38,7 +38,7 @@ public class Application {
             frame.add(PanelBuilder.createMemoryPanel(ljvDot));
             frame.add(PanelBuilder.createDatastructurePanel(GraphBuilder.buildGraphFromList(list)));
 
-            frame.setSize(2700, 1700);
+            frame.setSize(2700, 1200);
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
         });
