@@ -36,7 +36,7 @@ public class PanelBuilder {
         textArea.setText(code);
         textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
         textArea.setCodeFoldingEnabled(true);
-        textArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 19));
+        textArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 17));
         textArea.setEditable(false);
 
         textArea.setAntiAliasingEnabled(true);

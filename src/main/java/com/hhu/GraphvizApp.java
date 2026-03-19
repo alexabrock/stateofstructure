@@ -3,14 +3,11 @@ package com.hhu;
 import java.awt.GraphicsEnvironment;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.LinkedList;
 
 import com.hhu.datastructures.VLinkedList;
 import com.hhu.datastructures.VStack;
 import com.hhu.datastructures.VTreeMap;
 import com.hhu.views.application.Application;
-
-//Frame erstellen, der drei Bereiche hat: Links ein Bereich mit formatiertem Java-Code, in der Mitte eine Graphviz-Visualisierung eines einfachen gerichteten Graphen (Graph A) und rechts eine weitere Graphviz-Visualisierung eines anderen gerichteten Graphen (Graph B). 
 
 public class GraphvizApp {
     public static void main(String[] args) {
@@ -24,7 +21,7 @@ public class GraphvizApp {
     
     static void startVListApplication() {
         if (GraphicsEnvironment.isHeadless()) {
-            System.out.println("Headless environment detected - Swing viewer is not available.");
+            System.out.println("Headless environment detected ");
             return;
         }
 
@@ -40,7 +37,7 @@ public class GraphvizApp {
 
     static void startVStackApplication() {
         if (GraphicsEnvironment.isHeadless()) {
-            System.out.println("Headless environment detected - Swing viewer is not available.");
+            System.out.println("Headless environment detected");
             return;
         }
 
@@ -55,7 +52,7 @@ public class GraphvizApp {
 
     static void startVTreeMapApplication() {
             if (GraphicsEnvironment.isHeadless()) {
-                System.out.println("Headless environment detected - Swing viewer is not available.");
+                System.out.println("Headless environment detected");
                 return;
             }
     
@@ -65,6 +62,6 @@ public class GraphvizApp {
             map.put("java", 3);
     
             Path path = Paths.get("src/main/java/com/hhu/GraphvizApp.java");
-            Application.startListApplication(path, map.entrySet());
+            Application.startListApplication(path, map);
     }
 }
