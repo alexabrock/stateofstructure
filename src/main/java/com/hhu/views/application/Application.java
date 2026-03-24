@@ -9,7 +9,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import org.atpfivt.ljv.LJV;
 import java.awt.GraphicsEnvironment;
 
 import com.hhu.views.panelBuilder.PanelBuilder;
@@ -19,7 +18,6 @@ import guru.nidi.graphviz.model.Graph;
 import com.hhu.datastructures.VStack;
 import com.hhu.util.DrawStep;
 import com.hhu.util.FileReader;
-import com.hhu.util.graphBuilder.GraphBuilderFactory;
 
 public class Application {
     public static <E> void startApplication(Path path, Object collection) {
