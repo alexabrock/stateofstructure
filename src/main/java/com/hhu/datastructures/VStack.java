@@ -64,6 +64,7 @@ class VStack<E> extends Vector<E> {
      * Creates an empty Stack.
      */
     public VStack() {
+        drawCalls.add(DrawStep.fromStack(this, "Stack Konstruktor"));
     }
 
     /**
@@ -78,7 +79,7 @@ class VStack<E> extends Vector<E> {
      */
     public E push(E item) {
         addElement(item);
-        drawCalls.add(DrawStep.fromStack(this));
+        drawCalls.add(DrawStep.fromStack(this, "Stack.push()"));
 
         return item;
     }
@@ -98,7 +99,7 @@ class VStack<E> extends Vector<E> {
         obj = peek();
         removeElementAt(len - 1);
 
-        drawCalls.add(DrawStep.fromStack(this));
+        drawCalls.add(DrawStep.fromStack(this, "Stack.pop()"));
 
         return obj;
     }
@@ -116,7 +117,7 @@ class VStack<E> extends Vector<E> {
 
         if (len == 0)
             throw new EmptyStackException();
-        
+        drawCalls.add(DrawStep.fromStack(this, "Stack.peek()"));
         return elementAt(len - 1);
     }
 
@@ -127,6 +128,7 @@ class VStack<E> extends Vector<E> {
      *          no items; {@code false} otherwise.
      */
     public boolean empty() {
+        drawCalls.add(DrawStep.fromStack(this, "Stack.empty()"));
         return size() == 0;
     }
 
@@ -146,6 +148,8 @@ class VStack<E> extends Vector<E> {
      */
     public synchronized int search(Object o) {
         int i = lastIndexOf(o);
+
+        drawCalls.add(DrawStep.fromStack(this, "Stack.search()"));
 
         if (i >= 0) {
             return size() - i;
