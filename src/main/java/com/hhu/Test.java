@@ -2,9 +2,6 @@ package com.hhu;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.LinkedList;
-
-import org.atpfivt.ljv.Direction;
 import org.atpfivt.ljv.LJV;
 
 import com.hhu.datastructures.VLinkedList;

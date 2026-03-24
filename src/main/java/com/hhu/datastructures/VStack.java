@@ -26,7 +26,11 @@
 package com.hhu.datastructures;
 
 import java.util.EmptyStackException;
+import java.util.LinkedList;
 import java.util.Vector;
+
+import com.hhu.util.DrawStep;
+
 import java.util.Deque;
 
 /**
@@ -51,6 +55,11 @@ import java.util.Deque;
  */
 public
 class VStack<E> extends Vector<E> {
+
+    
+    private LinkedList<DrawStep> drawCalls = new LinkedList<>();
+    
+
     /**
      * Creates an empty Stack.
      */
@@ -69,6 +78,7 @@ class VStack<E> extends Vector<E> {
      */
     public E push(E item) {
         addElement(item);
+        drawCalls.add(DrawStep.fromStack(this));
 
         return item;
     }
@@ -88,6 +98,8 @@ class VStack<E> extends Vector<E> {
         obj = peek();
         removeElementAt(len - 1);
 
+        drawCalls.add(DrawStep.fromStack(this));
+
         return obj;
     }
 
@@ -104,6 +116,7 @@ class VStack<E> extends Vector<E> {
 
         if (len == 0)
             throw new EmptyStackException();
+        
         return elementAt(len - 1);
     }
 

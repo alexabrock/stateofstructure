@@ -17,17 +17,50 @@ import guru.nidi.graphviz.engine.Format;
 import guru.nidi.graphviz.engine.Graphviz;
 import guru.nidi.graphviz.model.Graph;
 
+import org.atpfivt.ljv.LJV;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
+
+import com.hhu.util.graphBuilder.GraphBuilderFactory;
+
 public class PanelBuilder {
-    public static JPanel createDatastructurePanel(Graph graph) {
+    public static JPanel createDatastructurePanel(Object collection) {
+        Graph graph = getDatastructureGraph(collection);
         return createGraphPanel("Datastructure Visualization", graph);
     }
 
-    public static JPanel createMemoryPanel(String dot) {
+   
+    public static JPanel createMemoryPanel(Object collection) {
+        String dot = getMemoryPanelDot(collection);
         return createDotGraphPanel("Memory Visualization", dot);
+    }
+
+    //Müssen public, damit DrawStep die sieht
+    public static Graph getDatastructureGraph(Object collection) {
+        return GraphBuilderFactory.getBuilder(collection).buildGraph(collection);
+    }
+
+    public static String getMemoryPanelDot(Object collection) {
+        return new LJV().setTreatAsPrimitive(Character.class)
+                //this is, so LJV doesnt traverse the drawCall Field, which led to timeouts
+                .addIgnoreField("drawCalls")
+
+                //this is, to make the graphic more readable
+                .addIgnoreField("hashIsZero")
+                .addIgnoreField("coder")
+                .addIgnoreField("modCount")
+                .addIgnoreField("capacityIncrement")
+                .addIgnoreField("comparator")
+                .addIgnoreField("keySet")
+                .addIgnoreField("navigableKeySet")
+                .addIgnoreField("entrySet")
+                .addIgnoreField("descendingMap")
+                .addIgnoreField("color")
+                .addIgnoreField("values")
+
+                .drawGraph(collection);
     }
 
 
@@ -47,10 +80,7 @@ public class PanelBuilder {
         } catch (BadLocationException e) {
             e.printStackTrace();
             System.out.println("Error highlighting line.");
-        }
-
-        
-
+        }   
         RTextScrollPane scrollPane = new RTextScrollPane(textArea);
 
         JLabel headline = new JLabel("Source Code", SwingConstants.CENTER);
@@ -97,4 +127,6 @@ public class PanelBuilder {
         panel.add(new JScrollPane(imageLabel), BorderLayout.CENTER);
         return panel;
     }
+
+
 }

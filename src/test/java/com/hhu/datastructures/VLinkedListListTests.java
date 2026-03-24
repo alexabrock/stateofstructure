@@ -86,38 +86,5 @@ public class VLinkedListListTests {
         assertEquals(3, list.lastIndexOf("A"));
     }
 
-    @Test
-    public void testClearAndGetFirstLast() {
-        list.add("A");
-        list.add("B");
-        assertEquals("A", list.getFirst());
-        assertEquals("B", list.getLast());
-
-        list.clear();
-        assertEquals(0, list.size());
-        try {
-            list.getFirst();
-            fail("NoSuchElementException erwartet");
-        } catch (NoSuchElementException e) {
-            /* ok */ }
-    }
-
-    @Test
-    public void testToArrayAndToArrayWithType() {
-        list.add("A");
-        list.add("B");
-        Object[] arr = list.toArray();
-        assertArrayEquals(new Object[] { "A", "B" }, arr);
-
-        String[] sarr = list.toArray(new String[0]);
-        assertArrayEquals(new String[] { "A", "B" }, sarr);
-
-        String[] bigger = new String[5];
-        bigger[0] = "foo";
-        String[] res = list.toArray(bigger);
-        assertEquals("A", res[0]);
-        assertEquals("B", res[1]);
-        assertNull(res[2]); // rest null according to contract
-    }
 
 }

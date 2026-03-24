@@ -1,13 +1,9 @@
 package com.hhu.util.GraphBuilder;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Stack;
-
 import org.junit.Test;
 
 import com.hhu.datastructures.VLinkedList;
@@ -18,7 +14,7 @@ import com.hhu.util.graphBuilder.api.GraphBuilder;
 
 import guru.nidi.graphviz.model.Graph;
 
-public class GraphBuilderTest {
+public class GraphBuilderFactoryTest {
 
     @Test
     public void testUseVListRenderer() {
@@ -29,7 +25,7 @@ public class GraphBuilderTest {
 
         Graph graph = builder.buildGraph(collection);
 
-        assertTrue(graph.name().toString().equals("listGraph"));
+        assertEquals(graph.name().toString(), "listGraph");
     }
 
     @Test
@@ -40,7 +36,7 @@ public class GraphBuilderTest {
 
         Graph graph = builder.buildGraph(collection);
 
-        assertTrue(graph.name().toString().equals("stackGraph"));
+        assertEquals(graph.name().toString(), "stackGraph");
     }
 
     @Test
@@ -51,7 +47,7 @@ public class GraphBuilderTest {
 
         Graph graph = builder.buildGraph(collection);
 
-        assertTrue(graph.name().toString().equals("mapGraph"));
+        assertEquals(graph.name().toString(), "mapGraph");
     }
     }
 
