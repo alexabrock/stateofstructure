@@ -11,11 +11,11 @@ import com.hhu.views.application.Application;
 
 public class GraphvizApp {
     public static void main(String[] args) {
-        startVListApplication();
+        //startVListApplication();
 
         startVStackApplication();
 
-        startVTreeMapApplication();
+        //startVTreeMapApplication();
 
     }
 

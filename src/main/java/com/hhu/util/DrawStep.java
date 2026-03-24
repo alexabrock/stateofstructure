@@ -9,13 +9,13 @@ import guru.nidi.graphviz.model.Graph;
 
 //Kann nicht direkt JPanels speichern, weil VStack dann eine JPanel Liste speichert und damit LJV Swing-Jpanels reflektieren muss
 
-public record DrawStep(String memoryDot, Graph structure, String methodName) {
+public record DrawStep(String memoryDot, Graph datastructure, String methodName) {
 
     public static <E> DrawStep fromStack(VStack<E> stack, String methodName) {
         String memoryDot = PanelBuilder.getMemoryPanelDot(stack);
 
-        Graph structure = PanelBuilder.getDatastructureGraph(stack);
+        Graph datastructure = PanelBuilder.getDatastructureGraph(stack);
 
-        return new DrawStep(memoryDot, structure, methodName);
+        return new DrawStep(memoryDot, datastructure, methodName);
     }
 }

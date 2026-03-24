@@ -46,6 +46,7 @@ public class PanelBuilder {
         return new LJV().setTreatAsPrimitive(Character.class)
                 //this is, so LJV doesnt traverse the drawCall Field, which led to timeouts
                 .addIgnoreField("drawCalls")
+                .addIgnoreField("currentStepIndex")
 
                 //this is, to make the graphic more readable
                 .addIgnoreField("hashIsZero")
@@ -95,13 +96,13 @@ public class PanelBuilder {
         return panel;
     }
 
-
-    private static JPanel createGraphPanel(String title, Graph graph) {
+    // müssen Public damit DrawStep die sieht
+    public static JPanel createGraphPanel(String title, Graph graph) {
         BufferedImage image = Graphviz.fromGraph(graph).width(600).render(Format.PNG).toImage();
         return buildImagePanel(title, image);
     }
-
-    private static JPanel createDotGraphPanel(String title, String dot) {
+    //müssen Public damit DrawStep die sieht
+    public static JPanel createDotGraphPanel(String title, String dot) {
         try {
             BufferedImage image = Graphviz.fromString(dot).width(800).render(Format.PNG).toImage();
             return buildImagePanel(title, image);

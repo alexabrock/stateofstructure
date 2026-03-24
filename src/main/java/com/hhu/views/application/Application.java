@@ -13,7 +13,11 @@ import org.atpfivt.ljv.LJV;
 import java.awt.GraphicsEnvironment;
 
 import com.hhu.views.panelBuilder.PanelBuilder;
+
+import guru.nidi.graphviz.model.Graph;
+
 import com.hhu.datastructures.VStack;
+import com.hhu.util.DrawStep;
 import com.hhu.util.FileReader;
 import com.hhu.util.graphBuilder.GraphBuilderFactory;
 
@@ -39,7 +43,7 @@ public class Application {
             JPanel centerPanel = createCenterPanel(codePanel, memoryPanel, datastructurePanel);
             frame.add(centerPanel, BorderLayout.CENTER);
 
-            JButton button = getButton(memoryPanel, centerPanel, collection);
+            JButton button = button(centerPanel, collection);
             frame.add(button, BorderLayout.SOUTH);
 
             frame.setSize(2700, 1200);
@@ -48,15 +52,32 @@ public class Application {
         });
     }
 
-    private static JButton getButton(JPanel toBeRemoved, JPanel residesIn, Object collection) {
+    private static JButton button( JPanel residesIn, Object collection) {
         JButton button = new JButton("Next");
         button.addActionListener(e -> {
-            ((VStack<String>) collection).add("a");
+            VStack<String> stack = (VStack<String>) collection;
 
-            residesIn.remove(toBeRemoved);
-            residesIn.add(PanelBuilder.createMemoryPanel(collection), 1);
-            residesIn.revalidate();
-            residesIn.repaint();
+            DrawStep step = stack.nextStep();
+
+            if (step != null) {
+                //replace memory panel
+            String memoryDot = step.memoryDot();
+            //this is really ugly wow
+            JPanel newMemoryPanel = PanelBuilder.createDotGraphPanel("Memory Visualization", memoryDot);
+                residesIn.remove(1);
+                residesIn.add(newMemoryPanel, 1);
+
+                // replace datastructure panel
+                Graph datastructure = step.datastructure();
+                JPanel newDatastructurePanel = PanelBuilder.createGraphPanel("Datastructure Visualization", datastructure);
+                residesIn.remove(2);
+                residesIn.add(newDatastructurePanel, 2);
+
+
+
+                residesIn.revalidate();
+                residesIn.repaint();
+            }
         });
         return button;
     }

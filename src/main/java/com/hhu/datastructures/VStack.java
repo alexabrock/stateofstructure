@@ -58,6 +58,18 @@ class VStack<E> extends Vector<E> {
 
     
     private LinkedList<DrawStep> drawCalls = new LinkedList<>();
+    private int currentStepIndex = 0;
+
+    public boolean hasNextStep() {
+        return currentStepIndex < drawCalls.size();
+    }
+
+    public DrawStep nextStep() {
+        if (!hasNextStep()) {
+            return null;
+        }
+        return drawCalls.get(currentStepIndex++);
+    }
     
 
     /**
