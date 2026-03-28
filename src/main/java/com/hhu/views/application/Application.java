@@ -101,6 +101,7 @@ public class Application {
 
         centerPanel.add(codePanel, BorderLayout.WEST);
         // CENTER stretches to fill remaining space
+        //TODO: MAke memory panel bigger
         centerPanel.add(memoryPanel, BorderLayout.CENTER);
         centerPanel.add(datastructurePanel, BorderLayout.EAST);
 
