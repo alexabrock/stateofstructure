@@ -12,58 +12,102 @@
 
 <properties>
   <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  <maven.compiler.release>17</maven.compiler.release>
+  <maven.compiler.release>21</maven.compiler.release>
 </properties>
 
   <dependencies>
 
 
-  <dependency>
-    <!-- Libary for visualization of Datastructures, Lightweight Java Visualizer-->
-    <groupId>org.atp-fivt</groupId>
-    <artifactId>ljv</artifactId>
-    <version>1.03</version>
-  </dependency>
+      <!-- Libary for visualization of Datastructures, Lightweight Java Visualizer-->
+    <dependency>
+      <groupId>org.atp-fivt</groupId>
+      <artifactId>ljv</artifactId>
+      <version>1.03</version>
+    </dependency>
 
+ <!-- Libary for Graph visualization. Graphviz Java-->
+    <dependency>
+      <groupId>guru.nidi</groupId>
+      <artifactId>graphviz-java</artifactId>
+      <version>0.18.1</version>
+    </dependency>
+    <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>1.2.13</version>
+    </dependency>
+
+
+    <!-- Libary for Graph visualization. Graphstream-->
+    <dependency>
+      <groupId>org.graphstream</groupId>
+      <artifactId>gs-core</artifactId>
+      <version>2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.graphstream</groupId>
+      <artifactId>gs-ui-swing</artifactId>
+      <version>2.0</version>
+    </dependency>
+
+  <!-- Libary for Code Formatting-->
+    <dependency>
+        <groupId>com.fifesoft</groupId>
+        <artifactId>rsyntaxtextarea</artifactId>
+        <version>3.3.3</version>
+    </dependency>
 
 
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
+      <version>4.13.2</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
 
   <build>
   <plugins>
-<plugin>
-  <groupId>org.codehaus.mojo</groupId>
-  <artifactId>exec-maven-plugin</artifactId>
-  <version>3.1.0</version>
 
-  <configuration>
-    <mainClass>com.hhu.App</mainClass>
+    <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <version>3.2.5</version>
+    <configuration>
+      <argLine>
+        --add-opens java.base/java.util=ALL-UNNAMED
+        --add-opens java.base/java.lang=ALL-UNNAMED
+        --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED
+      </argLine>
+    </configuration>
+    </plugin>
+    
+    <plugin>
+      <groupId>org.codehaus.mojo</groupId>
+      <artifactId>exec-maven-plugin</artifactId>
+      <version>3.1.0</version>
+          <configuration>
+            <executable>java</executable>
+            <arguments>
+              <argument>--add-opens=java.base/java.lang=ALL-UNNAMED</argument>
+              <argument>--add-opens=java.base/java.util=ALL-UNNAMED</argument>
+              <argument>--add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED</argument>
+              <argument>-Djava.awt.headless=false</argument>
+              <argument>-cp</argument>
+              <classpath/>
+              <argument>com.hhu.GraphvizApp</argument>
+            </arguments>
+          </configuration>
 
-    <!-- JVM-Argumente als Liste (sauber) -->
-    <jvmArgs>
-      <jvmArg>--add-opens=java.base/java.lang=ALL-UNNAMED</jvmArg>
-      <jvmArg>--add-opens=java.base/java.util=ALL-UNNAMED</jvmArg>
-    </jvmArgs>
-
-    <!-- fork ist nötig, damit jvmArgs angewandt werden -->
-    <fork>true</fork>
-  </configuration>
-
-  <executions>
-    <execution>
-      <id>run-app</id>
-      <goals>
-        <goal>java</goal>
-      </goals>
-    </execution>
-  </executions>
-</plugin>
+        <executions>
+          <execution>
+            <id>run-app</id>
+            <goals>
+              <goal>java</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
 
 <plugin>
   <groupId>org.apache.maven.plugins</groupId>
@@ -78,7 +122,7 @@
       <configuration>
         <transformers>
           <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-            <mainClass>com.hhu.App</mainClass>
+            <mainClass>com.hhu.GraphvizApp</mainClass>
           </transformer>
         </transformers>
       </configuration>
