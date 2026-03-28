@@ -1,21 +1,5 @@
 {
     "java.configuration.updateBuildConfiguration": "automatic",
-    "javaSwitcher.java.home": "C:\\Program Files\\Java\\jdk-25.0.2",
-    "java.jdt.ls.java.home": "C:\\Program Files\\Java\\jdk-25.0.2",
-    "java.import.gradle.java.home": "C:\\Program Files\\Java\\jdk-25.0.2",
-    "maven.terminal.customEnv": [
-        {
-            "environmentVariable": "JAVA_HOME",
-            "value": "C:\\Program Files\\Java\\jdk-25.0.2"
-        }
-    ],
-    "java.configuration.runtimes": [
-        {
-            "name": "JavaSE-25",
-            "path": "C:\\Program Files\\Java\\jdk-25.0.2",
-            "default": true
-        }
-    ],
     "terminal.integrated.profiles.windows": {
         "PowerShell": {
             "source": "PowerShell",
@@ -40,8 +24,7 @@
                 "chcp 65001 > nul"
             ],
             "env": {
-                "JAVA_HOME": "C:\\Program Files\\Java\\jdk-25.0.2",
-                "PATH": "C:\\Program Files\\Java\\jdk-25.0.2\\bin;${env:PATH}"
+                "PATH": "${env:PATH}"
             },
             "overrideName": true,
             "icon": "terminal-cmd"
@@ -49,6 +32,5 @@
     },
     "terminal.integrated.defaultProfile.windows": "Java Switcher",
     "terminal.integrated.enablePersistentSessions": false,
-    "terminal.integrated.tabs.hideCondition": "never",
-    "java.compile.nullAnalysis.mode": "automatic"
+    "terminal.integrated.tabs.hideCondition": "never"
 }
