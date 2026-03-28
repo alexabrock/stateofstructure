@@ -36,17 +36,16 @@ public class VTreeMapGraphBuilder implements GraphBuilder {
         List<Node> values = new ArrayList<>();
         List<LinkSource> links = new ArrayList<>();
 
-        for (Object entryObj : map.entrySet()) {
-            Map.Entry<?, ?> entry = (Map.Entry<?, ?>) entryObj;
+        for (Map.Entry<?, ?> entry : map.entrySet()) {
 
-            Node k = node(entry.getKey().toString());
-            Node v = node(entry.getValue().toString());
+            Node key = node(entry.getKey().toString());
+            Node value = node(entry.getValue().toString());
 
-            keys.add(k);
-            values.add(v);
-            links.add(k.link(v));
+            keys.add(key);
+            values.add(value);
+            links.add(key.link(value));
         }
-
+        //um Reihenfolge wiederherzustellen
         keys = keys.reversed();
         values = values.reversed();
 
@@ -67,7 +66,8 @@ public class VTreeMapGraphBuilder implements GraphBuilder {
                 .graphAttr().with(Rank.dir(LEFT_TO_RIGHT))
                 .nodeAttr().with(Shape.RECTANGLE,
                         Style.FILLED,
-                        Color.named("white").fill())
+                                        Color.named("white").fill())
+                //key und value graph zusammenführen
                 .with(
                         keyGraph,
                         valuesGraph)

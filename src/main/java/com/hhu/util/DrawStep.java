@@ -4,18 +4,13 @@ import javax.swing.JPanel;
 
 import com.hhu.datastructures.VStack;
 import com.hhu.views.panelBuilder.PanelBuilder;
+public record DrawStep(JPanel memory, JPanel datastructure, String methodName) {
+//currently only working for Stacks
+public static <E> DrawStep fromStack(VStack<E> stack, String methodName) {
+        
+        JPanel memory = PanelBuilder.createMemoryPanel(stack);
+        JPanel datastructure = PanelBuilder.createDatastructurePanel(stack);
 
-import guru.nidi.graphviz.model.Graph;
-
-//Kann nicht direkt JPanels speichern, weil VStack dann eine JPanel Liste speichert und damit LJV Swing-Jpanels reflektieren muss
-
-public record DrawStep(String memoryDot, Graph datastructure, String methodName) {
-
-    public static <E> DrawStep fromStack(VStack<E> stack, String methodName) {
-        String memoryDot = PanelBuilder.getMemoryPanelDot(stack);
-
-        Graph datastructure = PanelBuilder.getDatastructureGraph(stack);
-
-        return new DrawStep(memoryDot, datastructure, methodName);
+        return new DrawStep(memory, datastructure, methodName);
     }
 }

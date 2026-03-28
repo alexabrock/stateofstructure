@@ -34,7 +34,7 @@ public class VStackGraphBuilder<E> implements GraphBuilder {
         Node topPointer = node("top").with(Shape.PLAIN);
         Node bottomPointer = node("bottom").with(Shape.PLAIN);
 
-        // rank=same subgraphs
+        // rank=same subgraphs for top and bottom pointer
         Graph topRank = graph("topRank")
                 .graphAttr().with(Rank.inSubgraph(RankType.SAME))
                 .with(topPointer, nodes.get(0));
@@ -43,10 +43,10 @@ public class VStackGraphBuilder<E> implements GraphBuilder {
                 .graphAttr().with(Rank.inSubgraph(RankType.SAME))
                 .with(bottomPointer, nodes.get(stack.size() - 1));
 
+
         Graph g = graph("stackGraph").directed()
                 .graphAttr().with(Rank.dir(TOP_TO_BOTTOM))
-                .nodeAttr().with(Shape.RECTANGLE)
-                .with(nodes.toArray(new LinkSource[0]));
+                .nodeAttr().with(Shape.RECTANGLE);
 
         for (int i = 1; i < stack.size(); i++) {
             g = g.with(nodes.get(i - 1).link(nodes.get(i)));

@@ -18,23 +18,23 @@ public class VListGraphBuilder implements GraphBuilder {
         if (!(collection instanceof VLinkedList<?>)) {
                 throw new IllegalArgumentException("Expected VLinkedList");
             }
-
-        VLinkedList<?> list = (VLinkedList<?>) collection;
+        VLinkedList<Object> list = (VLinkedList<Object>) collection;
 
         Graph g = graph("listGraph").directed()
                 .graphAttr().with(Rank.dir(LEFT_TO_RIGHT))
                 .nodeAttr().with(Shape.RECTANGLE);
 
-        int index = 0;
-        for (Object element : list) {
-            String nodeName = element.toString() ;
+        for (int i = 0; i < list.size(); i++) {
+            String nodeName = list.get(i).toString();
             g = g.with(node(nodeName));
-            if (index > 0) {
-                String prevNodeName = list.stream().skip(index - 1).findFirst().orElse(null).toString() ;
+
+            if (i > 0) {
+                String prevNodeName = list.get(i - 1).toString();
+                // next pointer
                 g = g.with(node(prevNodeName).link(node(nodeName)));
-                g = g.with(node(nodeName).link(node( prevNodeName)));
+                // prev pointer
+                g = g.with(node(nodeName).link(node(prevNodeName)));
             }
-            index++;
         }
         return g;
     }

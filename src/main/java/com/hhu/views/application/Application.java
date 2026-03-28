@@ -13,15 +13,13 @@ import java.awt.GraphicsEnvironment;
 
 import com.hhu.views.panelBuilder.PanelBuilder;
 
-import guru.nidi.graphviz.model.Graph;
-
 import com.hhu.datastructures.VStack;
 import com.hhu.util.DrawStep;
 import com.hhu.util.FileReader;
 
 public class Application {
     public static <E> void startApplication(Path path, Object collection) {
-
+        //Swing needs this
         if (GraphicsEnvironment.isHeadless()) {
             System.out.println("Headless environment detected ");
             return;
@@ -41,16 +39,19 @@ public class Application {
             JPanel centerPanel = createCenterPanel(codePanel, memoryPanel, datastructurePanel);
             frame.add(centerPanel, BorderLayout.CENTER);
 
-            JButton button = button(centerPanel, collection);
-            frame.add(button, BorderLayout.SOUTH);
+            JPanel buttonPanel = new JPanel(); 
+            buttonPanel.add(prevButton(centerPanel, collection));
+            buttonPanel.add(nextButton(centerPanel, collection));
 
-            frame.setSize(2700, 1200);
+            frame.add(buttonPanel, BorderLayout.SOUTH);
+
+            frame.setSize(2500, 1200);
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
         });
     }
 
-    private static JButton button( JPanel residesIn, Object collection) {
+    private static JButton nextButton(JPanel residesIn, Object collection) {
         JButton button = new JButton("Next");
         button.addActionListener(e -> {
             VStack<String> stack = (VStack<String>) collection;
@@ -58,34 +59,50 @@ public class Application {
             DrawStep step = stack.nextStep();
 
             if (step != null) {
-                //replace memory panel
-            String memoryDot = step.memoryDot();
-            //this is really ugly wow
-            JPanel newMemoryPanel = PanelBuilder.createDotGraphPanel("Memory Visualization", memoryDot);
-                residesIn.remove(1);
-                residesIn.add(newMemoryPanel, 1);
+                replacePanels(residesIn, step);
+            }
+        });
+        return button;
+    }
+    
+    private static JButton prevButton(JPanel residesIn, Object collection) {
+        JButton button = new JButton("Previous");
+        button.addActionListener(e -> {
+            VStack<String> stack = (VStack<String>) collection;
 
-                // replace datastructure panel
-                Graph datastructure = step.datastructure();
-                JPanel newDatastructurePanel = PanelBuilder.createGraphPanel("Datastructure Visualization", datastructure);
-                residesIn.remove(2);
-                residesIn.add(newDatastructurePanel, 2);
+            DrawStep step = stack.prevStep();
 
-
-
-                residesIn.revalidate();
-                residesIn.repaint();
+            if (step != null) {
+                replacePanels(residesIn, step);
             }
         });
         return button;
     }
 
-    private static JPanel createCenterPanel(JPanel codePanel, JPanel memoryPanel, JPanel datastructurePanel) {
-        JPanel centerPanel = new JPanel(new GridLayout(1, 3, 8, 8));
+    private static void replacePanels(JPanel residesIn, DrawStep step) {
+        BorderLayout layout = (BorderLayout) residesIn.getLayout();
 
-        centerPanel.add(codePanel);
-        centerPanel.add(memoryPanel);
-        centerPanel.add(datastructurePanel);
+        // replace memory panel 
+        java.awt.Component oldMemory = layout.getLayoutComponent(BorderLayout.CENTER);
+        residesIn.remove(oldMemory);
+        residesIn.add(step.memory(), BorderLayout.CENTER);
+
+        // replace datastructure panel 
+        java.awt.Component oldDatastructure = layout.getLayoutComponent(BorderLayout.EAST);
+        residesIn.remove(oldDatastructure);
+        residesIn.add(step.datastructure(), BorderLayout.EAST);
+
+        residesIn.revalidate();
+        residesIn.repaint();
+    }
+
+    private static JPanel createCenterPanel(JPanel codePanel, JPanel memoryPanel, JPanel datastructurePanel) {
+        JPanel centerPanel = new JPanel(new BorderLayout(8, 8));
+
+        centerPanel.add(codePanel, BorderLayout.WEST);
+        // CENTER stretches to fill remaining space
+        centerPanel.add(memoryPanel, BorderLayout.CENTER);
+        centerPanel.add(datastructurePanel, BorderLayout.EAST);
 
         return centerPanel;
     }

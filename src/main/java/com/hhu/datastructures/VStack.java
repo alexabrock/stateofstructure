@@ -56,7 +56,6 @@ import java.util.Deque;
 public
 class VStack<E> extends Vector<E> {
 
-    
     private LinkedList<DrawStep> drawCalls = new LinkedList<>();
     private int currentStepIndex = 0;
 
@@ -66,11 +65,18 @@ class VStack<E> extends Vector<E> {
 
     public DrawStep nextStep() {
         if (!hasNextStep()) {
-            return null;
+            return drawCalls.getLast();
         }
-        return drawCalls.get(currentStepIndex++);
+        return drawCalls.get(currentStepIndex++); // show current, then advance
     }
-    
+
+    public DrawStep prevStep() {
+        if (currentStepIndex <= 1) {
+            return drawCalls.get(0);
+        }
+        currentStepIndex -= 2; // undo the last next-advance AND go one back
+        return drawCalls.get(currentStepIndex++); // show it, leave index just past it
+    }
 
     /**
      * Creates an empty Stack.
