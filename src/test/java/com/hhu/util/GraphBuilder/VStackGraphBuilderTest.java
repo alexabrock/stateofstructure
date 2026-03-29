@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import com.hhu.datastructures.VStack;
 import com.hhu.datastructures.VTreeMap;
-import com.hhu.util.graphBuilder.GraphBuilderFactory;
+import com.hhu.util.datastructureView.GraphBuilderFactory;
 
 //Mutable graph, weil man so schön an die einzelnen Nodes zum testen kommt
 import guru.nidi.graphviz.model.MutableGraph;

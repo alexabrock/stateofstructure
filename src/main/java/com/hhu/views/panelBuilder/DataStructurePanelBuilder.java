@@ -11,7 +11,7 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
-import com.hhu.util.graphBuilder.GraphBuilderFactory;
+import com.hhu.util.datastructureView.GraphBuilderFactory;
 
 import guru.nidi.graphviz.engine.Format;
 import guru.nidi.graphviz.engine.Graphviz;

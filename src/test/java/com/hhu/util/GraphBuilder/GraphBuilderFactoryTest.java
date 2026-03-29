@@ -9,8 +9,8 @@ import org.junit.Test;
 import com.hhu.datastructures.VLinkedList;
 import com.hhu.datastructures.VStack;
 import com.hhu.datastructures.VTreeMap;
-import com.hhu.util.graphBuilder.GraphBuilderFactory;
-import com.hhu.util.graphBuilder.api.GraphBuilder;
+import com.hhu.util.datastructureView.GraphBuilderFactory;
+import com.hhu.util.datastructureView.api.GraphBuilder;
 
 import guru.nidi.graphviz.model.Graph;
 
