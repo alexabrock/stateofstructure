@@ -7,15 +7,29 @@ import java.nio.file.Paths;
 import com.hhu.datastructures.VLinkedList;
 import com.hhu.datastructures.VStack;
 import com.hhu.datastructures.VTreeMap;
+import com.hhu.datastructures.VPrograList;
 import com.hhu.views.application.Application;
 
 public class GraphvizApp {
     public static void main(String[] args) {
         //startVListApplication();
 
-        startVStackApplication();
+        //startVStackApplication();
 
         //startVTreeMapApplication();
+
+        startVPrograListApplication();
+
+    }
+
+    static void startVPrograListApplication() {
+        VPrograList list = new VPrograList();
+        list.insert(1);
+        list.insert(2);
+        list.insert(3);
+
+        Path path = Paths.get("src/main/java/com/hhu/GraphvizApp.java");
+        Application.startApplication(path, list);
 
     }
 
