@@ -97,7 +97,7 @@ class VStack<E> extends Vector<E> {
      */
     public E push(E item) {
         addElement(item);
-        drawCalls.add(DrawStep.fromStack(this, "Stack.push()"));
+        drawCalls.add(DrawStep.fromStack(this, "Stack.push(" + item.toString() + ")"));
 
         return item;
     }
@@ -167,7 +167,7 @@ class VStack<E> extends Vector<E> {
     public synchronized int search(Object o) {
         int i = lastIndexOf(o);
 
-        drawCalls.add(DrawStep.fromStack(this, "Stack.search()"));
+        drawCalls.add(DrawStep.fromStack(this, "Stack.search(" + o.toString() + ")"));
 
         if (i >= 0) {
             return size() - i;

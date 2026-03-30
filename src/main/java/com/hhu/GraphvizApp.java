@@ -14,11 +14,11 @@ public class GraphvizApp {
     public static void main(String[] args) {
         //startVListApplication();
 
-        //startVStackApplication();
+        startVStackApplication();
 
         //startVTreeMapApplication();
 
-        startVPrograListApplication();
+        //startVPrograListApplication();
 
     }
 
@@ -52,6 +52,8 @@ public class GraphvizApp {
         stack.push("Progra");
         stack.push("middleElement");
         stack.push("2026");
+        stack.pop();
+        stack.search("Hello");
 
         Path path = Paths.get("src/main/java/com/hhu/GraphvizApp.java");
         Application.startApplication(path, stack);

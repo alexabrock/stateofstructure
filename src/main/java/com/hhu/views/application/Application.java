@@ -1,11 +1,13 @@
 package com.hhu.views.application;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.GridLayout;
 import java.nio.file.Path;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -35,8 +37,10 @@ public class Application {
             JPanel codePanel = PanelBuilder.createCodePanel(code);
             JPanel memoryPanel = PanelBuilder.createMemoryPanel(collection);
             JPanel datastructurePanel = PanelBuilder.createDatastructurePanel(collection);
+            //initiate Label with Datastructure Name
+            JLabel methodName = PanelBuilder.createMethodNameLabel(collection.getClass().toString());
 
-            JPanel centerPanel = createCenterPanel(codePanel, memoryPanel, datastructurePanel);
+            JPanel centerPanel = createCenterPanel(codePanel, memoryPanel, datastructurePanel, methodName);
             frame.add(centerPanel, BorderLayout.CENTER);
 
             JPanel buttonPanel = new JPanel(); 
@@ -83,20 +87,25 @@ public class Application {
         BorderLayout layout = (BorderLayout) residesIn.getLayout();
 
         // replace memory panel 
-        java.awt.Component oldMemory = layout.getLayoutComponent(BorderLayout.CENTER);
+        Component oldMemory = layout.getLayoutComponent(BorderLayout.CENTER);
         residesIn.remove(oldMemory);
         residesIn.add(step.memory(), BorderLayout.CENTER);
 
         // replace datastructure panel 
-        java.awt.Component oldDatastructure = layout.getLayoutComponent(BorderLayout.EAST);
+        Component oldDatastructure = layout.getLayoutComponent(BorderLayout.EAST);
         residesIn.remove(oldDatastructure);
         residesIn.add(step.datastructure(), BorderLayout.EAST);
+
+        //replace method name
+        Component oldMethodName = layout.getLayoutComponent(BorderLayout.NORTH);
+        residesIn.remove(oldMethodName);
+        residesIn.add(step.methodLabel(), BorderLayout.NORTH);
 
         residesIn.revalidate();
         residesIn.repaint();
     }
 
-    private static JPanel createCenterPanel(JPanel codePanel, JPanel memoryPanel, JPanel datastructurePanel) {
+    private static JPanel createCenterPanel(JPanel codePanel, JPanel memoryPanel, JPanel datastructurePanel, JLabel methodName) {
         JPanel centerPanel = new JPanel(new BorderLayout(8, 8));
 
         centerPanel.add(codePanel, BorderLayout.WEST);
@@ -104,6 +113,7 @@ public class Application {
         //TODO: MAke memory panel bigger
         centerPanel.add(memoryPanel, BorderLayout.CENTER);
         centerPanel.add(datastructurePanel, BorderLayout.EAST);
+        centerPanel.add(methodName, BorderLayout.NORTH);
 
         return centerPanel;
     }
