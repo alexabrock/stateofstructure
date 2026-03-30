@@ -15,6 +15,8 @@ import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
+import java.awt.Insets;
+
 final class CodePanelBuilder {
 
     private CodePanelBuilder() {
@@ -44,6 +46,7 @@ final class CodePanelBuilder {
         textArea.setEditable(false);
         textArea.setAntiAliasingEnabled(true);
         textArea.setCurrentLineHighlightColor(new Color(230, 230, 255));
+        textArea.setMargin(new Insets(10, 10, 10, 50));
 
         /* try {
             textArea.addLineHighlight(6, Color.YELLOW);

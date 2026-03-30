@@ -56,7 +56,12 @@
         <artifactId>rsyntaxtextarea</artifactId>
         <version>3.3.3</version>
     </dependency>
-
+    <!-- Libary for DarkMode-->
+    <dependency>
+        <groupId>com.formdev</groupId>
+        <artifactId>flatlaf</artifactId>
+        <version>3.4</version>
+    </dependency>
 
     <dependency>
       <groupId>junit</groupId>
@@ -65,6 +70,7 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  
 
   <build>
   <plugins>

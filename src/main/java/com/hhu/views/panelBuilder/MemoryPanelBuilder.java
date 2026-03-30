@@ -26,7 +26,7 @@ final class MemoryPanelBuilder {
 
         try {
 
-            BufferedImage image = Graphviz.fromString(dot).width(800).render(Format.PNG).toImage();
+            BufferedImage image = Graphviz.fromString(dot).width(900).render(Format.PNG).toImage();
             return GraphPanelRenderer.create(
                     "Memory Visualization",
                     image);

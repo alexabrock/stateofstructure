@@ -14,7 +14,8 @@ import javax.swing.SwingUtilities;
 import java.awt.GraphicsEnvironment;
 
 import com.hhu.views.panelBuilder.PanelBuilder;
-
+import com.formdev.flatlaf.FlatDarculaLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 import com.hhu.datastructures.VStack;
 import com.hhu.util.DrawStep;
 import com.hhu.util.FileReader;
@@ -28,6 +29,8 @@ public class Application {
         }
 
         String code = FileReader.fileToString(path);
+
+        FlatDarculaLaf.setup();
 
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame("State to Structure");
