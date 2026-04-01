@@ -29,6 +29,7 @@ import java.util.EmptyStackException;
 import java.util.LinkedList;
 import java.util.Vector;
 
+import com.hhu.util.DrawCalls;
 import com.hhu.util.DrawStep;
 
 import java.util.Deque;
@@ -44,60 +45,51 @@ import java.util.Deque;
  * <p>
  * When a stack is first created, it contains no items.
  *
- * <p>A more complete and consistent set of LIFO stack operations is
+ * <p>
+ * A more complete and consistent set of LIFO stack operations is
  * provided by the {@link Deque} interface and its implementations, which
- * should be used in preference to this class.  For example:
+ * should be used in preference to this class. For example:
+ * 
  * <pre>   {@code
- *   Deque<Integer> stack = new ArrayDeque<Integer>();}</pre>
+ * Deque<Integer> stack = new ArrayDeque<Integer>();
+ * }</pre>
  *
- * @author  Jonathan Payne
- * @since   1.0
+ * @author Jonathan Payne
+ * @since 1.0
  */
-public
-class VStack<E> extends Vector<E> {
+public class VStack<E> extends Vector<E> {
+    private DrawCalls drawCalls = new DrawCalls();
 
-    private LinkedList<DrawStep> drawCalls = new LinkedList<>();
-    private int currentStepIndex = 0;
-
-    public boolean hasNextStep() {
-        return currentStepIndex < drawCalls.size();
-    }
-
-    public DrawStep nextStep() {
-        if (!hasNextStep()) {
-            return drawCalls.getLast();
-        }
-        return drawCalls.get(currentStepIndex++); // show current, then advance
-    }
-
-    public DrawStep prevStep() {
-        if (currentStepIndex <= 1) {
-            return drawCalls.get(0);
-        }
-        currentStepIndex -= 2; // undo the last next-advance AND go one back
-        return drawCalls.get(currentStepIndex++); // show it, leave index just past it
+    public DrawCalls getDrawCalls() {
+        return drawCalls;
     }
 
     /**
      * Creates an empty Stack.
      */
     public VStack() {
-        drawCalls.add(DrawStep.fromStack(this, "Stack Konstruktor"));
+        drawCalls.record(this, "Stack Konstruktor");
     }
 
     /**
      * Pushes an item onto the top of this stack. This has exactly
      * the same effect as:
-     * <blockquote><pre>
-     * addElement(item)</pre></blockquote>
+     * <blockquote>
+     * 
+     * <pre>
+     * addElement(item)
+     * </pre>
+     * 
+     * </blockquote>
      *
-     * @param   item   the item to be pushed onto this stack.
-     * @return  the {@code item} argument.
-     * @see     java.util.Vector#addElement
+     * @param item the item to be pushed onto this stack.
+     * @return the {@code item} argument.
+     * @see java.util.Vector#addElement
      */
     public E push(E item) {
         addElement(item);
-        drawCalls.add(DrawStep.fromStack(this, "Stack.push(" + item.toString() + ")"));
+
+        drawCalls.record(this, "Stack.push()");
 
         return item;
     }
@@ -106,18 +98,18 @@ class VStack<E> extends Vector<E> {
      * Removes the object at the top of this stack and returns that
      * object as the value of this function.
      *
-     * @return  The object at the top of this stack (the last item
-     *          of the {@code Vector} object).
-     * @throws  EmptyStackException  if this stack is empty.
+     * @return The object at the top of this stack (the last item
+     *         of the {@code Vector} object).
+     * @throws EmptyStackException if this stack is empty.
      */
     public synchronized E pop() {
-        E       obj;
-        int     len = size();
+        E obj;
+        int len = size();
 
         obj = peek();
         removeElementAt(len - 1);
 
-        drawCalls.add(DrawStep.fromStack(this, "Stack.pop()"));
+        drawCalls.record(this, "Stack.pop()");
 
         return obj;
     }
@@ -126,27 +118,27 @@ class VStack<E> extends Vector<E> {
      * Looks at the object at the top of this stack without removing it
      * from the stack.
      *
-     * @return  the object at the top of this stack (the last item
-     *          of the {@code Vector} object).
-     * @throws  EmptyStackException  if this stack is empty.
+     * @return the object at the top of this stack (the last item
+     *         of the {@code Vector} object).
+     * @throws EmptyStackException if this stack is empty.
      */
     public synchronized E peek() {
-        int     len = size();
+        int len = size();
 
         if (len == 0)
             throw new EmptyStackException();
-        drawCalls.add(DrawStep.fromStack(this, "Stack.peek()"));
+        drawCalls.record(this, "Stack.peek()");
         return elementAt(len - 1);
     }
 
     /**
      * Tests if this stack is empty.
      *
-     * @return  {@code true} if and only if this stack contains
-     *          no items; {@code false} otherwise.
+     * @return {@code true} if and only if this stack contains
+     *         no items; {@code false} otherwise.
      */
     public boolean empty() {
-        drawCalls.add(DrawStep.fromStack(this, "Stack.empty()"));
+        drawCalls.record(this, "Stack.empty()");
         return size() == 0;
     }
 
@@ -159,15 +151,15 @@ class VStack<E> extends Vector<E> {
      * method is used to compare {@code o} to the
      * items in this stack.
      *
-     * @param   o   the desired object.
-     * @return  the 1-based position from the top of the stack where
-     *          the object is located; the return value {@code -1}
-     *          indicates that the object is not on the stack.
+     * @param o the desired object.
+     * @return the 1-based position from the top of the stack where
+     *         the object is located; the return value {@code -1}
+     *         indicates that the object is not on the stack.
      */
     public synchronized int search(Object o) {
         int i = lastIndexOf(o);
 
-        drawCalls.add(DrawStep.fromStack(this, "Stack.search(" + o.toString() + ")"));
+        drawCalls.record(this, "Stack.search()");
 
         if (i >= 0) {
             return size() - i;

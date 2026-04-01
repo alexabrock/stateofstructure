@@ -1,19 +1,30 @@
 package com.hhu.util;
 
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
+//DTO 
+public class DrawStep{
+    private JPanel memory;
+    private JPanel datastructure;
+    private JLabel methodLabel;
 
-import com.hhu.datastructures.VStack;
-import com.hhu.views.panelBuilder.PanelBuilder;
-public record DrawStep(JPanel memory, JPanel datastructure, JLabel methodLabel) {
-//currently only working for Stacks
-public static <E> DrawStep fromStack(VStack<E> stack, String methodLabel) {
+    public DrawStep(JPanel memory, JPanel datastructure, JLabel methodLabel) {
+        this.memory = memory;
+        this.datastructure = datastructure;
         
-        JPanel memory = PanelBuilder.createMemoryPanel(stack);
-        JPanel datastructure = PanelBuilder.createDatastructurePanel(stack);
-        JLabel method = PanelBuilder.createMethodNameLabel(methodLabel);
+        this.methodLabel = methodLabel;
+    }
+        
+    public JPanel memory() {
+        return memory;
+    }
 
-        return new DrawStep(memory, datastructure, method);
+    public JPanel datastructure() {
+        return datastructure;
+    }
+
+    public JLabel methodLabel() {
+        return methodLabel;
     }
 }
