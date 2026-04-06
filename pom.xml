@@ -101,7 +101,7 @@
               <argument>-Djava.awt.headless=false</argument>
               <argument>-cp</argument>
               <classpath/>
-              <argument>com.hhu.GraphvizApp</argument>
+              <argument>GraphvizApp</argument>
             </arguments>
           </configuration>
 
