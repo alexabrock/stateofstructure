@@ -29,6 +29,7 @@ import java.util.EmptyStackException;
 import java.util.LinkedList;
 import java.util.Vector;
 
+import com.hhu.datastructures.api.Visualizable;
 import com.hhu.util.DrawCalls;
 import com.hhu.util.DrawStep;
 
@@ -57,7 +58,7 @@ import java.util.Deque;
  * @author Jonathan Payne
  * @since 1.0
  */
-public class VStack<E> extends Vector<E> {
+public class VStack<E> extends Vector<E> implements Visualizable {
     private DrawCalls drawCalls = new DrawCalls();
 
     public DrawCalls getDrawCalls() {

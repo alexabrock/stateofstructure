@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.GridLayout;
 import java.nio.file.Path;
+import java.util.Collection;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,17 +12,21 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
+
 import java.awt.GraphicsEnvironment;
 
 import com.hhu.views.panelBuilder.PanelBuilder;
 import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.hhu.datastructures.VStack;
+import com.hhu.datastructures.api.Visualizable;
 import com.hhu.util.DrawCalls;
 import com.hhu.util.DrawStep;
-import com.hhu.util.FileReader;
+import com.hhu.util.FileManager;
 
 public class Application {
+
     public static <E> void startApplication(Path path, Object collection) {
         // Swing needs this
         if (GraphicsEnvironment.isHeadless()) {
@@ -29,7 +34,7 @@ public class Application {
             return;
         }
 
-        String code = FileReader.fileToString(path);
+        String code = FileManager.fileToString(path);
 
         FlatDarculaLaf.setup();
 
@@ -62,9 +67,9 @@ public class Application {
     private static JButton nextButton(JPanel residesIn, Object collection) {
         JButton button = new JButton("Next");
         button.addActionListener(e -> {
-            VStack<String> stack = (VStack<String>) collection;
+            Visualizable visualizable = (Visualizable) collection;
 
-            DrawCalls drawCalls = stack.getDrawCalls();
+            DrawCalls drawCalls = visualizable.getDrawCalls();
             DrawStep step = drawCalls.nextStep();
 
             if (step != null) {
@@ -77,9 +82,9 @@ public class Application {
     private static JButton prevButton(JPanel residesIn, Object collection) {
         JButton button = new JButton("Previous");
         button.addActionListener(e -> {
-            VStack<String> stack = (VStack<String>) collection;
+            Visualizable visualizable = (Visualizable) collection;
 
-            DrawCalls drawCalls = stack.getDrawCalls();
+            DrawCalls drawCalls = visualizable.getDrawCalls();
             DrawStep step = drawCalls.prevStep();
 
             if (step != null) {
@@ -106,6 +111,11 @@ public class Application {
         Component oldMethodName = layout.getLayoutComponent(BorderLayout.NORTH);
         residesIn.remove(oldMethodName);
         residesIn.add(step.methodLabel(), BorderLayout.NORTH);
+    
+        //replace code panel
+        Component oldCode = layout.getLayoutComponent(BorderLayout.WEST);
+        residesIn.remove(oldCode);
+        residesIn.add(step.codPanel(), BorderLayout.WEST);
 
         residesIn.revalidate();
         residesIn.repaint();
