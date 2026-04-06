@@ -27,14 +27,15 @@ import com.hhu.util.FileManager;
 
 public class Application {
 
-    public static <E> void startApplication(Path path, Object collection) {
+    public static <E> void startApplication(Object collection) {
         // Swing needs this
         if (GraphicsEnvironment.isHeadless()) {
             System.out.println("Headless environment detected ");
             return;
         }
-
-        String code = FileManager.fileToString(path);
+        Visualizable visualizable = (Visualizable) collection;
+        DrawCalls drawCalls = visualizable.getDrawCalls();
+        DrawStep firstStep = drawCalls.nextStep();
 
         FlatDarculaLaf.setup();
 
@@ -43,11 +44,12 @@ public class Application {
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setLayout(new BorderLayout());
 
-            JPanel codePanel = PanelBuilder.createCodePanel(code);
-            JPanel memoryPanel = PanelBuilder.createMemoryPanel(collection);
-            JPanel datastructurePanel = PanelBuilder.createDatastructurePanel(collection);
-            // initiate Label with Datastructure Name
-            JLabel methodName = PanelBuilder.createMethodNameLabel(collection.getClass().toString());
+            // need to initialize these, so the button logik is cleaner (button can just
+            // replace the existing code panels and doesnt need to check if they exist)
+            JPanel codePanel = firstStep.codPanel();
+            JPanel memoryPanel = firstStep.memory();
+            JPanel datastructurePanel = firstStep.datastructure();
+            JLabel methodName = firstStep.methodLabel();
 
             JPanel centerPanel = createCenterPanel(codePanel, memoryPanel, datastructurePanel, methodName);
             frame.add(centerPanel, BorderLayout.CENTER);
@@ -111,8 +113,8 @@ public class Application {
         Component oldMethodName = layout.getLayoutComponent(BorderLayout.NORTH);
         residesIn.remove(oldMethodName);
         residesIn.add(step.methodLabel(), BorderLayout.NORTH);
-    
-        //replace code panel
+
+        // replace code panel
         Component oldCode = layout.getLayoutComponent(BorderLayout.WEST);
         residesIn.remove(oldCode);
         residesIn.add(step.codPanel(), BorderLayout.WEST);

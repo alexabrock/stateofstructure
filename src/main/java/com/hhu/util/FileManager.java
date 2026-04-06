@@ -6,7 +6,7 @@ import java.nio.file.Path;
 
 public class FileManager {
 
-    public static String fileToString(Path path) {
+    private static String fileToString(Path path) {
         String content;
 
         try {

@@ -15,13 +15,13 @@ public class GraphvizApp {
     public static void main(String[] args) {
         //startVListApplication();
 
-        //startVStackApplication();
+        startVStackApplication();
 
         //startVTreeMapApplication();
 
         //startVPrograListApplication();
 
-        startVArrayListApplication();
+        //startVArrayListApplication();
 
     }
 
@@ -32,7 +32,7 @@ public class GraphvizApp {
         list.add(3);
 
         Path path = Paths.get("src/main/java/GraphvizApp.java");
-        Application.startApplication(path, list);
+        Application.startApplication(list);
     }
 
     static void startVPrograListApplication() {
@@ -42,7 +42,7 @@ public class GraphvizApp {
         list.insert(3);
 
         Path path = Paths.get("src/main/java/GraphvizApp.java");
-        Application.startApplication(path, list);
+        Application.startApplication( list);
 
     }
 
@@ -54,7 +54,7 @@ public class GraphvizApp {
         list.add("2026");
 
         Path path = Paths.get("src/main/java/GraphvizApp.java");
-        Application.startApplication(path, list);
+        Application.startApplication( list);
     }
 
     static void startVStackApplication() {
@@ -69,7 +69,7 @@ public class GraphvizApp {
         stack.search("Hello");
 
         Path path = Paths.get("src/main/java/GraphvizApp.java");
-        Application.startApplication(path, stack);
+        Application.startApplication( stack);
     }
 
     static void startVTreeMapApplication() {
@@ -81,6 +81,6 @@ public class GraphvizApp {
         map.put("java", 3);
 
         Path path = Paths.get("src/main/java/GraphvizApp.java");
-        Application.startApplication(path, map);
+        Application.startApplication( map);
     }
 }
