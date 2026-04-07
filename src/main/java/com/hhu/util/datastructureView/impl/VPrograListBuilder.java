@@ -31,7 +31,7 @@ public class VPrograListBuilder implements GraphBuilder{
             if (i > 0) {
                 String prevNodeName =  String.valueOf(list.at(i - 1));
                 // next pointer
-                g = g.with(node(prevNodeName).link(node(nodeName)));
+                //g = g.with(node(prevNodeName).link(node(nodeName)));
                 // prev pointer
                 g = g.with(node(nodeName).link(node(prevNodeName)));
             }

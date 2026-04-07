@@ -6,8 +6,8 @@
         </encoder>
     </appender>
 
-    <logger name="guru.nidi.graphviz" level="ERROR"/>
-    <logger name="com.kitfox.svg" level="ERROR"/>
+<!--     <logger name="guru.nidi.graphviz" level="ERROR"/>
+    <logger name="com.kitfox.svg" level="ERROR"/> -->
 
     <root level="ERROR">
         <appender-ref ref="STDOUT"/>

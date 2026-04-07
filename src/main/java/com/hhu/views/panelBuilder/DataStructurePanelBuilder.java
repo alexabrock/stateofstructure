@@ -1,13 +1,10 @@
 package com.hhu.views.panelBuilder;
 
 import java.awt.BorderLayout;
-import java.awt.Font;
 import java.awt.image.BufferedImage;
 
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 

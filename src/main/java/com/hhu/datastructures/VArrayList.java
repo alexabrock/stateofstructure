@@ -15,7 +15,8 @@ public class VArrayList<E> extends ArrayList<E> implements Visualizable{
     }
 
     public boolean add(E e) {
+        Boolean result = super.add(e);;
         drawCalls.record(this, "add()");
-        return super.add(e);
+        return result;
     }
 }

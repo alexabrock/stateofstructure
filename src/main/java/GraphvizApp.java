@@ -1,14 +1,8 @@
-
-
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 import com.hhu.datastructures.VArrayList;
 import com.hhu.datastructures.VLinkedList;
+import com.hhu.datastructures.VPrograList;
 import com.hhu.datastructures.VStack;
 import com.hhu.datastructures.VTreeMap;
-import com.hhu.datastructures.VPrograList;
 import com.hhu.views.application.Application;
 
 public class GraphvizApp {
@@ -26,12 +20,11 @@ public class GraphvizApp {
     }
 
     private static void startVArrayListApplication() {
-        VArrayList list = new VArrayList();
+        VArrayList<Integer> list = new VArrayList<>();
         list.add(1);
         list.add(2);
         list.add(3);
 
-        Path path = Paths.get("src/main/java/GraphvizApp.java");
         Application.startApplication(list);
     }
 
@@ -41,7 +34,6 @@ public class GraphvizApp {
         list.insert(2);
         list.insert(3);
 
-        Path path = Paths.get("src/main/java/GraphvizApp.java");
         Application.startApplication( list);
 
     }
@@ -53,7 +45,6 @@ public class GraphvizApp {
         list.add("Progra");
         list.add("2026");
 
-        Path path = Paths.get("src/main/java/GraphvizApp.java");
         Application.startApplication( list);
     }
 
@@ -68,7 +59,6 @@ public class GraphvizApp {
         stack.pop();
         stack.search("Hello");
 
-        Path path = Paths.get("src/main/java/GraphvizApp.java");
         Application.startApplication( stack);
     }
 
@@ -80,7 +70,6 @@ public class GraphvizApp {
         map.put("world", 2);
         map.put("java", 3);
 
-        Path path = Paths.get("src/main/java/GraphvizApp.java");
         Application.startApplication( map);
     }
 }

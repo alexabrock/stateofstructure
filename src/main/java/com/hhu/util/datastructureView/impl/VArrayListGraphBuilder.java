@@ -1,17 +1,15 @@
 package com.hhu.util.datastructureView.impl;
 
-import guru.nidi.graphviz.attribute.Rank;
-
-import com.hhu.datastructures.VArrayList;
-import com.hhu.datastructures.VLinkedList;
-import com.hhu.util.datastructureView.api.GraphBuilder;
-
-import guru.nidi.graphviz.attribute.Shape;
-import guru.nidi.graphviz.model.Graph;
-
 import static guru.nidi.graphviz.attribute.Rank.RankDir.LEFT_TO_RIGHT;
 import static guru.nidi.graphviz.model.Factory.graph;
 import static guru.nidi.graphviz.model.Factory.node;
+
+import com.hhu.datastructures.VArrayList;
+import com.hhu.util.datastructureView.api.GraphBuilder;
+
+import guru.nidi.graphviz.attribute.Rank;
+import guru.nidi.graphviz.attribute.Shape;
+import guru.nidi.graphviz.model.Graph;
 
 public class VArrayListGraphBuilder implements GraphBuilder {
     @Override

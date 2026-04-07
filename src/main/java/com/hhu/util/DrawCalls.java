@@ -3,15 +3,10 @@ package com.hhu.util;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import javax.imageio.stream.FileImageInputStream;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import org.fife.ui.rsyntaxtextarea.Theme;
-
-import com.hhu.datastructures.VStack;
 import com.hhu.views.panelBuilder.PanelBuilder;
-import com.hhu.util.FileManager;
 
 //Manages a List of DrawSteps
 public class DrawCalls {
