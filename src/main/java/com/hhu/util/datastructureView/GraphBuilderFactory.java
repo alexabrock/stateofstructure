@@ -17,7 +17,7 @@ public class GraphBuilderFactory {
     public static GraphBuilder getBuilder(Object collection) {
 
         if (collection instanceof VStack<?>) {
-            return new VStackGraphBuilder();
+            return new VStackGraphBuilder<>();
         }
 
         if (collection instanceof VLinkedList<?>) {
