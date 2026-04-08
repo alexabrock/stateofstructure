@@ -17,74 +17,63 @@ import org.fife.ui.rtextarea.RTextScrollPane;
 
 final class CodePanelBuilder {
 
-    private CodePanelBuilder() {
+    private static final Font HEADLINE_FONT = new Font(Font.SANS_SERIF, Font.BOLD, 20);
+
+    private static final Font CODE_FONT = new Font(Font.MONOSPACED, Font.PLAIN, 17);
+
+    private static final Color CURRENT_LINE_COLOR = new Color(230, 230, 255);
+    
+    private static final Color LINE_HIGHLIGHT_COLOR = new Color(255, 249, 196);
+
+    private CodePanelBuilder() {}
+
+    public static JPanel create(String code) {
+        return create(code, -1);
     }
 
-    static JPanel create(String code) {
-        RSyntaxTextArea textArea = createTextArea(code);
+    public static JPanel create(String code, int lineNumber) {
+        RSyntaxTextArea textArea = createTextArea(code, lineNumber);
         RTextScrollPane scrollPane = new RTextScrollPane(textArea);
 
         JLabel headline = new JLabel("Source Code", SwingConstants.CENTER);
-        headline.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
+        headline.setFont(HEADLINE_FONT);
 
         JPanel panel = new JPanel(new BorderLayout(0, 8));
         panel.setBorder(new TitledBorder("Code"));
+
         panel.add(headline, BorderLayout.NORTH);
         panel.add(scrollPane, BorderLayout.CENTER);
 
         return panel;
     }
 
-    static RSyntaxTextArea createTextArea(String code) {
+    private static RSyntaxTextArea createTextArea(String code, int lineNumber) {
+
         RSyntaxTextArea textArea = new RSyntaxTextArea();
+
         textArea.setText(code);
         textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
         textArea.setCodeFoldingEnabled(true);
-        textArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 17));
+        textArea.setFont(CODE_FONT);
         textArea.setEditable(false);
         textArea.setAntiAliasingEnabled(true);
-        textArea.setCurrentLineHighlightColor(new Color(230, 230, 255));
+        textArea.setCurrentLineHighlightColor(CURRENT_LINE_COLOR);
         textArea.setMargin(new Insets(10, 10, 10, 50));
+
+        highlightLineIfNeeded(textArea, lineNumber);
 
         return textArea;
     }
 
-    // what i want: get a new JPanel codePanel with the right line highlited . this
-    // panel will be stored in the drawstep class and then replaced each time the
-    // buttons get pressed.
-    public static JPanel create(String code, int lineNumber) {
-        RSyntaxTextArea textArea = createHighlitedTextArea(code, lineNumber);
-        RTextScrollPane scrollPane = new RTextScrollPane(textArea);
-
-        JLabel headline = new JLabel("Source Code", SwingConstants.CENTER);
-        headline.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
-
-        JPanel panel = new JPanel(new BorderLayout(0, 8));
-        panel.setBorder(new TitledBorder("Code"));
-        panel.add(headline, BorderLayout.NORTH);
-        panel.add(scrollPane, BorderLayout.CENTER);
-
-        return panel;
-    }
-
-    static RSyntaxTextArea createHighlitedTextArea(String code, int lineNumber) {
-        RSyntaxTextArea textArea = new RSyntaxTextArea();
-        textArea.setText(code);
-        textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
-        textArea.setCodeFoldingEnabled(true);
-        textArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 17));
-        textArea.setEditable(false);
-        textArea.setAntiAliasingEnabled(true);
-        textArea.setCurrentLineHighlightColor(new Color(230, 230, 255));
-        textArea.setMargin(new Insets(10, 10, 10, 50));
+    private static void highlightLineIfNeeded( RSyntaxTextArea textArea, int lineNumber) {
+        if (lineNumber < 0) {
+            return;
+        }
 
         try {
-            textArea.addLineHighlight(lineNumber, Color.YELLOW);
+            textArea.addLineHighlight(lineNumber, LINE_HIGHLIGHT_COLOR);
         } catch (BadLocationException e) {
             e.printStackTrace();
         }
-
-        return textArea;
     }
-
 }
