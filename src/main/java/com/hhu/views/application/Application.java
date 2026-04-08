@@ -2,9 +2,7 @@ package com.hhu.views.application;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.GridLayout;
-import java.nio.file.Path;
-import java.util.Collection;
+import java.awt.GraphicsEnvironment;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,18 +10,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
-
-import java.awt.GraphicsEnvironment;
-
-import com.hhu.views.panelBuilder.PanelBuilder;
 import com.formdev.flatlaf.FlatDarculaLaf;
-import com.formdev.flatlaf.FlatLightLaf;
-import com.hhu.datastructures.VStack;
 import com.hhu.datastructures.api.Visualizable;
 import com.hhu.util.DrawCalls;
 import com.hhu.util.DrawStep;
-import com.hhu.util.FileManager;
 
 public class Application {
 
