@@ -1,4 +1,4 @@
-package com.hhu.datastructures.api;
+package com.hhu.legacyDatastructures.api;
 
 import com.hhu.util.DrawCalls;
 

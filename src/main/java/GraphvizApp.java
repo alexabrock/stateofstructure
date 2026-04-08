@@ -1,10 +1,11 @@
+import java.util.ArrayList;
 import java.util.Stack;
 
-import com.hhu.datastructures.VArrayList;
-import com.hhu.datastructures.VLinkedList;
-import com.hhu.datastructures.VPrograList;
-import com.hhu.datastructures.VStack;
-import com.hhu.datastructures.VTreeMap;
+import com.hhu.legacyDatastructures.VArrayList;
+import com.hhu.legacyDatastructures.VLinkedList;
+import com.hhu.legacyDatastructures.VStack;
+import com.hhu.legacyDatastructures.VTreeMap;
+import com.hhu.prograDatastructures.PrograList;
 import com.hhu.util.DrawCalls;
 import com.hhu.views.application.Application;
 
@@ -22,9 +23,11 @@ public class GraphvizApp {
 
         startVStackApplicationWithFunnyDrawCalls();
 
+        //startVArrayListApplicationWithFunnyDrawCalls();
+
     }
 
-      static void startVStackApplicationWithFunnyDrawCalls() {
+    static void startVStackApplicationWithFunnyDrawCalls() {
         DrawCalls drawCalls = new DrawCalls();
 
         Stack<String> stack = new Stack<>();
@@ -37,7 +40,20 @@ public class GraphvizApp {
         stack.pop();
         stack.search("Hello");
 
-        Application.startApplication( drawCalls);
+        Application.startApplication(drawCalls);
+    }
+    
+    static void startVArrayListApplicationWithFunnyDrawCalls() {
+        DrawCalls drawCalls = new DrawCalls();
+
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(1);
+        drawCalls.record(list, "push()");
+        list.add(2);
+        drawCalls.record(list, "push()");
+        list.add(3);
+
+        Application.startApplication(drawCalls);
     }
 
     private static void startVArrayListApplication() {
@@ -50,7 +66,7 @@ public class GraphvizApp {
     }
 
     static void startVPrograListApplication() {
-        VPrograList list = new VPrograList();
+        PrograList list = new PrograList();
         list.insert(1);
         list.insert(2);
         list.insert(3);

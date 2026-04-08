@@ -5,8 +5,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.hhu.datastructures.VLinkedList;
-import com.hhu.datastructures.VTreeMap;
+import com.hhu.legacyDatastructures.VLinkedList;
+import com.hhu.legacyDatastructures.VTreeMap;
 import com.hhu.util.datastructureView.GraphBuilderFactory;
 
 //Mutable graph, weil man so schön an die einzelnen Nodes zum testen kommt

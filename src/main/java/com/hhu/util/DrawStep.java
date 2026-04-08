@@ -1,10 +1,10 @@
 package com.hhu.util;
 
-
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 //DTO 
-public class DrawStep{
+public class DrawStep {
     private JPanel memory;
     private JPanel datastructure;
     private JLabel methodLabel;
@@ -20,7 +20,7 @@ public class DrawStep{
     public JPanel codPanel() {
         return codePanel;
     }
-    
+
     public JPanel memory() {
         return memory;
     }

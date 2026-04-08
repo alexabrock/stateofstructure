@@ -1,11 +1,12 @@
 package com.hhu.util.datastructureView.impl;
 
-import com.hhu.datastructures.VTreeMap;
+import com.hhu.legacyDatastructures.VTreeMap;
 import com.hhu.util.datastructureView.api.GraphBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import guru.nidi.graphviz.attribute.Color;
 import guru.nidi.graphviz.attribute.Label;
@@ -21,16 +22,16 @@ import static guru.nidi.graphviz.model.Factory.node;
 import guru.nidi.graphviz.model.Node;
 import guru.nidi.graphviz.model.LinkSource;
 
-public class VTreeMapGraphBuilder implements GraphBuilder {
+public class TreeMapGraphBuilder implements GraphBuilder {
 
     @Override
     public Graph buildGraph(Object collection) {
 
-        if (!(collection instanceof VTreeMap<?, ?>)) {
-            throw new IllegalArgumentException("Expected VTreeMap");
+        if (!(collection instanceof TreeMap<?, ?>)) {
+            throw new IllegalArgumentException("Expected TreeMap");
         }
 
-        VTreeMap<?, ?> map = (VTreeMap<?, ?>) collection;
+        TreeMap<?, ?> map = (TreeMap<?, ?>) collection;
 
         List<Node> keys = new ArrayList<>();
         List<Node> values = new ArrayList<>();
@@ -45,7 +46,7 @@ public class VTreeMapGraphBuilder implements GraphBuilder {
             values.add(value);
             links.add(key.link(value));
         }
-        //um Reihenfolge wiederherzustellen
+        // um Reihenfolge wiederherzustellen
         keys = keys.reversed();
         values = values.reversed();
 
@@ -66,8 +67,8 @@ public class VTreeMapGraphBuilder implements GraphBuilder {
                 .graphAttr().with(Rank.dir(LEFT_TO_RIGHT))
                 .nodeAttr().with(Shape.RECTANGLE,
                         Style.FILLED,
-                                        Color.named("white").fill())
-                //key und value graph zusammenführen
+                        Color.named("white").fill())
+                // key und value graph zusammenführen
                 .with(
                         keyGraph,
                         valuesGraph)

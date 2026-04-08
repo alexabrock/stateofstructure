@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
-import com.hhu.datastructures.api.Visualizable;
+import com.hhu.legacyDatastructures.api.Visualizable;
 import com.hhu.util.DrawCalls;
 import com.hhu.util.DrawStep;
 
@@ -23,8 +23,8 @@ public class Application {
             System.out.println("Headless environment detected ");
             return;
         }
-        //Visualizable visualizable = (Visualizable) collection;
-        //DrawCalls drawCalls = visualizable.getDrawCalls();
+        // Visualizable visualizable = (Visualizable) collection;
+        // DrawCalls drawCalls = visualizable.getDrawCalls();
         DrawStep firstStep = drawCalls.nextStep();
 
         FlatDarculaLaf.setup();
@@ -59,9 +59,9 @@ public class Application {
     private static JButton nextButton(JPanel residesIn, DrawCalls drawCalls) {
         JButton button = new JButton("Next");
         button.addActionListener(e -> {
-            //Visualizable visualizable = (Visualizable) collection;
+            // Visualizable visualizable = (Visualizable) collection;
 
-            //DrawCalls drawCalls = visualizable.getDrawCalls();
+            // DrawCalls drawCalls = visualizable.getDrawCalls();
             DrawStep step = drawCalls.nextStep();
 
             if (step != null) {
@@ -74,9 +74,9 @@ public class Application {
     private static JButton prevButton(JPanel residesIn, DrawCalls drawCalls) {
         JButton button = new JButton("Previous");
         button.addActionListener(e -> {
-            //Visualizable visualizable = (Visualizable) collection;
+            // Visualizable visualizable = (Visualizable) collection;
 
-            //DrawCalls drawCalls = visualizable.getDrawCalls();
+            // DrawCalls drawCalls = visualizable.getDrawCalls();
             DrawStep step = drawCalls.prevStep();
 
             if (step != null) {
@@ -119,7 +119,6 @@ public class Application {
 
         centerPanel.add(codePanel, BorderLayout.WEST);
         // CENTER stretches to fill remaining space
-        // TODO: MAke memory panel bigger
         centerPanel.add(memoryPanel, BorderLayout.CENTER);
         centerPanel.add(datastructurePanel, BorderLayout.EAST);
         centerPanel.add(methodName, BorderLayout.NORTH);

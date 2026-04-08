@@ -46,6 +46,5 @@ public class DrawCalls {
 
         this.drawCalls.add(new DrawStep(memory, datastructure, methodLabel, codePanel));
     }
-    
 
 }

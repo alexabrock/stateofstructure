@@ -18,8 +18,7 @@ public class FileManager {
         return content;
     }
 
-
-    //Assumption: Caller Class liegt unter src/main/java
+    // Assumption: Caller Class liegt unter src/main/java
     public static String findCallerClass() {
         StackWalker walker = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE);
 
@@ -32,11 +31,9 @@ public class FileManager {
                 .map(name -> "src/main/java/" + name.replace(".", "/") + ".java")
                 .map(Path::of)
                 .orElse(null));
-        
 
         return fileToString(path);
     }
-    
 
     public static int findCallerLine() {
         StackWalker walker = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE);
@@ -48,8 +45,8 @@ public class FileManager {
                 .map(StackWalker.StackFrame::getLineNumber)
                 .orElse(-1));
 
-        //fix off by 1 error
-        return lineNumber-1;
+        // fix off by 1 error
+        return lineNumber - 1;
 
     }
 

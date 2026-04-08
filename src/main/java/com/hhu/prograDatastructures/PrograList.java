@@ -1,8 +1,8 @@
-package com.hhu.datastructures;
+package com.hhu.prograDatastructures;
 
 import java.util.LinkedList;
 
-public class VPrograList {
+public class PrograList {
 
     private class Node {
         private int data;

@@ -8,6 +8,8 @@ import java.util.NoSuchElementException;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.hhu.legacyDatastructures.VLinkedList;
+
 public class VLinkedListListTests {
 
     private VLinkedList<String> list;

@@ -1,39 +1,42 @@
 package com.hhu.util.datastructureView;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Stack;
+import java.util.TreeMap;
 
-import com.hhu.datastructures.VArrayList;
-import com.hhu.datastructures.VLinkedList;
-import com.hhu.datastructures.VPrograList;
-import com.hhu.datastructures.VStack;
-import com.hhu.datastructures.VTreeMap;
+import com.hhu.legacyDatastructures.VArrayList;
+import com.hhu.legacyDatastructures.VLinkedList;
+import com.hhu.legacyDatastructures.VStack;
+import com.hhu.legacyDatastructures.VTreeMap;
+import com.hhu.prograDatastructures.PrograList;
 import com.hhu.util.datastructureView.api.GraphBuilder;
-import com.hhu.util.datastructureView.impl.VArrayListGraphBuilder;
-import com.hhu.util.datastructureView.impl.VListGraphBuilder;
+import com.hhu.util.datastructureView.impl.ArrayListGraphBuilder;
+import com.hhu.util.datastructureView.impl.LinkedListGraphBuilder;
 import com.hhu.util.datastructureView.impl.VPrograListBuilder;
-import com.hhu.util.datastructureView.impl.VStackGraphBuilder;
-import com.hhu.util.datastructureView.impl.VTreeMapGraphBuilder;
+import com.hhu.util.datastructureView.impl.StackGraphBuilder;
+import com.hhu.util.datastructureView.impl.TreeMapGraphBuilder;
 
 public class GraphBuilderFactory {
 
     public static GraphBuilder getBuilder(Object collection) {
 
         if (collection instanceof Stack) {
-            return new VStackGraphBuilder<>();
+            return new StackGraphBuilder<>();
         }
 
-        if (collection instanceof VLinkedList<?>) {
-            return new VListGraphBuilder();
+        if (collection instanceof LinkedList<?>) {
+            return new LinkedListGraphBuilder<>();
         }
 
-        if (collection instanceof VTreeMap<?, ?>) {
-            return new VTreeMapGraphBuilder();
+        if (collection instanceof TreeMap<?, ?>) {
+            return new TreeMapGraphBuilder();
         }
-        if (collection instanceof VPrograList) {
+        if (collection instanceof PrograList) {
             return new VPrograListBuilder();
         }
-        if(collection instanceof VArrayList<?>){
-            return new VArrayListGraphBuilder();
+        if (collection instanceof ArrayList<?>) {
+            return new ArrayListGraphBuilder();
         }
 
         throw new IllegalArgumentException("Unbekannte Collection");

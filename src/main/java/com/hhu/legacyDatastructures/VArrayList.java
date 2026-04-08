@@ -1,8 +1,8 @@
-package com.hhu.datastructures;
+package com.hhu.legacyDatastructures;
 
 import java.util.ArrayList;
 
-import com.hhu.datastructures.api.Visualizable;
+import com.hhu.legacyDatastructures.api.Visualizable;
 import com.hhu.util.DrawCalls;
 
 

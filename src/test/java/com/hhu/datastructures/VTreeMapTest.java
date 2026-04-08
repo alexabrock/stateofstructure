@@ -9,6 +9,8 @@ import java.util.NavigableMap;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.hhu.legacyDatastructures.VTreeMap;
+
 public class VTreeMapTest {
 
     private NavigableMap<String, Integer> map;

@@ -6,9 +6,9 @@ import java.util.Collection;
 import java.util.Map;
 import org.junit.Test;
 
-import com.hhu.datastructures.VLinkedList;
-import com.hhu.datastructures.VStack;
-import com.hhu.datastructures.VTreeMap;
+import com.hhu.legacyDatastructures.VLinkedList;
+import com.hhu.legacyDatastructures.VStack;
+import com.hhu.legacyDatastructures.VTreeMap;
 import com.hhu.util.datastructureView.GraphBuilderFactory;
 import com.hhu.util.datastructureView.api.GraphBuilder;
 
