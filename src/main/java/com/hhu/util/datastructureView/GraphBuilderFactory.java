@@ -1,5 +1,7 @@
 package com.hhu.util.datastructureView;
 
+import java.util.Stack;
+
 import com.hhu.datastructures.VArrayList;
 import com.hhu.datastructures.VLinkedList;
 import com.hhu.datastructures.VPrograList;
@@ -16,7 +18,7 @@ public class GraphBuilderFactory {
 
     public static GraphBuilder getBuilder(Object collection) {
 
-        if (collection instanceof VStack<?>) {
+        if (collection instanceof Stack) {
             return new VStackGraphBuilder<>();
         }
 

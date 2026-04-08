@@ -5,6 +5,7 @@ import static guru.nidi.graphviz.model.Factory.graph;
 import static guru.nidi.graphviz.model.Factory.node;
 
 import java.util.List;
+import java.util.Stack;
 
 import com.hhu.datastructures.VStack;
 import com.hhu.util.datastructureView.api.GraphBuilder;
@@ -18,10 +19,10 @@ import guru.nidi.graphviz.model.Node;
 public class VStackGraphBuilder<E> implements GraphBuilder {
     @Override
     public Graph buildGraph(Object collection) {
-        if (!(collection instanceof VStack<?>)) {
-            throw new IllegalArgumentException("Expected VStack");
+        if (!(collection instanceof Stack)) {
+            throw new IllegalArgumentException("Expected Stack");
         }
-        VStack<E> stack = (VStack<E>) collection;
+        Stack<E> stack = (Stack<E>) collection;
 
         //für stack.get(0), wenn stack leer
         if (stack.isEmpty()) {
