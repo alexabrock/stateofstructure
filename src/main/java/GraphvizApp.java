@@ -1,15 +1,18 @@
+import java.util.Stack;
+
 import com.hhu.datastructures.VArrayList;
 import com.hhu.datastructures.VLinkedList;
 import com.hhu.datastructures.VPrograList;
 import com.hhu.datastructures.VStack;
 import com.hhu.datastructures.VTreeMap;
+import com.hhu.util.DrawCalls;
 import com.hhu.views.application.Application;
 
 public class GraphvizApp {
     public static void main(String[] args) {
         //startVListApplication();
 
-        startVStackApplication();
+        //startVStackApplication();
 
         //startVTreeMapApplication();
 
@@ -17,6 +20,24 @@ public class GraphvizApp {
 
         //startVArrayListApplication();
 
+        startVStackApplicationWithFunnyDrawCalls();
+
+    }
+
+      static void startVStackApplicationWithFunnyDrawCalls() {
+        DrawCalls drawCalls = new DrawCalls();
+
+        Stack<String> stack = new Stack<>();
+        stack.push("Hello");
+        drawCalls.record(stack, "push()");
+        stack.push("Progra");
+        drawCalls.record(stack, "push()");
+        stack.push("middleElement");
+        stack.push("2026");
+        stack.pop();
+        stack.search("Hello");
+
+        Application.startApplication( drawCalls);
     }
 
     private static void startVArrayListApplication() {
@@ -25,7 +46,7 @@ public class GraphvizApp {
         list.add(2);
         list.add(3);
 
-        Application.startApplication(list);
+       // Application.startApplication(list);
     }
 
     static void startVPrograListApplication() {
@@ -34,7 +55,7 @@ public class GraphvizApp {
         list.insert(2);
         list.insert(3);
 
-        Application.startApplication( list);
+        //Application.startApplication( list);
 
     }
 
@@ -45,7 +66,7 @@ public class GraphvizApp {
         list.add("Progra");
         list.add("2026");
 
-        Application.startApplication( list);
+        //Application.startApplication( list);
     }
 
     static void startVStackApplication() {
@@ -59,7 +80,7 @@ public class GraphvizApp {
         stack.pop();
         stack.search("Hello");
 
-        Application.startApplication( stack);
+        //Application.startApplication( stack);
     }
 
     static void startVTreeMapApplication() {
@@ -70,6 +91,6 @@ public class GraphvizApp {
         map.put("world", 2);
         map.put("java", 3);
 
-        Application.startApplication( map);
+       // Application.startApplication( map);
     }
 }

@@ -17,14 +17,14 @@ import com.hhu.util.DrawStep;
 
 public class Application {
 
-    public static <E> void startApplication(Object collection) {
+    public static <E> void startApplication(DrawCalls drawCalls) {
         // Swing needs this
         if (GraphicsEnvironment.isHeadless()) {
             System.out.println("Headless environment detected ");
             return;
         }
-        Visualizable visualizable = (Visualizable) collection;
-        DrawCalls drawCalls = visualizable.getDrawCalls();
+        //Visualizable visualizable = (Visualizable) collection;
+        //DrawCalls drawCalls = visualizable.getDrawCalls();
         DrawStep firstStep = drawCalls.nextStep();
 
         FlatDarculaLaf.setup();
@@ -45,8 +45,8 @@ public class Application {
             frame.add(centerPanel, BorderLayout.CENTER);
 
             JPanel buttonPanel = new JPanel();
-            buttonPanel.add(prevButton(centerPanel, collection));
-            buttonPanel.add(nextButton(centerPanel, collection));
+            buttonPanel.add(prevButton(centerPanel, drawCalls));
+            buttonPanel.add(nextButton(centerPanel, drawCalls));
 
             frame.add(buttonPanel, BorderLayout.SOUTH);
 
@@ -56,12 +56,12 @@ public class Application {
         });
     }
 
-    private static JButton nextButton(JPanel residesIn, Object collection) {
+    private static JButton nextButton(JPanel residesIn, DrawCalls drawCalls) {
         JButton button = new JButton("Next");
         button.addActionListener(e -> {
-            Visualizable visualizable = (Visualizable) collection;
+            //Visualizable visualizable = (Visualizable) collection;
 
-            DrawCalls drawCalls = visualizable.getDrawCalls();
+            //DrawCalls drawCalls = visualizable.getDrawCalls();
             DrawStep step = drawCalls.nextStep();
 
             if (step != null) {
@@ -71,12 +71,12 @@ public class Application {
         return button;
     }
 
-    private static JButton prevButton(JPanel residesIn, Object collection) {
+    private static JButton prevButton(JPanel residesIn, DrawCalls drawCalls) {
         JButton button = new JButton("Previous");
         button.addActionListener(e -> {
-            Visualizable visualizable = (Visualizable) collection;
+            //Visualizable visualizable = (Visualizable) collection;
 
-            DrawCalls drawCalls = visualizable.getDrawCalls();
+            //DrawCalls drawCalls = visualizable.getDrawCalls();
             DrawStep step = drawCalls.prevStep();
 
             if (step != null) {
