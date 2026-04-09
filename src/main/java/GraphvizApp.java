@@ -8,7 +8,6 @@ import com.hhu.legacyDatastructures.VArrayList;
 import com.hhu.legacyDatastructures.VLinkedList;
 import com.hhu.legacyDatastructures.VStack;
 import com.hhu.legacyDatastructures.VTreeMap;
-import com.hhu.prograDatastructures.specific.IntList;
 import com.hhu.util.DrawCalls;
 import com.hhu.views.application.Application;
 
@@ -20,17 +19,13 @@ public class GraphvizApp {
 
         //startVTreeMapApplication();
 
-        //startVPrograListApplication();
-
         //startVArrayListApplication();
 
-        //startStackApplicationWithFunnyDrawCalls();
+        startStackApplicationWithFunnyDrawCalls();
 
         //startArrayListApplicationWithFunnyDrawCalls();
 
-        //startPrograListApplicationWithFunnyDrawCalls();
-
-        startTreeMapApplicationWithFunnyDrawCalls();
+       // startTreeMapApplicationWithFunnyDrawCalls();
 
         //startLinkedHashSetApplicationWithFunnyDrawCalls();
 
@@ -100,19 +95,6 @@ public class GraphvizApp {
         Application.startApplication(drawCalls);
     }
 
-    static void startPrograListApplicationWithFunnyDrawCalls() {
-        DrawCalls drawCalls = new DrawCalls();
-
-        IntList list = new IntList();
-        list.add(1);
-        drawCalls.record(list, "push()");
-        list.add(2);
-        drawCalls.record(list, "push()");
-        list.add(3);
-        drawCalls.record(list, "push()");
-        Application.startApplication(drawCalls);
-    }
-
     static void startTreeMapApplicationWithFunnyDrawCalls() {
         DrawCalls drawCalls = new DrawCalls();
 
@@ -135,16 +117,6 @@ public class GraphvizApp {
         list.add(3);
 
        // Application.startApplication(list);
-    }
-
-    static void startVPrograListApplication() {
-        IntList list = new IntList();
-        list.add(1);
-        list.add(2);
-        list.add(3);
-
-        //Application.startApplication( list);
-
     }
 
     static void startVListApplication() {

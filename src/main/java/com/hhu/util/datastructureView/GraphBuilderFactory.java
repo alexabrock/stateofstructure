@@ -11,7 +11,6 @@ import com.hhu.legacyDatastructures.VArrayList;
 import com.hhu.legacyDatastructures.VLinkedList;
 import com.hhu.legacyDatastructures.VStack;
 import com.hhu.legacyDatastructures.VTreeMap;
-import com.hhu.prograDatastructures.specific.IntList;
 import com.hhu.util.datastructureView.api.GraphBuilder;
 import com.hhu.util.datastructureView.impl.javaUtil.ArrayListGraphBuilder;
 import com.hhu.util.datastructureView.impl.javaUtil.LinkedHashSetGraphBuilder;
@@ -19,25 +18,21 @@ import com.hhu.util.datastructureView.impl.javaUtil.LinkedListGraphBuilder;
 import com.hhu.util.datastructureView.impl.javaUtil.StackGraphBuilder;
 import com.hhu.util.datastructureView.impl.javaUtil.TreeMapGraphBuilder;
 import com.hhu.util.datastructureView.impl.javaUtil.TreeSetGraphBuilder;
-import com.hhu.util.datastructureView.impl.progra.PrograListBuilder;
 
 public class GraphBuilderFactory {
 
     public static GraphBuilder getBuilder(Object collection) {
 
         if (collection instanceof Stack) {
-            return new StackGraphBuilder<>();
+            return new StackGraphBuilder();
         }
 
         if (collection instanceof LinkedList<?>) {
-            return new LinkedListGraphBuilder<>();
+            return new LinkedListGraphBuilder();
         }
 
-        if (collection instanceof TreeMap<?, ?>) {
+        if (collection instanceof TreeMap<?,?>) {
             return new TreeMapGraphBuilder();
-        }
-        if (collection instanceof IntList) {
-            return new PrograListBuilder();
         }
         if (collection instanceof ArrayList<?>) {
             return new ArrayListGraphBuilder();
@@ -46,7 +41,7 @@ public class GraphBuilderFactory {
             return new LinkedHashSetGraphBuilder();
         }
         if (collection instanceof TreeSet<?>) {
-            return new TreeSetGraphBuilder<>();
+            return new TreeSetGraphBuilder();
         }
 
         throw new IllegalArgumentException("Unbekannte Collection");
