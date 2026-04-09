@@ -33,8 +33,8 @@ public class DrawCalls {
         return drawCalls.get(currentStepIndex++); // show it, leave index just past it
     }
 
-    // currently only working for Stacks
-    public <E> void record(Collection<E> collection, String methodName) {
+    // needs to be Object, since Progra DS != Collection
+    public <E> void record(Object collection, String methodName) {
 
         JPanel memory = PanelBuilder.createMemoryPanel(collection);
         JPanel datastructure = PanelBuilder.createDatastructurePanel(collection);
