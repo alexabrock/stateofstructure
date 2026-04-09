@@ -1,9 +1,20 @@
-Aktuelle Version zum Starten mit mvn Wrapper:
-.\mvnw.cmd clean install
+Starten & Testen mit mvn Wrapper:
+.\mvnw.cmd verify exec:exec
+
+Starten mit mvn Wrapper:
+.\mvnw.cmd exec:exec
 
 
 
 
+
+
+
+
+
+
+
+Legacy:
 
 mvn clean compile
 mvn exec:java
