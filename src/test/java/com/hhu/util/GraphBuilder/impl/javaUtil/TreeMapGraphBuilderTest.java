@@ -1,8 +1,12 @@
-package com.hhu.util.GraphBuilder.legacy;
+package com.hhu.util.GraphBuilder.impl.javaUtil;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.NavigableMap;
+import java.util.TreeMap;
+
+import org.junit.Before;
 import org.junit.Test;
 
 import com.hhu.legacyDatastructures.VLinkedList;
@@ -11,10 +15,14 @@ import com.hhu.util.datastructureView.GraphBuilderFactory;
 
 //Mutable graph, weil man so schön an die einzelnen Nodes zum testen kommt
 import guru.nidi.graphviz.model.MutableGraph;
-import org.junit.Ignore;
 
-@Ignore
-public class VTreeMapGraphBuilderTest {
+public class TreeMapGraphBuilderTest {
+        private TreeMap<String, Integer> tree;
+
+    @Before
+    public void setUp() {
+        tree = new TreeMap<>();
+    }
 
     private boolean hasEdge(MutableGraph graph, String from, String to) {
         return graph.nodes().stream()
@@ -27,7 +35,6 @@ public class VTreeMapGraphBuilderTest {
 
     @Test
     public void graphContainsSingleStringElement() {
-        VTreeMap<String, Integer> tree = new VTreeMap<>();
         tree.put("a",1);
 
         MutableGraph graph = (MutableGraph) GraphBuilderFactory
@@ -41,7 +48,6 @@ public class VTreeMapGraphBuilderTest {
 
     @Test
     public void graphContainsMultipleStringElements() {
-        VTreeMap<String, Integer> tree = new VTreeMap<>();
         tree.put("Lotte",  1);
         tree.put("Dieter",2);
         tree.put("Alexa",3);
@@ -57,7 +63,6 @@ public class VTreeMapGraphBuilderTest {
 
     @Test
     public void graphEmpty() {
-        VTreeMap<String, Integer> tree = new VTreeMap<>();
 
         MutableGraph graph = (MutableGraph) GraphBuilderFactory.getBuilder(tree).buildGraph(tree);
 
@@ -66,7 +71,6 @@ public class VTreeMapGraphBuilderTest {
 
     @Test
     public void graphHasCorrectEdge() {
-        VTreeMap<String, Integer> tree = new VTreeMap<>();
         tree.put("Lotte", 1);
         tree.put("Dieter", 2);
         tree.put("Alexa", 3);
