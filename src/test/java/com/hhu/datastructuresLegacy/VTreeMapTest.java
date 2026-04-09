@@ -1,17 +1,20 @@
 package com.hhu.datastructuresLegacy;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Iterator;
 import java.util.Map;
 import java.util.NavigableMap;
-import java.util.TreeMap;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.hhu.legacyDatastructures.VTreeMap;
-import org.junit.Ignore;
 
 @Ignore
 public class VTreeMapTest {

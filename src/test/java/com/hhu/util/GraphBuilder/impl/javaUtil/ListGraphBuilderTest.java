@@ -7,8 +7,6 @@ import java.util.LinkedList;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.hhu.legacyDatastructures.VLinkedList;
-import com.hhu.legacyDatastructures.VTreeMap;
 import com.hhu.util.datastructureView.GraphBuilderFactory;
 
 //Mutable graph, weil man so schön an die einzelnen Nodes zum testen kommt

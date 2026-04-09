@@ -10,9 +10,6 @@ import java.util.TreeMap;
 
 import org.junit.Test;
 
-import com.hhu.legacyDatastructures.VLinkedList;
-import com.hhu.legacyDatastructures.VStack;
-import com.hhu.legacyDatastructures.VTreeMap;
 import com.hhu.util.datastructureView.GraphBuilderFactory;
 import com.hhu.util.datastructureView.api.GraphBuilder;
 

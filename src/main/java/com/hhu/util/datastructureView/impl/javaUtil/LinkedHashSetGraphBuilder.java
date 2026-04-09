@@ -1,6 +1,5 @@
 package com.hhu.util.datastructureView.impl.javaUtil;
 
-import static guru.nidi.graphviz.attribute.Rank.dir;
 import static guru.nidi.graphviz.attribute.Rank.RankDir.LEFT_TO_RIGHT;
 import static guru.nidi.graphviz.attribute.Style.INVIS;
 import static guru.nidi.graphviz.model.Factory.graph;

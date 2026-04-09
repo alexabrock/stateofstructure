@@ -1,16 +1,12 @@
 package com.hhu.util.GraphBuilder.impl.javaUtil;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.NavigableMap;
 import java.util.TreeMap;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.hhu.legacyDatastructures.VLinkedList;
-import com.hhu.legacyDatastructures.VTreeMap;
 import com.hhu.util.datastructureView.GraphBuilderFactory;
 
 //Mutable graph, weil man so schön an die einzelnen Nodes zum testen kommt

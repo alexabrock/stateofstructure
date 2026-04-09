@@ -7,10 +7,6 @@ import java.util.Stack;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import com.hhu.legacyDatastructures.VArrayList;
-import com.hhu.legacyDatastructures.VLinkedList;
-import com.hhu.legacyDatastructures.VStack;
-import com.hhu.legacyDatastructures.VTreeMap;
 import com.hhu.util.datastructureView.api.GraphBuilder;
 import com.hhu.util.datastructureView.impl.javaUtil.ArrayListGraphBuilder;
 import com.hhu.util.datastructureView.impl.javaUtil.LinkedHashSetGraphBuilder;

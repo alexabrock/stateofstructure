@@ -1,15 +1,15 @@
 package com.hhu.datastructuresLegacy;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.EmptyStackException;
-import java.util.LinkedList;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.hhu.legacyDatastructures.VStack;
-import org.junit.Ignore;
 
 @Ignore
 public class VStackTest {

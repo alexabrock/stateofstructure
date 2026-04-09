@@ -1,25 +1,16 @@
 package com.hhu.util.datastructureView.impl.javaUtil;
 
-import static guru.nidi.graphviz.attribute.Rank.RankDir.LEFT_TO_RIGHT;
 import static guru.nidi.graphviz.model.Factory.graph;
 import static guru.nidi.graphviz.model.Factory.node;
 import static guru.nidi.graphviz.model.Factory.to;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 import java.util.TreeMap;
 
 import com.hhu.util.datastructureView.api.GraphBuilder;
 
-import guru.nidi.graphviz.attribute.Color;
-import guru.nidi.graphviz.attribute.Label;
-import guru.nidi.graphviz.attribute.Rank;
 import guru.nidi.graphviz.attribute.Shape;
-import guru.nidi.graphviz.attribute.Style;
 import guru.nidi.graphviz.model.Graph;
-import guru.nidi.graphviz.model.LinkSource;
 import guru.nidi.graphviz.model.Node;
 
 public class TreeMapGraphBuilder implements GraphBuilder {

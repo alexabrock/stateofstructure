@@ -1,18 +1,16 @@
 package com.hhu.util.datastructureView.impl.javaUtil;
 
-import guru.nidi.graphviz.attribute.Rank;
-
-import com.hhu.legacyDatastructures.VLinkedList;
-import com.hhu.util.datastructureView.api.GraphBuilder;
-
-import guru.nidi.graphviz.attribute.Shape;
-import guru.nidi.graphviz.model.Graph;
-
 import static guru.nidi.graphviz.attribute.Rank.RankDir.LEFT_TO_RIGHT;
 import static guru.nidi.graphviz.model.Factory.graph;
 import static guru.nidi.graphviz.model.Factory.node;
 
 import java.util.LinkedList;
+
+import com.hhu.util.datastructureView.api.GraphBuilder;
+
+import guru.nidi.graphviz.attribute.Rank;
+import guru.nidi.graphviz.attribute.Shape;
+import guru.nidi.graphviz.model.Graph;
 
 public class LinkedListGraphBuilder implements GraphBuilder {
     @Override

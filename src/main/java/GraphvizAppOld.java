@@ -1,15 +1,7 @@
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.Stack;
-import java.util.TreeMap;
-import java.util.TreeSet;
-
 import com.hhu.legacyDatastructures.VArrayList;
 import com.hhu.legacyDatastructures.VLinkedList;
 import com.hhu.legacyDatastructures.VStack;
 import com.hhu.legacyDatastructures.VTreeMap;
-import com.hhu.util.DrawCalls;
-import com.hhu.views.application.Application;
 
 public class GraphvizAppOld {
     public static void main(String[] args) {

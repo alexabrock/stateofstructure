@@ -1,6 +1,5 @@
 package com.hhu.util;
 
-import java.util.Collection;
 import java.util.LinkedList;
 
 import javax.swing.JLabel;

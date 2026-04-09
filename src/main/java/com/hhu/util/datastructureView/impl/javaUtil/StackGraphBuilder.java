@@ -7,7 +7,6 @@ import static guru.nidi.graphviz.model.Factory.node;
 import java.util.List;
 import java.util.Stack;
 
-import com.hhu.legacyDatastructures.VStack;
 import com.hhu.util.datastructureView.api.GraphBuilder;
 
 import guru.nidi.graphviz.attribute.Rank;

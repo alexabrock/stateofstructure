@@ -2,21 +2,15 @@ package com.hhu.util.datastructureView.impl.javaUtil;
 
 
 
-import static guru.nidi.graphviz.attribute.Rank.RankDir.LEFT_TO_RIGHT;
 import static guru.nidi.graphviz.attribute.Rank.RankDir.TOP_TO_BOTTOM;
 import static guru.nidi.graphviz.model.Factory.graph;
 import static guru.nidi.graphviz.model.Factory.node;
 
 import java.util.ArrayList;
 
-import com.hhu.legacyDatastructures.VArrayList;
 import com.hhu.util.datastructureView.api.GraphBuilder;
 
-import static guru.nidi.graphviz.attribute.Style.INVIS;
-import static guru.nidi.graphviz.model.Factory.to;
-
 import guru.nidi.graphviz.attribute.Attributes;
-
 import guru.nidi.graphviz.attribute.Rank;
 import guru.nidi.graphviz.attribute.Shape;
 import guru.nidi.graphviz.model.Graph;
