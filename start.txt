@@ -1,3 +1,10 @@
+Aktuelle Version zum Starten mit mvn Wrapper:
+.\mvnw.cmd clean install
+
+
+
+
+
 mvn clean compile
 mvn exec:java
 
@@ -14,7 +21,6 @@ java --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.util
 
 ausführen:
 mvn clean compile exec:exec
-
 
 start tests:
 mvn clean test
