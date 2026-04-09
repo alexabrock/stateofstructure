@@ -16,13 +16,13 @@ import guru.nidi.graphviz.attribute.Shape;
 import guru.nidi.graphviz.model.Graph;
 import guru.nidi.graphviz.model.Node;
 
-public class StackGraphBuilder<E> implements GraphBuilder {
+public class StackGraphBuilder implements GraphBuilder {
     @Override
     public Graph buildGraph(Object collection) {
         if (!(collection instanceof Stack)) {
             throw new IllegalArgumentException("Expected Stack");
         }
-        Stack<E> stack = (Stack<E>) collection;
+        Stack<?> stack = (Stack<?>) collection;
 
         // für stack.get(0), wenn stack leer
         if (stack.isEmpty()) {

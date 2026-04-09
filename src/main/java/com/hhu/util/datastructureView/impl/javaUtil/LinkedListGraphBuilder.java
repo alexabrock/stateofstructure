@@ -14,13 +14,13 @@ import static guru.nidi.graphviz.model.Factory.node;
 
 import java.util.LinkedList;
 
-public class LinkedListGraphBuilder<E> implements GraphBuilder {
+public class LinkedListGraphBuilder implements GraphBuilder {
     @Override
     public Graph buildGraph(Object collection) {
         if (!(collection instanceof LinkedList<?>)) {
             throw new IllegalArgumentException("Expected LinkedList");
         }
-        LinkedList<E> list = (LinkedList<E>) collection;
+        LinkedList<?> list = (LinkedList<?>) collection;
 
         Graph g = graph("listGraph").directed()
                 .graphAttr().with(Rank.dir(LEFT_TO_RIGHT))

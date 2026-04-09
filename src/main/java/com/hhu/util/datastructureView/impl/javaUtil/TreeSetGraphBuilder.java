@@ -15,7 +15,7 @@ import guru.nidi.graphviz.model.Graph;
 import static guru.nidi.graphviz.attribute.Attributes.attr;
 import guru.nidi.graphviz.model.Node;
 
-public class TreeSetGraphBuilder<E> implements GraphBuilder {
+public class TreeSetGraphBuilder implements GraphBuilder {
 
     @Override
     public Graph buildGraph(Object collection) {
