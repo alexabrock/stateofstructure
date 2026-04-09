@@ -130,7 +130,7 @@ import java.util.Iterator;
  *
  * @author Josh Bloch and Doug Lea
  * @see Map
- * @see HashMap
+ * @see IntHashMap
  * @see Hashtable
  * @see Comparable
  * @see Comparator
