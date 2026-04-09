@@ -1,4 +1,6 @@
-package com.hhu.util.datastructureView.impl;
+package com.hhu.util.datastructureView.impl.javaUtil;
+
+
 
 import static guru.nidi.graphviz.attribute.Rank.RankDir.LEFT_TO_RIGHT;
 import static guru.nidi.graphviz.attribute.Rank.RankDir.TOP_TO_BOTTOM;
