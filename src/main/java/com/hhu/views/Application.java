@@ -1,6 +1,7 @@
 package com.hhu.views;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.GraphicsEnvironment;
 
@@ -45,8 +46,31 @@ public class Application {
             frame.add(centerPanel, BorderLayout.CENTER);
 
             JPanel buttonPanel = new JPanel();
-            buttonPanel.add(prevButton(centerPanel, drawCalls));
-            buttonPanel.add(nextButton(centerPanel, drawCalls));
+
+            JButton prevButton = new JButton("Previous");
+            JButton nextButton = new JButton("Next");
+
+            // Initial state setzen
+            prevButton.setEnabled(true);
+            nextButton.setEnabled(drawCalls.hasNextStep());
+
+            
+            prevButton.addActionListener(e -> {
+                DrawStep step = drawCalls.prevStep();
+                replacePanels(centerPanel, step);
+
+                updateButtons(prevButton, nextButton, drawCalls);
+            });
+
+            nextButton.addActionListener(e -> {
+                DrawStep step = drawCalls.nextStep();
+                replacePanels(centerPanel, step);
+
+                updateButtons(prevButton, nextButton, drawCalls);
+            });
+
+            buttonPanel.add(prevButton);
+            buttonPanel.add(nextButton);
 
             frame.add(buttonPanel, BorderLayout.SOUTH);
 
@@ -56,35 +80,11 @@ public class Application {
         });
     }
 
-    private static JButton nextButton(JPanel residesIn, DrawCalls drawCalls) {
-        JButton button = new JButton("Next");
-        button.addActionListener(e -> {
-            // Visualizable visualizable = (Visualizable) collection;
-
-            // DrawCalls drawCalls = visualizable.getDrawCalls();
-            DrawStep step = drawCalls.nextStep();
-
-            if (step != null) {
-                replacePanels(residesIn, step);
-            }
-        });
-        return button;
+    private static void updateButtons(JButton prev, JButton next, DrawCalls drawCalls) {
+        prev.setEnabled(drawCalls.hasPrevStep());
+        next.setEnabled(drawCalls.hasNextStep());
     }
 
-    private static JButton prevButton(JPanel residesIn, DrawCalls drawCalls) {
-        JButton button = new JButton("Previous");
-        button.addActionListener(e -> {
-            // Visualizable visualizable = (Visualizable) collection;
-
-            // DrawCalls drawCalls = visualizable.getDrawCalls();
-            DrawStep step = drawCalls.prevStep();
-
-            if (step != null) {
-                replacePanels(residesIn, step);
-            }
-        });
-        return button;
-    }
 
     private static void replacePanels(JPanel residesIn, DrawStep step) {
         BorderLayout layout = (BorderLayout) residesIn.getLayout();
