@@ -1,8 +1,8 @@
 Starten & Testen mit mvn Wrapper:
-.\mvnw.cmd verify exec:exec
+.\mvnw.cmd clean verify exec:exec
 
 Starten mit mvn Wrapper:
-.\mvnw.cmd exec:exec
+.\mvnw.cmd clean compile exec:exec
 
 Testen mit mvn Wrapper:
 .\mvnw.cmd clean install
