@@ -15,11 +15,11 @@ public class GraphvizApp {
 
         //startArrayListApplicationWithFunnyDrawCalls();
 
-        startTreeMapApplicationWithFunnyDrawCalls();
+        //startTreeMapApplicationWithFunnyDrawCalls();
 
         //startLinkedHashSetApplicationWithFunnyDrawCalls();
 
-        //startTreeSetApplicationWithFunnyDrawCalls();
+        startTreeSetApplicationWithFunnyDrawCalls();
 
     }
 
