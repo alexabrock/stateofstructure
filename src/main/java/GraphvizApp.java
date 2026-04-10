@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.Stack;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -8,22 +9,23 @@ import com.hhu.util.DrawCalls;
 import com.hhu.views.application.Application;
 
 public class GraphvizApp {
-    
+
     public static void main(String[] args) {
 
         //startStackApplicationWithFunnyDrawCalls();
 
-        //startArrayListApplicationWithFunnyDrawCalls();
+        // startArrayListApplicationWithFunnyDrawCalls();
 
-        //startTreeMapApplicationWithFunnyDrawCalls();
+        // startTreeMapApplicationWithFunnyDrawCalls();
 
-        //startLinkedHashSetApplicationWithFunnyDrawCalls();
+        startLinkedHashSetApplicationWithFunnyDrawCalls();
 
-        startTreeSetApplicationWithFunnyDrawCalls();
+        // startTreeSetApplicationWithFunnyDrawCalls();
+
+        //startLinkedListApplicationWithFunnyDrawCalls();
 
     }
 
-    
     static void startTreeSetApplicationWithFunnyDrawCalls() {
         DrawCalls drawCalls = new DrawCalls();
 
@@ -37,7 +39,7 @@ public class GraphvizApp {
         treeSet.add("!");
         drawCalls.record(treeSet, "push()");
 
-        Application.startApplication(drawCalls);
+        Application.start(drawCalls);
     }
 
     static void startStackApplicationWithFunnyDrawCalls() {
@@ -53,7 +55,7 @@ public class GraphvizApp {
         stack.pop();
         stack.search("Hello");
 
-        Application.startApplication(drawCalls);
+        Application.start(drawCalls);
     }
 
     static void startLinkedHashSetApplicationWithFunnyDrawCalls() {
@@ -69,9 +71,9 @@ public class GraphvizApp {
         linkedHashSet.add("!");
         drawCalls.record(linkedHashSet, "push()");
 
-        Application.startApplication(drawCalls);
+        Application.start(drawCalls);
     }
-    
+
     static void startArrayListApplicationWithFunnyDrawCalls() {
         DrawCalls drawCalls = new DrawCalls();
 
@@ -82,7 +84,7 @@ public class GraphvizApp {
         drawCalls.record(list, "push()");
         list.add(3);
 
-        Application.startApplication(drawCalls);
+        Application.start(drawCalls);
     }
 
     static void startTreeMapApplicationWithFunnyDrawCalls() {
@@ -95,9 +97,23 @@ public class GraphvizApp {
         drawCalls.record(map, "push()");
         map.put("java", 3);
         drawCalls.record(map, "push()");
+        map.put("javasda", 3);
+        drawCalls.record(map, "push()");
 
-        Application.startApplication(drawCalls);
+        Application.start(drawCalls);
 
+    }
+
+    static void startLinkedListApplicationWithFunnyDrawCalls() {
+
+        LinkedList<String> list = new LinkedList<>();
+        DrawCalls drawCalls = new DrawCalls();
+        list.add("Lotte");
+        list.add("Dieter");
+        list.add("Alexa");
+        list.add("Holland");
+        drawCalls.record(list, "push()");
+        Application.start(drawCalls);
     }
 
 }
