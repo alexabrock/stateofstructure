@@ -1,5 +1,6 @@
 package com.hhu.util.GraphBuilder.impl.javaUtil;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -65,6 +66,20 @@ public class TreeMapGraphBuilderTest {
         MutableGraph graph = createMutableGraph();
 
         assertTrue(graph.nodes().isEmpty());
+    }
+
+    @Test
+    //There are many merged noded not visible in the final Graph, so testing for Nodes isn't advisable
+    public void correctAmountOfEdges() {
+        tree.put("Lotte", 1);
+        tree.put("Dieter", 2);
+        tree.put("Alexa", 3);
+        tree.put("Holland", 4);
+        
+        MutableGraph graph = createMutableGraph();
+        
+        //all but the root node are connected to the tree by one edge
+        assertEquals(3, graph.edges().size());
     }
 
 

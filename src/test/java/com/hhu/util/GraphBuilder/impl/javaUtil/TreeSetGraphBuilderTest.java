@@ -1,5 +1,6 @@
 package com.hhu.util.GraphBuilder.impl.javaUtil;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.TreeMap;
@@ -65,5 +66,21 @@ public class TreeSetGraphBuilderTest {
 
         assertTrue(graph.nodes().isEmpty());
     }
+
+    
+    @Test
+    //There are many merged noded not visible in the final Graph, so testing for Nodes isn't advisable
+    public void correctAmountOfEdges() {
+        set.add("Lotte");
+        set.add("Dieter");
+        set.add("Alexa");
+        set.add("Holland");
+        
+        MutableGraph graph = createMutableGraph();
+        
+        //all but the root node are connected to the tree by one edge
+        assertEquals(3, graph.edges().size());
+    }
+
 
 }

@@ -3,31 +3,31 @@ package com.hhu.util.GraphBuilder.impl.javaUtil;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.Stack;
+import java.util.LinkedHashSet;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import com.hhu.datastructureView.GraphBuilderFactory;
 
-//Mutable graph, weil man so schön an die einzelnen Nodes zum testen kommt
 import guru.nidi.graphviz.model.MutableGraph;
 
-public class StackGraphBuilderTest {
-    private Stack<String> stack;
+public class LinkedHashSetGraphBuilderTest {
+    
+    private LinkedHashSet<String> hashSet;
 
     @Before
     public void setUp() {
-        stack = new Stack<>();
+        hashSet = new LinkedHashSet<>();
     }
 
     private MutableGraph createMutableGraph() {
-        return (MutableGraph) GraphBuilderFactory.getBuilder(stack).buildGraph(stack);
+        return (MutableGraph) GraphBuilderFactory.getBuilder(hashSet).buildGraph(hashSet);
     }
 
     @Test
     public void graphContainsSingleStringElement() {
-        stack.add("a");
+        hashSet.add("a");
 
         MutableGraph graph = createMutableGraph();
 
@@ -38,13 +38,12 @@ public class StackGraphBuilderTest {
 
     @Test
     public void graphContainsMultipleStringElements() {
-        stack.add("Lotte");
-        stack.add("Dieter");
-        stack.add("Alexa");
-        stack.add("Holland");
+        hashSet.add("Lotte");
+        hashSet.add("Dieter");
+        hashSet.add("Alexa");
+        hashSet.add("Holland");
 
         MutableGraph graph = createMutableGraph();
-
         assertTrue(graph.nodes().stream().anyMatch(n -> n.name().toString().equals("Lotte")));
         assertTrue(graph.nodes().stream().anyMatch(n -> n.name().toString().equals("Dieter")));
         assertTrue(graph.nodes().stream().anyMatch(n -> n.name().toString().equals("Alexa")));
@@ -55,22 +54,21 @@ public class StackGraphBuilderTest {
     public void graphEmpty() {
 
         MutableGraph graph = createMutableGraph();
-
-        assertTrue(graph.nodes().isEmpty());
+        //only hashtable node
+        assertTrue(graph.nodes().size()==1);
     }
 
     @Test
     public void correctAmountOfNodes() {
-        stack.add("Lotte");
-        stack.add("Dieter");
-        stack.add("Alexa");
-        stack.add("Holland");
-
+        hashSet.add("Lotte");
+        hashSet.add("Dieter");
+        hashSet.add("Alexa");
+        hashSet.add("Holland");
+        
         MutableGraph graph = createMutableGraph();
+        System.out.println(graph.nodes());
 
-        // all nodes come with 1 pointer, except for the last node, which has no pointer 
-        //also, two pointers & nodes (top and bottom) exist
-        assertEquals(stack.size() * 2 -1 +4, graph.nodes().size());
+        //all nodes come with 23pointers (before & afet & hashtable link), except for the first and last node, which have one pointer each
+        assertEquals(hashSet.size()*3-2 , graph.edges().size());
     }
-
 }

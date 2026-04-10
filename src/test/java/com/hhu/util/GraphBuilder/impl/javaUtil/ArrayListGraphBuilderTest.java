@@ -3,31 +3,30 @@ package com.hhu.util.GraphBuilder.impl.javaUtil;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.Stack;
+import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import com.hhu.datastructureView.GraphBuilderFactory;
 
-//Mutable graph, weil man so schön an die einzelnen Nodes zum testen kommt
 import guru.nidi.graphviz.model.MutableGraph;
 
-public class StackGraphBuilderTest {
-    private Stack<String> stack;
+public class ArrayListGraphBuilderTest {
+     private ArrayList<String> list;
 
     @Before
     public void setUp() {
-        stack = new Stack<>();
+        list = new ArrayList<>();
     }
-
+    
     private MutableGraph createMutableGraph() {
-        return (MutableGraph) GraphBuilderFactory.getBuilder(stack).buildGraph(stack);
+        return (MutableGraph) GraphBuilderFactory.getBuilder(list).buildGraph(list);
     }
 
     @Test
     public void graphContainsSingleStringElement() {
-        stack.add("a");
+        list.add("a");
 
         MutableGraph graph = createMutableGraph();
 
@@ -35,13 +34,13 @@ public class StackGraphBuilderTest {
                 graph.nodes().stream()
                         .anyMatch(n -> n.name().toString().equals("a")));
     }
-
+    
     @Test
     public void graphContainsMultipleStringElements() {
-        stack.add("Lotte");
-        stack.add("Dieter");
-        stack.add("Alexa");
-        stack.add("Holland");
+        list.add("Lotte");
+        list.add("Dieter");
+        list.add("Alexa");
+        list.add("Holland");
 
         MutableGraph graph = createMutableGraph();
 
@@ -61,16 +60,14 @@ public class StackGraphBuilderTest {
 
     @Test
     public void correctAmountOfNodes() {
-        stack.add("Lotte");
-        stack.add("Dieter");
-        stack.add("Alexa");
-        stack.add("Holland");
+        list.add("Lotte");
+        list.add("Dieter");
+        list.add("Alexa");
+        list.add("Holland");
 
         MutableGraph graph = createMutableGraph();
 
-        // all nodes come with 1 pointer, except for the last node, which has no pointer 
-        //also, two pointers & nodes (top and bottom) exist
-        assertEquals(stack.size() * 2 -1 +4, graph.nodes().size());
+        //no pointers to account for
+        assertEquals(list.size(), graph.nodes().size());
     }
-
 }
