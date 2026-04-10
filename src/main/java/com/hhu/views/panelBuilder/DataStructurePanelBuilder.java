@@ -24,9 +24,7 @@ final class DataStructurePanelBuilder {
         Graph graph = GraphBuilderFactory.getBuilder(collection).buildGraph(collection);
         BufferedImage image = Graphviz.fromGraph(graph).width(400).render(Format.PNG).toImage();
 
-        return GraphPanelRenderer.create(
-                "Datastructure Visualization",
-                image);
+        return GraphPanelRenderer.create("Datastructure Visualization", image);
 
         // if something went wrong, a Panel with the error is returned
         } catch (RuntimeException ex) {
