@@ -4,7 +4,8 @@ Starten & Testen mit mvn Wrapper:
 Starten mit mvn Wrapper:
 .\mvnw.cmd exec:exec
 
-
+Testen mit mvn Wrapper:
+.\mvnw.cmd clean install
 
 
 
