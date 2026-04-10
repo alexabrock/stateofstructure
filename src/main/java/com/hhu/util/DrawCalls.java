@@ -7,32 +7,40 @@ import javax.swing.JPanel;
 
 import com.hhu.views.panelBuilder.PanelBuilder;
 
-//Manages a List of DrawSteps
 public class DrawCalls {
 
     private LinkedList<DrawStep> drawCalls = new LinkedList<>();
-    private int currentStepIndex = 0;
+    //-1, damit mit nextStep() das 1. Element returnt wird
+    private int currentStepIndex = -1;
 
     public boolean hasNextStep() {
-        return currentStepIndex < drawCalls.size();
+        return currentStepIndex < drawCalls.size() - 1;
+    }
+
+    public boolean hasPrevStep() {
+        return currentStepIndex > 0;
     }
 
     public DrawStep nextStep() {
+
         if (!hasNextStep()) {
             return drawCalls.getLast();
         }
-        return drawCalls.get(currentStepIndex++); // show current, then advance
+
+        currentStepIndex++;
+        return drawCalls.get(currentStepIndex);
     }
 
     public DrawStep prevStep() {
-        if (currentStepIndex <= 1) {
-            return drawCalls.get(0);
+
+        if (!hasPrevStep()) {
+            return drawCalls.getFirst();
         }
-        currentStepIndex -= 2; // undo the last next-advance AND go one back
-        return drawCalls.get(currentStepIndex++); // show it, leave index just past it
+
+        currentStepIndex--;
+        return drawCalls.get(currentStepIndex);
     }
 
-    // needs to be Object, since Progra DS != Collection
     public <E> void record(Object collection, String methodName) {
 
         JPanel memory = PanelBuilder.createMemoryPanel(collection);
@@ -43,7 +51,6 @@ public class DrawCalls {
         String code = FileManager.findCallerClass();
         JPanel codePanel = PanelBuilder.createCodePanel(code, lineNumber);
 
-        this.drawCalls.add(new DrawStep(memory, datastructure, methodLabel, codePanel));
+        drawCalls.add(new DrawStep(memory, datastructure, methodLabel, codePanel));
     }
-
 }
