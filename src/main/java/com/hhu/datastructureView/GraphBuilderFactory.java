@@ -1,4 +1,4 @@
-package com.hhu.util.datastructureView;
+package com.hhu.datastructureView;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -7,13 +7,13 @@ import java.util.Stack;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import com.hhu.util.datastructureView.api.GraphBuilder;
-import com.hhu.util.datastructureView.impl.javaUtil.ArrayListGraphBuilder;
-import com.hhu.util.datastructureView.impl.javaUtil.LinkedHashSetGraphBuilder;
-import com.hhu.util.datastructureView.impl.javaUtil.LinkedListGraphBuilder;
-import com.hhu.util.datastructureView.impl.javaUtil.StackGraphBuilder;
-import com.hhu.util.datastructureView.impl.javaUtil.TreeMapGraphBuilder;
-import com.hhu.util.datastructureView.impl.javaUtil.TreeSetGraphBuilder;
+import com.hhu.datastructureView.api.GraphBuilder;
+import com.hhu.datastructureView.impl.javaUtil.ArrayListGraphBuilder;
+import com.hhu.datastructureView.impl.javaUtil.LinkedHashSetGraphBuilder;
+import com.hhu.datastructureView.impl.javaUtil.LinkedListGraphBuilder;
+import com.hhu.datastructureView.impl.javaUtil.StackGraphBuilder;
+import com.hhu.datastructureView.impl.javaUtil.TreeMapGraphBuilder;
+import com.hhu.datastructureView.impl.javaUtil.TreeSetGraphBuilder;
 
 public class GraphBuilderFactory {
 

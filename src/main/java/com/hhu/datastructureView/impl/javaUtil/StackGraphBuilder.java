@@ -1,4 +1,4 @@
-package com.hhu.util.datastructureView.impl.javaUtil;
+package com.hhu.datastructureView.impl.javaUtil;
 
 import static guru.nidi.graphviz.attribute.Rank.RankDir.TOP_TO_BOTTOM;
 import static guru.nidi.graphviz.model.Factory.graph;
@@ -7,7 +7,7 @@ import static guru.nidi.graphviz.model.Factory.node;
 import java.util.List;
 import java.util.Stack;
 
-import com.hhu.util.datastructureView.api.GraphBuilder;
+import com.hhu.datastructureView.api.GraphBuilder;
 
 import guru.nidi.graphviz.attribute.Rank;
 import guru.nidi.graphviz.attribute.Rank.RankType;

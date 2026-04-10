@@ -10,8 +10,8 @@ import java.util.TreeMap;
 
 import org.junit.Test;
 
-import com.hhu.util.datastructureView.GraphBuilderFactory;
-import com.hhu.util.datastructureView.api.GraphBuilder;
+import com.hhu.datastructureView.GraphBuilderFactory;
+import com.hhu.datastructureView.api.GraphBuilder;
 
 import guru.nidi.graphviz.model.Graph;
 

@@ -1,4 +1,4 @@
-package com.hhu.util.datastructureView.impl.javaUtil;
+package com.hhu.datastructureView.impl.javaUtil;
 
 
 
@@ -8,7 +8,7 @@ import static guru.nidi.graphviz.model.Factory.node;
 
 import java.util.ArrayList;
 
-import com.hhu.util.datastructureView.api.GraphBuilder;
+import com.hhu.datastructureView.api.GraphBuilder;
 
 import guru.nidi.graphviz.attribute.Attributes;
 import guru.nidi.graphviz.attribute.Rank;

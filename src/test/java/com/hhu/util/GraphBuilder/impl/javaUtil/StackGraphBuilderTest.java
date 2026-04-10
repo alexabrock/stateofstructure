@@ -7,7 +7,7 @@ import java.util.Stack;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.hhu.util.datastructureView.GraphBuilderFactory;
+import com.hhu.datastructureView.GraphBuilderFactory;
 
 //Mutable graph, weil man so schön an die einzelnen Nodes zum testen kommt
 import guru.nidi.graphviz.model.MutableGraph;

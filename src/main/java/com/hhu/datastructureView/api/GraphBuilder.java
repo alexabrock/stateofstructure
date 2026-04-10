@@ -1,4 +1,4 @@
-package com.hhu.util.datastructureView.api;
+package com.hhu.datastructureView.api;
 
 import guru.nidi.graphviz.model.Graph;
 

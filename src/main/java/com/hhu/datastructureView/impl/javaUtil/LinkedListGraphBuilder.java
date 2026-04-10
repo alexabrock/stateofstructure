@@ -1,4 +1,4 @@
-package com.hhu.util.datastructureView.impl.javaUtil;
+package com.hhu.datastructureView.impl.javaUtil;
 
 import static guru.nidi.graphviz.attribute.Rank.RankDir.LEFT_TO_RIGHT;
 import static guru.nidi.graphviz.model.Factory.graph;
@@ -6,7 +6,7 @@ import static guru.nidi.graphviz.model.Factory.node;
 
 import java.util.LinkedList;
 
-import com.hhu.util.datastructureView.api.GraphBuilder;
+import com.hhu.datastructureView.api.GraphBuilder;
 
 import guru.nidi.graphviz.attribute.Rank;
 import guru.nidi.graphviz.attribute.Shape;
