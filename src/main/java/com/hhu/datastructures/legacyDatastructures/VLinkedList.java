@@ -23,7 +23,7 @@
  * questions.
  */
 
-package com.hhu.legacyDatastructures;
+package com.hhu.datastructures.legacyDatastructures;
 
 import java.util.AbstractSequentialList;
 import java.util.ArrayList;

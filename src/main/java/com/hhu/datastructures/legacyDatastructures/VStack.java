@@ -23,13 +23,13 @@
  * questions.
  */
 
-package com.hhu.legacyDatastructures;
+package com.hhu.datastructures.legacyDatastructures;
 
 import java.util.EmptyStackException;
 import java.util.LinkedList;
 import java.util.Vector;
 
-import com.hhu.legacyDatastructures.api.Visualizable;
+import com.hhu.datastructures.legacyDatastructures.api.Visualizable;
 import com.hhu.util.DrawCalls;
 import com.hhu.util.DrawStep;
 

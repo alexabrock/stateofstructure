@@ -14,7 +14,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.hhu.legacyDatastructures.VTreeMap;
+import com.hhu.datastructures.legacyDatastructures.VTreeMap;
 
 @Ignore
 public class VTreeMapTest {

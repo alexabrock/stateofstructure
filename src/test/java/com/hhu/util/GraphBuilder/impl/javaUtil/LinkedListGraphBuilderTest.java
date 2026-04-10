@@ -9,8 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.hhu.datastructureView.GraphBuilderFactory;
-import com.hhu.util.DrawCalls;
-import com.hhu.views.application.Application;
 
 //Mutable graph, weil man so schön an die einzelnen Nodes zum testen kommt
 import guru.nidi.graphviz.model.MutableGraph;

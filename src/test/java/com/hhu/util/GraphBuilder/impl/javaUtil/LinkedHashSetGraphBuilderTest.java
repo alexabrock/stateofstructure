@@ -59,16 +59,15 @@ public class LinkedHashSetGraphBuilderTest {
     }
 
     @Test
-    public void correctAmountOfNodes() {
+    public void correctAmountOfEdges() {
         hashSet.add("Lotte");
         hashSet.add("Dieter");
         hashSet.add("Alexa");
         hashSet.add("Holland");
         
         MutableGraph graph = createMutableGraph();
-        System.out.println(graph.nodes());
 
-        //all nodes come with 23pointers (before & afet & hashtable link), except for the first and last node, which have one pointer each
+        //all nodes come with  3 pointers (before & afet & hashtable link), except for the first and last node, which have one pointer each
         assertEquals(hashSet.size()*3-2 , graph.edges().size());
     }
 }

@@ -1,4 +1,4 @@
-package com.hhu.legacyDatastructures;
+package com.hhu.datastructures.legacyDatastructures;
 
 /*
  * Copyright (c) 1997, 2018, Oracle and/or its affiliates. All rights reserved.

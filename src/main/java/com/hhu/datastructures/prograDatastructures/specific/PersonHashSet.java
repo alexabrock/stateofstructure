@@ -1,6 +1,6 @@
-package com.hhu.prograDatastructures.specific;
+package com.hhu.datastructures.prograDatastructures.specific;
 
-import com.hhu.prograDatastructures.dependencies.persons.Person;
+import com.hhu.datastructures.prograDatastructures.dependencies.persons.Person;
 
 public class PersonHashSet {
 

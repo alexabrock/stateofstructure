@@ -1,23 +1,18 @@
 package com.hhu.datastructureView.impl.javaUtil;
 
-import static guru.nidi.graphviz.attribute.Rank.RankDir.LEFT_TO_RIGHT;
 import static guru.nidi.graphviz.attribute.Rank.RankDir.TOP_TO_BOTTOM;
-import static guru.nidi.graphviz.attribute.Style.INVIS;
 import static guru.nidi.graphviz.model.Factory.graph;
 import static guru.nidi.graphviz.model.Factory.node;
-import static guru.nidi.graphviz.model.Factory.nodeAttrs;
 import static guru.nidi.graphviz.model.Factory.to;
-import static guru.nidi.graphviz.attribute.Arrow.*;
 
 import java.util.LinkedHashSet;
 
 import com.hhu.datastructureView.api.GraphBuilder;
 
 import guru.nidi.graphviz.attribute.Arrow;
-import guru.nidi.graphviz.attribute.Attributes;
 import guru.nidi.graphviz.attribute.Rank;
-import guru.nidi.graphviz.attribute.Shape;
 import guru.nidi.graphviz.attribute.Rank.RankType;
+import guru.nidi.graphviz.attribute.Shape;
 import guru.nidi.graphviz.model.Graph;
 import guru.nidi.graphviz.model.Node;
 
@@ -34,7 +29,7 @@ public class LinkedHashSetGraphBuilder implements GraphBuilder {
         Graph g = graph("listGraph").directed()
                 .graphAttr().with(Rank.dir(TOP_TO_BOTTOM))
                 .nodeAttr().with(Shape.RECTANGLE);
-                
+
         //Graph with just the elements of the HashSet, to get them to be next to each other
         Graph elements = graph("elements").directed()
                 .graphAttr().with(
@@ -55,7 +50,6 @@ public class LinkedHashSetGraphBuilder implements GraphBuilder {
         for (Object current : set) {
             String nodename = current.toString();
             Node currentNode = node(nodename);
-            //g = g.with(node(nodename).link(hashTable));
 
             g = g.with(currentNode.link(to(hashTable).with(Arrow.NONE)));
 

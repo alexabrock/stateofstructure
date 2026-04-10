@@ -6,7 +6,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 import com.hhu.util.DrawCalls;
-import com.hhu.views.application.Application;
+import com.hhu.views.Application;
 
 public class GraphvizApp {
 

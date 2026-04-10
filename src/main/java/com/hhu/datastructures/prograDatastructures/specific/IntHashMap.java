@@ -1,4 +1,4 @@
-package com.hhu.prograDatastructures.specific;
+package com.hhu.datastructures.prograDatastructures.specific;
 
 public class IntHashMap {
     private final int maxSize;

@@ -1,4 +1,4 @@
-package com.hhu.prograDatastructures.specific;
+package com.hhu.datastructures.prograDatastructures.specific;
 
 import java.util.List;
 import java.util.LinkedList;

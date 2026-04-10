@@ -1,4 +1,4 @@
-package com.hhu.prograDatastructures.dependencies.maybeInt;
+package com.hhu.datastructures.prograDatastructures.dependencies.maybeInt;
 
 public class MaybeInt {
     private final int value;

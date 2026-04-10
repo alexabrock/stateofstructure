@@ -1,7 +1,7 @@
-import com.hhu.legacyDatastructures.VArrayList;
-import com.hhu.legacyDatastructures.VLinkedList;
-import com.hhu.legacyDatastructures.VStack;
-import com.hhu.legacyDatastructures.VTreeMap;
+import com.hhu.datastructures.legacyDatastructures.VArrayList;
+import com.hhu.datastructures.legacyDatastructures.VLinkedList;
+import com.hhu.datastructures.legacyDatastructures.VStack;
+import com.hhu.datastructures.legacyDatastructures.VTreeMap;
 
 public class GraphvizAppOld {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package com.hhu.prograDatastructures.specific;
+package com.hhu.datastructures.prograDatastructures.specific;
 
 //merged minimum and maximum IntBinarySearchTree
 public class IntBinarySearchTree {

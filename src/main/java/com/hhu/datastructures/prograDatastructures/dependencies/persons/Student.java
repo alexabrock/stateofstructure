@@ -1,4 +1,4 @@
-package com.hhu.prograDatastructures.dependencies.persons;
+package com.hhu.datastructures.prograDatastructures.dependencies.persons;
 
 public class Student extends Person {
 

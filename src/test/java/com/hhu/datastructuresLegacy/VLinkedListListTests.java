@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.hhu.legacyDatastructures.VLinkedList;
+import com.hhu.datastructures.legacyDatastructures.VLinkedList;
 
 @Ignore
 public class VLinkedListListTests {

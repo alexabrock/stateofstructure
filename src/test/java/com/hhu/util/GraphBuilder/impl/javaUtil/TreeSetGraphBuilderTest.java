@@ -3,7 +3,6 @@ package com.hhu.util.GraphBuilder.impl.javaUtil;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.TreeMap;
 import java.util.TreeSet;
 
 import org.junit.Before;

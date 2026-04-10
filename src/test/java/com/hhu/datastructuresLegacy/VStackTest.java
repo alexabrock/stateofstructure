@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.hhu.legacyDatastructures.VStack;
+import com.hhu.datastructures.legacyDatastructures.VStack;
 
 @Ignore
 public class VStackTest {
