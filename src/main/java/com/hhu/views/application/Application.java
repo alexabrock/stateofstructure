@@ -17,7 +17,7 @@ import com.hhu.util.DrawStep;
 
 public class Application {
 
-    public static <E> void startApplication(DrawCalls drawCalls) {
+    public static <E> void start(DrawCalls drawCalls) {
         // Swing needs this
         if (GraphicsEnvironment.isHeadless()) {
             System.out.println("Headless environment detected ");
