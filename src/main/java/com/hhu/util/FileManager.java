@@ -50,4 +50,14 @@ public class FileManager {
 
     }
 
+    public static int findCallerLineForTests() {
+        StackWalker walker = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE);
+
+        return walker.walk(stream -> stream
+                .dropWhile(frame -> frame.getDeclaringClass() == FileManager.class)
+                .findFirst()
+                .map(StackWalker.StackFrame::getLineNumber)
+                .orElse(-1));
+    }
+
 }

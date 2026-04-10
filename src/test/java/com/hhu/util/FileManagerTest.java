@@ -3,14 +3,7 @@ package com.hhu.util;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.nio.file.Paths;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-
 import org.junit.Test;
-
-import com.hhu.util.FileManager;
 
 public class FileManagerTest {
     @Test
@@ -21,17 +14,19 @@ public class FileManagerTest {
     }
 
     @Test
-    public void findCorrectLine() {
-        /* int expectedLine = new Throwable().getStackTrace()[0].getLineNumber() + 1;
+    public void findCorrectLine() throws IllegalAccessException {
+        int expectedLine = new Throwable().getStackTrace()[0].getLineNumber() +2 ; //+2 weil find caller line for tests zwei Zeilen tiefer aufgerufen wird
         
-        int actualLine = FileManager.findCallerLine();
+        int actualLine = FileManager.findCallerLineForTests();
         
-        assertEquals(expectedLine, actualLine); */
+        assertEquals(expectedLine, actualLine); 
 
         // [ERROR] FileManagerTest.findCorrectLine:29 expected:<26> but was:<58> 
 
         //Tests stoppen in Aufrufender Klasse vor dieser Testklasse
-        //TODO: herausfinden in welcher und warum
-        assertTrue(true);
+        // at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59) (findCallerLine returnt line -1)
+        //weil ich in der normalen FindCallerLine Methode .filter(frame ->
+        // !frame.getClassName().startsWith("com.hhu.util")) 
+        //filter, aber die Testklasse in diesem Package liegt.
     }
 }
