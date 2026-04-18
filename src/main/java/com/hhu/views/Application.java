@@ -10,6 +10,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
 import com.hhu.datastructures.legacyDatastructures.api.Visualizable;
@@ -53,6 +56,7 @@ public class Application {
             frame.add(centerPanel, BorderLayout.CENTER);
 
             JPanel buttonPanel = new JPanel();
+            buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 24, 8));
             ThemeStyler.styleToolbar(buttonPanel);
 
             JButton prevButton = new JButton("Previous");
@@ -103,17 +107,11 @@ public class Application {
 
     static void replacePanels(JPanel residesIn, DrawStep step) {
         BorderLayout layout = (BorderLayout) residesIn.getLayout();
-
-        // replace memory panel
-        Component oldMemory = layout.getLayoutComponent(BorderLayout.CENTER);
-        residesIn.remove(oldMemory);
-        residesIn.add(step.memory(), BorderLayout.CENTER);
-
-        // replace datastructure panel
-        Component oldDatastructure = layout.getLayoutComponent(BorderLayout.EAST);
-        residesIn.remove(oldDatastructure);
-        residesIn.add(step.datastructure(), BorderLayout.EAST);
-
+        // replace visualization area (memory + datastructure)
+        Component oldVisualizationArea = layout.getLayoutComponent(BorderLayout.CENTER);
+        residesIn.remove(oldVisualizationArea);
+        residesIn.add(createVisualizationPanel(step.memory(), step.datastructure()), BorderLayout.CENTER);
+        
         // replace method name
         Component oldMethodName = layout.getLayoutComponent(BorderLayout.NORTH);
         residesIn.remove(oldMethodName);
@@ -134,11 +132,33 @@ public class Application {
 
         centerPanel.add(codePanel, BorderLayout.WEST);
         // CENTER stretches to fill remaining space
-        centerPanel.add(memoryPanel, BorderLayout.CENTER);
-        centerPanel.add(datastructurePanel, BorderLayout.EAST);
+        centerPanel.add(createVisualizationPanel(memoryPanel, datastructurePanel), BorderLayout.CENTER);
         centerPanel.add(methodName, BorderLayout.NORTH);
 
         return centerPanel;
     }
+    
+    static JPanel createVisualizationPanel(JPanel memoryPanel, JPanel datastructurePanel) {
+        JPanel visualizationPanel = new JPanel(new GridBagLayout());
 
+        GridBagConstraints memoryConstraints = new GridBagConstraints();
+        memoryConstraints.gridx = 0;
+        memoryConstraints.gridy = 0;
+        memoryConstraints.weightx = 2.0;
+        memoryConstraints.weighty = 1.0;
+        memoryConstraints.fill = GridBagConstraints.BOTH;
+        memoryConstraints.insets = new Insets(0, 0, 0, 8);
+
+        GridBagConstraints datastructureConstraints = new GridBagConstraints();
+        datastructureConstraints.gridx = 1;
+        datastructureConstraints.gridy = 0;
+        datastructureConstraints.weightx = 1.0;
+        datastructureConstraints.weighty = 1.0;
+        datastructureConstraints.fill = GridBagConstraints.BOTH;
+
+        visualizationPanel.add(memoryPanel, memoryConstraints);
+        visualizationPanel.add(datastructurePanel, datastructureConstraints);
+
+        return visualizationPanel;
+    }
 }
