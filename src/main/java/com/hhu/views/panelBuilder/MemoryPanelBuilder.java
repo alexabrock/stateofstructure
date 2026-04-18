@@ -23,7 +23,7 @@ final class MemoryPanelBuilder {
     }
 
     static JPanel create(Object collection) {
-        String dot = createDot(collection);
+        String dot = GraphvizDarkModeStyler.apply(createDot(collection));
 
         try {
 

@@ -25,10 +25,11 @@ final class DataStructurePanelBuilder {
 
     static JPanel create(Object collection) {
         try {
-        Graph graph = GraphBuilderFactory.getBuilder(collection).buildGraph(collection);
-        BufferedImage image = Graphviz.fromGraph(graph).width(400).render(Format.PNG).toImage();
+            Graph graph = GraphBuilderFactory.getBuilder(collection).buildGraph(collection);
+            Graph themedGraph = GraphvizDarkModeStyler.apply(graph);
 
-        return GraphPanelRenderer.create("Datastructure Visualization", image);
+            BufferedImage image = Graphviz.fromGraph(themedGraph).width(400).render(Format.PNG).toImage();
+            return GraphPanelRenderer.create("Datastructure Visualization", image);
 
         // if something went wrong, a Panel with the error is returned
         } catch (RuntimeException ex) {
