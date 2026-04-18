@@ -80,13 +80,13 @@ public class Application {
         });
     }
 
-    private static void updateButtons(JButton prev, JButton next, DrawCalls drawCalls) {
+    static void updateButtons(JButton prev, JButton next, DrawCalls drawCalls) {
         prev.setEnabled(drawCalls.hasPrevStep());
         next.setEnabled(drawCalls.hasNextStep());
     }
 
 
-    private static void replacePanels(JPanel residesIn, DrawStep step) {
+    static void replacePanels(JPanel residesIn, DrawStep step) {
         BorderLayout layout = (BorderLayout) residesIn.getLayout();
 
         // replace memory panel
@@ -113,7 +113,7 @@ public class Application {
         residesIn.repaint();
     }
 
-    private static JPanel createCenterPanel(JPanel codePanel, JPanel memoryPanel, JPanel datastructurePanel,
+    static JPanel createCenterPanel(JPanel codePanel, JPanel memoryPanel, JPanel datastructurePanel,
             JLabel methodName) {
         JPanel centerPanel = new JPanel(new BorderLayout(8, 8));
 
