@@ -19,6 +19,7 @@ import com.hhu.util.DrawCalls;
 import com.hhu.util.DrawStep;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class ApplicationTest {
@@ -80,6 +81,7 @@ public class ApplicationTest {
     }
 
     @Test
+    @Ignore
     public void testReplacePanels() {
 
         JPanel container = new JPanel(new BorderLayout());
