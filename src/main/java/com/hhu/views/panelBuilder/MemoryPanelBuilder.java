@@ -43,7 +43,7 @@ final class MemoryPanelBuilder {
 
     static String createDot(Object collection) {
         return new LJV()
-                .setTreatAsPrimitive(Character.class)
+                .setTreatAsPrimitive(String.class)
                 .addIgnoreField("drawCalls")
                 .addIgnoreField("currentStepIndex")
                 .addIgnoreField("hashIsZero")
