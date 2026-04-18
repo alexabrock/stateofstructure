@@ -15,16 +15,31 @@ import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
+import java.awt.Font;
+import java.awt.Insets;
+import java.io.IOException;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.TitledBorder;
+import javax.swing.text.BadLocationException;
+
+import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
+import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
+import org.fife.ui.rsyntaxtextarea.Theme;
+import org.fife.ui.rtextarea.RTextScrollPane;
+
 final class CodePanelBuilder {
 
     private static final Font HEADLINE_FONT = new Font(Font.SANS_SERIF, Font.BOLD, 20);
 
-    private static final Font CODE_FONT = new Font(Font.MONOSPACED, Font.PLAIN, 17);
+    private static final Font CODE_FONT = new Font( "Fira Code", Font.PLAIN, 18);
 
-    private static final Color CURRENT_LINE_COLOR = new Color(230, 230, 255);
+    private static final Color CURRENT_LINE_FALLBACK = new Color(62, 76, 110);
+
+    private static final Color LINE_HIGHLIGHT_FALLBACK = new Color(84, 97, 131);
     
-    private static final Color LINE_HIGHLIGHT_COLOR = new Color(255, 249, 196);
-
     private CodePanelBuilder() {}
 
     public static JPanel create(String code) {
@@ -37,12 +52,16 @@ final class CodePanelBuilder {
 
         JLabel headline = new JLabel("Source Code", SwingConstants.CENTER);
         headline.setFont(HEADLINE_FONT);
+        ThemeStyler.styleAccentLabel(headline);
 
         JPanel panel = new JPanel(new BorderLayout(0, 8));
         panel.setBorder(new TitledBorder("Code"));
+        ThemeStyler.styleModernCard(panel);
 
         panel.add(headline, BorderLayout.NORTH);
         panel.add(scrollPane, BorderLayout.CENTER);
+
+        ThemeStyler.styleScrollPane(scrollPane);
 
         return panel;
     }
@@ -54,11 +73,15 @@ final class CodePanelBuilder {
         textArea.setText(code);
         textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
         textArea.setCodeFoldingEnabled(true);
-        textArea.setFont(CODE_FONT);
         textArea.setEditable(false);
         textArea.setAntiAliasingEnabled(true);
-        textArea.setCurrentLineHighlightColor(CURRENT_LINE_COLOR);
+        applyDarkSyntaxTheme(textArea);
+        textArea.setFont(CODE_FONT);
+        textArea.setCurrentLineHighlightColor(
+                ThemeStyler.uiColor("TextArea.selectionBackground", CURRENT_LINE_FALLBACK));
         textArea.setMargin(new Insets(10, 10, 10, 50));
+        textArea.setHighlightCurrentLine(true);
+        textArea.setRoundedSelectionEdges(true);
 
         highlightLineIfNeeded(textArea, lineNumber);
 
@@ -71,9 +94,22 @@ final class CodePanelBuilder {
         }
 
         try {
-            textArea.addLineHighlight(lineNumber, LINE_HIGHLIGHT_COLOR);
+            textArea.addLineHighlight(lineNumber,
+                    ThemeStyler.uiColor("Component.focusColor", LINE_HIGHLIGHT_FALLBACK));
         } catch (BadLocationException e) {
             e.printStackTrace();
+        }
+    }
+
+    private static void applyDarkSyntaxTheme(RSyntaxTextArea textArea) {
+        try {
+            Theme theme = Theme.load(CodePanelBuilder.class.getResourceAsStream(
+                    "/org/fife/ui/rsyntaxtextarea/themes/monokai.xml"));
+            theme.apply(textArea);
+        } catch (IOException | NullPointerException ignored) {
+            textArea.setBackground(ThemeStyler.uiColor("TextArea.background", new Color(42, 42, 42)));
+            textArea.setForeground(ThemeStyler.uiColor("TextArea.foreground", new Color(219, 220, 222)));
+            textArea.setCaretColor(ThemeStyler.uiColor("TextArea.caretForeground", new Color(255, 255, 255)));
         }
     }
 }

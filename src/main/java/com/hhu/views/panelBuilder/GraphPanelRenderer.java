@@ -11,6 +11,9 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 //class is final so it cant be extended, private constructor so it cant be instantiated, since its a helper class
 final class GraphPanelRenderer {
 
@@ -24,12 +27,13 @@ final class GraphPanelRenderer {
 
         JLabel headline = new JLabel(title, SwingConstants.CENTER);
         headline.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
+        ThemeStyler.styleAccentLabel(headline);
 
         JPanel panel = new JPanel(new BorderLayout(0, 8));
-        panel.setBorder(new TitledBorder("Graphviz"));
+        ThemeStyler.styleModernCard(panel);
 
+        panel.add(imageLabel, BorderLayout.CENTER);
         panel.add(headline, BorderLayout.NORTH);
-        panel.add(new JScrollPane(imageLabel), BorderLayout.CENTER);
 
         return panel;
     }

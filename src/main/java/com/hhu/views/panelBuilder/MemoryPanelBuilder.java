@@ -13,6 +13,10 @@ import org.atpfivt.ljv.LJV;
 import guru.nidi.graphviz.engine.Format;
 import guru.nidi.graphviz.engine.Graphviz;
 
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
 final class MemoryPanelBuilder {
 
     private MemoryPanelBuilder() {
@@ -31,7 +35,7 @@ final class MemoryPanelBuilder {
         } catch (RuntimeException ex) {
             JLabel error = new JLabel("Could not render LJV DOT: " + ex.getMessage(), SwingConstants.CENTER);
             JPanel panel = new JPanel(new BorderLayout());
-            panel.setBorder(new TitledBorder("Graphviz"));
+            ThemeStyler.styleModernCard(panel);
             panel.add(error, BorderLayout.CENTER);
             return panel;
         }

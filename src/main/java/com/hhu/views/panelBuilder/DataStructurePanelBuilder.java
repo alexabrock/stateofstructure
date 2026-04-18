@@ -14,6 +14,10 @@ import guru.nidi.graphviz.engine.Format;
 import guru.nidi.graphviz.engine.Graphviz;
 import guru.nidi.graphviz.model.Graph;
 
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
 final class DataStructurePanelBuilder {
 
     private DataStructurePanelBuilder() {
@@ -28,9 +32,10 @@ final class DataStructurePanelBuilder {
 
         // if something went wrong, a Panel with the error is returned
         } catch (RuntimeException ex) {
-            JLabel error = new JLabel("Could not render Datastructure Visualization: " + ex.getMessage(), SwingConstants.CENTER);
+            JLabel error = new JLabel("Could not render Datastructure Visualization: " + ex.getMessage(),
+                    SwingConstants.CENTER);
             JPanel panel = new JPanel(new BorderLayout());
-            panel.setBorder(new TitledBorder("Graphviz"));
+            ThemeStyler.styleModernCard(panel);
             panel.add(error, BorderLayout.CENTER);
             return panel;
         }

@@ -16,6 +16,8 @@ import com.hhu.datastructures.legacyDatastructures.api.Visualizable;
 import com.hhu.util.DrawCalls;
 import com.hhu.util.DrawStep;
 
+import com.hhu.views.panelBuilder.ThemeStyler;
+
 public class Application {
 
     public static <E> void start(DrawCalls drawCalls) {
@@ -28,7 +30,7 @@ public class Application {
         // DrawCalls drawCalls = visualizable.getDrawCalls();
         DrawStep firstStep = drawCalls.nextStep();
 
-        FlatDarculaLaf.setup();
+        ThemeStyler.applyDarkTheme();
 
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame("State to Structure");
@@ -46,6 +48,7 @@ public class Application {
             frame.add(centerPanel, BorderLayout.CENTER);
 
             JPanel buttonPanel = new JPanel();
+            ThemeStyler.styleToolbar(buttonPanel);
 
             JButton prevButton = new JButton("Previous");
             JButton nextButton = new JButton("Next");
