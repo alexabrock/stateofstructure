@@ -18,6 +18,11 @@ import com.hhu.util.DrawStep;
 
 import com.hhu.views.panelBuilder.ThemeStyler;
 
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GraphicsEnvironment;
+import java.awt.Insets;
+
 public class Application {
 
     public static <E> void start(DrawCalls drawCalls) {
@@ -52,6 +57,8 @@ public class Application {
 
             JButton prevButton = new JButton("Previous");
             JButton nextButton = new JButton("Next");
+            styleNavigationButton(prevButton);
+            styleNavigationButton(nextButton);
 
             // Initial state setzen
             prevButton.setEnabled(true);
@@ -87,7 +94,12 @@ public class Application {
         prev.setEnabled(drawCalls.hasPrevStep());
         next.setEnabled(drawCalls.hasNextStep());
     }
-
+    
+    static void styleNavigationButton(JButton button) {
+        button.setFont(button.getFont().deriveFont(Font.BOLD, 18f));
+        button.setMargin(new Insets(10, 24, 10, 24));
+        button.setPreferredSize(new Dimension(160, 56));
+    }
 
     static void replacePanels(JPanel residesIn, DrawStep step) {
         BorderLayout layout = (BorderLayout) residesIn.getLayout();
