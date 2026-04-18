@@ -28,7 +28,7 @@ final class DataStructurePanelBuilder {
             Graph graph = GraphBuilderFactory.getBuilder(collection).buildGraph(collection);
             Graph themedGraph = GraphvizDarkModeStyler.apply(graph);
 
-            BufferedImage image = Graphviz.fromGraph(themedGraph).width(400).render(Format.PNG).toImage();
+            BufferedImage image = Graphviz.fromGraph(themedGraph).width(1000).render(Format.PNG).toImage();
             return GraphPanelRenderer.create("Datastructure Visualization", image);
 
         // if something went wrong, a Panel with the error is returned
