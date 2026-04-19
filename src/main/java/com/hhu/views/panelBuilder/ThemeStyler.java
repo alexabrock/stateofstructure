@@ -1,6 +1,7 @@
 package com.hhu.views.panelBuilder;
 
 import java.awt.Color;
+import java.awt.Font;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
@@ -14,6 +15,7 @@ import com.formdev.flatlaf.FlatDarkLaf;
 public final class ThemeStyler {
 
     private static boolean initialized;
+    private static final Font HEADLINE_FONT = new Font(Font.SANS_SERIF, Font.BOLD, 30);
 
     private ThemeStyler() {
     }
@@ -44,7 +46,8 @@ public final class ThemeStyler {
     }
 
     public static void styleAccentLabel(JLabel label) {
-        label.setForeground(uiColor("Component.accentColor", new Color(125, 152, 255)));
+        label.setFont(HEADLINE_FONT);
+        label.setForeground(uiColor("Component.accentColor", new Color(245, 216,2)));
     }
 
     public static void styleScrollPane(JComponent component) {

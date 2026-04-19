@@ -32,8 +32,6 @@ import org.fife.ui.rtextarea.RTextScrollPane;
 
 final class CodePanelBuilder {
 
-    private static final Font HEADLINE_FONT = new Font(Font.SANS_SERIF, Font.BOLD, 20);
-
     private static final Font CODE_FONT = new Font( "Fira Code", Font.PLAIN, 18);
 
     private static final Color CURRENT_LINE_FALLBACK = new Color(62, 76, 110);
@@ -51,8 +49,8 @@ final class CodePanelBuilder {
         RTextScrollPane scrollPane = new RTextScrollPane(textArea);
 
         JLabel headline = new JLabel("Source Code", SwingConstants.CENTER);
-        headline.setFont(HEADLINE_FONT);
         ThemeStyler.styleAccentLabel(headline);
+        
 
         JPanel panel = new JPanel(new BorderLayout(0, 8));
         panel.setBorder(new TitledBorder("Code"));

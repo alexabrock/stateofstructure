@@ -23,8 +23,8 @@ public class PanelBuilder {
 
     public static JLabel createMethodNameLabel(String methodName) {
         JLabel label = new JLabel(methodName, SwingConstants.CENTER);
-        label.setFont(label.getFont().deriveFont(50f));
         ThemeStyler.styleAccentLabel(label);
+        label.setFont(label.getFont().deriveFont(50f));
         return label;
     }
 

@@ -29,7 +29,6 @@ final class GraphPanelRenderer {
         imagePanel.add(new ScaledImagePanel(image), BorderLayout.CENTER);
 
         JLabel headline = new JLabel(title, SwingConstants.CENTER);
-        headline.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
         ThemeStyler.styleAccentLabel(headline);
         JPanel panel = new JPanel(new BorderLayout(0, 8));
         ThemeStyler.styleModernCard(panel);
