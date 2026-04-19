@@ -34,9 +34,9 @@ final class CodePanelBuilder {
 
     private static final Font CODE_FONT = new Font( "Fira Code", Font.PLAIN, 18);
 
-    private static final Color CURRENT_LINE_FALLBACK = new Color(62, 76, 110);
+    private static final Color CURRENT_LINE_FALLBACK = new Color(0, 42, 61);
 
-    private static final Color LINE_HIGHLIGHT_FALLBACK = new Color(84, 97, 131);
+    private static final Color LINE_HIGHLIGHT_FALLBACK = new Color(74, 7, 39);
     
     private CodePanelBuilder() {}
 
@@ -75,8 +75,7 @@ final class CodePanelBuilder {
         textArea.setAntiAliasingEnabled(true);
         applyDarkSyntaxTheme(textArea);
         textArea.setFont(CODE_FONT);
-        textArea.setCurrentLineHighlightColor(
-                ThemeStyler.uiColor("TextArea.selectionBackground", CURRENT_LINE_FALLBACK));
+        textArea.setCurrentLineHighlightColor(CURRENT_LINE_FALLBACK);
         textArea.setMargin(new Insets(10, 10, 10, 50));
         textArea.setHighlightCurrentLine(true);
         textArea.setRoundedSelectionEdges(true);
@@ -92,8 +91,7 @@ final class CodePanelBuilder {
         }
 
         try {
-            textArea.addLineHighlight(lineNumber,
-                    ThemeStyler.uiColor("Component.focusColor", LINE_HIGHLIGHT_FALLBACK));
+            textArea.addLineHighlight(lineNumber, LINE_HIGHLIGHT_FALLBACK);
         } catch (BadLocationException e) {
             e.printStackTrace();
         }

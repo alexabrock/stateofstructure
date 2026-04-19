@@ -7,13 +7,13 @@ import javax.swing.JPanel;
 public class DrawStep {
     private JPanel memory;
     private JPanel datastructure;
-    private JLabel methodLabel;
+    private JLabel name;
     private JPanel codePanel;
 
-    public DrawStep(JPanel memory, JPanel datastructure, JLabel methodLabel, JPanel codPanel) {
+    public DrawStep(JPanel memory, JPanel datastructure, JLabel name, JPanel codPanel) {
         this.memory = memory;
         this.datastructure = datastructure;
-        this.methodLabel = methodLabel;
+        this.name = name;
         this.codePanel = codPanel;
     }
 
@@ -29,7 +29,7 @@ public class DrawStep {
         return datastructure;
     }
 
-    public JLabel methodLabel() {
-        return methodLabel;
+    public JLabel name() {
+        return name;
     }
 }

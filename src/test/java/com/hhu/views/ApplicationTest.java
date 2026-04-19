@@ -107,7 +107,7 @@ public class ApplicationTest {
         when(step.codPanel()).thenReturn(newCode);
         when(step.memory()).thenReturn(newMemory);
         when(step.datastructure()).thenReturn(newData);
-        when(step.methodLabel()).thenReturn(newLabel);
+        when(step.name()).thenReturn(newLabel);
 
 
         Application.replacePanels(container, step);

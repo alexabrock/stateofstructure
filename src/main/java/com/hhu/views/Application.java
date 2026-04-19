@@ -50,7 +50,7 @@ public class Application {
             JPanel codePanel = firstStep.codPanel();
             JPanel memoryPanel = firstStep.memory();
             JPanel datastructurePanel = firstStep.datastructure();
-            JLabel methodName = firstStep.methodLabel();
+            JLabel methodName = firstStep.name();
 
             JPanel centerPanel = createCenterPanel(codePanel, memoryPanel, datastructurePanel, methodName);
             frame.add(centerPanel, BorderLayout.CENTER);
@@ -115,7 +115,7 @@ public class Application {
         // replace method name
         Component oldMethodName = layout.getLayoutComponent(BorderLayout.NORTH);
         residesIn.remove(oldMethodName);
-        residesIn.add(step.methodLabel(), BorderLayout.NORTH);
+        residesIn.add(step.name(), BorderLayout.NORTH);
 
         // replace code panel
         Component oldCode = layout.getLayoutComponent(BorderLayout.WEST);

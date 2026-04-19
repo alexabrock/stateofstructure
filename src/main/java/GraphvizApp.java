@@ -31,13 +31,13 @@ public class GraphvizApp {
 
         TreeSet<String> treeSet = new TreeSet<>();
         treeSet.add("Hello");
-        drawCalls.record(treeSet, "push()");
+        drawCalls.record(treeSet );
         treeSet.add("Progra");
-        drawCalls.record(treeSet, "push()");
+        drawCalls.record(treeSet);
         treeSet.add("2026");
-        drawCalls.record(treeSet, "push()");
+        drawCalls.record(treeSet);
         treeSet.add("!");
-        drawCalls.record(treeSet, "push()");
+        drawCalls.record(treeSet);
 
         Application.start(drawCalls);
     }
@@ -92,13 +92,13 @@ public class GraphvizApp {
 
         TreeMap<String, Integer> map = new TreeMap<>();
         map.put("hello", 1);
-        drawCalls.record(map, "push()");
+        drawCalls.record(map);
         map.put("world", 2);
-        drawCalls.record(map, "push()");
+        drawCalls.record(map);
         map.put("java", 3);
-        drawCalls.record(map, "push()");
+        drawCalls.record(map);
         map.put("javasda", 3);
-        drawCalls.record(map, "push()");
+        drawCalls.record(map);
 
         Application.start(drawCalls);
 

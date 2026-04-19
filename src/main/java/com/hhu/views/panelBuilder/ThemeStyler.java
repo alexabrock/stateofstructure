@@ -47,7 +47,7 @@ public final class ThemeStyler {
 
     public static void styleAccentLabel(JLabel label) {
         label.setFont(HEADLINE_FONT);
-        label.setForeground(uiColor("Component.accentColor", new Color(245, 216,2)));
+        label.setForeground(Color.WHITE);
     }
 
     public static void styleScrollPane(JComponent component) {

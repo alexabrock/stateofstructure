@@ -41,7 +41,8 @@ public class FileManager {
         int lineNumber = walker.walk(stream -> stream
                 //filter all steps between outside-caller and this class (such as Application.java)
                 .filter(frame -> !frame.getClassName().startsWith("com.hhu.util")
-                        && !frame.getClassName().startsWith("com.hhu.datastructures"))
+                        && !frame.getClassName().startsWith("com.hhu.datastructures")
+                        && !frame.getClassName().startsWith("com.hhu.views.panelBuilder"))
                 .findFirst()
                 .map(StackWalker.StackFrame::getLineNumber)
                 .orElse(-1));

@@ -23,14 +23,14 @@ final class MemoryPanelBuilder {
     }
 
     static JPanel create(Object collection) {
-        String dot = GraphvizDarkModeStyler.apply(createDot(collection));
+        String dot = GraphvizDarkModeStyler.applyMemory(createDot(collection));
 
         try {
 
             BufferedImage image = Graphviz.fromString(dot).width(900).render(Format.PNG).toImage();
-            return GraphPanelRenderer.create("Memory Visualization",image);
-            
-        //if something went wrong, a Panel with the error is returned 
+            return GraphPanelRenderer.create("Memory Visualization", image);
+
+            // if something went wrong, a Panel with the error is returned
         } catch (RuntimeException ex) {
             JLabel error = new JLabel("Could not render LJV DOT: " + ex.getMessage(), SwingConstants.CENTER);
             JPanel panel = new JPanel(new BorderLayout());

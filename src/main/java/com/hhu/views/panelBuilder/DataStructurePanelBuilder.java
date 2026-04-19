@@ -26,12 +26,12 @@ final class DataStructurePanelBuilder {
     static JPanel create(Object collection) {
         try {
             Graph graph = GraphBuilderFactory.getBuilder(collection).buildGraph(collection);
-            Graph themedGraph = GraphvizDarkModeStyler.apply(graph);
+            Graph themedGraph = GraphvizDarkModeStyler.applyDataStructure(graph);
 
             BufferedImage image = Graphviz.fromGraph(themedGraph).width(1000).render(Format.PNG).toImage();
             return GraphPanelRenderer.create("Datastructure Visualization", image);
 
-        // if something went wrong, a Panel with the error is returned
+            // if something went wrong, a Panel with the error is returned
         } catch (RuntimeException ex) {
             JLabel error = new JLabel("Could not render Datastructure Visualization: " + ex.getMessage(),
                     SwingConstants.CENTER);
