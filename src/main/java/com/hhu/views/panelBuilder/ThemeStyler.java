@@ -11,6 +11,7 @@ import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import com.hhu.views.Colors;
 
 public final class ThemeStyler {
 
@@ -32,12 +33,16 @@ public final class ThemeStyler {
     public static void styleModernCard(JPanel panel) {
         panel.setBorder(
                 BorderFactory.createCompoundBorder(
-                        BorderFactory.createLineBorder(new Color(200, 211,217), 2),
+                        BorderFactory.createLineBorder(Colors.LINE_BORDER, 2),
                         BorderFactory.createEmptyBorder(12, 12, 12, 12)));
     }
-
+    
     public static void styleToolbar(JPanel panel) {
         panel.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
+    }
+
+    public static void styleCenterPanel(JPanel panel) {
+        panel.setBorder(BorderFactory.createEmptyBorder(16, 16, 16, 16));
     }
 
     public static void styleAccentLabel(JLabel label) {

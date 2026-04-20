@@ -6,7 +6,11 @@ import java.awt.Component;
 import java.awt.GraphicsEnvironment;
 import java.awt.Container;
 import java.awt.Rectangle;
+import java.awt.geom.Rectangle2D;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -139,6 +143,7 @@ public class Application {
     static JPanel createCenterPanel(JPanel codePanel, JPanel memoryPanel, JPanel datastructurePanel,
             JLabel methodName) {
         JPanel centerPanel = new JPanel(new BorderLayout(8, 8));
+        ThemeStyler.styleCenterPanel(centerPanel);
 
         centerPanel.add(codePanel, BorderLayout.WEST);
         // CENTER stretches to fill remaining space
@@ -148,6 +153,7 @@ public class Application {
         return centerPanel;
     }
     
+    //Schachtel um memory und ds panel, damit die beiden im Verhältnis zueinander skalieren
     static JPanel createVisualizationPanel(JPanel memoryPanel, JPanel datastructurePanel) {
         JPanel visualizationPanel = new JPanel(new GridBagLayout());
 
@@ -172,6 +178,9 @@ public class Application {
         return visualizationPanel;
     }
 
+
+    //Muss nach frame.setVisible passieren, damit die Panelhöhe existiert. 
+    //Deswegen kann das nicht im CodePanelBuilder passieren.
     static void ensureCodePanelScrollPosition(JPanel codePanel) {
         RSyntaxTextArea textArea = findSyntaxTextArea(codePanel);
         if (textArea == null) {
@@ -199,12 +208,13 @@ public class Application {
 
                 int safeLine = Math.max(0, Math.min(configuredLine, textArea.getLineCount() - 1));
                 int lineStartOffset = textArea.getLineStartOffset(safeLine);
-                Rectangle targetLineBounds = textArea.modelToView(lineStartOffset);
+                Rectangle2D targetLineBounds = textArea.modelToView2D(lineStartOffset);
                 if (targetLineBounds == null) {
                     return;
                 }
 
-                int targetY = targetLineBounds.y - (visibleRect.height / 2) + (targetLineBounds.height / 2);
+                int targetY = (int) targetLineBounds.getY() - (visibleRect.height / 2)
+                        + (int) (targetLineBounds.getHeight() / 2);
                 int maxY = Math.max(0, textArea.getHeight() - visibleRect.height);
                 int clampedY = Math.max(0, Math.min(targetY, maxY));
 
@@ -215,18 +225,22 @@ public class Application {
         });
     }
 
-    static RSyntaxTextArea findSyntaxTextArea(Component component) {
-        if (component instanceof RSyntaxTextArea syntaxTextArea) {
-            return syntaxTextArea;
+    static RSyntaxTextArea findSyntaxTextArea(Component root) {
+    Deque<Component> stack = new ArrayDeque<>();
+    stack.push(root);
+    
+    //Stack Tiefensuche
+    while (!stack.isEmpty()) {
+        Component current = stack.pop();
+        if (current instanceof RSyntaxTextArea textArea) {
+            return textArea;
         }
-        if (component instanceof Container container) {
+        if (current instanceof Container container) {
             for (Component child : container.getComponents()) {
-                RSyntaxTextArea textArea = findSyntaxTextArea(child);
-                if (textArea != null) {
-                    return textArea;
-                }
+                stack.push(child);
             }
         }
-        return null;
     }
+    return null;
+}
 }

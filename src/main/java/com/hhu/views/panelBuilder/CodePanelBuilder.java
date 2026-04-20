@@ -1,10 +1,10 @@
 package com.hhu.views.panelBuilder;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Insets;
 import java.awt.Rectangle;
+import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 
 import javax.swing.JLabel;
@@ -19,13 +19,13 @@ import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rsyntaxtextarea.Theme;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
+import com.hhu.views.Colors;
+
 final class CodePanelBuilder {
 
     static final String TARGET_LINE_PROPERTY = "codepanel.targetLineNumber";
 
     private static final Font CODE_FONT = new Font("Fira Code", Font.PLAIN, 18);
-
-    private static final Color LINE_HIGHLIGHT_FALLBACK = new Color(74, 7, 39);
 
     private CodePanelBuilder() {
     }
@@ -69,42 +69,18 @@ final class CodePanelBuilder {
         textArea.setRoundedSelectionEdges(true);
         textArea.putClientProperty(TARGET_LINE_PROPERTY, lineNumber);
 
-        highlightLineIfNeeded(textArea, lineNumber);
-        scrollToLineIfNeeded(textArea, lineNumber);
+        highlightLine(textArea, lineNumber);
 
         return textArea;
     }
 
-    private static void scrollToLineIfNeeded(RSyntaxTextArea textArea, int lineNumber) {
-        if (lineNumber < 0) {
-            return;
-        }
-
-        SwingUtilities.invokeLater(() -> {
-            try {
-                int lineCount = textArea.getLineCount();
-                int safeLine = Math.max(0, Math.min(lineNumber, lineCount - 1));
-                int lineStartOffset = textArea.getLineStartOffset(safeLine);
-
-                textArea.setCaretPosition(lineStartOffset);
-
-                Rectangle lineBounds = textArea.modelToView(lineStartOffset);
-                if (lineBounds != null) {
-                    textArea.scrollRectToVisible(lineBounds);
-                }
-            } catch (BadLocationException ignored) {
-                // line is out of range, nothing to scroll
-            }
-        });
-    }
-
-    private static void highlightLineIfNeeded(RSyntaxTextArea textArea, int lineNumber) {
+    private static void highlightLine(RSyntaxTextArea textArea, int lineNumber) {
         if (lineNumber < 0) {
             return;
         }
 
         try {
-            textArea.addLineHighlight(lineNumber, LINE_HIGHLIGHT_FALLBACK);
+            textArea.addLineHighlight(lineNumber, Colors.LINE_HIGHLIGHT);
         } catch (BadLocationException e) {
             e.printStackTrace();
         }
@@ -116,9 +92,9 @@ final class CodePanelBuilder {
                     "/org/fife/ui/rsyntaxtextarea/themes/monokai.xml"));
             theme.apply(textArea);
         } catch (IOException | NullPointerException ignored) {
-            textArea.setBackground((new Color(42, 42, 42)));
-            textArea.setForeground((new Color(219, 220, 222)));
-            textArea.setCaretColor(new Color(255, 255, 255));
+            textArea.setBackground(Colors.TEXT_BACKGROUND_COLOR);
+            textArea.setForeground(Colors.TEXT_FOREGROUND_COLOR);
+            textArea.setCaretColor(Colors.CARET_COLOR);
         }
     }
 }

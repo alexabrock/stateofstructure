@@ -15,8 +15,6 @@ import java.awt.image.BufferedImage;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-
-// class is final so it cant be extended, private constructor so it cant be instantiated, since its a helper class
 final class GraphPanelRenderer {
 
     private GraphPanelRenderer() {
@@ -25,7 +23,6 @@ final class GraphPanelRenderer {
     // transforms an image into a JPanel
     static JPanel create(String title, BufferedImage image) {
         JPanel imagePanel = new JPanel(new BorderLayout());
-        imagePanel.setOpaque(false);
         imagePanel.add(new ScaledImagePanel(image), BorderLayout.CENTER);
 
         JLabel headline = new JLabel(title, SwingConstants.CENTER);
@@ -39,6 +36,7 @@ final class GraphPanelRenderer {
         return panel;
     }
 
+    //Only used, for the zoom of the datastructure and memory panel 
     private static final class ScaledImagePanel extends JPanel {
         private static final double MIN_ZOOM = 0.3;
         private static final double MAX_ZOOM = 2.0;

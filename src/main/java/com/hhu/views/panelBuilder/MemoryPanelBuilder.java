@@ -10,6 +10,8 @@ import javax.swing.border.TitledBorder;
 
 import org.atpfivt.ljv.LJV;
 
+import com.hhu.views.Colors;
+
 import guru.nidi.graphviz.engine.Format;
 import guru.nidi.graphviz.engine.Graphviz;
 
@@ -18,16 +20,15 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 final class MemoryPanelBuilder {
-
     private MemoryPanelBuilder() {
     }
 
     static JPanel create(Object collection) {
-        String dot = GraphvizDarkModeStyler.applyMemory(createDot(collection));
+        String dot = applyDarkMode(createDot(collection));
 
         try {
 
-            BufferedImage image = Graphviz.fromString(dot).width(900).render(Format.PNG).toImage();
+            BufferedImage image = Graphviz.fromString(dot).width(1200).render(Format.PNG).toImage();
             return GraphPanelRenderer.create("Memory Visualization", image);
 
             // if something went wrong, a Panel with the error is returned
@@ -57,5 +58,25 @@ final class MemoryPanelBuilder {
                 .addIgnoreField("color")
                 .addIgnoreField("values")
                 .drawGraph(collection);
+    }
+
+    static String applyDarkMode(String dot) {
+        String themedAttributes = String.format(
+                "%n  graph [bgcolor=\"%s\", fontcolor=\"%s\"];%n"
+                        + "  node [fontcolor=\"%s\", color=\"%s\", style=\"filled\", fillcolor=\"%s\"];%n"
+                        + "  edge [color=\"%s\", fontcolor=\"%s\"];%n",
+                Colors.BG_COLORM,
+                Colors.FG_COLORM,
+                Colors.FG_COLORM,
+                Colors.NODE_BORDER_COLORM,
+                Colors.NODE_FILL_COLORM,
+                Colors.EDGE_COLORM,
+                Colors.FG_COLORM);
+
+        int firstBrace = dot.indexOf('{');
+        if (firstBrace < 0) {
+            return dot;
+        }
+        return dot.substring(0, firstBrace + 1) + themedAttributes + dot.substring(firstBrace + 1);
     }
 }
