@@ -4,12 +4,16 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GraphicsEnvironment;
+import java.awt.Container;
+import java.awt.Rectangle;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.text.BadLocationException;
+
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -25,6 +29,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.Insets;
+
+import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
 public class Application {
 
@@ -53,7 +59,9 @@ public class Application {
             JLabel methodName = firstStep.name();
 
             JPanel centerPanel = createCenterPanel(codePanel, memoryPanel, datastructurePanel, methodName);
+            ensureCodePanelScrollPosition(codePanel);
             frame.add(centerPanel, BorderLayout.CENTER);
+            
 
             JPanel buttonPanel = new JPanel();
             buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 24, 8));
@@ -120,8 +128,10 @@ public class Application {
         // replace code panel
         Component oldCode = layout.getLayoutComponent(BorderLayout.WEST);
         residesIn.remove(oldCode);
-        residesIn.add(step.codPanel(), BorderLayout.WEST);
-
+        JPanel newCodePanel = step.codPanel();
+        ensureCodePanelScrollPosition(newCodePanel);
+        residesIn.add(newCodePanel, BorderLayout.WEST);
+        
         residesIn.revalidate();
         residesIn.repaint();
     }
@@ -160,5 +170,63 @@ public class Application {
         visualizationPanel.add(datastructurePanel, datastructureConstraints);
 
         return visualizationPanel;
+    }
+
+    static void ensureCodePanelScrollPosition(JPanel codePanel) {
+        RSyntaxTextArea textArea = findSyntaxTextArea(codePanel);
+        if (textArea == null) {
+            return;
+        }
+
+        scrollCaretLineToPanelMiddle(textArea, 4);
+    }
+
+    static void scrollCaretLineToPanelMiddle(RSyntaxTextArea textArea, int retriesLeft) {
+        SwingUtilities.invokeLater(() -> {
+            Rectangle visibleRect = textArea.getVisibleRect();
+            if (!textArea.isShowing() || visibleRect.height <= 0) {
+                if (retriesLeft > 0) {
+                    scrollCaretLineToPanelMiddle(textArea, retriesLeft - 1);
+                }
+                return;
+            }
+
+            try {
+                Integer configuredLine = (Integer) textArea.getClientProperty("codepanel.targetLineNumber");
+                if (configuredLine == null || configuredLine < 0) {
+                    return;
+                }
+
+                int safeLine = Math.max(0, Math.min(configuredLine, textArea.getLineCount() - 1));
+                int lineStartOffset = textArea.getLineStartOffset(safeLine);
+                Rectangle targetLineBounds = textArea.modelToView(lineStartOffset);
+                if (targetLineBounds == null) {
+                    return;
+                }
+
+                int targetY = targetLineBounds.y - (visibleRect.height / 2) + (targetLineBounds.height / 2);
+                int maxY = Math.max(0, textArea.getHeight() - visibleRect.height);
+                int clampedY = Math.max(0, Math.min(targetY, maxY));
+
+                textArea.scrollRectToVisible(new Rectangle(0, clampedY, visibleRect.width, visibleRect.height));
+            } catch (BadLocationException ignored) {
+                // caret outside document range -> nothing to scroll
+            }
+        });
+    }
+
+    static RSyntaxTextArea findSyntaxTextArea(Component component) {
+        if (component instanceof RSyntaxTextArea syntaxTextArea) {
+            return syntaxTextArea;
+        }
+        if (component instanceof Container container) {
+            for (Component child : container.getComponents()) {
+                RSyntaxTextArea textArea = findSyntaxTextArea(child);
+                if (textArea != null) {
+                    return textArea;
+                }
+            }
+        }
+        return null;
     }
 }

@@ -4,24 +4,13 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Insets;
-
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import javax.swing.border.TitledBorder;
-import javax.swing.text.BadLocationException;
-
-import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
-import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
-import org.fife.ui.rtextarea.RTextScrollPane;
-
-import java.awt.Font;
-import java.awt.Insets;
+import java.awt.Rectangle;
 import java.io.IOException;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.BadLocationException;
 
@@ -32,11 +21,14 @@ import org.fife.ui.rtextarea.RTextScrollPane;
 
 final class CodePanelBuilder {
 
-    private static final Font CODE_FONT = new Font( "Fira Code", Font.PLAIN, 18);
+    static final String TARGET_LINE_PROPERTY = "codepanel.targetLineNumber";
 
-    private static final Color LINE_HIGHLIGHT_FALLBACK = new Color(0, 70, 102);
-    
-    private CodePanelBuilder() {}
+    private static final Font CODE_FONT = new Font("Fira Code", Font.PLAIN, 18);
+
+    private static final Color LINE_HIGHLIGHT_FALLBACK = new Color(74, 7, 39);
+
+    private CodePanelBuilder() {
+    }
 
     public static JPanel create(String code) {
         return create(code, -1);
@@ -48,7 +40,6 @@ final class CodePanelBuilder {
 
         JLabel headline = new JLabel("Source Code", SwingConstants.CENTER);
         ThemeStyler.styleAccentLabel(headline);
-        
 
         JPanel panel = new JPanel(new BorderLayout(0, 8));
         panel.setBorder(new TitledBorder("Code"));
@@ -74,16 +65,40 @@ final class CodePanelBuilder {
         applyDarkSyntaxTheme(textArea);
         textArea.setFont(CODE_FONT);
         textArea.setMargin(new Insets(10, 10, 10, 50));
-        textArea.setHighlightCurrentLine(true);
+        textArea.setHighlightCurrentLine(false);
         textArea.setRoundedSelectionEdges(true);
+        textArea.putClientProperty(TARGET_LINE_PROPERTY, lineNumber);
 
-        highlightLine(textArea, lineNumber);
-        
+        highlightLineIfNeeded(textArea, lineNumber);
+        scrollToLineIfNeeded(textArea, lineNumber);
+
         return textArea;
     }
 
+    private static void scrollToLineIfNeeded(RSyntaxTextArea textArea, int lineNumber) {
+        if (lineNumber < 0) {
+            return;
+        }
 
-    private static void highlightLine( RSyntaxTextArea textArea, int lineNumber) {
+        SwingUtilities.invokeLater(() -> {
+            try {
+                int lineCount = textArea.getLineCount();
+                int safeLine = Math.max(0, Math.min(lineNumber, lineCount - 1));
+                int lineStartOffset = textArea.getLineStartOffset(safeLine);
+
+                textArea.setCaretPosition(lineStartOffset);
+
+                Rectangle lineBounds = textArea.modelToView(lineStartOffset);
+                if (lineBounds != null) {
+                    textArea.scrollRectToVisible(lineBounds);
+                }
+            } catch (BadLocationException ignored) {
+                // line is out of range, nothing to scroll
+            }
+        });
+    }
+
+    private static void highlightLineIfNeeded(RSyntaxTextArea textArea, int lineNumber) {
         if (lineNumber < 0) {
             return;
         }

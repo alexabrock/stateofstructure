@@ -12,11 +12,11 @@ public class GraphvizApp {
 
     public static void main(String[] args) {
 
-        //startStackApplicationWithFunnyDrawCalls();
+        startStackApplicationWithFunnyDrawCalls();
 
         // startArrayListApplicationWithFunnyDrawCalls();
 
-        startTreeMapApplicationWithFunnyDrawCalls();
+        //startTreeMapApplicationWithFunnyDrawCalls();
 
         //startLinkedHashSetApplicationWithFunnyDrawCalls();
 
@@ -47,13 +47,17 @@ public class GraphvizApp {
 
         Stack<String> stack = new Stack<>();
         stack.push("Hello");
-        drawCalls.record(stack, "push()");
+        drawCalls.record(stack);
         stack.push("Progra");
-        drawCalls.record(stack, "push()");
+        drawCalls.record(stack);
         stack.push("middleElement");
+        drawCalls.record(stack);
         stack.push("2026");
+        drawCalls.record(stack);
         stack.pop();
+        drawCalls.record(stack);
         stack.search("Hello");
+        drawCalls.record(stack);
 
         Application.start(drawCalls);
     }
