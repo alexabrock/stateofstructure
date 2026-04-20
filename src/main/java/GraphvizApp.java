@@ -12,11 +12,11 @@ public class GraphvizApp {
 
     public static void main(String[] args) {
 
-        startStackApplicationWithFunnyDrawCalls();
+        //startStackApplicationWithFunnyDrawCalls();
 
         // startArrayListApplicationWithFunnyDrawCalls();
 
-        //startTreeMapApplicationWithFunnyDrawCalls();
+        startTreeMapApplicationWithFunnyDrawCalls();
 
         //startLinkedHashSetApplicationWithFunnyDrawCalls();
 

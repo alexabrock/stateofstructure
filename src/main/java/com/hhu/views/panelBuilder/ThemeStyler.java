@@ -29,15 +29,10 @@ public final class ThemeStyler {
         initialized = true;
     }
 
-    public static Color uiColor(String key, Color fallback) {
-        Color color = UIManager.getColor(key);
-        return color != null ? color : fallback;
-    }
-
     public static void styleModernCard(JPanel panel) {
         panel.setBorder(
                 BorderFactory.createCompoundBorder(
-                        BorderFactory.createLineBorder(uiColor("Component.borderColor", new Color(70, 70, 70))),
+                        BorderFactory.createLineBorder(new Color(200, 211,217), 2),
                         BorderFactory.createEmptyBorder(12, 12, 12, 12)));
     }
 

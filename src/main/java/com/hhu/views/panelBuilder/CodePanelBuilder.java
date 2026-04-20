@@ -116,9 +116,9 @@ final class CodePanelBuilder {
                     "/org/fife/ui/rsyntaxtextarea/themes/monokai.xml"));
             theme.apply(textArea);
         } catch (IOException | NullPointerException ignored) {
-            textArea.setBackground(ThemeStyler.uiColor("TextArea.background", new Color(42, 42, 42)));
-            textArea.setForeground(ThemeStyler.uiColor("TextArea.foreground", new Color(219, 220, 222)));
-            textArea.setCaretColor(ThemeStyler.uiColor("TextArea.caretForeground", new Color(255, 255, 255)));
+            textArea.setBackground((new Color(42, 42, 42)));
+            textArea.setForeground((new Color(219, 220, 222)));
+            textArea.setCaretColor(new Color(255, 255, 255));
         }
     }
 }

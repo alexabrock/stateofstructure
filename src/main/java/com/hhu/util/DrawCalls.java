@@ -10,7 +10,7 @@ import com.hhu.views.panelBuilder.PanelBuilder;
 public class DrawCalls {
 
     private LinkedList<DrawStep> drawCalls = new LinkedList<>();
-    //-1, damit mit nextStep() das 1. Element returnt wird
+    // -1, damit mit nextStep() das 1. (0.) Element returnt wird
     private int currentStepIndex = -1;
 
     public boolean hasNextStep() {
@@ -42,12 +42,12 @@ public class DrawCalls {
     }
 
     @Deprecated
-    //Would be used, if record is not implemented by DataStructure
+    // Would be used, if record is not implemented by DataStructure
     public <E> void record(Object collection, String methodName) {
 
         JPanel memory = PanelBuilder.createMemoryPanel(collection);
         JPanel datastructure = PanelBuilder.createDatastructurePanel(collection);
-        JLabel methodLabel = PanelBuilder.createMethodNameLabel(methodName);
+        JLabel methodLabel = PanelBuilder.createNameLabel(methodName);
 
         int lineNumber = FileManager.findCallerLine();
         String code = FileManager.findCallerClass();
@@ -60,12 +60,12 @@ public class DrawCalls {
 
         JPanel memory = PanelBuilder.createMemoryPanel(collection);
         JPanel datastructure = PanelBuilder.createDatastructurePanel(collection);
-        JLabel name = PanelBuilder.createMethodNameLabel(collection.getClass().getSimpleName());
+        JLabel collectionName = PanelBuilder.createNameLabel(collection.getClass().getSimpleName());
 
         int lineNumber = FileManager.findCallerLine();
         String code = FileManager.findCallerClass();
         JPanel codePanel = PanelBuilder.createCodePanel(code, lineNumber);
 
-        drawCalls.add(new DrawStep(memory, datastructure, name, codePanel));
+        drawCalls.add(new DrawStep(memory, datastructure, collectionName, codePanel));
     }
 }

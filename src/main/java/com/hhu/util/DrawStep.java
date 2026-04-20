@@ -10,11 +10,11 @@ public class DrawStep {
     private JLabel name;
     private JPanel codePanel;
 
-    public DrawStep(JPanel memory, JPanel datastructure, JLabel name, JPanel codPanel) {
+    public DrawStep(JPanel memory, JPanel datastructure, JLabel name, JPanel codePanel) {
         this.memory = memory;
         this.datastructure = datastructure;
         this.name = name;
-        this.codePanel = codPanel;
+        this.codePanel = codePanel;
     }
 
     public JPanel codPanel() {

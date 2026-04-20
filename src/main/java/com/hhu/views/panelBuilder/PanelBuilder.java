@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 public class PanelBuilder {
+    //die einzelnen applyDarkTheme Aufrufe sind damit die einzelnen Panel auch im darkMode sind.
 
     public static JPanel createDatastructurePanel(Object collection) {
         ThemeStyler.applyDarkTheme();
@@ -21,8 +22,8 @@ public class PanelBuilder {
         return CodePanelBuilder.create(code);
     }
 
-    public static JLabel createMethodNameLabel(String methodName) {
-        JLabel label = new JLabel(methodName, SwingConstants.CENTER);
+    public static JLabel createNameLabel(String name) {
+        JLabel label = new JLabel(name, SwingConstants.CENTER);
         ThemeStyler.styleAccentLabel(label);
         label.setFont(label.getFont().deriveFont(50f));
         return label;

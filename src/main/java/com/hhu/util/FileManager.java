@@ -41,8 +41,7 @@ public class FileManager {
         int lineNumber = walker.walk(stream -> stream
                 //filter all steps between outside-caller and this class (such as Application.java)
                 .filter(frame -> !frame.getClassName().startsWith("com.hhu.util")
-                        && !frame.getClassName().startsWith("com.hhu.datastructures")
-                        && !frame.getClassName().startsWith("com.hhu.views.panelBuilder"))
+                        && !frame.getClassName().startsWith("com.hhu.datastructures"))
                 .findFirst()
                 .map(StackWalker.StackFrame::getLineNumber)
                 .orElse(-1));
@@ -50,16 +49,6 @@ public class FileManager {
         // fix off by 1 error
         return lineNumber - 1;
 
-    }
-
-    public static int findCallerLineForTests() {
-        StackWalker walker = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE);
-
-        return walker.walk(stream -> stream
-                .dropWhile(frame -> frame.getDeclaringClass() == FileManager.class)
-                .findFirst()
-                .map(StackWalker.StackFrame::getLineNumber)
-                .orElse(-1));
     }
 
 }
