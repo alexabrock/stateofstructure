@@ -12,12 +12,15 @@ import guru.nidi.graphviz.attribute.Rank;
 import guru.nidi.graphviz.attribute.Shape;
 import guru.nidi.graphviz.model.Graph;
 
+/* Builds a GraphViz Graph for LinkedLists*/
 public class LinkedListGraphBuilder implements GraphBuilder {
     @Override
     public Graph buildGraph(Object collection) {
+
         if (!(collection instanceof LinkedList<?>)) {
             throw new IllegalArgumentException("Expected LinkedList");
         }
+
         LinkedList<?> list = (LinkedList<?>) collection;
 
         Graph g = graph("listGraph").directed()

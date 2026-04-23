@@ -4,8 +4,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+/*
+ * Returns a JPanel from an Object
+ */
 public class PanelBuilder {
-    //die einzelnen applyDarkTheme Aufrufe sind damit die einzelnen Panel auch im darkMode sind.
+    private PanelBuilder() {
+    }
+    /*
+     * The repeaded applyDarkTheme calls are needed, so the individual panels are in
+     * darkMode.
+     */
 
     public static JPanel createDatastructurePanel(Object collection) {
         ThemeStyler.applyDarkTheme();
@@ -24,7 +32,7 @@ public class PanelBuilder {
 
     public static JLabel createNameLabel(String name) {
         JLabel label = new JLabel(name, SwingConstants.CENTER);
-        ThemeStyler.styleAccentLabel(label);
+        ThemeStyler.styleHeadline(label);
         label.setFont(label.getFont().deriveFont(50f));
         return label;
     }

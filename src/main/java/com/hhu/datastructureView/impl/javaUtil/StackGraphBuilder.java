@@ -15,6 +15,7 @@ import guru.nidi.graphviz.attribute.Shape;
 import guru.nidi.graphviz.model.Graph;
 import guru.nidi.graphviz.model.Node;
 
+/* Builds a GraphViz Graph for Stacks */
 public class StackGraphBuilder implements GraphBuilder {
     @Override
     public Graph buildGraph(Object collection) {
@@ -23,7 +24,6 @@ public class StackGraphBuilder implements GraphBuilder {
         }
         Stack<?> stack = (Stack<?>) collection;
 
-        // für stack.get(0), wenn stack leer
         if (stack.isEmpty()) {
             return graph("stackGraph");
         }
@@ -33,11 +33,12 @@ public class StackGraphBuilder implements GraphBuilder {
         Node topPointer = node("top").with(Shape.PLAIN);
         Node bottomPointer = node("bottom").with(Shape.PLAIN);
 
-        // rank=same subgraphs for top and bottom pointer
+        // rank=same subgraph for top pointer & top element linkage
         Graph topRank = graph("topRank")
                 .graphAttr().with(Rank.inSubgraph(RankType.SAME))
                 .with(topPointer, nodes.get(0));
-
+                
+        // rank=same subgraph for bottom pointer & bottom element linkage
         Graph bottomRank = graph("bottomRank")
                 .graphAttr().with(Rank.inSubgraph(RankType.SAME))
                 .with(bottomPointer, nodes.get(stack.size() - 1));

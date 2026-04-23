@@ -20,7 +20,7 @@ public class GraphvizApp {
 
         //startLinkedHashSetApplicationWithFunnyDrawCalls();
 
-        // startTreeSetApplicationWithFunnyDrawCalls();
+        //startTreeSetApplicationWithFunnyDrawCalls();
 
         //startLinkedListApplicationWithFunnyDrawCalls();
 
@@ -67,13 +67,13 @@ public class GraphvizApp {
 
         LinkedHashSet<String> linkedHashSet = new LinkedHashSet<>();
         linkedHashSet.add("Hello");
-        drawCalls.record(linkedHashSet, "push()");
+        drawCalls.record(linkedHashSet);
         linkedHashSet.add("Progra");
-        drawCalls.record(linkedHashSet, "push()");
+        drawCalls.record(linkedHashSet);
         linkedHashSet.add("2026");
-        drawCalls.record(linkedHashSet, "push()");
+        drawCalls.record(linkedHashSet);
         linkedHashSet.add("!");
-        drawCalls.record(linkedHashSet, "push()");
+        drawCalls.record(linkedHashSet);
 
         Application.start(drawCalls);
     }
@@ -83,9 +83,9 @@ public class GraphvizApp {
 
         ArrayList<Integer> list = new ArrayList<>();
         list.add(1);
-        drawCalls.record(list, "push()");
+        drawCalls.record(list);
         list.add(2);
-        drawCalls.record(list, "push()");
+        drawCalls.record(list);
         list.add(3);
 
         Application.start(drawCalls);
@@ -101,8 +101,9 @@ public class GraphvizApp {
         drawCalls.record(map);
         map.put("java", 3);
         drawCalls.record(map);
-        map.put("javasda", 3);
+        map.put("jaghva", 35);
         drawCalls.record(map);
+
 
         Application.start(drawCalls);
 
@@ -116,7 +117,7 @@ public class GraphvizApp {
         list.add("Dieter");
         list.add("Alexa");
         list.add("Holland");
-        drawCalls.record(list, "push()");
+        drawCalls.record(list);
         Application.start(drawCalls);
     }
 

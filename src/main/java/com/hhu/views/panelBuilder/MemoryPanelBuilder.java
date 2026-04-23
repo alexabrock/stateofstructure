@@ -19,20 +19,25 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-final class MemoryPanelBuilder {
+/*
+* Builds the Memory Panel. An abstract vizualisation of a given collection in the Java-Heap.
+ */
+class MemoryPanelBuilder {
     private MemoryPanelBuilder() {
     }
 
+    /*
+     * Returns a JPanel, that holds the Memory-Representation of the given Collection. Uses LJV to do so.
+     */
     static JPanel create(Object collection) {
         String dot = applyDarkMode(createDot(collection));
 
         try {
+            
+            return GraphPanelRenderer.create("Memory Visualization", dot);
 
-            BufferedImage image = Graphviz.fromString(dot).width(1200).render(Format.PNG).toImage();
-            return GraphPanelRenderer.create("Memory Visualization", image);
-
-            // if something went wrong, a Panel with the error is returned
         } catch (RuntimeException ex) {
+            // if something went wrong, a Panel with the error is returned
             JLabel error = new JLabel("Could not render LJV DOT: " + ex.getMessage(), SwingConstants.CENTER);
             JPanel panel = new JPanel(new BorderLayout());
             ThemeStyler.styleModernCard(panel);
@@ -41,7 +46,12 @@ final class MemoryPanelBuilder {
         }
     }
 
-    static String createDot(Object collection) {
+    /*
+     * Ignores Fields, that are not relevant to the state of the datastructure, are
+     * always null unless accessed first or add unneccessary noise to the
+     * datastructure-vizualisation.
+     */
+    private static String createDot(Object collection) {
         return new LJV()
                 .setTreatAsPrimitive(String.class)
                 .addIgnoreField("drawCalls")
@@ -60,6 +70,10 @@ final class MemoryPanelBuilder {
                 .drawGraph(collection);
     }
 
+    /*
+     * clinks into the by LJV generated dot and modifies the colors to support
+     * darkMode
+     */
     static String applyDarkMode(String dot) {
         String themedAttributes = String.format(
                 "%n  graph [bgcolor=\"%s\", fontcolor=\"%s\"];%n"
@@ -73,10 +87,14 @@ final class MemoryPanelBuilder {
                 Colors.EDGE_COLORM,
                 Colors.FG_COLORM);
 
+        // After the first brace in the dot is where the styling of the graph happens
         int firstBrace = dot.indexOf('{');
         if (firstBrace < 0) {
             return dot;
         }
+        /*
+         * dot... { + themed attributes + ... dot
+         */
         return dot.substring(0, firstBrace + 1) + themedAttributes + dot.substring(firstBrace + 1);
     }
 }

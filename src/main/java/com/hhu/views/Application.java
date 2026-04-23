@@ -29,8 +29,6 @@ import com.hhu.util.DrawStep;
 
 import com.hhu.views.panelBuilder.ThemeStyler;
 
-import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.Insets;
 
@@ -44,86 +42,99 @@ public class Application {
             System.out.println("Headless environment detected ");
             return;
         }
-        // Visualizable visualizable = (Visualizable) collection;
-        // DrawCalls drawCalls = visualizable.getDrawCalls();
-        DrawStep firstStep = drawCalls.nextStep();
 
         ThemeStyler.applyDarkTheme();
 
         SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("State to Structure");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setLayout(new BorderLayout());
+            /*
+             * need to initialize these, so the button logik is cleaner (button can just
+             * replace the existing code panels and doesnt need to check if they exist)
+             */
+            DrawStep firstStep = drawCalls.nextStep();
 
-            // need to initialize these, so the button logik is cleaner (button can just
-            // replace the existing code panels and doesnt need to check if they exist)
-            JPanel codePanel = firstStep.codPanel();
-            JPanel memoryPanel = firstStep.memory();
-            JPanel datastructurePanel = firstStep.datastructure();
-            JLabel methodName = firstStep.name();
+            JPanel centerPanel = createCenterPanel(firstStep);
 
-            JPanel centerPanel = createCenterPanel(codePanel, memoryPanel, datastructurePanel, methodName);
-            ensureCodePanelScrollPosition(codePanel);
-            frame.add(centerPanel, BorderLayout.CENTER);
-            
+            JPanel buttonPanel = createButtonPanel(drawCalls, centerPanel);
 
-            JPanel buttonPanel = new JPanel();
-            buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 24, 8));
-            ThemeStyler.styleToolbar(buttonPanel);
+            JFrame frame = createFrame(centerPanel, buttonPanel);
 
-            JButton prevButton = new JButton("Previous");
-            JButton nextButton = new JButton("Next");
-            styleNavigationButton(prevButton);
-            styleNavigationButton(nextButton);
-
-            // Initial state setzen
-            prevButton.setEnabled(true);
-            nextButton.setEnabled(drawCalls.hasNextStep());
-
-            
-            prevButton.addActionListener(e -> {
-                DrawStep step = drawCalls.prevStep();
-                replacePanels(centerPanel, step);
-
-                updateButtons(prevButton, nextButton, drawCalls);
-            });
-
-            nextButton.addActionListener(e -> {
-                DrawStep step = drawCalls.nextStep();
-                replacePanels(centerPanel, step);
-
-                updateButtons(prevButton, nextButton, drawCalls);
-            });
-
-            buttonPanel.add(prevButton);
-            buttonPanel.add(nextButton);
-
-            frame.add(buttonPanel, BorderLayout.SOUTH);
-
-            frame.setSize(2500, 1200);
-            frame.setLocationRelativeTo(null);
             frame.setVisible(true);
         });
+    }
+
+    /*
+     * returns the very outer shell of the Application.
+     */
+
+    static JFrame createFrame(JPanel centerPanel, JPanel buttonPanel) {
+        JFrame frame = new JFrame("State to Structure");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
+        frame.add(centerPanel, BorderLayout.CENTER);
+
+        frame.add(buttonPanel, BorderLayout.SOUTH);
+
+        frame.setSize(2500, 1200);
+        frame.setLocationRelativeTo(null);
+        return frame;
+    }
+
+    /*
+     * returns a Panel, that holds the buttons. Initializes those buttons to replace
+     * the Panels, that are nested inside the centerPanel, with the next or previous
+     * DrawStep
+     */
+    static JPanel createButtonPanel(DrawCalls drawCalls, JPanel centerPanel) {
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 24, 8));
+        ThemeStyler.styleToolbar(buttonPanel);
+
+        JButton prevButton = new JButton("Previous");
+        JButton nextButton = new JButton("Next");
+        ThemeStyler.styleNavigationButton(prevButton);
+        ThemeStyler.styleNavigationButton(nextButton);
+
+        // Initial state setzen
+        prevButton.setEnabled(drawCalls.hasPrevStep());
+        nextButton.setEnabled(drawCalls.hasNextStep());
+
+        prevButton.addActionListener(e -> {
+            DrawStep step = drawCalls.prevStep();
+            replacePanels(centerPanel, step);
+
+            updateButtons(prevButton, nextButton, drawCalls);
+        });
+
+        nextButton.addActionListener(e -> {
+            DrawStep step = drawCalls.nextStep();
+            replacePanels(centerPanel, step);
+
+            updateButtons(prevButton, nextButton, drawCalls);
+        });
+
+        buttonPanel.add(prevButton);
+        buttonPanel.add(nextButton);
+        return buttonPanel;
     }
 
     static void updateButtons(JButton prev, JButton next, DrawCalls drawCalls) {
         prev.setEnabled(drawCalls.hasPrevStep());
         next.setEnabled(drawCalls.hasNextStep());
     }
-    
-    static void styleNavigationButton(JButton button) {
-        button.setFont(button.getFont().deriveFont(Font.BOLD, 18f));
-        button.setMargin(new Insets(10, 24, 10, 24));
-        button.setPreferredSize(new Dimension(160, 56));
-    }
 
+    /*
+     * removes the current Panels in residesIn and replaces them with the panels
+     * stored inside the DrawStep.
+     * Also updates the scrollPosition of the CodePanel to match the new highlited
+     * line.
+     */
     static void replacePanels(JPanel residesIn, DrawStep step) {
         BorderLayout layout = (BorderLayout) residesIn.getLayout();
         // replace visualization area (memory + datastructure)
         Component oldVisualizationArea = layout.getLayoutComponent(BorderLayout.CENTER);
         residesIn.remove(oldVisualizationArea);
         residesIn.add(createVisualizationPanel(step.memory(), step.datastructure()), BorderLayout.CENTER);
-        
+
         // replace method name
         Component oldMethodName = layout.getLayoutComponent(BorderLayout.NORTH);
         residesIn.remove(oldMethodName);
@@ -132,56 +143,77 @@ public class Application {
         // replace code panel
         Component oldCode = layout.getLayoutComponent(BorderLayout.WEST);
         residesIn.remove(oldCode);
-        JPanel newCodePanel = step.codPanel();
-        ensureCodePanelScrollPosition(newCodePanel);
+        JPanel newCodePanel = step.codePanel();
+        setScrollPosition(newCodePanel);
         residesIn.add(newCodePanel, BorderLayout.WEST);
-        
+
         residesIn.revalidate();
         residesIn.repaint();
     }
 
-    static JPanel createCenterPanel(JPanel codePanel, JPanel memoryPanel, JPanel datastructurePanel,
-            JLabel methodName) {
+    /*
+     * returns a Panel that holds the center part of the Application and a headline
+     * specifically, it holds the codePanel, the memoryPanel, the datastructurePanel
+     * and the datastructurePanel, which is the headline.
+     */
+    static JPanel createCenterPanel(DrawStep step) {
+
+        JPanel codePanel = step.codePanel();
+        JPanel memoryPanel = step.memory();
+        JPanel datastructurePanel = step.datastructure();
+        JLabel datastructureName = step.name();
+
         JPanel centerPanel = new JPanel(new BorderLayout(8, 8));
         ThemeStyler.styleCenterPanel(centerPanel);
 
         centerPanel.add(codePanel, BorderLayout.WEST);
+        setScrollPosition(codePanel);
+
         // CENTER stretches to fill remaining space
         centerPanel.add(createVisualizationPanel(memoryPanel, datastructurePanel), BorderLayout.CENTER);
-        centerPanel.add(methodName, BorderLayout.NORTH);
+
+        centerPanel.add(datastructureName, BorderLayout.NORTH);
 
         return centerPanel;
     }
-    
-    //Schachtel um memory und ds panel, damit die beiden im Verhältnis zueinander skalieren
+
+    /*
+     * Nests the memory and datastructure panel together, so the two scale together,
+     * but seperate from the codePanel.
+     * The memory panel should always be twice as large as the datastructure panel.
+     */
     static JPanel createVisualizationPanel(JPanel memoryPanel, JPanel datastructurePanel) {
         JPanel visualizationPanel = new JPanel(new GridBagLayout());
 
-        GridBagConstraints memoryConstraints = new GridBagConstraints();
-        memoryConstraints.gridx = 0;
-        memoryConstraints.gridy = 0;
-        memoryConstraints.weightx = 2.0;
-        memoryConstraints.weighty = 1.0;
-        memoryConstraints.fill = GridBagConstraints.BOTH;
-        memoryConstraints.insets = new Insets(0, 0, 0, 8);
+        GridBagConstraints c = new GridBagConstraints();
 
-        GridBagConstraints datastructureConstraints = new GridBagConstraints();
-        datastructureConstraints.gridx = 1;
-        datastructureConstraints.gridy = 0;
-        datastructureConstraints.weightx = 1.0;
-        datastructureConstraints.weighty = 1.0;
-        datastructureConstraints.fill = GridBagConstraints.BOTH;
+        c.gridx = 0; // spalte
+        c.gridy = 0; // zeile
+        c.weightx = 2; // größe in spalte
+        c.weighty = 1; // größe in zeile
+        c.fill = GridBagConstraints.BOTH; // strech verhalten
 
-        visualizationPanel.add(memoryPanel, memoryConstraints);
-        visualizationPanel.add(datastructurePanel, datastructureConstraints);
+        // space between the two panels
+        c.insets = new Insets(0, 0, 0, 8);
+
+        visualizationPanel.add(memoryPanel, c);
+
+        c.gridx = 1;
+        c.weightx = 1;
+
+        visualizationPanel.add(datastructurePanel, c);
 
         return visualizationPanel;
     }
 
-
-    //Muss nach frame.setVisible passieren, damit die Panelhöhe existiert. 
-    //Deswegen kann das nicht im CodePanelBuilder passieren.
-    static void ensureCodePanelScrollPosition(JPanel codePanel) {
+    /*
+     * Changes the scroll Positon of the codePanel to be the highlited line.
+     * 
+     * Needs to happen after frame.setVisible, since the panelHeight is needed for
+     * the calculation of the position. Therefore, this method cannot be inside
+     * CodePanelBuilder.
+     */
+    static void setScrollPosition(JPanel codePanel) {
         RSyntaxTextArea textArea = findSyntaxTextArea(codePanel);
         if (textArea == null) {
             return;
@@ -226,21 +258,21 @@ public class Application {
     }
 
     static RSyntaxTextArea findSyntaxTextArea(Component root) {
-    Deque<Component> stack = new ArrayDeque<>();
-    stack.push(root);
-    
-    //Stack Tiefensuche
-    while (!stack.isEmpty()) {
-        Component current = stack.pop();
-        if (current instanceof RSyntaxTextArea textArea) {
-            return textArea;
-        }
-        if (current instanceof Container container) {
-            for (Component child : container.getComponents()) {
-                stack.push(child);
+        Deque<Component> stack = new ArrayDeque<>();
+        stack.push(root);
+
+        // Stack Tiefensuche
+        while (!stack.isEmpty()) {
+            Component current = stack.pop();
+            if (current instanceof RSyntaxTextArea textArea) {
+                return textArea;
+            }
+            if (current instanceof Container container) {
+                for (Component child : container.getComponents()) {
+                    stack.push(child);
+                }
             }
         }
+        return null;
     }
-    return null;
-}
 }

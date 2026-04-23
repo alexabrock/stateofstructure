@@ -15,18 +15,29 @@ import java.awt.image.BufferedImage;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-final class GraphPanelRenderer {
+
+import guru.nidi.graphviz.engine.Format;
+import guru.nidi.graphviz.engine.Graphviz;
+
+/*
+     * Recieves an Image and renders a zoomable JPanel from that image.
+     */
+class GraphPanelRenderer {
 
     private GraphPanelRenderer() {
     }
+    /*
+     * transforms an image into a zoomable JPanel
+     */
+    static JPanel create(String title, String dot) {
 
-    // transforms an image into a JPanel
-    static JPanel create(String title, BufferedImage image) {
+        BufferedImage image = Graphviz.fromString(dot).width(1000).render(Format.PNG).toImage();
+        
         JPanel imagePanel = new JPanel(new BorderLayout());
         imagePanel.add(new ScaledImagePanel(image), BorderLayout.CENTER);
 
         JLabel headline = new JLabel(title, SwingConstants.CENTER);
-        ThemeStyler.styleAccentLabel(headline);
+        ThemeStyler.styleHeadline(headline);
         JPanel panel = new JPanel(new BorderLayout(0, 8));
         ThemeStyler.styleModernCard(panel);
 
@@ -36,7 +47,9 @@ final class GraphPanelRenderer {
         return panel;
     }
 
-    //Only used, for the zoom of the datastructure and memory panel 
+    /*
+     * Only used, for the zoom of the datastructure and memory panel
+     */
     private static final class ScaledImagePanel extends JPanel {
         private static final double MIN_ZOOM = 0.3;
         private static final double MAX_ZOOM = 2.0;

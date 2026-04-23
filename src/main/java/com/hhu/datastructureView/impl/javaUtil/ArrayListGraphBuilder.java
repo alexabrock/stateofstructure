@@ -15,6 +15,7 @@ import guru.nidi.graphviz.attribute.Rank;
 import guru.nidi.graphviz.attribute.Shape;
 import guru.nidi.graphviz.model.Graph;
 
+/* Builds a GraphViz Graph for ArrayLists */
 public class ArrayListGraphBuilder implements GraphBuilder {
     @Override
     public Graph buildGraph(Object collection) {
@@ -35,6 +36,11 @@ public class ArrayListGraphBuilder implements GraphBuilder {
                         Attributes.attr("margin", "0") // remove inner padding
                 );
 
+        g = addNodesFromList(list, g);
+        return g;
+    }
+
+    private Graph addNodesFromList(ArrayList<?> list, Graph g) {
         for (int i = 0; i < list.size(); i++) {
             String nodeName = String.valueOf(list.get(i));
             g = g.with(node(nodeName));

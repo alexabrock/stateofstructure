@@ -14,7 +14,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-
 import com.hhu.util.DrawCalls;
 import com.hhu.util.DrawStep;
 
@@ -51,7 +50,7 @@ public class ApplicationTest {
 
         assertTrue(prev.isEnabled());
     }
-    
+
     @Test
     public void testButtonNextDisabled() {
         JButton prev = new JButton();
@@ -96,7 +95,6 @@ public class ApplicationTest {
         container.add(oldData, BorderLayout.EAST);
         container.add(oldLabel, BorderLayout.NORTH);
 
-
         DrawStep step = mock(DrawStep.class);
 
         JPanel newCode = new JPanel();
@@ -104,14 +102,12 @@ public class ApplicationTest {
         JPanel newData = new JPanel();
         JLabel newLabel = new JLabel();
 
-        when(step.codPanel()).thenReturn(newCode);
+        when(step.codePanel()).thenReturn(newCode);
         when(step.memory()).thenReturn(newMemory);
         when(step.datastructure()).thenReturn(newData);
         when(step.name()).thenReturn(newLabel);
 
-
         Application.replacePanels(container, step);
-
 
         BorderLayout layout = (BorderLayout) container.getLayout();
 

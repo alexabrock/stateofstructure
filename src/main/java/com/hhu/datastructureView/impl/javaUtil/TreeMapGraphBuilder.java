@@ -9,83 +9,43 @@ import java.util.TreeMap;
 
 import com.hhu.datastructureView.api.GraphBuilder;
 
+import static guru.nidi.graphviz.attribute.Attributes.attr;
+
+import guru.nidi.graphviz.attribute.NodeAttr;
 import guru.nidi.graphviz.attribute.Shape;
+import guru.nidi.graphviz.attribute.Style;
 import guru.nidi.graphviz.model.Graph;
 import guru.nidi.graphviz.model.Node;
 
+/* Builds a GraphViz Graph for TreeMaps */
 public class TreeMapGraphBuilder implements GraphBuilder {
 
     @Override
     public Graph buildGraph(Object collection) {
 
-        if (!(collection instanceof TreeMap<?, ?>)) {
-            throw new IllegalArgumentException("Expected TreeMap");
-        }
-
         try {
             TreeMap<?, ?> map = (TreeMap<?, ?>) collection;
-            Graph g = graph("treeMapGraph");
+            Graph g = graph("treeMapGraph").nodeAttr().with(
+                    attr("fixedsize", "true"),
+                    attr("width", "1"),
+                    attr("height", "1"));
 
             if (map.isEmpty()) {
                 return g;
             }
-            
-            // Entry<K,V> is a private nested class
+
             Field rootField = TreeMap.class.getDeclaredField("root");
             rootField.setAccessible(true);
+            // root is an Entry<K,V>, wich is a private nested class
             Object root = rootField.get(map);
 
             return buildRecursive(g, root);
 
-
-
+        } catch (ClassCastException c) {
+            throw new IllegalArgumentException("Expected TreeMap");
         } catch (Exception e) {
             throw new RuntimeException("Could not inspect TreeSet structure", e);
         }
-
-
-/*         List<Node> keys = new ArrayList<>();
-        List<Node> values = new ArrayList<>();
-        List<LinkSource> links = new ArrayList<>();
-
-        for (Map.Entry<?, ?> entry : map.entrySet()) {
-
-            Node key = node(entry.getKey().toString());
-            Node value = node(entry.getValue().toString());
-
-            keys.add(key);
-            values.add(value);
-            links.add(key.link(value));
-        }
-        // um Reihenfolge wiederherzustellen
-        keys = keys.reversed();
-        values = values.reversed();
-
-        Graph keyGraph = graph("keyGraph").cluster()
-                .graphAttr()
-                .with(Label.of("Keys"),
-                        Style.FILLED,
-                        Color.named("lightblue").fill())
-                .with(keys);
-
-        Graph valuesGraph = graph("valuesGraph").cluster()
-                .graphAttr().with(Label.of("Values"),
-                        Style.FILLED,
-                        Color.named("lightpink").fill())
-                .with(values);
-
-        Graph g = graph("mapGraph").directed()
-                .graphAttr().with(Rank.dir(LEFT_TO_RIGHT))
-                .nodeAttr().with(Shape.RECTANGLE,
-                        Style.FILLED,
-                        Color.named("white").fill())
-                // key und value graph zusammenführen
-                .with(
-                        keyGraph,
-                        valuesGraph)
-                .with(links);
-
-        return g; */
     }
 
     private Graph buildRecursive(Graph g, Object entry) throws Exception{
@@ -95,6 +55,7 @@ public class TreeMapGraphBuilder implements GraphBuilder {
 
         Class<?> entryClass = entry.getClass();
 
+        //get Fields
         Field keyField = entryClass.getDeclaredField("key");
         Field valueField = entryClass.getDeclaredField("value");
         Field leftField = entryClass.getDeclaredField("left");
@@ -105,39 +66,52 @@ public class TreeMapGraphBuilder implements GraphBuilder {
         leftField.setAccessible(true);
         rightField.setAccessible(true);
 
+        //get Inhalt der Fields
         Object key = keyField.get(entry);
         Object value = valueField.get(entry);
-        Object left = leftField.get(entry);
-        Object right = rightField.get(entry);
+        Object left = leftField.get(entry);  // Entry<K,V>
+        Object right = rightField.get(entry); // Entry<K,V>
 
-        Node currentNode = node(String.valueOf(key) + ", " + String.valueOf(value)).with(Shape.CIRCLE);
-
+        Node currentNode = treeMapNode(key, value).with(Shape.CIRCLE);
         g = g.with(currentNode);
 
+        //linken Knoten erstellen
         if (left != null) {
-            Object leftKey = keyField.get(left);
-            Object leftValue = valueField.get(left);
-
-            Node leftNode = node(String.valueOf(leftKey) + ", " + String.valueOf(leftValue));
-
-            g = g.with(currentNode.link(to(leftNode)));
-
-            g = buildRecursive(g, left);
+            g = getSubTree(g, keyField, valueField, left, currentNode);
+        } else {
+            g = g.with(currentNode.link(to(invisibleNode(key)).with(Style.INVIS)));
         }
 
+        //rechten Knoten erstellen
         if (right != null) {
-            Object rightKey = keyField.get(right);
-            Object rightValue = valueField.get(right);
-
-            Node rightNode = node(String.valueOf(rightKey) + ", " + String.valueOf(rightValue));
-
-            g = g.with(currentNode.link(to(rightNode)));
-
-            g = buildRecursive(g, right);
+            g = getSubTree(g, keyField, valueField, right, currentNode);
+        } else {
+            g = g.with(currentNode.link(to(invisibleNode(key)).with(Style.INVIS)));
         }
-
 
         return g;
+    }
+
+    private Graph getSubTree(Graph g, Field keyField, Field valueField, Object left, Node currentNode)
+            throws IllegalAccessException, Exception {
+        Object leftKey = keyField.get(left);
+        Object leftValue = valueField.get(left);
+
+        Node leftNode = treeMapNode(leftKey, leftValue);
+        g = g.with(currentNode.link(to(leftNode)));
+
+        g = buildRecursive(g, left);
+        return g;
+    }
+
+    private Node treeMapNode(Object rightKey, Object rightValue) {
+        return node(String.valueOf(rightKey) + ", " + String.valueOf(rightValue));
+    }
+
+
+    // needs to be unique, since graphviz merges Nodes with the same Name
+    private Node invisibleNode(Object key) {
+        return node("" + System.nanoTime()).with(Style.INVIS);
     }
 
 }

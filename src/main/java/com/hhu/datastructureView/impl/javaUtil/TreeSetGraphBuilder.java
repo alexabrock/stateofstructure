@@ -11,10 +11,12 @@ import java.util.TreeSet;
 import com.hhu.datastructureView.api.GraphBuilder;
 
 import guru.nidi.graphviz.attribute.Shape;
+import guru.nidi.graphviz.attribute.Style;
 import guru.nidi.graphviz.model.Graph;
 import static guru.nidi.graphviz.attribute.Attributes.attr;
 import guru.nidi.graphviz.model.Node;
 
+/* Builds a GraphViz Graph for TreeSets*/
 public class TreeSetGraphBuilder implements GraphBuilder {
 
     @Override
@@ -43,12 +45,14 @@ public class TreeSetGraphBuilder implements GraphBuilder {
 
             Graph g = graph("treeSetGraph").nodeAttr().with(
                     attr("fixedsize", "true"),
-                    attr("width", "0.6"),
-                    attr("height", "0.6"));
+                    attr("width", "1"),
+                    attr("height", "1"));
             
 
             return buildRecursive(g, root);
 
+        } catch (ClassCastException c) {
+            throw new IllegalArgumentException("Expected TreeMap");
         } catch (Exception e) {
             throw new RuntimeException("Could not inspect TreeSet structure", e);
         }
@@ -79,25 +83,37 @@ public class TreeSetGraphBuilder implements GraphBuilder {
         g = g.with(currentNode);
 
         if (left != null) {
-            Object leftKey = keyField.get(left);
-
-            Node leftNode = node(String.valueOf(leftKey));
-
-            g = g.with(currentNode.link(to(leftNode)));
-
-            g = buildRecursive(g, left);
+            g = getSubTree(g, keyField, left, currentNode);
+        } else {
+            g = g.with(
+                    currentNode.link(to(invisibleNode(key)).with(Style.INVIS)));
         }
 
         if (right != null) {
-            Object rightKey = keyField.get(right);
-
-            Node rightNode = node(String.valueOf(rightKey));
-
-            g = g.with(currentNode.link(to(rightNode)));
-
-            g = buildRecursive(g, right);
+            g = getSubTree(g, keyField, right, currentNode);
+        } else {
+            g = g.with(
+                    currentNode.link(to(invisibleNode(key)).with(Style.INVIS)));
         }
 
         return g;
     }
+
+    private Graph getSubTree(Graph g, Field keyField, Object left, Node currentNode)
+            throws IllegalAccessException, Exception {
+        Object leftKey = keyField.get(left);
+
+        Node leftNode = node(String.valueOf(leftKey));
+
+        g = g.with(currentNode.link(to(leftNode)));
+
+        g = buildRecursive(g, left);
+        return g;
+    }
+
+    // needs to be unique, since graphviz merges Nodes with the same Name
+    private Node invisibleNode(Object key) {
+        return node(""+ System.nanoTime()).with(Style.INVIS);
+    }
+
 }

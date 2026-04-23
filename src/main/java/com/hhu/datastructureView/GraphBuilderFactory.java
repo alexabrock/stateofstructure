@@ -15,11 +15,13 @@ import com.hhu.datastructureView.impl.javaUtil.StackGraphBuilder;
 import com.hhu.datastructureView.impl.javaUtil.TreeMapGraphBuilder;
 import com.hhu.datastructureView.impl.javaUtil.TreeSetGraphBuilder;
 
-public class GraphBuilderFactory {
 
+public class GraphBuilderFactory {
+    
+    /* Matches a Builder to a Collection */
     public static GraphBuilder getBuilder(Object collection) {
 
-        if (collection instanceof Stack) {
+        if (collection instanceof Stack<?>) {
             return new StackGraphBuilder();
         }
 

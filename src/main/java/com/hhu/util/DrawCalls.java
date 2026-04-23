@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 
 import com.hhu.views.panelBuilder.PanelBuilder;
 
+/* Handles iteration & state recording logic for a List of DrawSteps*/
 public class DrawCalls {
 
     private LinkedList<DrawStep> drawCalls = new LinkedList<>();
@@ -42,15 +43,16 @@ public class DrawCalls {
     }
 
     @Deprecated
-    // Would be used, if record is not implemented by DataStructure
+    // Would be used by datastructure, if record is not implemented by DataStructure
+    //Is currently being used by legacyDatastructures
     public <E> void record(Object collection, String methodName) {
 
         JPanel memory = PanelBuilder.createMemoryPanel(collection);
         JPanel datastructure = PanelBuilder.createDatastructurePanel(collection);
         JLabel methodLabel = PanelBuilder.createNameLabel(methodName);
 
-        int lineNumber = FileManager.findCallerLine();
-        String code = FileManager.findCallerClass();
+        int lineNumber = Caller.findCallerLine();
+        String code = Caller.findCallerClass();
         JPanel codePanel = PanelBuilder.createCodePanel(code, lineNumber);
 
         drawCalls.add(new DrawStep(memory, datastructure, methodLabel, codePanel));
@@ -62,8 +64,8 @@ public class DrawCalls {
         JPanel datastructure = PanelBuilder.createDatastructurePanel(collection);
         JLabel collectionName = PanelBuilder.createNameLabel(collection.getClass().getSimpleName());
 
-        int lineNumber = FileManager.findCallerLine();
-        String code = FileManager.findCallerClass();
+        int lineNumber = Caller.findCallerLine();
+        String code = Caller.findCallerClass();
         JPanel codePanel = PanelBuilder.createCodePanel(code, lineNumber);
 
         drawCalls.add(new DrawStep(memory, datastructure, collectionName, codePanel));
