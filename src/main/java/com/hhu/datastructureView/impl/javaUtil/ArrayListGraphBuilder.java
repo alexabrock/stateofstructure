@@ -8,7 +8,7 @@ import static guru.nidi.graphviz.model.Factory.node;
 
 import java.util.ArrayList;
 
-import com.hhu.datastructureView.api.GraphBuilder;
+
 
 import guru.nidi.graphviz.attribute.Attributes;
 import guru.nidi.graphviz.attribute.Rank;
@@ -16,13 +16,10 @@ import guru.nidi.graphviz.attribute.Shape;
 import guru.nidi.graphviz.model.Graph;
 
 /* Builds a GraphViz Graph for ArrayLists */
-public class ArrayListGraphBuilder implements GraphBuilder {
-    @Override
-    public Graph buildGraph(Object collection) {
-        if (!(collection instanceof ArrayList<?>)) {
-            throw new IllegalArgumentException("Expected ArrayList");
-        }
-        ArrayList<?> list = (ArrayList<?>) collection;
+public class ArrayListGraphBuilder {
+
+    public static Graph buildGraph(ArrayList<?> list) {
+        
 
         Graph g = graph("listGraph").directed()
                 .graphAttr().with(
@@ -40,7 +37,7 @@ public class ArrayListGraphBuilder implements GraphBuilder {
         return g;
     }
 
-    private Graph addNodesFromList(ArrayList<?> list, Graph g) {
+    private static Graph addNodesFromList(ArrayList<?> list, Graph g) {
         for (int i = 0; i < list.size(); i++) {
             String nodeName = String.valueOf(list.get(i));
             g = g.with(node(nodeName));

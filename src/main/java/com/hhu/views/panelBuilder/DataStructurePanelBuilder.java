@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
-import com.hhu.datastructureView.GraphBuilderFactory;
+import com.hhu.datastructureView.GraphBuilder;
 import com.hhu.views.Colors;
 
 import guru.nidi.graphviz.engine.Format;
@@ -37,7 +37,7 @@ class DataStructurePanelBuilder {
      */
     static JPanel create(Object collection) {
         try {
-            Graph graph = applyDarkMode(GraphBuilderFactory.getBuilder(collection).buildGraph(collection));
+            Graph graph = applyDarkMode(GraphBuilder.buildGraph(collection));
             return GraphPanelRenderer.create("Datastructure Visualization", graph.toString());
 
         } catch (RuntimeException ex) {

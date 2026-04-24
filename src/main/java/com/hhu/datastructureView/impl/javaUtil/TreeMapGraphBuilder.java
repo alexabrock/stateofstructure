@@ -7,7 +7,6 @@ import static guru.nidi.graphviz.model.Factory.to;
 import java.lang.reflect.Field;
 import java.util.TreeMap;
 
-import com.hhu.datastructureView.api.GraphBuilder;
 
 import static guru.nidi.graphviz.attribute.Attributes.attr;
 
@@ -18,13 +17,11 @@ import guru.nidi.graphviz.model.Graph;
 import guru.nidi.graphviz.model.Node;
 
 /* Builds a GraphViz Graph for TreeMaps */
-public class TreeMapGraphBuilder implements GraphBuilder {
+public class TreeMapGraphBuilder {
 
-    @Override
-    public Graph buildGraph(Object collection) {
+    public static Graph buildGraph(TreeMap<?,?> map) {
 
-        try {
-            TreeMap<?, ?> map = (TreeMap<?, ?>) collection;
+        
             Graph g = graph("treeMapGraph").nodeAttr().with(
                     attr("fixedsize", "true"),
                     attr("width", "1"),
@@ -33,6 +30,8 @@ public class TreeMapGraphBuilder implements GraphBuilder {
             if (map.isEmpty()) {
                 return g;
             }
+            
+            try {
 
             Field rootField = TreeMap.class.getDeclaredField("root");
             rootField.setAccessible(true);
@@ -40,15 +39,12 @@ public class TreeMapGraphBuilder implements GraphBuilder {
             Object root = rootField.get(map);
 
             return buildRecursive(g, root);
-
-        } catch (ClassCastException c) {
-            throw new IllegalArgumentException("Expected TreeMap");
         } catch (Exception e) {
             throw new RuntimeException("Could not inspect TreeSet structure", e);
         }
     }
 
-    private Graph buildRecursive(Graph g, Object entry) throws Exception{
+    private static Graph buildRecursive(Graph g, Object entry) throws Exception{
         if (entry == null) {
             return g;
         }
@@ -92,7 +88,7 @@ public class TreeMapGraphBuilder implements GraphBuilder {
         return g;
     }
 
-    private Graph getSubTree(Graph g, Field keyField, Field valueField, Object left, Node currentNode)
+    private static Graph getSubTree(Graph g, Field keyField, Field valueField, Object left, Node currentNode)
             throws IllegalAccessException, Exception {
         Object leftKey = keyField.get(left);
         Object leftValue = valueField.get(left);
@@ -104,13 +100,13 @@ public class TreeMapGraphBuilder implements GraphBuilder {
         return g;
     }
 
-    private Node treeMapNode(Object rightKey, Object rightValue) {
+    private static Node treeMapNode(Object rightKey, Object rightValue) {
         return node(String.valueOf(rightKey) + ", " + String.valueOf(rightValue));
     }
 
 
     // needs to be unique, since graphviz merges Nodes with the same Name
-    private Node invisibleNode(Object key) {
+    private static Node invisibleNode(Object key) {
         return node("" + System.nanoTime()).with(Style.INVIS);
     }
 

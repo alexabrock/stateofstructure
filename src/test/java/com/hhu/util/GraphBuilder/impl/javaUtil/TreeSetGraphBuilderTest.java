@@ -7,8 +7,7 @@ import java.util.TreeSet;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import com.hhu.datastructureView.GraphBuilderFactory;
+import com.hhu.datastructureView.GraphBuilder;
 
 import guru.nidi.graphviz.model.MutableGraph;
 
@@ -21,7 +20,7 @@ public class TreeSetGraphBuilderTest {
     }
 
     private MutableGraph createMutableGraph() {
-        return (MutableGraph) GraphBuilderFactory.getBuilder(set).buildGraph(set);
+        return (MutableGraph) GraphBuilder.buildGraph(set);
     }
 
     @Test

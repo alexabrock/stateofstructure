@@ -7,7 +7,6 @@ import static guru.nidi.graphviz.model.Factory.node;
 import java.util.List;
 import java.util.Stack;
 
-import com.hhu.datastructureView.api.GraphBuilder;
 
 import guru.nidi.graphviz.attribute.Rank;
 import guru.nidi.graphviz.attribute.Rank.RankType;
@@ -16,14 +15,10 @@ import guru.nidi.graphviz.model.Graph;
 import guru.nidi.graphviz.model.Node;
 
 /* Builds a GraphViz Graph for Stacks */
-public class StackGraphBuilder implements GraphBuilder {
-    @Override
-    public Graph buildGraph(Object collection) {
-        if (!(collection instanceof Stack)) {
-            throw new IllegalArgumentException("Expected Stack");
-        }
-        Stack<?> stack = (Stack<?>) collection;
-
+public class StackGraphBuilder {
+    
+    public static Graph buildGraph(Stack<?> stack) {
+        
         if (stack.isEmpty()) {
             return graph("stackGraph");
         }

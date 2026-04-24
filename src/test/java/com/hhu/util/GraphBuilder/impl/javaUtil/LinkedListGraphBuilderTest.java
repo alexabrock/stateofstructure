@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.hhu.datastructureView.GraphBuilderFactory;
+import com.hhu.datastructureView.GraphBuilder;
 
 //Mutable graph, weil man so schön an die einzelnen Nodes zum testen kommt
 import guru.nidi.graphviz.model.MutableGraph;
@@ -23,7 +23,7 @@ public class LinkedListGraphBuilderTest {
     }
 
     private MutableGraph createMutableGraph() {
-        return (MutableGraph) GraphBuilderFactory.getBuilder(list).buildGraph(list);
+        return (MutableGraph) GraphBuilder.buildGraph(list);
     }
 
     @Test

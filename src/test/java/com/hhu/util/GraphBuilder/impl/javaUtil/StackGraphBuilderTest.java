@@ -8,7 +8,7 @@ import java.util.Stack;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.hhu.datastructureView.GraphBuilderFactory;
+import com.hhu.datastructureView.GraphBuilder;
 
 //Mutable graph, weil man so schön an die einzelnen Nodes zum testen kommt
 import guru.nidi.graphviz.model.MutableGraph;
@@ -22,7 +22,7 @@ public class StackGraphBuilderTest {
     }
 
     private MutableGraph createMutableGraph() {
-        return (MutableGraph) GraphBuilderFactory.getBuilder(stack).buildGraph(stack);
+        return (MutableGraph) GraphBuilder.buildGraph(stack);
     }
 
     @Test

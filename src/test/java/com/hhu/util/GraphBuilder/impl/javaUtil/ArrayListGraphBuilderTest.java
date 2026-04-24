@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.hhu.datastructureView.GraphBuilderFactory;
+import com.hhu.datastructureView.GraphBuilder;
 
 import guru.nidi.graphviz.model.MutableGraph;
 
@@ -21,7 +21,7 @@ public class ArrayListGraphBuilderTest {
     }
     
     private MutableGraph createMutableGraph() {
-        return (MutableGraph) GraphBuilderFactory.getBuilder(list).buildGraph(list);
+        return (MutableGraph) GraphBuilder.buildGraph(list);
     }
 
     @Test

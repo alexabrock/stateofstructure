@@ -8,7 +8,6 @@ import java.lang.reflect.Field;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import com.hhu.datastructureView.api.GraphBuilder;
 
 import guru.nidi.graphviz.attribute.Shape;
 import guru.nidi.graphviz.attribute.Style;
@@ -17,17 +16,11 @@ import static guru.nidi.graphviz.attribute.Attributes.attr;
 import guru.nidi.graphviz.model.Node;
 
 /* Builds a GraphViz Graph for TreeSets*/
-public class TreeSetGraphBuilder implements GraphBuilder {
+public class TreeSetGraphBuilder{
 
-    @Override
-    public Graph buildGraph(Object collection) {
-        if (!(collection instanceof TreeSet<?>)) {
-            throw new IllegalArgumentException("Expected TreeSet");
-        }
+    public static Graph buildGraph(TreeSet<?> set) {
 
         try {
-            TreeSet<?> set = (TreeSet<?>) collection;
-
             if (set.isEmpty()) {
                 return graph("treeSetGraph");
             }
@@ -51,14 +44,12 @@ public class TreeSetGraphBuilder implements GraphBuilder {
 
             return buildRecursive(g, root);
 
-        } catch (ClassCastException c) {
-            throw new IllegalArgumentException("Expected TreeMap");
         } catch (Exception e) {
             throw new RuntimeException("Could not inspect TreeSet structure", e);
         }
     }
 
-    private Graph buildRecursive(Graph g, Object entry) throws Exception {
+    private static Graph buildRecursive(Graph g, Object entry) throws Exception {
 
         if (entry == null) {
             return g;
@@ -99,7 +90,7 @@ public class TreeSetGraphBuilder implements GraphBuilder {
         return g;
     }
 
-    private Graph getSubTree(Graph g, Field keyField, Object left, Node currentNode)
+    private static Graph getSubTree(Graph g, Field keyField, Object left, Node currentNode)
             throws IllegalAccessException, Exception {
         Object leftKey = keyField.get(left);
 
@@ -112,7 +103,7 @@ public class TreeSetGraphBuilder implements GraphBuilder {
     }
 
     // needs to be unique, since graphviz merges Nodes with the same Name
-    private Node invisibleNode(Object key) {
+    private static Node invisibleNode(Object key) {
         return node(""+ System.nanoTime()).with(Style.INVIS);
     }
 

@@ -8,7 +8,7 @@ import java.util.LinkedHashSet;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.hhu.datastructureView.GraphBuilderFactory;
+import com.hhu.datastructureView.GraphBuilder;
 
 import guru.nidi.graphviz.model.MutableGraph;
 
@@ -22,7 +22,7 @@ public class LinkedHashSetGraphBuilderTest {
     }
 
     private MutableGraph createMutableGraph() {
-        return (MutableGraph) GraphBuilderFactory.getBuilder(hashSet).buildGraph(hashSet);
+        return (MutableGraph) GraphBuilder.buildGraph(hashSet);
     }
 
     @Test

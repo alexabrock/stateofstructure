@@ -1,6 +1,6 @@
 package com.hhu.datastructures.prograDatastructures.generic;
 
-public class LinkedList<T extends Comparable<T>> {
+public class PrograLinkedList<T extends Comparable<T>> {
 
     private class Node {
         private T value;
@@ -14,7 +14,7 @@ public class LinkedList<T extends Comparable<T>> {
 
     private Node head;
 
-    public LinkedList() {
+    public PrograLinkedList() {
     }
 
     public void add(T element) {

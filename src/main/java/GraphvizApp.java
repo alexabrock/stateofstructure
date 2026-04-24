@@ -5,6 +5,9 @@ import java.util.Stack;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import com.hhu.datastructures.prograDatastructures.generic.BinarySearchTree;
+import com.hhu.datastructures.prograDatastructures.generic.HashSet;
+import com.hhu.datastructures.prograDatastructures.generic.PrograLinkedList;
 import com.hhu.util.DrawCalls;
 import com.hhu.views.Application;
 
@@ -14,9 +17,9 @@ public class GraphvizApp {
 
         //startStackApplicationWithFunnyDrawCalls();
 
-        // startArrayListApplicationWithFunnyDrawCalls();
+        //startArrayListApplicationWithFunnyDrawCalls();
 
-        startTreeMapApplicationWithFunnyDrawCalls();
+        //startTreeMapApplicationWithFunnyDrawCalls();
 
         //startLinkedHashSetApplicationWithFunnyDrawCalls();
 
@@ -24,6 +27,54 @@ public class GraphvizApp {
 
         //startLinkedListApplicationWithFunnyDrawCalls();
 
+        //startBinarySearchTreeApplicationWithFunnyDrawCalls();
+
+        //startPrograLinkedListApplication();
+
+        startPrograHashSetApplication();
+
+    }
+
+    private static void startPrograHashSetApplication() {
+        DrawCalls drawCalls = new DrawCalls();
+
+        HashSet<Integer> set = new HashSet<>();
+        set.insert(1);
+        drawCalls.record(set);
+        set.insert(2);
+        drawCalls.record(set);
+        set.insert(3);
+
+        Application.start(drawCalls);
+    }
+    
+    private static void startPrograLinkedListApplication() {
+        DrawCalls drawCalls = new DrawCalls();
+
+        PrograLinkedList<Integer> list = new PrograLinkedList<>();
+        list.add(1);
+        drawCalls.record(list);
+        list.add(2);
+        drawCalls.record(list);
+        list.add(3);
+
+        Application.start(drawCalls);
+    }
+
+    static void startBinarySearchTreeApplicationWithFunnyDrawCalls() {
+        DrawCalls drawCalls = new DrawCalls();
+
+        BinarySearchTree<String> treeSet = new BinarySearchTree<>();
+        treeSet.insert("Hello");
+        drawCalls.record(treeSet);
+        treeSet.insert("Progra");
+        drawCalls.record(treeSet);
+        treeSet.insert("2026");
+        drawCalls.record(treeSet);
+        treeSet.insert("!");
+        drawCalls.record(treeSet);
+
+        Application.start(drawCalls);
     }
 
     static void startTreeSetApplicationWithFunnyDrawCalls() {
