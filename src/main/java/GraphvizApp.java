@@ -44,6 +44,14 @@ public class GraphvizApp {
         set.insert(2);
         drawCalls.record(set);
         set.insert(3);
+        drawCalls.record(set);
+        set.insert(4);
+        drawCalls.record(set);
+        set.insert(5);
+        drawCalls.record(set);
+        set.insert(6);
+        drawCalls.record(set);
+        
 
         Application.start(drawCalls);
     }
