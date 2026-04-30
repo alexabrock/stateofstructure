@@ -5,8 +5,8 @@ import java.util.NoSuchElementException;
 import java.util.Iterator;
 
 public class HashSet<T>{
-
-    private final static int SIZE = 20;
+    //kleine size, weil Progra HashSet kein resizing supportet, mit großem Array aber die Visualisierung kaputt geht
+    private final static int SIZE = 15;
     private Object[] objects = new Object[SIZE];
     // man kann leider keine Arrays mit generischen Typ anlegen
     // (https://www.tothenew.com/blog/why-is-generic-array-creation-not-allowed-in-java/)
