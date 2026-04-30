@@ -42,8 +42,6 @@ public class PrograLinkedListGraphBuilder{
                 String prevNodeName = list.get(i - 1).toString();
                 // next pointer
                 g = g.with(node(prevNodeName).link(node(nodeName)));
-                // prev pointer
-                g = g.with(node(nodeName).link(node(prevNodeName)));
             }
         }
         return g;
