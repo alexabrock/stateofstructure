@@ -10,6 +10,8 @@ public class BinarySearchTreeGraphBuilder {
     public static Graph buildGraph(BinarySearchTree<?> tree) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'buildGraph'");
+
+        
     }
     
 }

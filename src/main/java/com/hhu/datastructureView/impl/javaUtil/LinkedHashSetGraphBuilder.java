@@ -7,8 +7,6 @@ import static guru.nidi.graphviz.model.Factory.to;
 
 import java.util.LinkedHashSet;
 
-
-
 import guru.nidi.graphviz.attribute.Arrow;
 import guru.nidi.graphviz.attribute.Rank;
 import guru.nidi.graphviz.attribute.Rank.RankType;

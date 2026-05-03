@@ -1,27 +1,17 @@
 package com.hhu.views.panelBuilder;
 
+import static guru.nidi.graphviz.attribute.Attributes.attr;
+
 import java.awt.BorderLayout;
-import java.awt.image.BufferedImage;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.border.TitledBorder;
 
 import com.hhu.datastructureView.GraphBuilder;
 import com.hhu.views.Colors;
 
-import guru.nidi.graphviz.engine.Format;
-import guru.nidi.graphviz.engine.Graphviz;
 import guru.nidi.graphviz.model.Graph;
-
-import static guru.nidi.graphviz.attribute.Attributes.attr;
-
-import guru.nidi.graphviz.model.Graph;
-
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
 /*
 * Builds the DataStructure Panel. An simplified vizualisation of a given collection.

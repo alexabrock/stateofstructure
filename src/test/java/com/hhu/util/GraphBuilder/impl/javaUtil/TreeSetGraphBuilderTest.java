@@ -1,6 +1,5 @@
 package com.hhu.util.graphBuilder.impl.javaUtil;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.TreeSet;
@@ -8,6 +7,7 @@ import java.util.TreeSet;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+
 import com.hhu.datastructureView.GraphBuilder;
 
 import guru.nidi.graphviz.model.MutableGraph;

@@ -2,7 +2,6 @@ package com.hhu.views.panelBuilder;
 
 import java.awt.BorderLayout;
 import java.awt.Cursor;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;

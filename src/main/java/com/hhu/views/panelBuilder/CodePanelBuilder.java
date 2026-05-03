@@ -3,14 +3,11 @@ package com.hhu.views.panelBuilder;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.Insets;
-import java.awt.Rectangle;
-import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.BadLocationException;
 

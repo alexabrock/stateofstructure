@@ -1,16 +1,18 @@
 package com.hhu.views;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Component;
-import java.awt.GraphicsEnvironment;
 import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.GraphicsEnvironment;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,21 +20,11 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.text.BadLocationException;
 
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
-import com.formdev.flatlaf.FlatDarculaLaf;
-import com.hhu.datastructures.legacyDatastructures.api.Visualizable;
 import com.hhu.util.DrawCalls;
 import com.hhu.util.DrawStep;
-
 import com.hhu.views.panelBuilder.ThemeStyler;
-
-import java.awt.GraphicsEnvironment;
-import java.awt.Insets;
-
-import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
 public class Application {
 

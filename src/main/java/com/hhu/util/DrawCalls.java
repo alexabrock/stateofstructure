@@ -44,7 +44,7 @@ public class DrawCalls {
 
     @Deprecated
     // Would be used by datastructure, if record is not implemented by DataStructure
-    //Is currently being used by legacyDatastructures
+    // Is currently being used by legacyDatastructures
     public <E> void record(Object collection, String methodName) {
 
         JPanel memory = PanelBuilder.createMemoryPanel(collection);

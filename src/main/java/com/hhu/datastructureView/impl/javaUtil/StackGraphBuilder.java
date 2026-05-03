@@ -1,19 +1,17 @@
 package com.hhu.datastructureView.impl.javaUtil;
 
+import static com.hhu.datastructureView.NodeBuilder.getNode;
 import static guru.nidi.graphviz.attribute.Rank.RankDir.TOP_TO_BOTTOM;
 import static guru.nidi.graphviz.model.Factory.graph;
-import static guru.nidi.graphviz.model.Factory.node;
 
 import java.util.List;
 import java.util.Stack;
-
 
 import guru.nidi.graphviz.attribute.Rank;
 import guru.nidi.graphviz.attribute.Rank.RankType;
 import guru.nidi.graphviz.attribute.Shape;
 import guru.nidi.graphviz.model.Graph;
 import guru.nidi.graphviz.model.Node;
-import static com.hhu.datastructureView.NodeBuilder.getNode;
 
 /* Builds a GraphViz Graph for Stacks */
 public class StackGraphBuilder {

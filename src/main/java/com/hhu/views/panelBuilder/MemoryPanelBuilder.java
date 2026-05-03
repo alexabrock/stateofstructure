@@ -1,23 +1,14 @@
 package com.hhu.views.panelBuilder;
 
 import java.awt.BorderLayout;
-import java.awt.image.BufferedImage;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.border.TitledBorder;
 
 import org.atpfivt.ljv.LJV;
 
 import com.hhu.views.Colors;
-
-import guru.nidi.graphviz.engine.Format;
-import guru.nidi.graphviz.engine.Graphviz;
-
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
 /*
 * Builds the Memory Panel. An abstract vizualisation of a given collection in the Java-Heap.
