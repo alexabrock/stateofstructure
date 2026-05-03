@@ -66,7 +66,9 @@ public class TreeMapGraphBuilder {
         //get Inhalt der Fields
         Object key = keyField.get(entry);
         Object value = valueField.get(entry);
-        Object left = leftField.get(entry);  // Entry<K,V>
+        // left subtree
+        Object left = leftField.get(entry); // Entry<K,V>
+        // right subtree
         Object right = rightField.get(entry); // Entry<K,V>
 
         Node currentNode = treeMapNode(key, value).with(Shape.CIRCLE);
@@ -76,14 +78,14 @@ public class TreeMapGraphBuilder {
         if (left != null) {
             g = getSubTree(g, keyField, valueField, left, currentNode);
         } else {
-            g = g.with(currentNode.link(to(invisibleNode(key)).with(Style.INVIS)));
+            g = g.with(currentNode.link(to(nullNode(key)).with(Style.INVIS)));
         }
 
         //rechten Knoten erstellen
         if (right != null) {
             g = getSubTree(g, keyField, valueField, right, currentNode);
         } else {
-            g = g.with(currentNode.link(to(invisibleNode(key)).with(Style.INVIS)));
+            g = g.with(currentNode.link(to(nullNode(key)).with(Style.INVIS)));
         }
 
         return g;
@@ -107,8 +109,11 @@ public class TreeMapGraphBuilder {
 
 
     // needs to be unique, since graphviz merges Nodes with the same Name
-    private static Node invisibleNode(Object key) {
-        return getNode((String) key).with(Style.INVIS);
+    private static Node nullNode(Object key) {
+        return getNode("")
+                .with(attr("width", "0.3"),
+                        attr("height", "0.3"),
+                        attr("fixedsize", "true"));
     }
 
 }

@@ -43,14 +43,16 @@ public class TreeSetGraphBuilder {
                     attr("width", "1"),
                     attr("height", "1"));
 
-            return buildRecursive(g, root);
+            Map<Object, Node> cache = new HashMap<>();
+
+            return buildRecursive(g, root, cache);
 
         } catch (Exception e) {
             throw new RuntimeException("Could not inspect TreeSet structure", e);
         }
     }
 
-    private static Graph buildRecursive(Graph g, Object entry) throws Exception {
+    private static Graph buildRecursive(Graph g, Object entry, Map<Object, Node> cache ) throws Exception {
 
         if (entry == null) {
             return g;
@@ -67,10 +69,11 @@ public class TreeSetGraphBuilder {
         rightField.setAccessible(true);
 
         Object key = keyField.get(entry);
+        //left subtree
         Object left = leftField.get(entry);
+        //right subtree
         Object right = rightField.get(entry);
 
-        Map<Object, Node> cache = new HashMap<>();
 
         String currentNodeName = String.valueOf(key);
         Node currentNode = cache.computeIfAbsent(
@@ -80,37 +83,43 @@ public class TreeSetGraphBuilder {
         g = g.with(currentNode);
 
         if (left != null) {
-            g = getSubTree(g, keyField, left, currentNode);
+            Object leftKey = keyField.get(left);
+
+            Node node = cache.computeIfAbsent(
+                    leftKey,
+                    k -> getNode(String.valueOf(k)));
+
+            g = g.with(currentNode.link(to(node)));
+
+            g = buildRecursive(g, left, cache);
         } else {
             g = g.with(
-                    currentNode.link(to(invisibleNode(key)).with(Style.INVIS)));
+                    currentNode.link(to(nullNode(key))));
         }
 
         if (right != null) {
-            g = getSubTree(g, keyField, right, currentNode);
+            Object rightKey = keyField.get(right);
+
+            Node node = cache.computeIfAbsent(
+                    rightKey,
+                    k -> getNode(String.valueOf(k)));
+
+            g = g.with(currentNode.link(to(node)));
+
+            g = buildRecursive(g, right, cache);
         } else {
             g = g.with(
-                    currentNode.link(to(invisibleNode(key)).with(Style.INVIS)));
+                    currentNode.link(to(nullNode(key))));
         }
 
-        return g;
-    }
-
-    private static Graph getSubTree(Graph g, Field keyField, Object branch, Node currentNode)
-            throws IllegalAccessException, Exception {
-        Object key = keyField.get(branch);
-
-        Node node = node(String.valueOf(key));
-
-        g = g.with(currentNode.link(to(node)));
-
-        g = buildRecursive(g, branch);
         return g;
     }
 
     // needs to be unique, since graphviz merges Nodes with the same Name
-    private static Node invisibleNode(Object key) {
-        return getNode("").with(Style.INVIS);
+    private static Node nullNode(Object key) {
+        return getNode("")
+                .with(attr("width", "0.3"),
+                        attr("height", "0.3"),
+                        attr("fixedsize", "true"));
     }
-
 }

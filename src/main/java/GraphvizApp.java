@@ -15,23 +15,23 @@ public class GraphvizApp {
 
     public static void main(String[] args) {
 
-        startStackApplicationWithFunnyDrawCalls();
+        //startStackApplicationWithFunnyDrawCalls();
 
-        startArrayListApplicationWithFunnyDrawCalls();
+        //startArrayListApplicationWithFunnyDrawCalls();
 
-        startTreeMapApplicationWithFunnyDrawCalls();
+        //startTreeMapApplicationWithFunnyDrawCalls();
 
-        startLinkedHashSetApplicationWithFunnyDrawCalls();
+        //startLinkedHashSetApplicationWithFunnyDrawCalls();
 
         startTreeSetApplicationWithFunnyDrawCalls();
 
-        startLinkedListApplicationWithFunnyDrawCalls();
+        //startLinkedListApplicationWithFunnyDrawCalls();
 
-        startBinarySearchTreeApplicationWithFunnyDrawCalls();
+        //startBinarySearchTreeApplicationWithFunnyDrawCalls();
 
-        startPrograLinkedListApplication();
+        //startPrograLinkedListApplication();
 
-        startPrograHashSetApplication();
+        //startPrograHashSetApplication();
 
     }
 
