@@ -38,7 +38,7 @@ public class TreeMapGraphBuilder {
 
             return buildRecursive(g, root);
         } catch (Exception e) {
-            throw new RuntimeException("Could not inspect TreeSet structure", e);
+            throw new RuntimeException("Could not inspect TreeMap structure", e);
         }
     }
 
