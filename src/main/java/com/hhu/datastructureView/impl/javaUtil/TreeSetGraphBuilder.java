@@ -1,7 +1,9 @@
 package com.hhu.datastructureView.impl.javaUtil;
 
+import static com.hhu.datastructureView.NodeBuilder.getNode;
+import static com.hhu.datastructureView.NodeBuilder.nullNode;
+import static guru.nidi.graphviz.attribute.Attributes.attr;
 import static guru.nidi.graphviz.model.Factory.graph;
-import static guru.nidi.graphviz.model.Factory.node;
 import static guru.nidi.graphviz.model.Factory.to;
 
 import java.lang.reflect.Field;
@@ -10,12 +12,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import guru.nidi.graphviz.attribute.Shape;
-import guru.nidi.graphviz.attribute.Style;
 import guru.nidi.graphviz.model.Graph;
-
-import static com.hhu.datastructureView.NodeBuilder.getNode;
-import static guru.nidi.graphviz.attribute.Attributes.attr;
 import guru.nidi.graphviz.model.Node;
 
 /* Builds a GraphViz Graph for TreeSets*/
@@ -115,11 +112,5 @@ public class TreeSetGraphBuilder {
         return g;
     }
 
-    // needs to be unique, since graphviz merges Nodes with the same Name
-    private static Node nullNode(Object key) {
-        return getNode("")
-                .with(attr("width", "0.3"),
-                        attr("height", "0.3"),
-                        attr("fixedsize", "true"));
-    }
+    
 }

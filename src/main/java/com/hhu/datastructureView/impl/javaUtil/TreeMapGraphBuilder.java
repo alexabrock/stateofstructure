@@ -1,21 +1,18 @@
 package com.hhu.datastructureView.impl.javaUtil;
 
+import static com.hhu.datastructureView.NodeBuilder.getNode;
+import static com.hhu.datastructureView.NodeBuilder.nullNode;
+import static guru.nidi.graphviz.attribute.Attributes.attr;
 import static guru.nidi.graphviz.model.Factory.graph;
-import static guru.nidi.graphviz.model.Factory.node;
 import static guru.nidi.graphviz.model.Factory.to;
 
 import java.lang.reflect.Field;
 import java.util.TreeMap;
 
-
-import static guru.nidi.graphviz.attribute.Attributes.attr;
-
-import guru.nidi.graphviz.attribute.NodeAttr;
 import guru.nidi.graphviz.attribute.Shape;
 import guru.nidi.graphviz.attribute.Style;
 import guru.nidi.graphviz.model.Graph;
 import guru.nidi.graphviz.model.Node;
-import static com.hhu.datastructureView.NodeBuilder.getNode;
 
 /* Builds a GraphViz Graph for TreeMaps */
 public class TreeMapGraphBuilder {
@@ -106,14 +103,4 @@ public class TreeMapGraphBuilder {
     private static Node treeMapNode(Object key, Object value) {
         return getNode(String.valueOf(key) + ", " + String.valueOf(value));
     }
-
-
-    // needs to be unique, since graphviz merges Nodes with the same Name
-    private static Node nullNode(Object key) {
-        return getNode("")
-                .with(attr("width", "0.3"),
-                        attr("height", "0.3"),
-                        attr("fixedsize", "true"));
-    }
-
 }
