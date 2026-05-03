@@ -66,9 +66,10 @@ class MemoryPanelBuilder {
      * darkMode
      */
     static String applyDarkMode(String dot) {
+
         String themedAttributes = String.format(
                 "%n  graph [bgcolor=\"%s\", fontcolor=\"%s\"];%n"
-                        + "  node [fontcolor=\"%s\", color=\"%s\", style=\"filled\", fillcolor=\"%s\"];%n"
+                        + "  node [fontcolor=\"%s\", color=\"%s\", style=\"filled\", fillcolor=\"%s\", fontsize=\"8\"];%n"
                         + "  edge [color=\"%s\", fontcolor=\"%s\"];%n",
                 Colors.BG_COLORM,
                 Colors.FG_COLORM,
@@ -78,14 +79,21 @@ class MemoryPanelBuilder {
                 Colors.EDGE_COLORM,
                 Colors.FG_COLORM);
 
+
         // After the first brace in the dot is where the styling of the graph happens
         int firstBrace = dot.indexOf('{');
         if (firstBrace < 0) {
             return dot;
         }
+
+        
         /*
          * dot... { + themed attributes + ... dot
          */
-        return dot.substring(0, firstBrace + 1) + themedAttributes + dot.substring(firstBrace + 1);
+        String graph = dot.substring(0, firstBrace + 1)
+                + themedAttributes
+                + dot.substring(firstBrace + 1);
+
+        return graph;
     }
 }
