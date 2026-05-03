@@ -15,6 +15,7 @@ import guru.nidi.graphviz.attribute.Shape;
 import guru.nidi.graphviz.attribute.Style;
 import guru.nidi.graphviz.model.Graph;
 import guru.nidi.graphviz.model.Node;
+import static com.hhu.datastructureView.NodeBuilder.getNode;
 
 /* Builds a GraphViz Graph for TreeMaps */
 public class TreeMapGraphBuilder {
@@ -100,14 +101,14 @@ public class TreeMapGraphBuilder {
         return g;
     }
 
-    private static Node treeMapNode(Object rightKey, Object rightValue) {
-        return node(String.valueOf(rightKey) + ", " + String.valueOf(rightValue));
+    private static Node treeMapNode(Object key, Object value) {
+        return getNode(String.valueOf(key) + ", " + String.valueOf(value));
     }
 
 
     // needs to be unique, since graphviz merges Nodes with the same Name
     private static Node invisibleNode(Object key) {
-        return node("" + System.nanoTime()).with(Style.INVIS);
+        return getNode((String) key).with(Style.INVIS);
     }
 
 }

@@ -16,11 +16,14 @@ public class HashSet<T>{
 
     public void insert(T object) {
         int insertionIndex = Math.abs(object.hashCode() % SIZE);
-        while (insertionIndex < SIZE-1 && objects[insertionIndex] != null) {
+        while (insertionIndex < SIZE && objects[insertionIndex] != null) {
             // lineares Sondieren
             insertionIndex++;
         }
+        //ignore all new objects, when objects[] is full
+        if (insertionIndex < SIZE) {
             objects[insertionIndex] = object;
+        }
     }
 
     @Override

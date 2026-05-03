@@ -18,7 +18,7 @@ import guru.nidi.graphviz.model.Node;
 /* Builds a GraphViz Graph for LinkedHashSets */
 public class LinkedHashSetGraphBuilder  {
 
-
+//Not using NodeBuilder, since Nodes shouldn't enter the HashSet twice.
     public static Graph buildGraph(LinkedHashSet<?> set) {
         
         Graph g = graph("listGraph").directed()

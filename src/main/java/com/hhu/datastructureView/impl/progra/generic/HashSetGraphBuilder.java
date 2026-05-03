@@ -19,7 +19,7 @@ import guru.nidi.graphviz.attribute.Rank.RankType;
 import guru.nidi.graphviz.attribute.Shape;
 import guru.nidi.graphviz.model.Graph;
 import guru.nidi.graphviz.model.Node;
-
+import static com.hhu.datastructureView.NodeBuilder.getNode;
 /* Returns a GraphViz Graph for Progra HashSet  */
 public class HashSetGraphBuilder {
 
@@ -51,7 +51,7 @@ public class HashSetGraphBuilder {
             // info is normally hidden from the user
             for (Object current : objects) {
                 if (current != null) {
-                    Node currentNode = node(current.toString());
+                    Node currentNode = getNode(current.toString());
                     elements = elements.with(currentNode);
                 }
             }

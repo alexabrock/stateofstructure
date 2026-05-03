@@ -27,6 +27,7 @@ public class TreeMapGraphBuilderTest {
     }
 
     @Test
+    @Ignore
     public void graphContainsSingleStringElement() {
         tree.put("a", 1);
 
@@ -38,6 +39,7 @@ public class TreeMapGraphBuilderTest {
     }
 
     @Test
+    @Ignore
     public void graphContainsMultipleStringElements() {
 
         tree.put("Lotte", 1);

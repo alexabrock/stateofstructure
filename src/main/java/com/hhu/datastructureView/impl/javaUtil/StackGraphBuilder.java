@@ -13,6 +13,7 @@ import guru.nidi.graphviz.attribute.Rank.RankType;
 import guru.nidi.graphviz.attribute.Shape;
 import guru.nidi.graphviz.model.Graph;
 import guru.nidi.graphviz.model.Node;
+import static com.hhu.datastructureView.NodeBuilder.getNode;
 
 /* Builds a GraphViz Graph for Stacks */
 public class StackGraphBuilder {
@@ -23,10 +24,10 @@ public class StackGraphBuilder {
             return graph("stackGraph");
         }
 
-        List<Node> nodes = stack.stream().map(e -> node(e.toString())).toList();
+        List<Node> nodes = stack.stream().map(e -> getNode(e.toString())).toList();
 
-        Node topPointer = node("top").with(Shape.PLAIN);
-        Node bottomPointer = node("bottom").with(Shape.PLAIN);
+        Node topPointer = getNode("top").with(Shape.PLAIN);
+        Node bottomPointer = getNode("bottom").with(Shape.PLAIN);
 
         // rank=same subgraph for top pointer & top element linkage
         Graph topRank = graph("topRank")

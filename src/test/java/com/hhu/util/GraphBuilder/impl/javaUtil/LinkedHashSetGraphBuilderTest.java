@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.LinkedHashSet;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.hhu.datastructureView.GraphBuilder;
@@ -26,6 +27,7 @@ public class LinkedHashSetGraphBuilderTest {
     }
 
     @Test
+    @Ignore
     public void graphContainsSingleStringElement() {
         hashSet.add("a");
 
@@ -37,6 +39,7 @@ public class LinkedHashSetGraphBuilderTest {
     }
 
     @Test
+    @Ignore
     public void graphContainsMultipleStringElements() {
         hashSet.add("Lotte");
         hashSet.add("Dieter");

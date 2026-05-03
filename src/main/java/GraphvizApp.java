@@ -15,21 +15,21 @@ public class GraphvizApp {
 
     public static void main(String[] args) {
 
-        //startStackApplicationWithFunnyDrawCalls();
+        startStackApplicationWithFunnyDrawCalls();
 
-        //startArrayListApplicationWithFunnyDrawCalls();
+        startArrayListApplicationWithFunnyDrawCalls();
 
-        //startTreeMapApplicationWithFunnyDrawCalls();
+        startTreeMapApplicationWithFunnyDrawCalls();
 
-        //startLinkedHashSetApplicationWithFunnyDrawCalls();
+        startLinkedHashSetApplicationWithFunnyDrawCalls();
 
-        //startTreeSetApplicationWithFunnyDrawCalls();
+        startTreeSetApplicationWithFunnyDrawCalls();
 
-        //startLinkedListApplicationWithFunnyDrawCalls();
+        startLinkedListApplicationWithFunnyDrawCalls();
 
-        //startBinarySearchTreeApplicationWithFunnyDrawCalls();
+        startBinarySearchTreeApplicationWithFunnyDrawCalls();
 
-        //startPrograLinkedListApplication();
+        startPrograLinkedListApplication();
 
         startPrograHashSetApplication();
 
@@ -39,6 +39,42 @@ public class GraphvizApp {
         DrawCalls drawCalls = new DrawCalls();
 
         HashSet<Integer> set = new HashSet<>();
+        set.insert(1);
+        drawCalls.record(set);
+        set.insert(2);
+        drawCalls.record(set);
+        set.insert(3);
+        drawCalls.record(set);
+        set.insert(4);
+        drawCalls.record(set);
+        set.insert(5);
+        drawCalls.record(set);
+        set.insert(6);
+        drawCalls.record(set);
+        set.insert(1);
+        drawCalls.record(set);
+        set.insert(2);
+        drawCalls.record(set);
+        set.insert(3);
+        drawCalls.record(set);
+        set.insert(4);
+        drawCalls.record(set);
+        set.insert(5);
+        drawCalls.record(set);
+        set.insert(6);
+        drawCalls.record(set);
+        set.insert(1);
+        drawCalls.record(set);
+        set.insert(2);
+        drawCalls.record(set);
+        set.insert(3);
+        drawCalls.record(set);
+        set.insert(4);
+        drawCalls.record(set);
+        set.insert(5);
+        drawCalls.record(set);
+        set.insert(6);
+        drawCalls.record(set);
         set.insert(1);
         drawCalls.record(set);
         set.insert(2);
@@ -65,6 +101,11 @@ public class GraphvizApp {
         list.add(2);
         drawCalls.record(list);
         list.add(3);
+        list.add(1);
+        drawCalls.record(list);
+        list.add(2);
+        drawCalls.record(list);
+        list.add(3);
 
         Application.start(drawCalls);
     }
@@ -73,6 +114,14 @@ public class GraphvizApp {
         DrawCalls drawCalls = new DrawCalls();
 
         BinarySearchTree<String> treeSet = new BinarySearchTree<>();
+        treeSet.insert("Hello");
+        drawCalls.record(treeSet);
+        treeSet.insert("Progra");
+        drawCalls.record(treeSet);
+        treeSet.insert("2026");
+        drawCalls.record(treeSet);
+        treeSet.insert("!");
+        drawCalls.record(treeSet);
         treeSet.insert("Hello");
         drawCalls.record(treeSet);
         treeSet.insert("Progra");
@@ -91,6 +140,14 @@ public class GraphvizApp {
         TreeSet<String> treeSet = new TreeSet<>();
         treeSet.add("Hello");
         drawCalls.record(treeSet );
+        treeSet.add("Progra");
+        drawCalls.record(treeSet);
+        treeSet.add("2026");
+        drawCalls.record(treeSet);
+        treeSet.add("!");
+        drawCalls.record(treeSet);
+        treeSet.add("Hello");
+        drawCalls.record(treeSet);
         treeSet.add("Progra");
         drawCalls.record(treeSet);
         treeSet.add("2026");
@@ -133,6 +190,14 @@ public class GraphvizApp {
         drawCalls.record(linkedHashSet);
         linkedHashSet.add("!");
         drawCalls.record(linkedHashSet);
+        linkedHashSet.add("Hello");
+        drawCalls.record(linkedHashSet);
+        linkedHashSet.add("Progra");
+        drawCalls.record(linkedHashSet);
+        linkedHashSet.add("2026");
+        drawCalls.record(linkedHashSet);
+        linkedHashSet.add("!");
+        drawCalls.record(linkedHashSet);
 
         Application.start(drawCalls);
     }
@@ -141,6 +206,11 @@ public class GraphvizApp {
         DrawCalls drawCalls = new DrawCalls();
 
         ArrayList<Integer> list = new ArrayList<>();
+        list.add(1);
+        drawCalls.record(list);
+        list.add(2);
+        drawCalls.record(list);
+        list.add(3);
         list.add(1);
         drawCalls.record(list);
         list.add(2);
@@ -162,6 +232,14 @@ public class GraphvizApp {
         drawCalls.record(map);
         map.put("jaghva", 35);
         drawCalls.record(map);
+        map.put("hello", 1);
+        drawCalls.record(map);
+        map.put("world", 2);
+        drawCalls.record(map);
+        map.put("java", 3);
+        drawCalls.record(map);
+        map.put("jaghva", 35);
+        drawCalls.record(map);
 
 
         Application.start(drawCalls);
@@ -173,8 +251,11 @@ public class GraphvizApp {
         LinkedList<String> list = new LinkedList<>();
         DrawCalls drawCalls = new DrawCalls();
         list.add("Lotte");
+        drawCalls.record(list);
         list.add("Dieter");
+        drawCalls.record(list);
         list.add("Alexa");
+        drawCalls.record(list);
         list.add("Holland");
         drawCalls.record(list);
         Application.start(drawCalls);

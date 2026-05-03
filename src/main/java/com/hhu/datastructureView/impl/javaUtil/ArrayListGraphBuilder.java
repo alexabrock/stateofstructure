@@ -14,6 +14,7 @@ import guru.nidi.graphviz.attribute.Attributes;
 import guru.nidi.graphviz.attribute.Rank;
 import guru.nidi.graphviz.attribute.Shape;
 import guru.nidi.graphviz.model.Graph;
+import static com.hhu.datastructureView.NodeBuilder.getNode;
 
 /* Builds a GraphViz Graph for ArrayLists */
 public class ArrayListGraphBuilder {
@@ -40,7 +41,7 @@ public class ArrayListGraphBuilder {
     private static Graph addNodesFromList(ArrayList<?> list, Graph g) {
         for (int i = 0; i < list.size(); i++) {
             String nodeName = String.valueOf(list.get(i));
-            g = g.with(node(nodeName));
+            g = g.with(getNode(nodeName));
         }
         return g;
     }

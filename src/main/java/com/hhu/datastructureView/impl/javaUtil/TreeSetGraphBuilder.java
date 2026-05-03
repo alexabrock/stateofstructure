@@ -5,18 +5,21 @@ import static guru.nidi.graphviz.model.Factory.node;
 import static guru.nidi.graphviz.model.Factory.to;
 
 import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.TreeMap;
 import java.util.TreeSet;
-
 
 import guru.nidi.graphviz.attribute.Shape;
 import guru.nidi.graphviz.attribute.Style;
 import guru.nidi.graphviz.model.Graph;
+
+import static com.hhu.datastructureView.NodeBuilder.getNode;
 import static guru.nidi.graphviz.attribute.Attributes.attr;
 import guru.nidi.graphviz.model.Node;
 
 /* Builds a GraphViz Graph for TreeSets*/
-public class TreeSetGraphBuilder{
+public class TreeSetGraphBuilder {
 
     public static Graph buildGraph(TreeSet<?> set) {
 
@@ -29,7 +32,6 @@ public class TreeSetGraphBuilder{
             Field mapField = TreeSet.class.getDeclaredField("m");
             mapField.setAccessible(true);
             TreeMap<?, ?> map = (TreeMap<?, ?>) mapField.get(set);
-            
 
             // Zugriff auf root node
             Field rootField = TreeMap.class.getDeclaredField("root");
@@ -40,7 +42,6 @@ public class TreeSetGraphBuilder{
                     attr("fixedsize", "true"),
                     attr("width", "1"),
                     attr("height", "1"));
-            
 
             return buildRecursive(g, root);
 
@@ -69,7 +70,12 @@ public class TreeSetGraphBuilder{
         Object left = leftField.get(entry);
         Object right = rightField.get(entry);
 
-        Node currentNode = node(String.valueOf(key)).with(Shape.CIRCLE);
+        Map<Object, Node> cache = new HashMap<>();
+
+        String currentNodeName = String.valueOf(key);
+        Node currentNode = cache.computeIfAbsent(
+                currentNodeName,
+                k -> getNode(String.valueOf(k)));
 
         g = g.with(currentNode);
 
@@ -90,21 +96,21 @@ public class TreeSetGraphBuilder{
         return g;
     }
 
-    private static Graph getSubTree(Graph g, Field keyField, Object left, Node currentNode)
+    private static Graph getSubTree(Graph g, Field keyField, Object branch, Node currentNode)
             throws IllegalAccessException, Exception {
-        Object leftKey = keyField.get(left);
+        Object key = keyField.get(branch);
 
-        Node leftNode = node(String.valueOf(leftKey));
+        Node node = node(String.valueOf(key));
 
-        g = g.with(currentNode.link(to(leftNode)));
+        g = g.with(currentNode.link(to(node)));
 
-        g = buildRecursive(g, left);
+        g = buildRecursive(g, branch);
         return g;
     }
 
     // needs to be unique, since graphviz merges Nodes with the same Name
     private static Node invisibleNode(Object key) {
-        return node(""+ System.nanoTime()).with(Style.INVIS);
+        return getNode("").with(Style.INVIS);
     }
 
 }

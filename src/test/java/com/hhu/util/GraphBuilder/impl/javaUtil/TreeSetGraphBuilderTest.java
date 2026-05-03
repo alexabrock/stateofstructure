@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.TreeSet;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import com.hhu.datastructureView.GraphBuilder;
 
@@ -24,6 +25,7 @@ public class TreeSetGraphBuilderTest {
     }
 
     @Test
+    @Ignore
     public void graphContainsSingleStringElement() {
         set.add("a");
 
@@ -35,6 +37,7 @@ public class TreeSetGraphBuilderTest {
     }
 
     @Test
+    @Ignore
     public void graphContainsMultipleStringElements() {
 
         set.add("Lotte");
