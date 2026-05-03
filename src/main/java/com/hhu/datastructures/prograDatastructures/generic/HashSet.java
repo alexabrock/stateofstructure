@@ -1,9 +1,5 @@
 package com.hhu.datastructures.prograDatastructures.generic;
 
-import java.util.NoSuchElementException;
-
-import java.util.Iterator;
-
 public class HashSet<T>{
     //kleine size, weil Progra HashSet kein resizing supportet, mit großem Array aber die Visualisierung kaputt geht
     private final static int SIZE = 15;
