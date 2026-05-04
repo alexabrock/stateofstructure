@@ -42,9 +42,7 @@ public class DrawCalls {
         return drawCalls.get(currentStepIndex);
     }
 
-    @Deprecated
-    // Would be used by datastructure, if record is not implemented by DataStructure
-    // Is currently being used by legacyDatastructures
+
     public <E> void record(Object collection, String methodName) {
 
         JPanel memory = PanelBuilder.createMemoryPanel(collection);
@@ -56,18 +54,5 @@ public class DrawCalls {
         JPanel codePanel = PanelBuilder.createCodePanel(code, lineNumber);
 
         drawCalls.add(new DrawStep(memory, datastructure, methodLabel, codePanel));
-    }
-
-    public <E> void record(Object collection) {
-
-        JPanel memory = PanelBuilder.createMemoryPanel(collection);
-        JPanel datastructure = PanelBuilder.createDatastructurePanel(collection);
-        JLabel collectionName = PanelBuilder.createNameLabel(collection.getClass().getSimpleName());
-
-        int lineNumber = Caller.findCallerLine();
-        String code = Caller.findCallerClass();
-        JPanel codePanel = PanelBuilder.createCodePanel(code, lineNumber);
-
-        drawCalls.add(new DrawStep(memory, datastructure, collectionName, codePanel));
     }
 }

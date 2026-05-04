@@ -25,15 +25,12 @@
 
 package com.hhu.datastructures.legacyDatastructures;
 
+import java.util.Deque;
 import java.util.EmptyStackException;
-import java.util.LinkedList;
 import java.util.Vector;
 
 import com.hhu.datastructures.legacyDatastructures.api.Visualizable;
 import com.hhu.util.DrawCalls;
-import com.hhu.util.DrawStep;
-
-import java.util.Deque;
 
 /**
  * The {@code Stack} class represents a last-in-first-out

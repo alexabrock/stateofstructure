@@ -1,17 +1,17 @@
-import java.util.Stack;
+import com.hhu.datastructures.legacyDatastructures.VStack;
 import com.hhu.views.Application;
 
 public class GraphvizApp {
 
     public static void main(String[] args) {
 
-        //startStackApplicationWithFunnyDrawCalls();
+        startStackApplicationWithFunnyDrawCalls();
 
     }
 
     static void startStackApplicationWithFunnyDrawCalls() {
 
-        Stack<String> stack = new Stack<>();
+        VStack<String> stack = new VStack<>();
         stack.push("Hello");
         stack.push("Progra");
         stack.push("middleElement");

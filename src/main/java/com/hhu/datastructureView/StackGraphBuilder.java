@@ -5,7 +5,8 @@ import static guru.nidi.graphviz.attribute.Rank.RankDir.TOP_TO_BOTTOM;
 import static guru.nidi.graphviz.model.Factory.graph;
 
 import java.util.List;
-import java.util.Stack;
+
+import com.hhu.datastructures.legacyDatastructures.VStack;
 
 import guru.nidi.graphviz.attribute.Rank;
 import guru.nidi.graphviz.attribute.Rank.RankType;
@@ -16,7 +17,7 @@ import guru.nidi.graphviz.model.Node;
 /* Builds a GraphViz Graph for Stacks */
 public class StackGraphBuilder {
     
-    public static Graph buildGraph(Stack<?> stack) {
+    public static Graph buildGraph(VStack<?> stack) {
         
         if (stack.isEmpty()) {
             return graph("stackGraph");

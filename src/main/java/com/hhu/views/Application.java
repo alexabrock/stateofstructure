@@ -22,13 +22,14 @@ import javax.swing.text.BadLocationException;
 
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
+import com.hhu.datastructures.legacyDatastructures.api.Visualizable;
 import com.hhu.util.DrawCalls;
 import com.hhu.util.DrawStep;
 import com.hhu.views.panelBuilder.ThemeStyler;
 
 public class Application {
 
-    public static <E> void start(DrawCalls drawCalls) {
+    public static <E> void start(Visualizable collection) {
         // Swing needs this
         if (GraphicsEnvironment.isHeadless()) {
             System.out.println("Headless environment detected ");
@@ -42,6 +43,8 @@ public class Application {
              * need to initialize these, so the button logik is cleaner (button can just
              * replace the existing code panels and doesnt need to check if they exist)
              */
+            DrawCalls drawCalls = collection.getDrawCalls();
+
             DrawStep firstStep = drawCalls.nextStep();
 
             JPanel centerPanel = createCenterPanel(firstStep);

@@ -1,7 +1,6 @@
 package com.hhu.datastructureView;
 
-import java.util.Stack;
-
+import com.hhu.datastructures.legacyDatastructures.VStack;
 
 import guru.nidi.graphviz.model.Graph;
 
@@ -16,7 +15,7 @@ public class GraphBuilder {
 
             /* Java.util */
 
-            case Stack<?> stack ->
+            case VStack<?> stack ->
                 StackGraphBuilder.buildGraph(stack);
 
             default ->
