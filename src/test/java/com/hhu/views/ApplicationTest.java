@@ -1,7 +1,5 @@
 package com.hhu.views;
 
-import java.util.LinkedHashSet;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -14,12 +12,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.hhu.util.DrawCalls;
-import com.hhu.util.DrawStep;
-
-import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+
+import com.hhu.util.DrawCalls;
+import com.hhu.util.DrawStep;
 
 public class ApplicationTest {
 
