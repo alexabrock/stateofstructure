@@ -8,6 +8,7 @@ public class StringLinkedHashSet {
     private static final int MAX_SIZE = 50;
     // wir haben unter Kontrolle, dass der raw type auf der rechten Seite passt; das benutzen wir hier nur, weil Arrays nicht mit Generics funktionieren (für Interessierte: https://www.tothenew.com/blog/why-is-generic-array-creation-not-allowed-in-java/)
     // Für die Bearbeitung der Aufgabe können Sie dieses Detail ignorieren.
+    @SuppressWarnings("unchecked")
     private final List<String>[] elements = new LinkedList[MAX_SIZE];
     private int size = 0;
     
