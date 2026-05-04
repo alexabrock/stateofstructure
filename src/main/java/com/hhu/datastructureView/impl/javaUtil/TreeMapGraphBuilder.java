@@ -7,6 +7,7 @@ import static guru.nidi.graphviz.model.Factory.graph;
 import static guru.nidi.graphviz.model.Factory.to;
 
 import java.lang.reflect.Field;
+import java.util.HashMap;
 import java.util.TreeMap;
 
 import guru.nidi.graphviz.attribute.Shape;
@@ -35,14 +36,17 @@ public class TreeMapGraphBuilder {
             rootField.setAccessible(true);
             // root is an Entry<K,V>, wich is a private nested class
             Object root = rootField.get(map);
+            
+            HashMap<Object, Node> cache = new HashMap<>();
 
-            return buildRecursive(g, root);
+            return buildRecursive(g, root, cache);
+            
         } catch (Exception e) {
             throw new RuntimeException("Could not inspect TreeMap structure", e);
         }
     }
 
-    private static Graph buildRecursive(Graph g, Object entry) throws Exception{
+    private static Graph buildRecursive(Graph g, Object entry, HashMap<Object,Node> cache) throws Exception{
         if (entry == null) {
             return g;
         }
@@ -68,37 +72,39 @@ public class TreeMapGraphBuilder {
         // right subtree
         Object right = rightField.get(entry); // Entry<K,V>
 
-        Node currentNode = treeMapNode(key, value).with(Shape.CIRCLE);
+        Node currentNode = cache.computeIfAbsent(key, k -> treeMapNode(key, value));
         g = g.with(currentNode);
 
         //linken Knoten erstellen
         if (left != null) {
-            g = getSubTree(g, keyField, valueField, left, currentNode);
+            Object leftKey = keyField.get(left);
+            Object leftValue = valueField.get(left);
+
+            Node leftNode = cache.computeIfAbsent(leftKey, k -> treeMapNode(leftKey, leftValue));
+            g = g.with(currentNode.link(to(leftNode)));
+
+            g = buildRecursive(g, left, cache);
         } else {
-            g = g.with(currentNode.link(to(nullNode(key)).with(Style.INVIS)));
+            g = g.with(currentNode.link(to(nullNode(key))));
         }
 
         //rechten Knoten erstellen
         if (right != null) {
-            g = getSubTree(g, keyField, valueField, right, currentNode);
+            Object rightKey = keyField.get(right);
+            Object rightValue = valueField.get(right);
+
+            Node rightNode = cache.computeIfAbsent(rightKey, k -> treeMapNode(rightKey, rightValue));
+            g = g.with(currentNode.link(to(rightNode)));
+
+            g = buildRecursive(g, right, cache);
         } else {
-            g = g.with(currentNode.link(to(nullNode(key)).with(Style.INVIS)));
+            g = g.with(currentNode.link(to(nullNode(key))));
         }
 
         return g;
     }
 
-    private static Graph getSubTree(Graph g, Field keyField, Field valueField, Object left, Node currentNode)
-            throws IllegalAccessException, Exception {
-        Object leftKey = keyField.get(left);
-        Object leftValue = valueField.get(left);
-
-        Node leftNode = treeMapNode(leftKey, leftValue);
-        g = g.with(currentNode.link(to(leftNode)));
-
-        g = buildRecursive(g, left);
-        return g;
-    }
+    
 
     private static Node treeMapNode(Object key, Object value) {
         return getNode(String.valueOf(key) + ", " + String.valueOf(value));
