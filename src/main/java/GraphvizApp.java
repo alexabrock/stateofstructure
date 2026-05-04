@@ -23,11 +23,11 @@ public class GraphvizApp {
 
         //startLinkedHashSetApplicationWithFunnyDrawCalls();
 
-        //startTreeSetApplicationWithFunnyDrawCalls();
+        startTreeSetApplicationWithFunnyDrawCalls();
 
         //startLinkedListApplicationWithFunnyDrawCalls();
 
-        //startBinarySearchTreeApplicationWithFunnyDrawCalls();
+        startBinarySearchTreeApplicationWithFunnyDrawCalls();
 
         //startPrograLinkedListApplication();
 

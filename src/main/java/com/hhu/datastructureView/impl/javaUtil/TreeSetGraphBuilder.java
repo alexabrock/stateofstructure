@@ -1,19 +1,16 @@
 package com.hhu.datastructureView.impl.javaUtil;
 
-import static com.hhu.datastructureView.NodeBuilder.getNode;
-import static com.hhu.datastructureView.NodeBuilder.nullNode;
 import static guru.nidi.graphviz.attribute.Attributes.attr;
 import static guru.nidi.graphviz.model.Factory.graph;
-import static guru.nidi.graphviz.model.Factory.to;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import com.hhu.datastructureView.impl.TreeGraphUtils;
+
 import guru.nidi.graphviz.model.Graph;
-import guru.nidi.graphviz.model.Node;
 
 /* Builds a GraphViz Graph for TreeSets*/
 public class TreeSetGraphBuilder {
@@ -40,77 +37,14 @@ public class TreeSetGraphBuilder {
                     attr("width", "1"),
                     attr("height", "1"));
 
-            Map<Object, Node> cache = new HashMap<>();
-
-            return buildRecursive(g, root, cache);
+            return TreeGraphUtils.buildRecursive(
+                    g,
+                    root,
+                    new HashMap<>(),
+                    "key");
 
         } catch (Exception e) {
             throw new RuntimeException("Could not inspect TreeSet structure", e);
         }
     }
-
-    private static Graph buildRecursive(Graph g, Object entry, Map<Object, Node> cache ) throws Exception {
-
-        if (entry == null) {
-            return g;
-        }
-
-        Class<?> entryClass = entry.getClass();
-
-        Field keyField = entryClass.getDeclaredField("key");
-        Field leftField = entryClass.getDeclaredField("left");
-        Field rightField = entryClass.getDeclaredField("right");
-
-        keyField.setAccessible(true);
-        leftField.setAccessible(true);
-        rightField.setAccessible(true);
-
-        Object key = keyField.get(entry);
-        //left subtree
-        Object left = leftField.get(entry);
-        //right subtree
-        Object right = rightField.get(entry);
-
-
-        String currentNodeName = String.valueOf(key);
-        Node currentNode = cache.computeIfAbsent(
-                currentNodeName,
-                k -> getNode(String.valueOf(k)));
-
-        g = g.with(currentNode);
-
-        if (left != null) {
-            Object leftKey = keyField.get(left);
-
-            Node node = cache.computeIfAbsent(
-                    leftKey,
-                    k -> getNode(String.valueOf(k)));
-
-            g = g.with(currentNode.link(to(node)));
-
-            g = buildRecursive(g, left, cache);
-        } else {
-            g = g.with(
-                    currentNode.link(to(nullNode(key))));
-        }
-
-        if (right != null) {
-            Object rightKey = keyField.get(right);
-
-            Node node = cache.computeIfAbsent(
-                    rightKey,
-                    k -> getNode(String.valueOf(k)));
-
-            g = g.with(currentNode.link(to(node)));
-
-            g = buildRecursive(g, right, cache);
-        } else {
-            g = g.with(
-                    currentNode.link(to(nullNode(key))));
-        }
-
-        return g;
-    }
-
-    
 }
