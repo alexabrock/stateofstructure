@@ -1,4 +1,4 @@
-package com.hhu.datastructuresLegacy;
+package com.hhu.datastructures;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
