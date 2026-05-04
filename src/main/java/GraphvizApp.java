@@ -19,7 +19,7 @@ public class GraphvizApp {
 
         //startArrayListApplicationWithFunnyDrawCalls();
 
-        //startTreeMapApplicationWithFunnyDrawCalls();
+        startTreeMapApplicationWithFunnyDrawCalls();
 
         //startLinkedHashSetApplicationWithFunnyDrawCalls();
 
@@ -27,7 +27,7 @@ public class GraphvizApp {
 
         //startLinkedListApplicationWithFunnyDrawCalls();
 
-        startBinarySearchTreeApplicationWithFunnyDrawCalls();
+        //startBinarySearchTreeApplicationWithFunnyDrawCalls();
 
         //startPrograLinkedListApplication();
 
