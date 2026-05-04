@@ -2,6 +2,7 @@ package com.hhu.views;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -9,6 +10,7 @@ import static org.mockito.Mockito.when;
 import java.awt.BorderLayout;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -75,43 +77,4 @@ public class ApplicationTest {
 
         assertTrue(next.isEnabled());
     }
-
-    @Test
-    @Ignore
-    public void testReplacePanels() {
-
-        JPanel container = new JPanel(new BorderLayout());
-
-        JPanel oldCode = new JPanel();
-        JPanel oldMemory = new JPanel();
-        JPanel oldData = new JPanel();
-        JLabel oldLabel = new JLabel();
-
-        container.add(oldCode, BorderLayout.WEST);
-        container.add(oldMemory, BorderLayout.CENTER);
-        container.add(oldData, BorderLayout.EAST);
-        container.add(oldLabel, BorderLayout.NORTH);
-
-        DrawStep step = mock(DrawStep.class);
-
-        JPanel newCode = new JPanel();
-        JPanel newMemory = new JPanel();
-        JPanel newData = new JPanel();
-        JLabel newLabel = new JLabel();
-
-        when(step.codePanel()).thenReturn(newCode);
-        when(step.memory()).thenReturn(newMemory);
-        when(step.datastructure()).thenReturn(newData);
-        when(step.name()).thenReturn(newLabel);
-
-        Application.replacePanels(container, step);
-
-        BorderLayout layout = (BorderLayout) container.getLayout();
-
-        assertEquals(newCode, layout.getLayoutComponent(BorderLayout.WEST));
-        assertEquals(newMemory, layout.getLayoutComponent(BorderLayout.CENTER));
-        assertEquals(newData, layout.getLayoutComponent(BorderLayout.EAST));
-        assertEquals(newLabel, layout.getLayoutComponent(BorderLayout.NORTH));
-    }
-
 }

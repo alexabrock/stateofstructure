@@ -19,7 +19,7 @@ public class LinkedHashSetGraphBuilder  {
 //Not using NodeBuilder, since Nodes shouldn't enter the HashSet twice.
     public static Graph buildGraph(LinkedHashSet<?> set) {
         
-        Graph g = graph("listGraph").directed()
+        Graph g = graph("linkedHashSetGraph").directed()
                 .graphAttr().with(Rank.dir(TOP_TO_BOTTOM))
                 .nodeAttr().with(Shape.RECTANGLE);
 

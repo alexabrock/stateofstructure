@@ -14,7 +14,7 @@ import com.hhu.datastructureView.GraphBuilder;
 import guru.nidi.graphviz.model.MutableGraph;
 
 public class ArrayListGraphBuilderTest {
-     private ArrayList<String> list;
+    private ArrayList<String> list;
 
     @Before
     public void setUp() {

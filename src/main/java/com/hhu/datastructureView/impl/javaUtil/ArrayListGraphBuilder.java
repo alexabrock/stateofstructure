@@ -19,7 +19,7 @@ public class ArrayListGraphBuilder {
     public static Graph buildGraph(ArrayList<?> list) {
         
 
-        Graph g = graph("listGraph").directed()
+        Graph g = graph("arrayListGraph").directed()
                 .graphAttr().with(
                         //damit die einzelnen Nodes von rechts nach links angezeigt werden
                         Rank.dir(TOP_TO_BOTTOM),

@@ -23,7 +23,7 @@ public class PrograLinkedListGraphBuilder{
          * Since the PrograLinkedList isn't a List, the LinkedListGraphBuilder
          * can't be reused
          */
-        Graph g = graph("listGraph").directed()
+        Graph g = graph("prograLinkedListGraph").directed()
                 .graphAttr().with(Rank.dir(LEFT_TO_RIGHT))
                 .nodeAttr().with(Shape.RECTANGLE);
                 
