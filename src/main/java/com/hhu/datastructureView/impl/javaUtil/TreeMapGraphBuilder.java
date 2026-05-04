@@ -10,50 +10,47 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.TreeMap;
 
-import guru.nidi.graphviz.attribute.Shape;
-import guru.nidi.graphviz.attribute.Style;
 import guru.nidi.graphviz.model.Graph;
 import guru.nidi.graphviz.model.Node;
 
 /* Builds a GraphViz Graph for TreeMaps */
 public class TreeMapGraphBuilder {
 
-    public static Graph buildGraph(TreeMap<?,?> map) {
+    public static Graph buildGraph(TreeMap<?, ?> map) {
 
-        
-            Graph g = graph("treeMapGraph").nodeAttr().with(
-                    attr("fixedsize", "true"),
-                    attr("width", "1"),
-                    attr("height", "1"));
+        Graph g = graph("treeMapGraph").nodeAttr().with(
+                attr("fixedsize", "true"),
+                attr("width", "1"),
+                attr("height", "1"));
 
-            if (map.isEmpty()) {
-                return g;
-            }
-            
-            try {
+        if (map.isEmpty()) {
+            return g;
+        }
+
+        try {
 
             Field rootField = TreeMap.class.getDeclaredField("root");
             rootField.setAccessible(true);
             // root is an Entry<K,V>, wich is a private nested class
             Object root = rootField.get(map);
-            
+
             HashMap<Object, Node> cache = new HashMap<>();
 
             return buildRecursive(g, root, cache);
-            
+
         } catch (Exception e) {
             throw new RuntimeException("Could not inspect TreeMap structure", e);
         }
     }
 
-    private static Graph buildRecursive(Graph g, Object entry, HashMap<Object,Node> cache) throws Exception{
+    private static Graph buildRecursive(Graph g, Object entry, HashMap<Object, Node> cache) throws Exception {
         if (entry == null) {
             return g;
         }
 
         Class<?> entryClass = entry.getClass();
 
-        //get Fields
+        // get Fields
         Field keyField = entryClass.getDeclaredField("key");
         Field valueField = entryClass.getDeclaredField("value");
         Field leftField = entryClass.getDeclaredField("left");
@@ -64,7 +61,7 @@ public class TreeMapGraphBuilder {
         leftField.setAccessible(true);
         rightField.setAccessible(true);
 
-        //get Inhalt der Fields
+        // get Inhalt der Fields
         Object key = keyField.get(entry);
         Object value = valueField.get(entry);
         // left subtree
@@ -75,7 +72,7 @@ public class TreeMapGraphBuilder {
         Node currentNode = cache.computeIfAbsent(key, k -> treeMapNode(key, value));
         g = g.with(currentNode);
 
-        //linken Knoten erstellen
+        // linken Knoten erstellen
         if (left != null) {
             Object leftKey = keyField.get(left);
             Object leftValue = valueField.get(left);
@@ -88,7 +85,7 @@ public class TreeMapGraphBuilder {
             g = g.with(currentNode.link(to(nullNode(key))));
         }
 
-        //rechten Knoten erstellen
+        // rechten Knoten erstellen
         if (right != null) {
             Object rightKey = keyField.get(right);
             Object rightValue = valueField.get(right);
@@ -103,8 +100,6 @@ public class TreeMapGraphBuilder {
 
         return g;
     }
-
-    
 
     private static Node treeMapNode(Object key, Object value) {
         return getNode(String.valueOf(key) + ", " + String.valueOf(value));
