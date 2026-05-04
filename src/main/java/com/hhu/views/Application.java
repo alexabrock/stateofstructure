@@ -207,44 +207,60 @@ public class Application {
      */
     static void setScrollPosition(JPanel codePanel) {
         RSyntaxTextArea textArea = findSyntaxTextArea(codePanel);
-        if (textArea == null) {
-            return;
+        if (textArea != null) {
+            scrollToTargetLine(textArea, 4);
         }
-
-        scrollCaretLineToPanelMiddle(textArea, 4);
     }
 
-    static void scrollCaretLineToPanelMiddle(RSyntaxTextArea textArea, int retriesLeft) {
+    private static void scrollToTargetLine(RSyntaxTextArea textArea, int retries) {
         SwingUtilities.invokeLater(() -> {
+            // check if the UI is ready to be measured
+            // if visibleRect.height = 0 , then the textArea is not visible yet
             Rectangle visibleRect = textArea.getVisibleRect();
             if (!textArea.isShowing() || visibleRect.height <= 0) {
-                if (retriesLeft > 0) {
-                    scrollCaretLineToPanelMiddle(textArea, retriesLeft - 1);
+                if (retries > 0) {
+                    // Swing is lazy; it only knows the size of the text Area, when the component is
+                    // shown. The retry fixes accessing the height before it's known.
+                    scrollToTargetLine(textArea, retries - 1);
                 }
                 return;
             }
 
             try {
-                Integer configuredLine = (Integer) textArea.getClientProperty("codepanel.targetLineNumber");
-                if (configuredLine == null || configuredLine < 0) {
+                // get line to scroll to
+                Integer target = (Integer) textArea.getClientProperty("codepanel.targetLineNumber");
+                if (target == null)
                     return;
-                }
 
-                int safeLine = Math.max(0, Math.min(configuredLine, textArea.getLineCount() - 1));
-                int lineStartOffset = textArea.getLineStartOffset(safeLine);
-                Rectangle2D targetLineBounds = textArea.modelToView2D(lineStartOffset);
-                if (targetLineBounds == null) {
+                // make sure line isnt negative or higher than number of existing lines
+                int maxLineIndex = textArea.getLineCount() - 1;
+                int safeLine = Math.max(0, Math.min(target, maxLineIndex));
+
+                // turn LineStart into Geometric Coordinates (Pixels on Screen)
+                int lineOffset = textArea.getLineStartOffset(safeLine);
+                Rectangle2D lineBounds = textArea.modelToView2D(lineOffset);
+                if (lineBounds == null)
                     return;
-                }
 
-                int targetY = (int) targetLineBounds.getY() - (visibleRect.height / 2)
-                        + (int) (targetLineBounds.getHeight() / 2);
-                int maxY = Math.max(0, textArea.getHeight() - visibleRect.height);
-                int clampedY = Math.max(0, Math.min(targetY, maxY));
+                //Calculate the center position
+                double lineTopY = lineBounds.getY();
+                double lineHeight = lineBounds.getHeight();
+                double viewHeight = visibleRect.getHeight();
 
-                textArea.scrollRectToVisible(new Rectangle(0, clampedY, visibleRect.width, visibleRect.height));
+                // Math: Start at line top -> Move up by half a screen -> Move down by half a
+                // line
+                int centeredY = (int) (lineTopY - (viewHeight / 2) + (lineHeight / 2));
+
+                // Confirm it's valid scroll position so we don't go out of bounds
+                int maxPossibleScroll = textArea.getHeight() - (int) viewHeight;
+                int finalScrollY = Math.max(0, Math.min(centeredY, maxPossibleScroll));
+
+                // scroll to this rectangle, that is placed above the line to highlight
+                Rectangle targetView = new Rectangle(0, finalScrollY, (int) visibleRect.getWidth(), (int) viewHeight);
+                textArea.scrollRectToVisible(targetView);
+
             } catch (BadLocationException ignored) {
-                // caret outside document range -> nothing to scroll
+                // Outside document range -> nothing to scroll
             }
         });
     }
@@ -253,7 +269,7 @@ public class Application {
         Deque<Component> stack = new ArrayDeque<>();
         stack.push(root);
 
-        // Stack Tiefensuche
+        // Stack Tiefensuche durch alle Panel und deren Kinder
         while (!stack.isEmpty()) {
             Component current = stack.pop();
             if (current instanceof RSyntaxTextArea textArea) {
