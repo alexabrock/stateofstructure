@@ -28,8 +28,7 @@ public class LinkedHashSetGraphBuilder  {
         Graph elements = graph("elements").directed()
                 .graphAttr().with(
                         Rank.inSubgraph(RankType.SAME))
-                .nodeAttr().with(Shape.RECTANGLE)
-                .graphAttr().with();
+                .nodeAttr().with(Shape.RECTANGLE);
 
         // Not visualizing the HashTable Slots in the DataStructure View, since that
         // info is normally hidden from the user
