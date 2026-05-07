@@ -70,7 +70,7 @@ class CodePanelBuilder {
         textArea.setText(code);
         textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
         textArea.setCodeFoldingEnabled(true);
-        textArea.setEditable(false);
+        textArea.setEditable(true);
         textArea.setAntiAliasingEnabled(true);
         applyDarkSyntaxTheme(textArea);
         textArea.setFont(CODE_FONT);
