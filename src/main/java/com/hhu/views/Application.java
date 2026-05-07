@@ -116,10 +116,11 @@ public class Application {
         });
 
         compileButton.addActionListener(e -> handleCompilation(centerPanel, compileButton));
-
+        
+        buttonPanel.add(compileButton);
         buttonPanel.add(prevButton);
         buttonPanel.add(nextButton);
-        buttonPanel.add(compileButton);
+        
         return buttonPanel;
     }
 
