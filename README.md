@@ -8,35 +8,3 @@ Testen mit mvn Wrapper:
 .\mvnw.cmd clean install
 
 
-
-
-
-
-
-
-
-Legacy:
-
-mvn clean compile
-mvn exec:java
-
-mvn clean package dependency:copy-dependencies -DincludeScope=runtime
-java --add-opens=java.base/java.lang=ALL-UNNAMED -cp target\classes;target\dependency\* com.hhu.App
-
-
-java --add-opens=java.base/java.lang=ALL-UNNAMED `
-     -cp "target\classes;target\dependency\*" `
-     com.hhu.App
-
-java --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED -cp "target\classes;target\dependency\*" com.hhu.App
-
-
-ausführen:
-mvn clean compile exec:exec
-
-start tests:
-mvn clean test
-
-temporär java home und pathvar setzen:
-$env:JAVA_HOME="C:\Program Files\Java\jdk-25.0.2"
-$env:Path="$env:JAVA_HOME\bin;$env:Path"
