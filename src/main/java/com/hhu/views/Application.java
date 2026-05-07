@@ -12,6 +12,7 @@ import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.concurrent.ExecutionException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,6 +20,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.text.BadLocationException;
+import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
 
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
@@ -26,6 +29,7 @@ import com.hhu.util.DrawCalls;
 import com.hhu.util.DrawStep;
 import com.hhu.util.compiler.Compiler;
 import com.hhu.views.panelBuilder.ThemeStyler;
+import com.hhu.util.compiler.CompilationException;
 
 public class Application {
     private static DrawCalls drawCalls;
@@ -111,21 +115,75 @@ public class Application {
             updateButtons(prevButton, nextButton);
         });
 
-        compileButton.addActionListener(e -> {
-            RSyntaxTextArea codeArea = findSyntaxTextArea(centerPanel);
-            String code = codeArea.getText();
-
-            //forget the old Datastructure vizualisation, if the Code is recompiled
-            drawCalls = Compiler.compile(code);
-            
-            replacePanels(centerPanel, drawCalls.nextStep());
-
-        });
+        compileButton.addActionListener(e -> handleCompilation(centerPanel, compileButton));
 
         buttonPanel.add(prevButton);
         buttonPanel.add(nextButton);
         buttonPanel.add(compileButton);
         return buttonPanel;
+    }
+
+    /*
+     * Compiles the Text inside the codePanel and updated the Appliation.drawStep
+     * It uses the SwingWorker, since the calculation of the Graphs takes a while
+     * and without SwingWorker, the calculation can't happen in the background and
+     * the Application freezes until the compilation is done.
+     */
+    private static void handleCompilation(JPanel centerPanel, JButton compileButton) {
+        RSyntaxTextArea codeArea = findSyntaxTextArea(centerPanel);
+        String code = codeArea.getText();
+
+        compileButton.setEnabled(false);
+        compileButton.setText("Compiling...");
+
+        SwingWorker<DrawCalls, Void> worker = new SwingWorker<>() {
+
+            @Override
+            protected DrawCalls doInBackground() {
+                // forget the old Datastructure vizualisation, if the Code is recompiled
+                return Compiler.compile(code);
+            }
+
+            @Override
+            protected void done() {
+                try {
+                    // get() returns result of doInBackground
+                    drawCalls = get();
+
+                    replacePanels(centerPanel, drawCalls.nextStep());
+
+                } catch (ExecutionException e) {
+                    /*
+                     * Incase the doInBackground went wrong, a ExecutionException is thrown.
+                     * The ExecutionException is a wrapper around, in this case, a
+                     * CompilationException.
+                     * The wrapped EXception is retrieved by e.getCause
+                     */
+                    Throwable cause = e.getCause();
+
+                    JOptionPane.showMessageDialog(
+                            centerPanel,
+                            cause.getMessage(),
+                            "Compilation Error",
+                            JOptionPane.ERROR_MESSAGE);
+                } catch (InterruptedException e) {
+                    /* InterruptedException is thrown if the done() Thread is interrupted */
+                    Thread.currentThread().interrupt();
+
+                    JOptionPane.showMessageDialog(
+                            centerPanel,
+                            "Compilation interrupted",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                    // finally, damit egal was passiert der Button wieder enabled wird
+                } finally {
+                    compileButton.setEnabled(true);
+                    compileButton.setText("Compile");
+                }
+            }
+        };
+
+        worker.execute();
     }
 
     static void updateButtons(JButton prev, JButton next) {
@@ -261,7 +319,7 @@ public class Application {
                 if (lineBounds == null)
                     return;
 
-                //Calculate the center position
+                // Calculate the center position
                 double lineTopY = lineBounds.getY();
                 double lineHeight = lineBounds.getHeight();
                 double viewHeight = visibleRect.getHeight();
