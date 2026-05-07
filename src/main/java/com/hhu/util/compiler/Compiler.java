@@ -2,18 +2,22 @@ package com.hhu.util.compiler;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Path;
+
 import javax.tools.JavaCompiler;
 import javax.tools.ToolProvider;
 
 import com.hhu.util.DrawCalls;
 
+/* 
+Generates a new Java File with the given Sting as content. 
+Expects, that the class the given String contains defines the Method 
+    'public DrawCall build()'
+ */
 public class Compiler {
 
     public static DrawCalls compile(String code) {
@@ -31,12 +35,10 @@ public class Compiler {
             Class<?> klasse = Class.forName("GraphvizApp", true, loader);
 
             Object o = klasse.getConstructor().newInstance();
-            Object bar = klasse.getMethod("build").invoke(o);
-            
-            return (DrawCalls) bar;
+            Object drawCalls = klasse.getMethod("build").invoke(o);
 
+            return (DrawCalls) drawCalls;
 
-        
         } catch (NoSuchMethodException e) {
             throw new CompilationException(
                     """
@@ -53,10 +55,8 @@ public class Compiler {
                             """, e);
         } catch (ClassCastException e) {
             throw new CompilationException(
-                "CompilationException: build-Method did not return a DrawCall."
-                    , e);
-        }            
-        catch (IOException e) {
+                    "CompilationException: build-Method did not return a DrawCall.", e);
+        } catch (IOException e) {
             throw new CompilationException("File error while writing source code", e);
 
         } catch (ClassNotFoundException e) {
@@ -69,15 +69,5 @@ public class Compiler {
             throw new CompilationException("Reflection setup failed (constructor/method issue)", e);
         }
 
-    }
-
-    public static void main(String[] args) {
-        String code = """
-                public class Foo {
-                    public String bar() { return "baz"; }
-                }
-                """;
-
-        compile(code);
     }
 }
