@@ -35,44 +35,14 @@ public class GraphvizApp {
 
     }
     
-    public DrawCalls build() {
-                    DrawCalls drawCalls = new DrawCalls();
+    String build() {
+        String code = """
+                public class Foo {
+                    public String bar() { return "baz"; }
+                }
+                """;
 
-                    HashSet<Integer> set = new HashSet<>();
-                    set.insert(1);
-                    drawCalls.record(set);
-                    set.insert(2);
-                    drawCalls.record(set);
-                    set.insert(3);
-                    drawCalls.record(set);
-                    set.insert(4);
-                    drawCalls.record(set);
-                    set.insert(5);
-                    drawCalls.record(set);
-                    set.insert(6);
-                    drawCalls.record(set);
-                    set.insert(1);
-                    drawCalls.record(set);
-                    set.insert(2);
-                    drawCalls.record(set);
-                    set.insert(3);
-                    drawCalls.record(set);
-                    set.insert(4);
-                    drawCalls.record(set);
-                    set.insert(5);
-                    drawCalls.record(set);
-                    set.insert(6);
-                    drawCalls.record(set);
-                    set.insert(1);
-                    drawCalls.record(set);
-                    set.insert(2);
-                    drawCalls.record(set);
-                    set.insert(3);
-                    drawCalls.record(set);
-                    set.insert(4);
-                    drawCalls.record(set);
-                    
-        return drawCalls;
+        return code;
     }
     
     private static void startPrograHashSetApplication() {

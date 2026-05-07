@@ -24,11 +24,13 @@ import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
 import com.hhu.util.DrawCalls;
 import com.hhu.util.DrawStep;
+import com.hhu.util.compiler.Compiler;
 import com.hhu.views.panelBuilder.ThemeStyler;
 
 public class Application {
+    private static DrawCalls drawCalls;
 
-    public static <E> void start(DrawCalls drawCalls) {
+    public static <E> void start(DrawCalls givenDrawCalls) {
         // Swing needs this
         if (GraphicsEnvironment.isHeadless()) {
             System.out.println("Headless environment detected ");
@@ -37,16 +39,19 @@ public class Application {
 
         ThemeStyler.applyDarkTheme();
 
+        drawCalls = givenDrawCalls;
+
         SwingUtilities.invokeLater(() -> {
             /*
              * need to initialize these, so the button logik is cleaner (button can just
              * replace the existing code panels and doesnt need to check if they exist)
              */
+
             DrawStep firstStep = drawCalls.nextStep();
 
             JPanel centerPanel = createCenterPanel(firstStep);
 
-            JPanel buttonPanel = createButtonPanel(drawCalls, centerPanel);
+            JPanel buttonPanel = createButtonPanel(centerPanel);
 
             JFrame frame = createFrame(centerPanel, buttonPanel);
 
@@ -76,15 +81,17 @@ public class Application {
      * the Panels, that are nested inside the centerPanel, with the next or previous
      * DrawStep
      */
-    static JPanel createButtonPanel(DrawCalls drawCalls, JPanel centerPanel) {
+    static JPanel createButtonPanel(JPanel centerPanel) {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 24, 8));
         ThemeStyler.styleToolbar(buttonPanel);
 
         JButton prevButton = new JButton("Previous");
         JButton nextButton = new JButton("Next");
+        JButton compileButton = new JButton("Compile");
         ThemeStyler.styleNavigationButton(prevButton);
         ThemeStyler.styleNavigationButton(nextButton);
+        ThemeStyler.styleNavigationButton(compileButton);
 
         // Initial state setzen
         prevButton.setEnabled(drawCalls.hasPrevStep());
@@ -94,22 +101,34 @@ public class Application {
             DrawStep step = drawCalls.prevStep();
             replacePanels(centerPanel, step);
 
-            updateButtons(prevButton, nextButton, drawCalls);
+            updateButtons(prevButton, nextButton);
         });
 
         nextButton.addActionListener(e -> {
             DrawStep step = drawCalls.nextStep();
             replacePanels(centerPanel, step);
 
-            updateButtons(prevButton, nextButton, drawCalls);
+            updateButtons(prevButton, nextButton);
+        });
+
+        compileButton.addActionListener(e -> {
+            RSyntaxTextArea codeArea = findSyntaxTextArea(centerPanel);
+            String code = codeArea.getText();
+
+            //forget the old Datastructure vizualisation, if the Code is recompiled
+            drawCalls = Compiler.compile(code);
+            
+            replacePanels(centerPanel, drawCalls.nextStep());
+
         });
 
         buttonPanel.add(prevButton);
         buttonPanel.add(nextButton);
+        buttonPanel.add(compileButton);
         return buttonPanel;
     }
 
-    static void updateButtons(JButton prev, JButton next, DrawCalls drawCalls) {
+    static void updateButtons(JButton prev, JButton next) {
         prev.setEnabled(drawCalls.hasPrevStep());
         next.setEnabled(drawCalls.hasNextStep());
     }
