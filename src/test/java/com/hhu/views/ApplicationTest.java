@@ -31,7 +31,7 @@ public class ApplicationTest {
 
         when(drawCalls.hasPrevStep()).thenReturn(false);
 
-        Application.updateButtons(prev, next, drawCalls);
+        Application.updateButtons(prev, next);
 
         assertFalse(prev.isEnabled());
     }
@@ -45,7 +45,7 @@ public class ApplicationTest {
 
         when(drawCalls.hasPrevStep()).thenReturn(true);
 
-        Application.updateButtons(prev, next, drawCalls);
+        Application.updateButtons(prev, next);
 
         assertTrue(prev.isEnabled());
     }
@@ -59,7 +59,7 @@ public class ApplicationTest {
 
         when(drawCalls.hasNextStep()).thenReturn(false);
 
-        Application.updateButtons(prev, next, drawCalls);
+        Application.updateButtons(prev, next);
 
         assertFalse(next.isEnabled());
     }
@@ -73,7 +73,7 @@ public class ApplicationTest {
 
         when(drawCalls.hasNextStep()).thenReturn(true);
 
-        Application.updateButtons(prev, next, drawCalls);
+        Application.updateButtons(prev, next);
 
         assertTrue(next.isEnabled());
     }
