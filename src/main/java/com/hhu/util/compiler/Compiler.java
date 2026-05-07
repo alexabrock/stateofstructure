@@ -1,4 +1,4 @@
-package com.hhu.util.compiler;
+package  com.hhu.util.compiler;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,7 +23,12 @@ public class Compiler {
     public static DrawCalls compile(String code) {
 
         try {
-            Path path = Path.of("GraphvizApp.java");
+
+            String packageName = "com.hhu.util.compiler.compiledClasses";
+
+            code = "package " + packageName + ";\n\n" + code;
+
+            Path path = Path.of("src", "main", "java","com","hhu","util","compiler","compiledClasses","GraphvizApp.java");
 
             Files.writeString(path, code);
 
@@ -32,7 +37,7 @@ public class Compiler {
 
             URLClassLoader loader = URLClassLoader.newInstance(new URL[] {
                     new File(".").toURI().toURL() });
-            Class<?> klasse = Class.forName("GraphvizApp", true, loader);
+            Class<?> klasse = Class.forName("com.hhu.util.compiler.compiledClasses.GraphvizApp", true, loader);
 
             Object o = klasse.getConstructor().newInstance();
             Object drawCalls = klasse.getMethod("build").invoke(o);
