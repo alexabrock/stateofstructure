@@ -10,6 +10,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.concurrent.ExecutionException;
@@ -60,7 +62,31 @@ public class Application {
             JFrame frame = createFrame(centerPanel, buttonPanel);
 
             frame.setVisible(true);
+
+            cleanupAfterClose();
         });
+    }
+
+    private static void cleanupAfterClose() {
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            try {
+                Path dir = Path.of("src/main/java/com/hhu/util/compiler/compiledClasses");
+
+                if (Files.exists(dir)) {
+                    Files.walk(dir)
+                            .forEach(p -> {
+                                try {
+                                    if (Files.isRegularFile(p)) {
+                                        Files.deleteIfExists(p);
+                                    }
+                                } catch (Exception ignored) {
+                                }
+                            });
+                }
+
+            } catch (Exception ignored) {
+            }
+        }));
     }
 
     /*
@@ -116,11 +142,11 @@ public class Application {
         });
 
         compileButton.addActionListener(e -> handleCompilation(centerPanel, compileButton));
-        
+
         buttonPanel.add(compileButton);
         buttonPanel.add(prevButton);
         buttonPanel.add(nextButton);
-        
+
         return buttonPanel;
     }
 
