@@ -1,4 +1,4 @@
-package  com.hhu.util.compiler;
+package com.hhu.util.compiler;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,6 +12,7 @@ import javax.tools.JavaCompiler;
 import javax.tools.ToolProvider;
 
 import com.hhu.util.DrawCalls;
+import com.hhu.util.FileManager;
 
 /* 
 Generates a new Java File with the given Sting as content. 
@@ -23,20 +24,35 @@ public class Compiler {
     public static DrawCalls compile(String code) {
 
         try {
+            Path path = Path.of("src", "main", "java", "com", "hhu", "util", "compiler", "compiledClasses",
+                    "GraphvizApp.java");
 
             String packageName = "com.hhu.util.compiler.compiledClasses";
 
-            code = "package " + packageName + ";\n\n" + code;
-
-            Path path = Path.of("src", "main", "java","com","hhu","util","compiler","compiledClasses","GraphvizApp.java");
-
+            // String currentFileContent = FileManager.fileToString(path);
+            if (!code.startsWith("package " + packageName)) {
+                code = "package " + packageName + ";\n\n" + code;
+            }
+            
             Files.writeString(path, code);
 
+            try {
+                //Wait for file to exist before compiling & reflecting it
+                Thread.sleep(300);
+            } catch (InterruptedException e) {
+                throw new CompilationException("Exception while sleeping during compilation", e);
+            }
+
             JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+            
+
             compiler.run(null, null, null, path.toString());
 
             URLClassLoader loader = URLClassLoader.newInstance(new URL[] {
                     new File(".").toURI().toURL() });
+
+            
+
             Class<?> klasse = Class.forName("com.hhu.util.compiler.compiledClasses.GraphvizApp", true, loader);
 
             Object o = klasse.getConstructor().newInstance();
@@ -51,12 +67,6 @@ public class Compiler {
 
                             Required signature:
                                 public DrawCalls build()
-
-                            The compiled class must define a method named 'build' that:
-                            - has no parameters
-                            - returns a DrawSteps object
-                            - is public
-
                             """, e);
         } catch (ClassCastException e) {
             throw new CompilationException(
