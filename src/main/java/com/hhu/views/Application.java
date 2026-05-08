@@ -71,18 +71,32 @@ public class Application {
     private static void cleanupAfterClose() {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             try {
-                Path dir = Path.of("src/main/java/com/hhu/util/compiler/compiledClasses");
+                Path dir = Path.of(
+                        "src",
+                        "main",
+                        "java",
+                        "com",
+                        "hhu",
+                        "util",
+                        "compiler",
+                        "compiledClasses");
 
-                if (Files.exists(dir)) {
-                    Files.walk(dir)
-                            .forEach(p -> {
-                                try {
-                                    if (Files.isRegularFile(p)) {
-                                        Files.deleteIfExists(p);
-                                    }
-                                } catch (Exception ignored) {
-                                }
-                            });
+                Path javaFile = dir.resolve("GraphvizApp.java");
+                Path classFile = dir.resolve("GraphvizApp.class");
+
+                Path defaultFile = Path.of(
+                        "src",
+                        "main",
+                        "resources",
+                        "GraphvizAppDefault.java");
+
+                // delete compiled .class file
+                Files.deleteIfExists(classFile);
+
+                // reset GraphvizApp.java to default content
+                if (Files.exists(defaultFile)) {
+                    String defaultContent = Files.readString(defaultFile);
+                    Files.writeString(javaFile, defaultContent);
                 }
 
             } catch (Exception ignored) {
@@ -142,7 +156,7 @@ public class Application {
             updateButtons(prevButton, nextButton);
         });
 
-        compileButton.addActionListener(e -> handleCompilation(centerPanel, compileButton));
+        compileButton.addActionListener(e -> handleCompilation(centerPanel, compileButton,nextButton,prevButton));
 
         buttonPanel.add(compileButton);
         buttonPanel.add(prevButton);
@@ -157,7 +171,7 @@ public class Application {
      * and without SwingWorker, the calculation can't happen in the background and
      * the Application freezes until the compilation is done.
      */
-    private static void handleCompilation(JPanel centerPanel, JButton compileButton) {
+    private static void handleCompilation(JPanel centerPanel, JButton compileButton, JButton nextButton, JButton prevButton) {
         RSyntaxTextArea codeArea = findSyntaxTextArea(centerPanel);
         String code = codeArea.getText();
 
@@ -207,6 +221,9 @@ public class Application {
                 } finally {
                     compileButton.setEnabled(true);
                     compileButton.setText("Compile");
+                    updateButtons(prevButton, nextButton);
+                    
+
                 }
             }
         };
