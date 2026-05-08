@@ -14,19 +14,20 @@ import com.hhu.ui.panelBuilder.ThemeStyler;
  */
 class NavigationPanel {
 
-    private final ApplicationState applicationState;
-    private final DrawStepPanel drawStepView;
+    private final DrawCallHandler drawCallHandler;
+    private final DrawStepPanel drawStepPanel;
     private final CodePanelScroller codePanelScroller;
 
     private JButton prevButton;
     private JButton nextButton;
+    private JButton compileButton;
 
     NavigationPanel(
-            ApplicationState applicationState,
-            DrawStepPanel drawStepView,
+            DrawCallHandler drawCallHandler,
+            DrawStepPanel drawStepPanel,
             CodePanelScroller codePanelScroller) {
-        this.applicationState = applicationState;
-        this.drawStepView = drawStepView;
+        this.drawCallHandler = drawCallHandler;
+        this.drawStepPanel = drawStepPanel;
         this.codePanelScroller = codePanelScroller;
     }
 
@@ -34,13 +35,13 @@ class NavigationPanel {
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 24, 8));
         ThemeStyler.styleToolbar(buttonPanel);
 
-        JButton compileButton = createButton("Compile");
+        compileButton = createButton("Compile");
         prevButton = createButton("Previous");
         nextButton = createButton("Next");
 
         // Initial state setzen
         refreshNavigationButtons();
-        registerActions(centerPanel, compileButton);
+        initializeButtonActions(centerPanel);
 
         buttonPanel.add(compileButton);
         buttonPanel.add(prevButton);
@@ -50,12 +51,12 @@ class NavigationPanel {
     }
 
     void refreshNavigationButtons() {
-        updateButtons(prevButton, nextButton, applicationState);
+        updateButtons(prevButton, nextButton, drawCallHandler);
     }
-
-    static void updateButtons(JButton prev, JButton next, ApplicationState applicationState) {
-        prev.setEnabled(applicationState.hasPreviousStep());
-        next.setEnabled(applicationState.hasNextStep());
+    
+    static void updateButtons(JButton prev, JButton next, DrawCallHandler drawCallHandler) {
+        prev.setEnabled(drawCallHandler.hasPreviousStep());
+        next.setEnabled(drawCallHandler.hasNextStep());
     }
 
     private JButton createButton(String label) {
@@ -64,7 +65,9 @@ class NavigationPanel {
         return button;
     }
 
-    private void registerActions(JPanel centerPanel, JButton compileButton) {
+    //centerPanel is needed, since the compiler, which is linked to the compile Button, 
+    //replaces the text from the codePanel in the centerPanel
+    private void initializeButtonActions(JPanel centerPanel) {
         prevButton.addActionListener(e -> showPreviousStep(centerPanel));
         nextButton.addActionListener(e -> showNextStep(centerPanel));
         compileButton.addActionListener(e -> createCompilationController().compile(centerPanel, compileButton));
@@ -72,19 +75,19 @@ class NavigationPanel {
 
     private CompilationController createCompilationController() {
         return new CompilationController(
-                applicationState,
-                drawStepView,
+                drawCallHandler,
+                drawStepPanel,
                 codePanelScroller,
                 this::refreshNavigationButtons);
     }
 
     private void showPreviousStep(JPanel centerPanel) {
-        drawStepView.showStep(centerPanel, applicationState.previousStep());
+        drawStepPanel.showStep(centerPanel, drawCallHandler.previousStep());
         refreshNavigationButtons();
     }
 
     private void showNextStep(JPanel centerPanel) {
-        drawStepView.showStep(centerPanel, applicationState.nextStep());
+        drawStepPanel.showStep(centerPanel, drawCallHandler.nextStep());
         refreshNavigationButtons();
     }
 }
