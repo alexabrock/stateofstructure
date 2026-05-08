@@ -9,7 +9,7 @@ import com.hhu.datastructures.prograDatastructures.generic.BinarySearchTree;
 import com.hhu.datastructures.prograDatastructures.generic.PrograHashSet;
 import com.hhu.datastructures.prograDatastructures.generic.PrograLinkedList;
 import com.hhu.util.DrawCalls;
-import com.hhu.views.Application;
+import com.hhu.views.application.Application;
 
 public class GraphvizAppOld{
 

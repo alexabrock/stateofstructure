@@ -19,6 +19,7 @@ import org.junit.Test;
 
 import com.hhu.util.DrawCalls;
 import com.hhu.util.DrawStep;
+import com.hhu.views.application.Application;
 
 public class ApplicationTest {
 

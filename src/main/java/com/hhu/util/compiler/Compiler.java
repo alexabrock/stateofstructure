@@ -32,32 +32,31 @@ public class Compiler {
             if (!code.startsWith("package " + packageName)) {
                 code = "package " + packageName + ";\n\n" + code;
             }
-            
+
             Files.writeString(path, code);
 
             try {
-                //Wait for file to exist before compiling & reflecting it
+                // Wait for file to exist before compiling & reflecting it
                 Thread.sleep(300);
             } catch (InterruptedException e) {
                 throw new CompilationException("Exception while sleeping during compilation", e);
             }
 
             JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
-            
 
             compiler.run(null, null, null, path.toString());
 
             URLClassLoader loader = URLClassLoader.newInstance(new URL[] {
                     new File(".").toURI().toURL() });
 
-            
-
             Class<?> klasse = Class.forName("com.hhu.util.compiler.compiledClasses.GraphvizApp", true, loader);
 
             Object o = klasse.getConstructor().newInstance();
-            Object drawCalls = klasse.getMethod("build").invoke(o);
+            DrawCalls drawCalls = (DrawCalls) klasse.getMethod("build").invoke(o);
 
-            return (DrawCalls) drawCalls;
+            System.out.println(drawCalls.size());
+
+            return drawCalls;
 
         } catch (NoSuchMethodException e) {
             throw new CompilationException(

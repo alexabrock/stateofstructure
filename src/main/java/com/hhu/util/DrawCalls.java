@@ -54,4 +54,8 @@ public class DrawCalls {
 
         drawCalls.add(new DrawStep(memory, datastructure, collectionName, codePanel));
     }
+
+    public int size() {
+        return drawCalls.size();
+    }
 }
