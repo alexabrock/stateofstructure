@@ -2,19 +2,20 @@ package com.hhu.util;
 
 import java.nio.file.Path;
 
-/* Returns information about the Calling Class*/
-public class Caller {
+/* Returns information about the Calling Class
+    since it only checks if the class is called GraphvizApp, 
+    the class that first calls the program is found, but also the class after recompilation 
+    and the testing class, solong they are called GraphvizApp.
+*/
+public class GraphvizAppCaller {
     /*
      * Returns the String-representation of the class, that called DrawCalls.record
-     * Assumption: Caller Class liegt unter src/main/java
+     * Assumption: Caller Class is named GraphVizApp 
      */
     public static String findCallerClass() {
         StackWalker walker = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE);
 
         Path path = walker.walk(stream -> stream
-                // filter all steps between outside-caller and this class (such as
-                // Application.java)
-                //can be any class that is called GraphvizApp
                 .filter(f -> f.getClassName().contains("GraphvizApp"))
                 .findFirst()
                 .map(StackWalker.StackFrame::getDeclaringClass)
@@ -32,8 +33,6 @@ public class Caller {
         StackWalker walker = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE);
 
         int lineNumber = walker.walk(stream -> stream
-                // filter all steps between outside-caller and this class (such as
-                // Application.java)
                 .filter(f -> f.getClassName().contains("GraphvizApp"))
                 .findFirst()
                 .map(StackWalker.StackFrame::getLineNumber)

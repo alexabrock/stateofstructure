@@ -48,8 +48,8 @@ public class DrawCalls {
         JPanel datastructure = PanelBuilder.createDatastructurePanel(collection);
         JLabel collectionName = PanelBuilder.createNameLabel(collection.getClass().getSimpleName());
 
-        int lineNumber = Caller.findCallerLine();
-        String code = Caller.findCallerClass();
+        int lineNumber = GraphvizAppCaller.findCallerLine();
+        String code = GraphvizAppCaller.findCallerClass();
         JPanel codePanel = PanelBuilder.createCodePanel(code, lineNumber);
 
         drawCalls.add(new DrawStep(memory, datastructure, collectionName, codePanel));
