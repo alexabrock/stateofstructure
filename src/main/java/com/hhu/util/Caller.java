@@ -14,15 +14,14 @@ public class Caller {
         Path path = walker.walk(stream -> stream
                 // filter all steps between outside-caller and this class (such as
                 // Application.java)
-                .filter(frame -> !frame.getClassName().startsWith("com.hhu.util")
-                        && !frame.getClassName().startsWith("com.hhu.datastructures"))
+                //can be any class that is called GraphvizApp
+                .filter(f -> f.getClassName().contains("GraphvizApp"))
                 .findFirst()
                 .map(StackWalker.StackFrame::getDeclaringClass)
                 .map(Class::getName)
                 .map(name -> "src/main/java/" + name.replace(".", "/") + ".java")
                 .map(Path::of)
                 .orElse(null));
-
         return FileManager.fileToString(path);
     }
 
@@ -35,8 +34,7 @@ public class Caller {
         int lineNumber = walker.walk(stream -> stream
                 // filter all steps between outside-caller and this class (such as
                 // Application.java)
-                .filter(frame -> !frame.getClassName().startsWith("com.hhu.util")
-                        && !frame.getClassName().startsWith("com.hhu.datastructures"))
+                .filter(f -> f.getClassName().contains("GraphvizApp"))
                 .findFirst()
                 .map(StackWalker.StackFrame::getLineNumber)
                 .orElse(-1));
