@@ -17,7 +17,7 @@ import com.hhu.datastructureView.impl.progra.generic.BinarySearchTreeGraphBuilde
 import com.hhu.datastructureView.impl.progra.generic.HashSetGraphBuilder;
 import com.hhu.datastructureView.impl.progra.generic.PrograLinkedListGraphBuilder;
 import com.hhu.datastructures.prograDatastructures.generic.BinarySearchTree;
-import com.hhu.datastructures.prograDatastructures.generic.HashSet;
+import com.hhu.datastructures.prograDatastructures.generic.PrograHashSet;
 import com.hhu.datastructures.prograDatastructures.generic.PrograLinkedList;
 
 import guru.nidi.graphviz.model.Graph;
@@ -59,7 +59,7 @@ public class GraphBuilder {
             case BinarySearchTree<?> tree -> 
                 BinarySearchTreeGraphBuilder.buildGraph(tree);
 
-            case HashSet<?> set -> 
+            case PrograHashSet<?> set -> 
                 HashSetGraphBuilder.buildGraph(set);
 
             default ->

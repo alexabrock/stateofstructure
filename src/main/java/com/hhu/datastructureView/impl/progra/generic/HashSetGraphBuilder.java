@@ -6,7 +6,7 @@ import static guru.nidi.graphviz.model.Factory.graph;
 
 import java.lang.reflect.Field;
 
-import com.hhu.datastructures.prograDatastructures.generic.HashSet;
+import com.hhu.datastructures.prograDatastructures.generic.PrograHashSet;
 
 import guru.nidi.graphviz.attribute.Shape;
 import guru.nidi.graphviz.model.Graph;
@@ -14,7 +14,7 @@ import guru.nidi.graphviz.model.Node;
 /* Returns a GraphViz Graph for Progra HashSet  */
 public class HashSetGraphBuilder {
 
-    public static Graph buildGraph(HashSet<?> set) {
+    public static Graph buildGraph(PrograHashSet<?> set) {
         if (set.size() == 0) {
             return graph("hashSetGraph");
         }
@@ -34,7 +34,7 @@ public class HashSetGraphBuilder {
 
         try {
             //Progra HashSet hat keine get() - Methode, deswegen wird hier das object Array gelesen
-            Field objectsField = HashSet.class.getDeclaredField("objects");
+            Field objectsField = PrograHashSet.class.getDeclaredField("objects");
             objectsField.setAccessible(true);
             Object[] objects = (Object[]) objectsField.get(set);
 

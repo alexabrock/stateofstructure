@@ -6,7 +6,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 import com.hhu.datastructures.prograDatastructures.generic.BinarySearchTree;
-import com.hhu.datastructures.prograDatastructures.generic.HashSet;
+import com.hhu.datastructures.prograDatastructures.generic.PrograHashSet;
 import com.hhu.datastructures.prograDatastructures.generic.PrograLinkedList;
 import com.hhu.util.DrawCalls;
 import com.hhu.views.Application;
@@ -38,7 +38,7 @@ public class GraphvizAppOld{
     public DrawCalls build() {
         DrawCalls drawCalls = new DrawCalls();
 
-        HashSet<Integer> set = new HashSet<>();
+        PrograHashSet<Integer> set = new PrograHashSet<>();
         set.insert(1);
         drawCalls.record(set);
         set.insert(2);
@@ -78,7 +78,7 @@ public class GraphvizAppOld{
     private static void startPrograHashSetApplication() {
         DrawCalls drawCalls = new DrawCalls();
 
-        HashSet<Integer> set = new HashSet<>();
+        PrograHashSet<Integer> set = new PrograHashSet<>();
         set.insert(1);
         drawCalls.record(set);
         set.insert(2);

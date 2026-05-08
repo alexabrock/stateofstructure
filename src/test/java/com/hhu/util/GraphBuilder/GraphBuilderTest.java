@@ -15,7 +15,7 @@ import org.junit.Test;
 
 import com.hhu.datastructureView.GraphBuilder;
 import com.hhu.datastructures.prograDatastructures.generic.BinarySearchTree;
-import com.hhu.datastructures.prograDatastructures.generic.HashSet;
+import com.hhu.datastructures.prograDatastructures.generic.PrograHashSet;
 import com.hhu.datastructures.prograDatastructures.generic.PrograLinkedList;
 
 import guru.nidi.graphviz.model.Graph;
@@ -75,7 +75,7 @@ public class GraphBuilderTest {
 
     @Test
     public void testUseHashSetRenderer() {
-        HashSet<?> collection = new HashSet<>();
+        PrograHashSet<?> collection = new PrograHashSet<>();
         confirmGraphName(collection, "hashSetGraph");
     }
 

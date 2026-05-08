@@ -1,5 +1,5 @@
 import com.hhu.datastructures.prograDatastructures.generic.BinarySearchTree;
-import com.hhu.datastructures.prograDatastructures.generic.HashSet;
+import com.hhu.datastructures.prograDatastructures.generic.PrograHashSet;
 import com.hhu.util.DrawCalls;
 import com.hhu.views.Application;
 
@@ -13,7 +13,7 @@ public class GraphvizApp {
     public DrawCalls build() {
         DrawCalls drawCalls = new DrawCalls();
 
-        HashSet<Integer> set = new HashSet<>();
+        PrograHashSet<Integer> set = new PrograHashSet<>();
         set.insert(1);
         drawCalls.record(set);
         set.insert(4);
