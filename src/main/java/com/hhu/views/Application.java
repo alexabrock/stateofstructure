@@ -67,6 +67,7 @@ public class Application {
         });
     }
 
+    /* deletes every file in util/compiler/compiledClasses */
     private static void cleanupAfterClose() {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             try {
@@ -166,7 +167,7 @@ public class Application {
         SwingWorker<DrawCalls, Void> worker = new SwingWorker<>() {
 
             @Override
-            protected DrawCalls doInBackground() {
+            protected DrawCalls doInBackground() throws InterruptedException {
                 // forget the old Datastructure vizualisation, if the Code is recompiled
                 return Compiler.compile(code);
             }
@@ -175,8 +176,8 @@ public class Application {
             protected void done() {
                 try {
                     // get() returns result of doInBackground
-                    drawCalls = get();
 
+                    drawCalls = get();
                     replacePanels(centerPanel, drawCalls.nextStep());
 
                 } catch (ExecutionException e) {
