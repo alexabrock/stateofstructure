@@ -7,7 +7,7 @@ import java.nio.file.Path;
 /* Transforms a File to a String */
 public class FileManager {
 
-    static String fileToString(Path path) {
+    public static String fileToString(Path path) {
         String content;
 
         try {
