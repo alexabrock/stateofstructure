@@ -19,11 +19,11 @@ import java.util.concurrent.ExecutionException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import javax.swing.text.BadLocationException;
-import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
+import javax.swing.text.BadLocationException;
 
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
@@ -31,7 +31,6 @@ import com.hhu.util.DrawCalls;
 import com.hhu.util.DrawStep;
 import com.hhu.util.compiler.Compiler;
 import com.hhu.views.panelBuilder.ThemeStyler;
-import com.hhu.util.compiler.CompilationException;
 
 public class Application {
     private static DrawCalls drawCalls;

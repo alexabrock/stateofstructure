@@ -12,7 +12,6 @@ import javax.tools.JavaCompiler;
 import javax.tools.ToolProvider;
 
 import com.hhu.util.DrawCalls;
-import com.hhu.util.FileManager;
 
 /* 
 Generates a new Java File with the given Sting as content. 
