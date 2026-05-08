@@ -4,11 +4,11 @@ import com.hhu.util.DrawCalls;
 import com.hhu.util.DrawStep;
 
 /* Holds the currently displayed DrawCalls and exposes navigation through its DrawSteps. */
-class ApplicationState {
+class DrawCallHandler {
 
     private DrawCalls drawCalls;
 
-    ApplicationState(DrawCalls drawCalls) {
+    DrawCallHandler(DrawCalls drawCalls) {
         this.drawCalls = drawCalls;
     }
 

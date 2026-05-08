@@ -21,13 +21,13 @@ class CompilationController {
     private static final String COMPILE_LABEL = "Compile";
     private static final String COMPILING_LABEL = "Compiling...";
 
-    private final ApplicationState applicationState;
+    private final DrawCallHandler applicationState;
     private final DrawStepPanel drawStepView;
     private final CodePanelScroller codePanelScroller;
     private final Runnable afterCompilation;
 
     CompilationController(
-            ApplicationState applicationState,
+            DrawCallHandler applicationState,
             DrawStepPanel drawStepView,
             CodePanelScroller codePanelScroller,
             Runnable afterCompilation) {

@@ -2,11 +2,10 @@ package com.hhu.util.compiler.compiledClasses;
 
 import com.hhu.datastructures.prograDatastructures.generic.BinarySearchTree;
 import com.hhu.datastructures.prograDatastructures.generic.PrograHashSet;
-import com.hhu.ui.application.Application;
 import com.hhu.util.DrawCalls;
+import com.hhu.ui.application.Application;
 
 public class GraphvizApp {
-
     public static void main(String[] args) {
         startBinarySearchTreeApplicationWithFunnyDrawCalls();
 

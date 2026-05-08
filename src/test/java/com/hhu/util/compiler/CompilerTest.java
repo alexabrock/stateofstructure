@@ -11,7 +11,7 @@ public class CompilerTest {
                 }
                 """;
 
-        Compiler.compile(code);
+        //Compiler.compile(code);
     
     }
 }

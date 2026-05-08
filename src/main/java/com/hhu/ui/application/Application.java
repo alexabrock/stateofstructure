@@ -15,16 +15,16 @@ import com.hhu.util.DrawStep;
 import com.hhu.util.compiler.WorkspaceCleaner;
 
 public class Application {
-    private static ApplicationState currentState;
+    private static DrawCallHandler currentState;
 
-    private final ApplicationState applicationState;
+    private final DrawCallHandler applicationState;
     private final CodePanelScroller codePanelScroller;
     private final DrawStepPanel drawStepView;
     private final ApplicationFrame applicationFrame;
     private final WorkspaceCleaner workspaceCleaner;
 
     private Application(DrawCalls drawCalls) {
-        applicationState = new ApplicationState(drawCalls);
+        applicationState = new DrawCallHandler(drawCalls);
         codePanelScroller = new CodePanelScroller();
         drawStepView = new DrawStepPanel(codePanelScroller);
         applicationFrame = new ApplicationFrame();
