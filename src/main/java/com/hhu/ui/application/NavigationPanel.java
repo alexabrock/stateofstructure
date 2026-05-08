@@ -1,11 +1,11 @@
-package com.hhu.views.application;
+package com.hhu.ui.application;
 
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import com.hhu.views.panelBuilder.ThemeStyler;
+import com.hhu.ui.panelBuilder.ThemeStyler;
 
 /*
  * returns a Panel, that holds the buttons. Initializes those buttons to replace

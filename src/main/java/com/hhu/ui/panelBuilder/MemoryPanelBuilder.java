@@ -1,4 +1,4 @@
-package com.hhu.views.panelBuilder;
+package com.hhu.ui.panelBuilder;
 
 import java.awt.BorderLayout;
 
@@ -8,7 +8,7 @@ import javax.swing.SwingConstants;
 
 import org.atpfivt.ljv.LJV;
 
-import com.hhu.views.Colors;
+import com.hhu.ui.Colors;
 
 /*
 * Builds the Memory Panel. An abstract vizualisation of a given collection in the Java-Heap.

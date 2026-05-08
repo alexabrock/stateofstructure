@@ -1,4 +1,4 @@
-package com.hhu.views;
+package com.hhu.ui;
 
 import java.awt.Color;
 

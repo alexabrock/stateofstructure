@@ -1,4 +1,4 @@
-package com.hhu.views;
+package com.hhu.ui;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -17,9 +17,9 @@ import javax.swing.JPanel;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import com.hhu.ui.application.Application;
 import com.hhu.util.DrawCalls;
 import com.hhu.util.DrawStep;
-import com.hhu.views.application.Application;
 
 public class ApplicationTest {
 

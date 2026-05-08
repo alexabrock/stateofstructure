@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.hhu.views.panelBuilder.PanelBuilder;
+import com.hhu.ui.panelBuilder.PanelBuilder;
 
 /* Handles iteration & state recording logic for a List of DrawSteps*/
 public class DrawCalls {

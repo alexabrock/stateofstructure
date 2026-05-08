@@ -1,4 +1,4 @@
-package com.hhu.views.application;
+package com.hhu.ui.application;
 
 import java.awt.GraphicsEnvironment;
 
@@ -9,10 +9,10 @@ import javax.swing.SwingUtilities;
 
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
+import com.hhu.ui.panelBuilder.ThemeStyler;
 import com.hhu.util.DrawCalls;
 import com.hhu.util.DrawStep;
 import com.hhu.util.compiler.WorkspaceCleaner;
-import com.hhu.views.panelBuilder.ThemeStyler;
 
 public class Application {
     private static ApplicationState currentState;

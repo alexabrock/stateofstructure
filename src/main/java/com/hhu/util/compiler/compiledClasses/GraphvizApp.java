@@ -2,8 +2,8 @@ package com.hhu.util.compiler.compiledClasses;
 
 import com.hhu.datastructures.prograDatastructures.generic.BinarySearchTree;
 import com.hhu.datastructures.prograDatastructures.generic.PrograHashSet;
+import com.hhu.ui.application.Application;
 import com.hhu.util.DrawCalls;
-import com.hhu.views.application.Application;
 
 public class GraphvizApp {
 
@@ -20,9 +20,6 @@ public class GraphvizApp {
         drawCalls.record(set);
         set.insert(4);
         drawCalls.record(set);
-        set.insert(3);
-        drawCalls.record(set);
-
 
         return drawCalls;
     }

@@ -1,4 +1,4 @@
-package com.hhu.views.panelBuilder;
+package com.hhu.ui.panelBuilder;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.formdev.flatlaf.FlatDarkLaf;
-import com.hhu.views.Colors;
+import com.hhu.ui.Colors;
 
     /*
      * Handles the styling of Swing-Components in the view Package.

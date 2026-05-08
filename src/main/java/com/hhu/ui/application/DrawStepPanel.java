@@ -1,4 +1,4 @@
-package com.hhu.views.application;
+package com.hhu.ui.application;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -9,8 +9,8 @@ import java.awt.Insets;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.hhu.ui.panelBuilder.ThemeStyler;
 import com.hhu.util.DrawStep;
-import com.hhu.views.panelBuilder.ThemeStyler;
 
 /*
  * Builds and updates the center area that renders the current DrawStep.

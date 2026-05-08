@@ -1,4 +1,4 @@
-package com.hhu.views.application;
+package com.hhu.ui.application;
 
 import java.awt.BorderLayout;
 
