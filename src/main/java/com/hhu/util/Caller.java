@@ -16,7 +16,8 @@ public class Caller {
         StackWalker walker = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE);
 
         Path path = walker.walk(stream -> stream
-                .filter(f -> f.getClassName().contains("GraphvizApp"))
+                .filter(f -> f.getClassName().contains("GraphvizApp") || f.getClassName().contains(
+                        "CallerTest") )
                 .findFirst()
                 .map(StackWalker.StackFrame::getDeclaringClass)
                 .map(Class::getName)
@@ -33,7 +34,7 @@ public class Caller {
         StackWalker walker = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE);
 
         int lineNumber = walker.walk(stream -> stream
-                .filter(f -> f.getClassName().contains("GraphvizApp"))
+                .filter(f -> f.getClassName().contains("GraphvizApp") || f.getClassName().contains("CallerTest"))
                 .findFirst()
                 .map(StackWalker.StackFrame::getLineNumber)
                 .orElse(-1));
