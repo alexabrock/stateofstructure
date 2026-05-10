@@ -27,11 +27,11 @@ class CompilationController {
     private final Runnable afterCompilation;
 
     CompilationController(
-            DrawCallHandler applicationState,
+            DrawCallHandler drawCallHandler,
             DrawStepPanel drawStepView,
             CodePanelScroller codePanelScroller,
             Runnable afterCompilation) {
-        this.applicationState = applicationState;
+        this.applicationState = drawCallHandler;
         this.drawStepView = drawStepView;
         this.codePanelScroller = codePanelScroller;
         this.afterCompilation = afterCompilation;
@@ -82,6 +82,8 @@ class CompilationController {
         // forget the old Datastructure vizualisation, if the Code is recompiled
         applicationState.replaceDrawCalls(drawCalls);
         drawStepView.showStep(centerPanel, applicationState.nextStep());
+
+        Application.start(drawCalls);
     }
 
     private void markCompilationStarted(JButton compileButton) {

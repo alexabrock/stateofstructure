@@ -1,15 +1,22 @@
 package com.hhu.util;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
+import java.nio.file.Path;
 
 import org.junit.Test;
 
-public class FileManagerTest {
+public class CallerTest {
     @Test
     public void findCorrectCallerClass() {
-        // Weil die Methode die Assumpiton macht, wo die Klasse liegt, und die
-        // Testklassen dort nicht liegen, muss die Methode manuell getestet werden
-        assertTrue(true);
+        //PSA: THis is probably the wrong path
+        String expected = FileManager.fileToString(Path.of("src", "test", "java", "com", "hhu", "util", "Caller.java"));
+        
+        String actual = Caller.findCallerClass();
+        System.out.println(expected);
+        System.out.println(actual);
+        assertEquals(expected, actual);
     }
 
     @Test
