@@ -21,7 +21,7 @@ public class WorkspaceCleaner {
             "src",
             "main",
             "resources",
-            "GraphvizAppDefault.java");
+            "GraphvizAppDefault.txt");
 
     public void registerShutdownCleanup() {
         Runtime.getRuntime().addShutdownHook(new Thread(this::cleanup));
