@@ -1,5 +1,6 @@
 package com.hhu.ui.application;
 
+import java.awt.Component;
 import java.awt.GraphicsEnvironment;
 
 import javax.swing.JButton;
@@ -87,7 +88,7 @@ public class Application {
     static void replacePanels(JPanel residesIn, DrawStep step) {
         newDrawStepView().showStep(residesIn, step);
     }
-     static RSyntaxTextArea findSyntaxTextArea(java.awt.Component root) {
+    static RSyntaxTextArea findSyntaxTextArea(Component root) {
         return new CodePanelScroller().findSyntaxTextArea(root);
     }
 
