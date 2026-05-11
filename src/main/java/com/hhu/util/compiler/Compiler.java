@@ -23,33 +23,57 @@ public class Compiler {
     public static DrawCalls compile(String code) {
 
         try {
-            Path path = Path.of("src", "main", "java", "com", "hhu", "util", "compiler", "compiledClasses",
-                    "GraphvizApp.java");
-
-            String packageName = "com.hhu.util.compiler.compiledClasses";
-
-            // String currentFileContent = FileManager.fileToString(path);
-            if (!code.startsWith("package " + packageName)) {
-                code = "package " + packageName + ";\n\n" + code;
-            }
-
+            Path path = Path.of("src", "main", "java", "GraphvizApp.java");
             Files.writeString(path, code);
-
-            try {
-                // Wait for file to exist before compiling & reflecting it
-                Thread.sleep(300);
-            } catch (InterruptedException e) {
-                throw new CompilationException("Exception while sleeping during compilation", e);
-            }
 
             JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
 
-            compiler.run(null, null, null, path.toString());
+            // Compile into isolated dir, not target/classes
+            Path outputDir = Path.of("target", "user-compiled");
+            Files.createDirectories(outputDir);
 
-            URLClassLoader loader = URLClassLoader.newInstance(new URL[] {
-                    new File(".").toURI().toURL() });
+            String classpath = System.getProperty("java.class.path");
+            compiler.run(null, null, null,
+                    "-classpath", classpath,
+                    "-d", outputDir.toString(),
+                    path.toString());
 
-            Class<?> klasse = Class.forName("com.hhu.util.compiler.compiledClasses.GraphvizApp", true, loader);
+            /*
+             * URLClassLoader loader = URLClassLoader.newInstance(new URL[] {
+             * new File(".").toURI().toURL() });
+             * The default ClassLoader doesn't reload a class once it got compiled and loaded. 
+             * We want the ClassLoader to always reload the GraphVizApp as if it has never seen it bevore
+             * (thus not chaching any state).
+             * 
+             * Normally, the Classloader loads classes parent-first. Every Classloader, except the very toplevel one, has a parent. 
+             * When asked to load a class, it recursevely askes their parent "Have you already loaded this class?" 
+             * Only if no parent has seen the class, the bottom-level Classloader will load the class itself. 
+             * 
+             * By overwriting loadClass this behaviour is changed.
+             * It now does child-first (aka load the class yourself) for GraphvizApp
+             * But still delegated all other classes parent-first.
+             */
+            URLClassLoader loader = new URLClassLoader(
+                    new URL[] { outputDir.toUri().toURL() }, //path to .class file location
+                    Compiler.class.getClassLoader()) {
+                @Override
+                protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
+                    if (name.equals("GraphvizApp")) {
+                        Class<?> c = findLoadedClass(name);
+                        if (c == null)
+                            c = findClass(name); // look in outputDir first. Does not ask parent 
+                                                 //asking the parent-first for GraphVisApp resulted 
+                                                 //resulted in not having the newest .class file, once it 
+                                                 //had been recompiled 
+                        if (resolve)
+                            resolveClass(c);
+                        return c;
+                    }
+                    return super.loadClass(name, resolve); // normal parent-first for everything else
+                }
+            };
+
+            Class<?> klasse = Class.forName("GraphvizApp", true, loader);
 
             Object o = klasse.getConstructor().newInstance();
             DrawCalls drawCalls = (DrawCalls) klasse.getMethod("build").invoke(o);
