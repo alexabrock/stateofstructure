@@ -82,8 +82,6 @@ class CompilationController {
         // forget the old Datastructure vizualisation, if the Code is recompiled
         applicationState.replaceDrawCalls(drawCalls);
         drawStepView.showStep(centerPanel, applicationState.nextStep());
-
-        Application.start(drawCalls);
     }
 
     private void markCompilationStarted(JButton compileButton) {
