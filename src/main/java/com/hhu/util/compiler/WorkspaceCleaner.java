@@ -11,12 +11,7 @@ public class WorkspaceCleaner {
     private static final Path COMPILED_CLASSES_DIR = Path.of(
             "src",
             "main",
-            "java",
-            "com",
-            "hhu",
-            "util",
-            "compiler",
-            "compiledClasses");
+            "java");
     private static final Path DEFAULT_GRAPHVIZ_APP = Path.of(
             "src",
             "main",
