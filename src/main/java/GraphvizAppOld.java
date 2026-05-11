@@ -11,276 +11,291 @@ import com.hhu.datastructures.prograDatastructures.generic.PrograLinkedList;
 import com.hhu.ui.application.Application;
 import com.hhu.util.DrawCalls;
 
-public class GraphvizAppOld{
+public class GraphvizAppOld {
 
     public static void main(String[] args) {
-
-        // startStackApplicationWithFunnyDrawCalls();
-
-        // startArrayListApplicationWithFunnyDrawCalls();
-
         startTreeMapApplicationWithFunnyDrawCalls();
-
-        // startLinkedHashSetApplicationWithFunnyDrawCalls();
-
-        // startTreeSetApplicationWithFunnyDrawCalls();
-
-        // startLinkedListApplicationWithFunnyDrawCalls();
-
-        // startBinarySearchTreeApplicationWithFunnyDrawCalls();
-
-        // startPrograLinkedListApplication();
-
-        // startPrograHashSetApplication();
-
-    }
-
-    public DrawCalls build() {
-        DrawCalls drawCalls = new DrawCalls();
-
-        PrograHashSet<Integer> set = new PrograHashSet<>();
-        set.insert(1);
-        drawCalls.record(set);
-        set.insert(2);
-        drawCalls.record(set);
-        set.insert(3);
-        drawCalls.record(set);
-        set.insert(4);
-        drawCalls.record(set);
-        set.insert(5);
-        drawCalls.record(set);
-        set.insert(6);
-        drawCalls.record(set);
-        set.insert(1);
-        drawCalls.record(set);
-        set.insert(2);
-        drawCalls.record(set);
-        set.insert(3);
-        drawCalls.record(set);
-        set.insert(4);
-        drawCalls.record(set);
-        set.insert(5);
-        drawCalls.record(set);
-        set.insert(6);
-        drawCalls.record(set);
-        set.insert(1);
-        drawCalls.record(set);
-        set.insert(2);
-        drawCalls.record(set);
-        set.insert(3);
-        drawCalls.record(set);
-        set.insert(4);
-        drawCalls.record(set);
-
-        return drawCalls;
     }
 
     private static void startPrograHashSetApplication() {
-        DrawCalls drawCalls = new DrawCalls();
 
         PrograHashSet<Integer> set = new PrograHashSet<>();
+        DrawCalls drawCalls = new DrawCalls(set);
+
         set.insert(1);
-        drawCalls.record(set);
+        drawCalls.record();
+
         set.insert(2);
-        drawCalls.record(set);
+        drawCalls.record();
+
         set.insert(3);
-        drawCalls.record(set);
+        drawCalls.record();
+
         set.insert(4);
-        drawCalls.record(set);
+        drawCalls.record();
+
         set.insert(5);
-        drawCalls.record(set);
+        drawCalls.record();
+
         set.insert(6);
-        drawCalls.record(set);
+        drawCalls.record();
+
         set.insert(1);
-        drawCalls.record(set);
+        drawCalls.record();
+
         set.insert(2);
-        drawCalls.record(set);
+        drawCalls.record();
+
         set.insert(3);
-        drawCalls.record(set);
+        drawCalls.record();
+
         set.insert(4);
-        drawCalls.record(set);
+        drawCalls.record();
+
         set.insert(5);
-        drawCalls.record(set);
+        drawCalls.record();
+
         set.insert(6);
-        drawCalls.record(set);
+        drawCalls.record();
+
         set.insert(1);
-        drawCalls.record(set);
+        drawCalls.record();
+
         set.insert(2);
-        drawCalls.record(set);
+        drawCalls.record();
+
         set.insert(3);
-        drawCalls.record(set);
+        drawCalls.record();
+
         set.insert(4);
-        drawCalls.record(set);
+        drawCalls.record();
 
         Application.start(drawCalls);
     }
 
     private static void startPrograLinkedListApplication() {
-        DrawCalls drawCalls = new DrawCalls();
 
         PrograLinkedList<Integer> list = new PrograLinkedList<>();
+        DrawCalls drawCalls = new DrawCalls(list);
+
         list.add(1);
-        drawCalls.record(list);
+        drawCalls.record();
+
         list.add(2);
-        drawCalls.record(list);
+        drawCalls.record();
+
         list.add(3);
+        drawCalls.record();
+
         list.add(1);
-        drawCalls.record(list);
+        drawCalls.record();
+
         list.add(2);
-        drawCalls.record(list);
+        drawCalls.record();
+
         list.add(3);
+        drawCalls.record();
 
         Application.start(drawCalls);
     }
 
     static void startBinarySearchTreeApplicationWithFunnyDrawCalls() {
-        DrawCalls drawCalls = new DrawCalls();
 
         BinarySearchTree<String> treeSet = new BinarySearchTree<>();
+        DrawCalls drawCalls = new DrawCalls(treeSet);
+
         treeSet.insert("Hello");
-        drawCalls.record(treeSet);
+        drawCalls.record();
+
         treeSet.insert("Progra");
-        drawCalls.record(treeSet);
+        drawCalls.record();
+
         treeSet.insert("2026");
-        drawCalls.record(treeSet);
+        drawCalls.record();
+
         treeSet.insert("!");
-        drawCalls.record(treeSet);
+        drawCalls.record();
+
         treeSet.insert("Hello");
-        drawCalls.record(treeSet);
+        drawCalls.record();
+
         treeSet.insert("Progra");
-        drawCalls.record(treeSet);
+        drawCalls.record();
+
         treeSet.insert("2026");
-        drawCalls.record(treeSet);
+        drawCalls.record();
+
         treeSet.insert("!");
-        drawCalls.record(treeSet);
+        drawCalls.record();
 
         Application.start(drawCalls);
     }
 
     static void startTreeSetApplicationWithFunnyDrawCalls() {
-        DrawCalls drawCalls = new DrawCalls();
 
         TreeSet<String> treeSet = new TreeSet<>();
+        DrawCalls drawCalls = new DrawCalls(treeSet);
+
         treeSet.add("Hello");
-        drawCalls.record(treeSet);
+        drawCalls.record();
+
         treeSet.add("Progra");
-        drawCalls.record(treeSet);
+        drawCalls.record();
+
         treeSet.add("2026");
-        drawCalls.record(treeSet);
+        drawCalls.record();
+
         treeSet.add("!");
-        drawCalls.record(treeSet);
+        drawCalls.record();
+
         treeSet.add("Hello");
-        drawCalls.record(treeSet);
+        drawCalls.record();
+
         treeSet.add("Progra");
-        drawCalls.record(treeSet);
+        drawCalls.record();
+
         treeSet.add("2026");
-        drawCalls.record(treeSet);
+        drawCalls.record();
+
         treeSet.add("!");
-        drawCalls.record(treeSet);
+        drawCalls.record();
 
         Application.start(drawCalls);
     }
 
     static void startStackApplicationWithFunnyDrawCalls() {
-        DrawCalls drawCalls = new DrawCalls();
 
         Stack<String> stack = new Stack<>();
+        DrawCalls drawCalls = new DrawCalls(stack);
+
         stack.push("Hello");
-        drawCalls.record(stack);
+        drawCalls.record();
+
         stack.push("Progra");
-        drawCalls.record(stack);
+        drawCalls.record();
+
         stack.push("middleElement");
-        drawCalls.record(stack);
+        drawCalls.record();
+
         stack.push("2026");
-        drawCalls.record(stack);
+        drawCalls.record();
+
         stack.pop();
-        drawCalls.record(stack);
+        drawCalls.record();
+
         stack.search("Hello");
-        drawCalls.record(stack);
+        drawCalls.record();
 
         Application.start(drawCalls);
     }
 
     static void startLinkedHashSetApplicationWithFunnyDrawCalls() {
-        DrawCalls drawCalls = new DrawCalls();
 
-        LinkedHashSet<String> linkedHashSet = new LinkedHashSet<>();
-        linkedHashSet.add("Hello");
-        drawCalls.record(linkedHashSet);
-        linkedHashSet.add("Progra");
-        drawCalls.record(linkedHashSet);
-        linkedHashSet.add("2026");
-        drawCalls.record(linkedHashSet);
-        linkedHashSet.add("!");
-        drawCalls.record(linkedHashSet);
-        linkedHashSet.add("Hello");
-        drawCalls.record(linkedHashSet);
-        linkedHashSet.add("Progra");
-        drawCalls.record(linkedHashSet);
-        linkedHashSet.add("2026");
-        drawCalls.record(linkedHashSet);
-        linkedHashSet.add("!");
-        drawCalls.record(linkedHashSet);
+        LinkedHashSet<String> set = new LinkedHashSet<>();
+        DrawCalls drawCalls = new DrawCalls(set);
+
+        set.add("Hello");
+        drawCalls.record();
+
+        set.add("Progra");
+        drawCalls.record();
+
+        set.add("2026");
+        drawCalls.record();
+
+        set.add("!");
+        drawCalls.record();
+
+        set.add("Hello");
+        drawCalls.record();
+
+        set.add("Progra");
+        drawCalls.record();
+
+        set.add("2026");
+        drawCalls.record();
+
+        set.add("!");
+        drawCalls.record();
 
         Application.start(drawCalls);
     }
 
     static void startArrayListApplicationWithFunnyDrawCalls() {
-        DrawCalls drawCalls = new DrawCalls();
 
         ArrayList<Integer> list = new ArrayList<>();
+        DrawCalls drawCalls = new DrawCalls(list);
+
         list.add(1);
-        drawCalls.record(list);
+        drawCalls.record();
+
         list.add(2);
-        drawCalls.record(list);
+        drawCalls.record();
+
         list.add(3);
+        drawCalls.record();
+
         list.add(1);
-        drawCalls.record(list);
+        drawCalls.record();
+
         list.add(2);
-        drawCalls.record(list);
+        drawCalls.record();
+
         list.add(3);
+        drawCalls.record();
 
         Application.start(drawCalls);
     }
 
     static void startTreeMapApplicationWithFunnyDrawCalls() {
-        DrawCalls drawCalls = new DrawCalls();
 
         TreeMap<String, Integer> map = new TreeMap<>();
+        DrawCalls drawCalls = new DrawCalls(map);
+
         map.put("hello", 1);
-        drawCalls.record(map);
+        drawCalls.record();
+
         map.put("world", 2);
-        drawCalls.record(map);
+        drawCalls.record();
+
         map.put("java", 3);
-        drawCalls.record(map);
+        drawCalls.record();
+
         map.put("jaghva", 35);
-        drawCalls.record(map);
+        drawCalls.record();
+
         map.put("hello", 1);
-        drawCalls.record(map);
+        drawCalls.record();
+
         map.put("world", 2);
-        drawCalls.record(map);
+        drawCalls.record();
+
         map.put("java", 3);
-        drawCalls.record(map);
+        drawCalls.record();
+
         map.put("jaghva", 35);
-        drawCalls.record(map);
+        drawCalls.record();
 
         Application.start(drawCalls);
-
     }
 
     static void startLinkedListApplicationWithFunnyDrawCalls() {
 
         LinkedList<String> list = new LinkedList<>();
-        DrawCalls drawCalls = new DrawCalls();
+        DrawCalls drawCalls = new DrawCalls(list);
+
         list.add("Lotte");
-        drawCalls.record(list);
+        drawCalls.record();
+
         list.add("Dieter");
-        drawCalls.record(list);
+        drawCalls.record();
+
         list.add("Alexa");
-        drawCalls.record(list);
+        drawCalls.record();
+
         list.add("Holland");
-        drawCalls.record(list);
+        drawCalls.record();
+
         Application.start(drawCalls);
     }
-
 }

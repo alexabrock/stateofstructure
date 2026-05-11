@@ -1,38 +1,41 @@
-package com.hhu.util.compiler.compiledClasses;
-
 import com.hhu.datastructures.prograDatastructures.generic.BinarySearchTree;
 import com.hhu.datastructures.prograDatastructures.generic.PrograHashSet;
 import com.hhu.util.DrawCalls;
 import com.hhu.ui.application.Application;
 
 public class GraphvizApp {
-     public static void main(String[] args) {
-        startBinarySearchTreeApplicationWithFunnyDrawCalls();
 
+    public static void main(String[] args) {
+        startBinarySearchTreeApplicationWithFunnyDrawCalls();
     }
 
     public DrawCalls build() {
-        DrawCalls drawCalls = new DrawCalls();
 
         PrograHashSet<Integer> set = new PrograHashSet<>();
+        DrawCalls drawCalls = new DrawCalls(set);
+
         set.insert(1);
-        drawCalls.record(set);
+        drawCalls.record();
+
         set.insert(4);
-        drawCalls.record(set);
+        drawCalls.record();
 
         return drawCalls;
     }
 
     static void startBinarySearchTreeApplicationWithFunnyDrawCalls() {
-        DrawCalls drawCalls = new DrawCalls();
 
         BinarySearchTree<String> treeSet = new BinarySearchTree<>();
+        DrawCalls drawCalls = new DrawCalls(treeSet);
+
         treeSet.insert("Hello");
-        drawCalls.record(treeSet);
+        drawCalls.record();
+
         treeSet.insert("Progra");
-        drawCalls.record(treeSet);
+        drawCalls.record();
+
         treeSet.insert("2026");
-        drawCalls.record(treeSet);
+        drawCalls.record();
 
         Application.start(drawCalls);
     }

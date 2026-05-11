@@ -11,8 +11,13 @@ import com.hhu.ui.panelBuilder.PanelBuilder;
 public class DrawCalls {
 
     private LinkedList<DrawStep> drawCalls = new LinkedList<>();
+    private Object collection;
     // -1, damit mit nextStep() das 1. (0.) Element returnt wird
     private int currentStepIndex = -1;
+
+    public DrawCalls(Object collection) {
+        this.collection = collection;
+    }
 
     public boolean hasNextStep() {
         return currentStepIndex < drawCalls.size() - 1;
@@ -42,7 +47,7 @@ public class DrawCalls {
         return drawCalls.get(currentStepIndex);
     }
 
-    public <E> void record(Object collection) {
+    public <E> void record() {
 
         JPanel memory = PanelBuilder.createMemoryPanel(collection);
         JPanel datastructure = PanelBuilder.createDatastructurePanel(collection);
