@@ -16,6 +16,31 @@ public class GraphvizApp {
     public static void main(String[] args) {
         startLinkedHashSetApplicationWithFunnyDrawCalls();
     }
+     public DrawCalls build() {
+
+        Stack<String> stack = new Stack<>();
+        DrawCalls drawCalls = new DrawCalls(stack);
+
+        stack.push("Hello");
+        drawCalls.record();
+
+        stack.push("Progra");
+        drawCalls.record();
+
+        stack.push("middleElement");
+        drawCalls.record();
+
+        stack.push("2026");
+        drawCalls.record();
+
+        stack.pop();
+        drawCalls.record();
+
+        stack.search("Hello");
+        drawCalls.record();
+
+        return drawCalls;
+     }
 
     private static void startPrograHashSetApplication() {
 
