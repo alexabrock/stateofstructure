@@ -30,7 +30,7 @@ class GraphPanelRenderer {
      */
     static JPanel create(String title, String dot) {
 
-        BufferedImage image = Graphviz.fromString(dot).width(1000).render(Format.PNG).toImage();
+        BufferedImage image = Graphviz.fromString(dot).width(1500).render(Format.PNG).toImage();
         
         JPanel imagePanel = new JPanel(new BorderLayout());
         imagePanel.add(new ScaledImagePanel(image), BorderLayout.CENTER);
