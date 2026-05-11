@@ -69,7 +69,7 @@ class MemoryPanelBuilder {
 
         String themedAttributes = String.format(
                 "%n  graph [bgcolor=\"%s\", fontcolor=\"%s\"];%n"
-                        + "  node [fontcolor=\"%s\", color=\"%s\", style=\"filled\", fillcolor=\"%s\", fontsize=\"8\"];%n"
+                        + "  node [fontcolor=\"%s\", color=\"%s\", style=\"filled\", fillcolor=\"%s\"];%n"
                         + "  edge [color=\"%s\", fontcolor=\"%s\"];%n",
                 Colors.BG_COLORM,
                 Colors.FG_COLORM,
