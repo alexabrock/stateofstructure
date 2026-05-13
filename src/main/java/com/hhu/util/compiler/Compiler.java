@@ -12,11 +12,12 @@ import javax.tools.JavaCompiler;
 import javax.tools.ToolProvider;
 
 import com.hhu.util.DrawCalls;
+import com.hhu.util.Visualizer;
 
 /* 
 Generates a new Java File with the given Sting as content. 
 Expects, that the class the given String contains defines the Method 
-    'public DrawCall build()'
+    'public void build()'
  */
 public class Compiler {
 
@@ -61,8 +62,8 @@ public class Compiler {
                     if (name.equals("GraphvizApp")) {
                         Class<?> c = findLoadedClass(name);
                         if (c == null)
-                            c = findClass(name); // look in outputDir first. Does not ask parent 
-                                                 //asking the parent-first for GraphVisApp resulted 
+                            c = findClass(name); // look in outputDir first. Does not ask parent. 
+                                                 //asking parent-first for GraphVisApp  
                                                  //resulted in not having the newest .class file, once it 
                                                  //had been recompiled 
                         if (resolve)
@@ -76,7 +77,10 @@ public class Compiler {
             Class<?> klasse = Class.forName("GraphvizApp", true, loader);
 
             Object o = klasse.getConstructor().newInstance();
-            DrawCalls drawCalls = (DrawCalls) klasse.getMethod("build").invoke(o);
+            //invoke the build method. After this, the static drawcalls-Wrapper Visualizer is filled with drawcall recordings
+            klasse.getMethod("build").invoke(o);
+            //get the now filled drawcalls
+            DrawCalls drawCalls = Visualizer.getDrawCalls();
 
             return drawCalls;
 
@@ -86,13 +90,13 @@ public class Compiler {
                             CompilationException: Expected execution entry method not found.
 
                             Required signature:
-                                public DrawCalls build()
+                                public void build()
                             """, e);
         } catch (ClassCastException e) {
             throw new CompilationException(
-                    "CompilationException: build-Method did not return a DrawCall.", e);
+                    "CompilationException: build-Method did not record any Visualizations.", e);
         } catch (IOException e) {
-            throw new CompilationException("File error while writing source code", e);
+            throw new CompilationException("File error while writing source code into a File", e);
 
         } catch (ClassNotFoundException e) {
             throw new CompilationException("Class loading failed (classpath/package mismatch)", e);
