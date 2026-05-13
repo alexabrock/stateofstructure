@@ -1,3 +1,5 @@
+
+
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
@@ -8,8 +10,7 @@ import java.util.TreeSet;
 import com.hhu.datastructures.prograDatastructures.generic.BinarySearchTree;
 import com.hhu.datastructures.prograDatastructures.generic.PrograHashSet;
 import com.hhu.datastructures.prograDatastructures.generic.PrograLinkedList;
-import com.hhu.ui.application.Application;
-import com.hhu.util.DrawCalls;
+import com.hhu.util.Visualizer;
 
 public class GraphvizAppOld {
 
@@ -18,284 +19,148 @@ public class GraphvizAppOld {
     }
 
     private static void startPrograHashSetApplication() {
-
         PrograHashSet<Integer> set = new PrograHashSet<>();
-        DrawCalls drawCalls = new DrawCalls(set);
+        Visualizer.register(set);
 
-        set.insert(1);
-        drawCalls.record();
+        for (int i = 1; i <= 6; i++) {
+            set.insert(i);
+            Visualizer.record();
+        }
 
-        set.insert(2);
-        drawCalls.record();
+        // Repeating insertions to show set behavior
+        for (int i = 1; i <= 6; i++) {
+            set.insert(i);
+            Visualizer.record();
+        }
 
-        set.insert(3);
-        drawCalls.record();
-
-        set.insert(4);
-        drawCalls.record();
-
-        set.insert(5);
-        drawCalls.record();
-
-        set.insert(6);
-        drawCalls.record();
-
-        set.insert(1);
-        drawCalls.record();
-
-        set.insert(2);
-        drawCalls.record();
-
-        set.insert(3);
-        drawCalls.record();
-
-        set.insert(4);
-        drawCalls.record();
-
-        set.insert(5);
-        drawCalls.record();
-
-        set.insert(6);
-        drawCalls.record();
-
-        set.insert(1);
-        drawCalls.record();
-
-        set.insert(2);
-        drawCalls.record();
-
-        set.insert(3);
-        drawCalls.record();
-
-        set.insert(4);
-        drawCalls.record();
-
-        Application.start(drawCalls);
+        Visualizer.show();
     }
 
     private static void startPrograLinkedListApplication() {
-
         PrograLinkedList<Integer> list = new PrograLinkedList<>();
-        DrawCalls drawCalls = new DrawCalls(list);
+        Visualizer.register(list);
 
-        list.add(1);
-        drawCalls.record();
+        for (int i = 1; i <= 3; i++) {
+            list.add(i);
+            Visualizer.record();
+        }
 
-        list.add(2);
-        drawCalls.record();
-
-        list.add(3);
-        drawCalls.record();
-
-        list.add(1);
-        drawCalls.record();
-
-        list.add(2);
-        drawCalls.record();
-
-        list.add(3);
-        drawCalls.record();
-
-        Application.start(drawCalls);
+        Visualizer.show();
     }
 
     static void startBinarySearchTreeApplicationWithFunnyDrawCalls() {
-
         BinarySearchTree<String> treeSet = new BinarySearchTree<>();
-        DrawCalls drawCalls = new DrawCalls(treeSet);
+        Visualizer.register(treeSet);
 
         treeSet.insert("Hello");
-        drawCalls.record();
-
+        Visualizer.record();
         treeSet.insert("Progra");
-        drawCalls.record();
-
+        Visualizer.record();
         treeSet.insert("2026");
-        drawCalls.record();
-
+        Visualizer.record();
         treeSet.insert("!");
-        drawCalls.record();
+        Visualizer.record();
 
-        treeSet.insert("Hello");
-        drawCalls.record();
-
-        treeSet.insert("Progra");
-        drawCalls.record();
-
-        treeSet.insert("2026");
-        drawCalls.record();
-
-        treeSet.insert("!");
-        drawCalls.record();
-
-        Application.start(drawCalls);
+        Visualizer.show();
     }
 
     static void startTreeSetApplicationWithFunnyDrawCalls() {
-
         TreeSet<String> treeSet = new TreeSet<>();
-        DrawCalls drawCalls = new DrawCalls(treeSet);
+        Visualizer.register(treeSet);
 
         treeSet.add("Hello");
-        drawCalls.record();
-
+        Visualizer.record();
         treeSet.add("Progra");
-        drawCalls.record();
-
+        Visualizer.record();
         treeSet.add("2026");
-        drawCalls.record();
-
+        Visualizer.record();
         treeSet.add("!");
-        drawCalls.record();
+        Visualizer.record();
 
-        treeSet.add("Hello");
-        drawCalls.record();
-
-        treeSet.add("Progra");
-        drawCalls.record();
-
-        treeSet.add("2026");
-        drawCalls.record();
-
-        treeSet.add("!");
-        drawCalls.record();
-
-        Application.start(drawCalls);
+        Visualizer.show();
     }
 
     static void startStackApplicationWithFunnyDrawCalls() {
-
         Stack<String> stack = new Stack<>();
-        DrawCalls drawCalls = new DrawCalls(stack);
+        Visualizer.register(stack);
 
         stack.push("Hello");
-        drawCalls.record();
-
+        Visualizer.record();
         stack.push("Progra");
-        drawCalls.record();
-
+        Visualizer.record();
         stack.push("middleElement");
-        drawCalls.record();
-
+        Visualizer.record();
         stack.push("2026");
-        drawCalls.record();
+        Visualizer.record();
 
         stack.pop();
-        drawCalls.record();
+        Visualizer.record();
 
         stack.search("Hello");
-        drawCalls.record();
+        Visualizer.record();
 
-        Application.start(drawCalls);
+        Visualizer.show();
     }
 
     static void startLinkedHashSetApplicationWithFunnyDrawCalls() {
-
         LinkedHashSet<String> set = new LinkedHashSet<>();
-        DrawCalls drawCalls = new DrawCalls(set);
+        Visualizer.register(set);
 
         set.add("Hello");
-        drawCalls.record();
-
+        Visualizer.record();
         set.add("Progra");
-        drawCalls.record();
-
+        Visualizer.record();
         set.add("2026");
-        drawCalls.record();
-
+        Visualizer.record();
         set.add("!");
-        drawCalls.record();
+        Visualizer.record();
 
-        set.add("Hello");
-        drawCalls.record();
-
-        set.add("Progra");
-        drawCalls.record();
-
-        set.add("2026");
-        drawCalls.record();
-
-        set.add("!");
-        drawCalls.record();
-
-        Application.start(drawCalls);
+        Visualizer.show();
     }
 
     static void startArrayListApplicationWithFunnyDrawCalls() {
-
         ArrayList<Integer> list = new ArrayList<>();
-        DrawCalls drawCalls = new DrawCalls(list);
+        Visualizer.register(list);
 
         list.add(1);
-        drawCalls.record();
-
+        Visualizer.record();
         list.add(2);
-        drawCalls.record();
-
+        Visualizer.record();
         list.add(3);
-        drawCalls.record();
+        Visualizer.record();
 
-        list.add(1);
-        drawCalls.record();
-
-        list.add(2);
-        drawCalls.record();
-
-        list.add(3);
-        drawCalls.record();
-
-        Application.start(drawCalls);
+        Visualizer.show();
     }
 
     static void startTreeMapApplicationWithFunnyDrawCalls() {
-
         TreeMap<String, Integer> map = new TreeMap<>();
-        DrawCalls drawCalls = new DrawCalls(map);
+        Visualizer.register(map);
 
         map.put("hello", 1);
-        drawCalls.record();
-
+        Visualizer.record();
         map.put("world", 2);
-        drawCalls.record();
-
+        Visualizer.record();
         map.put("java", 3);
-        drawCalls.record();
-
+        Visualizer.record();
         map.put("jaghva", 35);
-        drawCalls.record();
+        Visualizer.record();
 
-        map.put("hello", 1);
-        drawCalls.record();
-
-        map.put("world", 2);
-        drawCalls.record();
-
-        map.put("java", 3);
-        drawCalls.record();
-
-        map.put("jaghva", 35);
-        drawCalls.record();
-
-        Application.start(drawCalls);
+        Visualizer.show();
     }
 
     static void startLinkedListApplicationWithFunnyDrawCalls() {
-
         LinkedList<String> list = new LinkedList<>();
-        DrawCalls drawCalls = new DrawCalls(list);
+        Visualizer.register(list);
 
         list.add("Lotte");
-        drawCalls.record();
-
+        Visualizer.record();
         list.add("Dieter");
-        drawCalls.record();
-
+        Visualizer.record();
         list.add("Alexa");
-        drawCalls.record();
-
+        Visualizer.record();
         list.add("Holland");
-        drawCalls.record();
+        Visualizer.record();
 
-        Application.start(drawCalls);
+        Visualizer.show();
     }
 }
