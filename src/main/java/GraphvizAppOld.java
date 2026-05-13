@@ -15,7 +15,7 @@ import com.hhu.util.Visualizer;
 public class GraphvizAppOld {
 
     public static void main(String[] args) {
-        startTreeMapApplicationWithFunnyDrawCalls();
+        startTreeMapApplication();
     }
 
     private static void startPrograHashSetApplication() {
@@ -48,7 +48,7 @@ public class GraphvizAppOld {
         Visualizer.show();
     }
 
-    static void startBinarySearchTreeApplicationWithFunnyDrawCalls() {
+    static void startBinarySearchTreeApplication() {
         BinarySearchTree<String> treeSet = new BinarySearchTree<>();
         Visualizer.register(treeSet);
 
@@ -64,7 +64,7 @@ public class GraphvizAppOld {
         Visualizer.show();
     }
 
-    static void startTreeSetApplicationWithFunnyDrawCalls() {
+    static void startTreeSetApplication() {
         TreeSet<String> treeSet = new TreeSet<>();
         Visualizer.register(treeSet);
 
@@ -80,7 +80,7 @@ public class GraphvizAppOld {
         Visualizer.show();
     }
 
-    static void startStackApplicationWithFunnyDrawCalls() {
+    static void startStackApplication() {
         Stack<String> stack = new Stack<>();
         Visualizer.register(stack);
 
@@ -102,7 +102,7 @@ public class GraphvizAppOld {
         Visualizer.show();
     }
 
-    static void startLinkedHashSetApplicationWithFunnyDrawCalls() {
+    static void startLinkedHashSetApplication() {
         LinkedHashSet<String> set = new LinkedHashSet<>();
         Visualizer.register(set);
 
@@ -118,7 +118,7 @@ public class GraphvizAppOld {
         Visualizer.show();
     }
 
-    static void startArrayListApplicationWithFunnyDrawCalls() {
+    static void startArrayListApplication() {
         ArrayList<Integer> list = new ArrayList<>();
         Visualizer.register(list);
 
@@ -132,7 +132,7 @@ public class GraphvizAppOld {
         Visualizer.show();
     }
 
-    static void startTreeMapApplicationWithFunnyDrawCalls() {
+    static void startTreeMapApplication() {
         TreeMap<String, Integer> map = new TreeMap<>();
         Visualizer.register(map);
 
@@ -148,7 +148,7 @@ public class GraphvizAppOld {
         Visualizer.show();
     }
 
-    static void startLinkedListApplicationWithFunnyDrawCalls() {
+    static void startLinkedListApplication() {
         LinkedList<String> list = new LinkedList<>();
         Visualizer.register(list);
 
