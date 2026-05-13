@@ -25,7 +25,7 @@ class CodePanelBuilder {
 
     static final String TARGET_LINE_PROPERTY = "codepanel.targetLineNumber";
 
-    private static final Font CODE_FONT = new Font("Fira Code", Font.PLAIN, 18);
+    private static final Font CODE_FONT = createFont();
 
     private CodePanelBuilder() {
     }
@@ -114,5 +114,13 @@ class CodePanelBuilder {
             textArea.setForeground(Colors.TEXT_FOREGROUND_COLOR);
             textArea.setCaretColor(Colors.CARET_COLOR);
         }
+    }
+
+    private static Font createFont() {
+        Font fira = new Font("Fira Code", Font.PLAIN, 18);
+        //check if FiraCode exists, otherwise take MONOSPACED
+        return fira.getFamily().equalsIgnoreCase("Fira Code")
+                ? fira
+                : new Font(Font.MONOSPACED, Font.PLAIN, 18);
     }
 }
