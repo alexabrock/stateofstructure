@@ -2,7 +2,10 @@ package com.hhu.datastructureView.impl.progra.generic;
 
 import static com.hhu.datastructureView.NodeBuilder.getNode;
 import static guru.nidi.graphviz.attribute.Rank.RankDir.LEFT_TO_RIGHT;
+import static guru.nidi.graphviz.attribute.Rank.RankDir.TOP_TO_BOTTOM;
 import static guru.nidi.graphviz.model.Factory.graph;
+import static guru.nidi.graphviz.model.Factory.node;
+import static guru.nidi.graphviz.model.Factory.to;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +27,7 @@ public class PrograLinkedListGraph{
          * can't be reused
          */
         Graph g = graph("prograLinkedListGraph").directed()
-                .graphAttr().with(Rank.dir(LEFT_TO_RIGHT))
+                .graphAttr().with(Rank.dir(TOP_TO_BOTTOM))
                 .nodeAttr().with(Shape.RECTANGLE);
                 
         // cashing Nodes for linkage, sind ID broke normal factory pattern
@@ -32,7 +35,7 @@ public class PrograLinkedListGraph{
 
         for (int i = 0; i < list.length(); i++) {
             String nodeName = list.get(i).toString();
-            Node current = getNode(nodeName); 
+            Node current = getNode(nodeName);
             nodeMap.put(i, current);
             g = g.with(current);
 
@@ -42,6 +45,9 @@ public class PrograLinkedListGraph{
                 g = g.with(prev.link(current));
             }
         }
+        
+        Node head = node("head").with(Shape.PLAIN).link(to(nodeMap.get(0)));
+        g = g.with(head);
         return g;
     }
 }
