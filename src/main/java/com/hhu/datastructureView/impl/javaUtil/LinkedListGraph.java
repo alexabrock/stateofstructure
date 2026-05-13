@@ -14,7 +14,7 @@ import guru.nidi.graphviz.model.Graph;
 import guru.nidi.graphviz.model.Node;
 
 /* Builds a GraphViz Graph for LinkedLists*/
-public class LinkedListGraphBuilder {
+public class LinkedListGraph {
     public static Graph buildGraph(List<?> list) {
 
         Graph g = graph("listGraph").directed()

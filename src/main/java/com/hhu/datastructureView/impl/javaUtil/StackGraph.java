@@ -24,7 +24,7 @@ import guru.nidi.graphviz.model.Node;
 import static guru.nidi.graphviz.model.Factory.to;
 
 /* Builds a GraphViz Graph for Stacks */
-public class StackGraphBuilder {
+public class StackGraph {
     
     public static Graph buildGraph(Stack<?> stack) {
         

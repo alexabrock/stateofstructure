@@ -14,7 +14,7 @@ import guru.nidi.graphviz.attribute.Shape;
 import guru.nidi.graphviz.model.Graph;
 
 /* Builds a GraphViz Graph for ArrayLists */
-public class ArrayListGraphBuilder {
+public class ArrayListGraph {
 
     public static Graph buildGraph(ArrayList<?> list) {
         

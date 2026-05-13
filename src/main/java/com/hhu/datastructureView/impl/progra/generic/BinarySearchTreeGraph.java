@@ -12,7 +12,7 @@ import com.hhu.datastructureView.impl.TreeGraphUtils;
 import guru.nidi.graphviz.model.Graph;
 
 /* Builds a GraphViz Graph for Progra BinarySearchTrees */
-public class BinarySearchTreeGraphBuilder {
+public class BinarySearchTreeGraph {
 
     public static Graph buildGraph(BinarySearchTree<?> tree) {
 

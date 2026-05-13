@@ -7,15 +7,15 @@ import java.util.Stack;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import com.hhu.datastructureView.impl.javaUtil.ArrayListGraphBuilder;
-import com.hhu.datastructureView.impl.javaUtil.LinkedHashSetGraphBuilder;
-import com.hhu.datastructureView.impl.javaUtil.LinkedListGraphBuilder;
-import com.hhu.datastructureView.impl.javaUtil.StackGraphBuilder;
-import com.hhu.datastructureView.impl.javaUtil.TreeMapGraphBuilder;
-import com.hhu.datastructureView.impl.javaUtil.TreeSetGraphBuilder;
-import com.hhu.datastructureView.impl.progra.generic.BinarySearchTreeGraphBuilder;
-import com.hhu.datastructureView.impl.progra.generic.HashSetGraphBuilder;
-import com.hhu.datastructureView.impl.progra.generic.PrograLinkedListGraphBuilder;
+import com.hhu.datastructureView.impl.javaUtil.ArrayListGraph;
+import com.hhu.datastructureView.impl.javaUtil.LinkedHashSetGraph;
+import com.hhu.datastructureView.impl.javaUtil.LinkedListGraph;
+import com.hhu.datastructureView.impl.javaUtil.StackGraph;
+import com.hhu.datastructureView.impl.javaUtil.TreeMapGraph;
+import com.hhu.datastructureView.impl.javaUtil.TreeSetGraph;
+import com.hhu.datastructureView.impl.progra.generic.BinarySearchTreeGraph;
+import com.hhu.datastructureView.impl.progra.generic.HashSetGraph;
+import com.hhu.datastructureView.impl.progra.generic.PrograLinkedListGraph;
 import com.hhu.datastructures.prograDatastructures.generic.BinarySearchTree;
 import com.hhu.datastructures.prograDatastructures.generic.PrograHashSet;
 import com.hhu.datastructures.prograDatastructures.generic.PrograLinkedList;
@@ -34,33 +34,33 @@ public class GraphBuilder {
             /* Java.util */
 
             case Stack<?> stack ->
-                StackGraphBuilder.buildGraph(stack);
+                StackGraph.buildGraph(stack);
 
             case LinkedList<?> list ->
-                LinkedListGraphBuilder.buildGraph(list);
+                LinkedListGraph.buildGraph(list);
 
             case TreeMap<?, ?> map ->
-                TreeMapGraphBuilder.buildGraph(map);
+                TreeMapGraph.buildGraph(map);
 
             case ArrayList<?> list ->
-                ArrayListGraphBuilder.buildGraph(list);
+                ArrayListGraph.buildGraph(list);
 
             case LinkedHashSet<?> set ->
-                LinkedHashSetGraphBuilder.buildGraph(set);
+                LinkedHashSetGraph.buildGraph(set);
 
             case TreeSet<?> set ->
-                TreeSetGraphBuilder.buildGraph(set);
+                TreeSetGraph.buildGraph(set);
 
             /* Progra */
 
             case PrograLinkedList<?> list ->
-                PrograLinkedListGraphBuilder.buildGraph(list);
+                PrograLinkedListGraph.buildGraph(list);
 
             case BinarySearchTree<?> tree -> 
-                BinarySearchTreeGraphBuilder.buildGraph(tree);
+                BinarySearchTreeGraph.buildGraph(tree);
 
             case PrograHashSet<?> set -> 
-                HashSetGraphBuilder.buildGraph(set);
+                HashSetGraph.buildGraph(set);
 
             default ->
                 throw new IllegalArgumentException(

@@ -14,7 +14,7 @@ import guru.nidi.graphviz.model.Graph;
 import guru.nidi.graphviz.model.Node;
 
 /* Builds a GraphViz Graph for TreeMaps */
-public class TreeMapGraphBuilder {
+public class TreeMapGraph {
 
     public static Graph buildGraph(TreeMap<?, ?> map) {
 

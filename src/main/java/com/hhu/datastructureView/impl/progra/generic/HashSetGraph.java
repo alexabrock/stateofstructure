@@ -12,7 +12,7 @@ import guru.nidi.graphviz.attribute.Shape;
 import guru.nidi.graphviz.model.Graph;
 import guru.nidi.graphviz.model.Node;
 /* Returns a GraphViz Graph for Progra HashSet  */
-public class HashSetGraphBuilder {
+public class HashSetGraph {
 
     public static Graph buildGraph(PrograHashSet<?> set) {
         if (set.size() == 0) {

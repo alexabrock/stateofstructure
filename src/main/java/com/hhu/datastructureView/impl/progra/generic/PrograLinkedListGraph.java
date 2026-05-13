@@ -15,7 +15,7 @@ import guru.nidi.graphviz.model.Graph;
 import guru.nidi.graphviz.model.Node;
 
 /* Builds a GraphViz Graph for PrograLinkedLists*/
-public class PrograLinkedListGraphBuilder{
+public class PrograLinkedListGraph{
 
     /* Returns a GraphViz Graph for PrograLinkedLists */
     public static Graph buildGraph(PrograLinkedList<?> list) {
