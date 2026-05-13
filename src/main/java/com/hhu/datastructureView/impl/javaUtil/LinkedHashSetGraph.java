@@ -44,11 +44,6 @@ public class LinkedHashSetGraph {
         Node head = node("head").with(Shape.PLAIN);
         Node tail = node("tail").with(Shape.PLAIN);
 
-        Graph pointer = graph("pointer")
-                .graphAttr().with(Rank.dir(TOP_TO_BOTTOM))
-                .graphAttr().with("rank", "SAME")
-                .with(head, tail);
-
         // Not visualizing the HashTable Slots in the DataStructure View, since that
         // info is normally hidden from the user
 
@@ -81,7 +76,6 @@ public class LinkedHashSetGraph {
         }
 
         g = g.with(elements);
-        g = g.with(pointer);
         return g;
     }
 }
