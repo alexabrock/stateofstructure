@@ -12,12 +12,11 @@ public class Caller {
      * Returns the String-representation of the class, that called DrawCalls.record
      * Assumption: Caller Class is named GraphVizApp 
      */
-    public static String findCallerClass() {
+    static String findCallerClass() {
         StackWalker walker = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE);
 
         Path path = walker.walk(stream -> stream
-                .filter(f -> f.getClassName().contains("GraphvizApp") || f.getClassName().contains(
-                        "CallerTest") )
+                .filter(f -> f.getClassName().contains("GraphvizApp"))
                 .findFirst()
                 .map(StackWalker.StackFrame::getDeclaringClass)
                 .map(Class::getName)
@@ -30,11 +29,11 @@ public class Caller {
     /*
      * Returns the line, that called DrawCalls.record
      */
-    public static int findCallerLine() {
+    static int findCallerLine() {
         StackWalker walker = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE);
 
         int lineNumber = walker.walk(stream -> stream
-                .filter(f -> f.getClassName().contains("GraphvizApp") || f.getClassName().contains("CallerTest"))
+                .filter(f -> f.getClassName().contains("GraphvizApp"))
                 .findFirst()
                 .map(StackWalker.StackFrame::getLineNumber)
                 .orElse(-1));
