@@ -1,19 +1,17 @@
 package com.hhu.util.graphBuilder.impl.javaUtil;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.LinkedHashSet;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.hhu.datastructureView.GraphBuilder;
 
 import guru.nidi.graphviz.model.MutableGraph;
 
-public class LinkedHashSetGraphBuilderTest {
+public class LinkedHashSetGraphTest {
     
     private LinkedHashSet<String> hashSet;
 
@@ -27,7 +25,6 @@ public class LinkedHashSetGraphBuilderTest {
     }
 
     @Test
-    @Ignore
     public void graphContainsSingleStringElement() {
         hashSet.add("a");
 
@@ -39,7 +36,6 @@ public class LinkedHashSetGraphBuilderTest {
     }
 
     @Test
-    @Ignore
     public void graphContainsMultipleStringElements() {
         hashSet.add("Lotte");
         hashSet.add("Dieter");

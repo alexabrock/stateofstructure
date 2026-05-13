@@ -2,10 +2,9 @@ package com.hhu.util.graphBuilder.impl.javaUtil;
 
 import static org.junit.Assert.assertTrue;
 
-import java.util.TreeMap;
+import java.util.Stack;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.hhu.datastructureView.GraphBuilder;
@@ -13,52 +12,48 @@ import com.hhu.datastructureView.GraphBuilder;
 //Mutable graph, weil man so schön an die einzelnen Nodes zum testen kommt
 import guru.nidi.graphviz.model.MutableGraph;
 
-public class TreeMapGraphBuilderTest {
-        private TreeMap<String, Integer> tree;
+public class StackGraphTest {
+    private Stack<String> stack;
 
     @Before
     public void setUp() {
-        tree = new TreeMap<>();
+        stack = new Stack<>();
     }
 
     private MutableGraph createMutableGraph() {
-        return (MutableGraph) GraphBuilder.buildGraph(tree);
+        return (MutableGraph) GraphBuilder.buildGraph(stack);
     }
 
     @Test
-    @Ignore
     public void graphContainsSingleStringElement() {
-        tree.put("a", 1);
+        stack.add("a");
 
         MutableGraph graph = createMutableGraph();
 
-        assertTrue(
-                graph.nodes().stream()
-                        .anyMatch(n -> n.name().toString().equals("a, 1")));
+        assertTrue(graph.nodes().stream()
+                .anyMatch(n -> n.get("label") != null && n.get("label").toString().equals("a")));
     }
 
     @Test
-    @Ignore
     public void graphContainsMultipleStringElements() {
+        stack.add("Lotte");
+        stack.add("Dieter");
+        stack.add("Alexa");
+        stack.add("Holland");
 
-        tree.put("Lotte", 1);
-        tree.put("Dieter", 2);
-        tree.put("Alexa", 3);
-        tree.put("Holland", 4);
-        
         MutableGraph graph = createMutableGraph();
 
         assertTrue(graph.nodes().stream()
-                .anyMatch(n -> n.name().toString().equals("Lotte, 1")));
+                .anyMatch(n -> n.get("label") != null && n.get("label").toString().equals("Lotte")));
 
         assertTrue(graph.nodes().stream()
-                .anyMatch(n -> n.name().toString().equals("Dieter, 2")));
+                .anyMatch(n -> n.get("label") != null && n.get("label").toString().equals("Dieter")));
 
         assertTrue(graph.nodes().stream()
-                .anyMatch(n -> n.name().toString().equals("Alexa, 3")));
+                .anyMatch(n -> n.get("label") != null && n.get("label").toString().equals("Alexa")));
 
         assertTrue(graph.nodes().stream()
-                .anyMatch(n -> n.name().toString().equals("Holland, 4")));
+                .anyMatch(n -> n.get("label") != null && n.get("label").toString().equals("Holland")));
     }
 
     @Test
@@ -68,4 +63,5 @@ public class TreeMapGraphBuilderTest {
 
         assertTrue(graph.nodes().isEmpty());
     }
+
 }

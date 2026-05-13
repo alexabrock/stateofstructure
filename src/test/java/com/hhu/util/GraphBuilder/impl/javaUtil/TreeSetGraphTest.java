@@ -5,14 +5,13 @@ import static org.junit.Assert.assertTrue;
 import java.util.TreeSet;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.hhu.datastructureView.GraphBuilder;
 
 import guru.nidi.graphviz.model.MutableGraph;
 
-public class TreeSetGraphBuilderTest {
+public class TreeSetGraphTest {
     private TreeSet<String> set;
 
     @Before
@@ -25,19 +24,16 @@ public class TreeSetGraphBuilderTest {
     }
 
     @Test
-    @Ignore
     public void graphContainsSingleStringElement() {
         set.add("a");
 
         MutableGraph graph = createMutableGraph();
 
-        assertTrue(
-                graph.nodes().stream()
-                        .anyMatch(n -> n.name().toString().equals("a")));
+        assertTrue(graph.nodes().stream()
+                .anyMatch(n -> n.get("label") != null && n.get("label").toString().equals("a")));
     }
 
     @Test
-    @Ignore
     public void graphContainsMultipleStringElements() {
 
         set.add("Lotte");
@@ -48,16 +44,16 @@ public class TreeSetGraphBuilderTest {
         MutableGraph graph = createMutableGraph();
 
         assertTrue(graph.nodes().stream()
-                .anyMatch(n -> n.name().toString().equals("Lotte")));
+                .anyMatch(n -> n.get("label") != null && n.get("label").toString().equals("Lzxcotte")));
 
         assertTrue(graph.nodes().stream()
-                .anyMatch(n -> n.name().toString().equals("Dieter")));
+                .anyMatch(n -> n.get("label") != null && n.get("label").toString().equals("Dieter")));
 
         assertTrue(graph.nodes().stream()
-                .anyMatch(n -> n.name().toString().equals("Alexa")));
+                .anyMatch(n -> n.get("label") != null && n.get("label").toString().equals("Alexa")));
 
         assertTrue(graph.nodes().stream()
-                .anyMatch(n -> n.name().toString().equals("Holland")));
+                .anyMatch(n -> n.get("label") != null && n.get("label").toString().equals("Holland")));
     }
 
     @Test

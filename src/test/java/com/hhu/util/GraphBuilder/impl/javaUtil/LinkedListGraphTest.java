@@ -1,12 +1,10 @@
 package com.hhu.util.graphBuilder.impl.javaUtil;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.LinkedList;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.hhu.datastructureView.GraphBuilder;
@@ -14,7 +12,7 @@ import com.hhu.datastructureView.GraphBuilder;
 //Mutable graph, weil man so schön an die einzelnen Nodes zum testen kommt
 import guru.nidi.graphviz.model.MutableGraph;
 
-public class LinkedListGraphBuilderTest {
+public class LinkedListGraphTest {
 
     private LinkedList<String> list;
 
@@ -28,19 +26,16 @@ public class LinkedListGraphBuilderTest {
     }
 
     @Test
-    @Ignore
     public void graphContainsSingleStringElement() {
         list.add("a");
 
         MutableGraph graph = createMutableGraph();
 
-        assertTrue(
-                graph.nodes().stream()
-                        .anyMatch(n -> n.name().toString().equals("a")));
+        assertTrue(graph.nodes().stream()
+                .anyMatch(n -> n.get("label") != null && n.get("label").toString().equals("a")));
     }
 
     @Test
-    @Ignore
     public void graphContainsMultipleStringElements() {
         list.add("Lotte");
         list.add("Dieter");
@@ -48,10 +43,17 @@ public class LinkedListGraphBuilderTest {
         list.add("Holland");
 
         MutableGraph graph = createMutableGraph();
-        assertTrue(graph.nodes().stream().anyMatch(n -> n.name().toString().equals("Lotte")));
-        assertTrue(graph.nodes().stream().anyMatch(n -> n.name().toString().equals("Dieter")));
-        assertTrue(graph.nodes().stream().anyMatch(n -> n.name().toString().equals("Alexa")));
-        assertTrue(graph.nodes().stream().anyMatch(n -> n.name().toString().equals("Holland")));
+        assertTrue(graph.nodes().stream()
+                .anyMatch(n -> n.get("label") != null && n.get("label").toString().equals("Lotte")));
+
+        assertTrue(graph.nodes().stream()
+                .anyMatch(n -> n.get("label") != null && n.get("label").toString().equals("Dieter")));
+
+        assertTrue(graph.nodes().stream()
+                .anyMatch(n -> n.get("label") != null && n.get("label").toString().equals("Alexa")));
+
+        assertTrue(graph.nodes().stream()
+                .anyMatch(n -> n.get("label") != null && n.get("label").toString().equals("Holland")));
     }
 
     @Test
