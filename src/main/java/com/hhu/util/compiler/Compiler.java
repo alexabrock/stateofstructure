@@ -78,8 +78,6 @@ public class Compiler {
             Object o = klasse.getConstructor().newInstance();
             DrawCalls drawCalls = (DrawCalls) klasse.getMethod("build").invoke(o);
 
-            System.out.println(drawCalls.size());
-
             return drawCalls;
 
         } catch (NoSuchMethodException e) {
