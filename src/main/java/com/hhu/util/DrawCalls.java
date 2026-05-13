@@ -15,7 +15,7 @@ public class DrawCalls {
     // -1, damit mit nextStep() das 1. (0.) Element returnt wird
     private int currentStepIndex = -1;
 
-    public DrawCalls(Object collection) {
+    DrawCalls(Object collection) {
         this.collection = collection;
     }
 
@@ -47,7 +47,7 @@ public class DrawCalls {
         return drawCalls.get(currentStepIndex);
     }
 
-    public <E> void record() {
+    <E> void record() {
 
         JPanel memory = PanelBuilder.createMemoryPanel(collection);
         JPanel datastructure = PanelBuilder.createDatastructurePanel(collection);
@@ -58,9 +58,5 @@ public class DrawCalls {
         JPanel codePanel = PanelBuilder.createCodePanel(code, lineNumber);
 
         drawCalls.add(new DrawStep(memory, datastructure, collectionName, codePanel));
-    }
-
-    public int size() {
-        return drawCalls.size();
     }
 }
