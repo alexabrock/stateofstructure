@@ -58,6 +58,6 @@ public class LinkedHashSetGraphBuilderTest {
 
         MutableGraph graph = createMutableGraph();
         //only hashtable node
-        assertTrue(graph.nodes().size()==1);
+        assertTrue(graph.nodes().isEmpty());
     }
 }
