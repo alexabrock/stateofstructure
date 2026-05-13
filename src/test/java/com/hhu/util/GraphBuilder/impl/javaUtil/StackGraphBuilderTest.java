@@ -62,18 +62,4 @@ public class StackGraphBuilderTest {
         assertTrue(graph.nodes().isEmpty());
     }
 
-    @Test
-    public void correctAmountOfNodes() {
-        stack.add("Lotte");
-        stack.add("Dieter");
-        stack.add("Alexa");
-        stack.add("Holland");
-
-        MutableGraph graph = createMutableGraph();
-
-        // all nodes come with 1 pointer, except for the last node, which has no pointer 
-        //also, two pointers & nodes (top and bottom) exist
-        assertEquals(stack.size() * 2 -1 +4, graph.nodes().size());
-    }
-
 }

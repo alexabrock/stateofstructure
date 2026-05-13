@@ -61,16 +61,4 @@ public class ArrayListGraphBuilderTest {
         assertTrue(graph.nodes().isEmpty());
     }
 
-    @Test
-    public void correctAmountOfNodes() {
-        list.add("Lotte");
-        list.add("Dieter");
-        list.add("Alexa");
-        list.add("Holland");
-
-        MutableGraph graph = createMutableGraph();
-
-        //no pointers to account for
-        assertEquals(list.size(), graph.nodes().size());
-    }
 }

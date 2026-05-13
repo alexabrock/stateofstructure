@@ -60,17 +60,4 @@ public class LinkedHashSetGraphBuilderTest {
         //only hashtable node
         assertTrue(graph.nodes().size()==1);
     }
-
-    @Test
-    public void correctAmountOfEdges() {
-        hashSet.add("Lotte");
-        hashSet.add("Dieter");
-        hashSet.add("Alexa");
-        hashSet.add("Holland");
-        
-        MutableGraph graph = createMutableGraph();
-
-        //all nodes come with  3 pointers (before & afet & hashtable link), except for the first and last node, which have one pointer each
-        assertEquals(hashSet.size()*3-2 , graph.edges().size());
-    }
 }

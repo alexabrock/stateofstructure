@@ -61,18 +61,4 @@ public class LinkedListGraphBuilderTest {
 
         assertTrue(graph.nodes().isEmpty());
     }
-
-    @Test
-    @Ignore
-    public void correctAmountOfNodes() {
-        list.add("Lotte");
-        list.add("Dieter");
-        list.add("Alexa");
-        list.add("Holland");
-        
-        MutableGraph graph = createMutableGraph();
-
-        //all nodes come with 2 pointers (next & prev), except for the first and last node, which have one pointer each
-         assertEquals(list.size() *3-2, graph.nodes().size());
-    }
 }

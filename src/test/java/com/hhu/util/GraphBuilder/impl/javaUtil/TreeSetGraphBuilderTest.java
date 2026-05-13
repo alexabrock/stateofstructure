@@ -67,8 +67,4 @@ public class TreeSetGraphBuilderTest {
 
         assertTrue(graph.nodes().isEmpty());
     }
-
-    //There are many merged nodes & edges not visible in the final Graph, so testing for Nodes isn't advisable
-
-
 }
