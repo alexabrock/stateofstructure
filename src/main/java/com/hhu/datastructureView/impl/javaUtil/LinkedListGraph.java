@@ -22,6 +22,9 @@ import guru.nidi.graphviz.model.Node;
 /* Builds a GraphViz Graph for LinkedLists*/
 public class LinkedListGraph {
     public static Graph buildGraph(List<?> list) {
+        if (list.isEmpty()) {
+            return graph("listGraph");
+        }
 
         Graph g = graph("listGraph").directed()
                 .graphAttr().with(Rank.dir(TOP_TO_BOTTOM))

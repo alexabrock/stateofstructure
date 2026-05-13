@@ -17,6 +17,11 @@ import guru.nidi.graphviz.model.Graph;
 public class ArrayListGraph {
 
     public static Graph buildGraph(ArrayList<?> list) {
+
+
+        if (list.isEmpty()) {
+            return graph("arrayListGraph");
+        }
         
 
         Graph g = graph("arrayListGraph").directed()

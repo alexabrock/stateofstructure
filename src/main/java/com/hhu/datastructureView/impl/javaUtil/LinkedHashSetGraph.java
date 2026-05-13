@@ -25,7 +25,7 @@ public class LinkedHashSetGraph {
 
     // Not using NodeBuilder, since Nodes shouldn't enter the HashSet twice.
     public static Graph buildGraph(LinkedHashSet<?> set) {
-        if (set == null) {
+        if (set.isEmpty()) {
             return graph("linkedHashSetGraph");
         }
 

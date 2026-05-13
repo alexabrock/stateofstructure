@@ -22,10 +22,10 @@ public class PrograLinkedListGraph{
 
     /* Returns a GraphViz Graph for PrograLinkedLists */
     public static Graph buildGraph(PrograLinkedList<?> list) {
-        /*
-         * Since the PrograLinkedList isn't a List, the LinkedListGraphBuilder
-         * can't be reused
-         */
+        if (list.length() == 0) {
+            return graph("prograLinkedListGraph");
+        }
+
         Graph g = graph("prograLinkedListGraph").directed()
                 .graphAttr().with(Rank.dir(TOP_TO_BOTTOM))
                 .nodeAttr().with(Shape.RECTANGLE);

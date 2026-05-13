@@ -17,15 +17,14 @@ import guru.nidi.graphviz.model.Node;
 public class TreeMapGraph {
 
     public static Graph buildGraph(TreeMap<?, ?> map) {
+        if (map.isEmpty()) {
+            return graph("treeMapGraph");
+        }
 
         Graph g = graph("treeMapGraph").nodeAttr().with(
                 attr("fixedsize", "true"),
                 attr("width", "1"),
                 attr("height", "1"));
-
-        if (map.isEmpty()) {
-            return g;
-        }
 
         try {
 
