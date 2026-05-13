@@ -21,4 +21,9 @@ public class Visualizer {
     public static void show() {
         Application.start(drawCalls);
     }
+
+    //To get the DrawCalls back
+    public static DrawCalls getDrawCalls() {
+        return drawCalls;
+    }
 }
