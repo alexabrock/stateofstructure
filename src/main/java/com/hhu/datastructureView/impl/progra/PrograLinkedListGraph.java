@@ -1,7 +1,6 @@
 package com.hhu.datastructureView.impl.progra;
 
 import static com.hhu.datastructureView.NodeBuilder.getNode;
-import static guru.nidi.graphviz.attribute.Rank.RankDir.LEFT_TO_RIGHT;
 import static guru.nidi.graphviz.attribute.Rank.RankDir.TOP_TO_BOTTOM;
 import static guru.nidi.graphviz.model.Factory.graph;
 import static guru.nidi.graphviz.model.Factory.node;
