@@ -47,7 +47,7 @@ public class DrawCalls {
         return drawCalls.get(currentStepIndex);
     }
 
-    <E> void record() {
+    void record() {
 
         JPanel memory = PanelBuilder.createMemoryPanel(collection);
         JPanel datastructure = PanelBuilder.createDatastructurePanel(collection);
