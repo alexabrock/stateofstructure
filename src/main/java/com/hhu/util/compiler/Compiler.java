@@ -20,11 +20,15 @@ Expects, that the class the given String contains defines the Method
     'public void build()'
  */
 public class Compiler {
+    private final static String recordCallReplacement = "Visualizer.record();";
 
     public static DrawCalls compile(String code) {
 
         try {
             Path path = Path.of("src", "main", "java", "GraphvizApp.java");
+
+            code = addRecordCalls(code);
+
             Files.writeString(path, code);
 
             JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
@@ -37,7 +41,7 @@ public class Compiler {
 
             ByteArrayOutputStream errorStream = new ByteArrayOutputStream();
 
-            int compilationResult = compiler.run(null, null, 
+            int compilationResult = compiler.run(null, null,
                     errorStream,
                     "-classpath", classpath,
                     "-d", outputDir.toString(),
@@ -48,30 +52,35 @@ public class Compiler {
             /*
              * URLClassLoader loader = URLClassLoader.newInstance(new URL[] {
              * new File(".").toURI().toURL() });
-             * The default ClassLoader doesn't reload a class once it got compiled and loaded. 
-             * We want the ClassLoader to always reload the GraphVizApp as if it has never seen it bevore
+             * The default ClassLoader doesn't reload a class once it got compiled and
+             * loaded.
+             * We want the ClassLoader to always reload the GraphVizApp as if it has never
+             * seen it bevore
              * (thus not chaching any state).
              * 
-             * Normally, the Classloader loads classes parent-first. Every Classloader, except the very toplevel one, has a parent. 
-             * When asked to load a class, it recursevely askes their parent "Have you already loaded this class?" 
-             * Only if no parent has seen the class, the bottom-level Classloader will load the class itself. 
+             * Normally, the Classloader loads classes parent-first. Every Classloader,
+             * except the very toplevel one, has a parent.
+             * When asked to load a class, it recursevely askes their parent
+             * "Have you already loaded this class?"
+             * Only if no parent has seen the class, the bottom-level Classloader will load
+             * the class itself.
              * 
              * By overwriting loadClass this behaviour is changed.
              * It now does child-first (aka load the class yourself) for GraphvizApp
              * But still delegated all other classes parent-first.
              */
             URLClassLoader loader = new URLClassLoader(
-                    new URL[] { outputDir.toUri().toURL() }, //path to .class file location
+                    new URL[] { outputDir.toUri().toURL() }, // path to .class file location
                     Compiler.class.getClassLoader()) {
                 @Override
                 protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
                     if (name.equals("GraphvizApp")) {
                         Class<?> c = findLoadedClass(name);
                         if (c == null)
-                            c = findClass(name); // look in outputDir first. Does not ask parent. 
-                                                 //asking parent-first for GraphVisApp  
-                                                 //resulted in not having the newest .class file, once it 
-                                                 //had been recompiled 
+                            c = findClass(name); // look in outputDir first. Does not ask parent.
+                                                 // asking parent-first for GraphVisApp
+                                                 // resulted in not having the newest .class file, once it
+                                                 // had been recompiled
                         if (resolve)
                             resolveClass(c);
                         return c;
@@ -83,9 +92,10 @@ public class Compiler {
             Class<?> klasse = Class.forName("GraphvizApp", true, loader);
 
             Object o = klasse.getConstructor().newInstance();
-            //invoke the build method. After this, the static drawcalls-Wrapper Visualizer is filled with drawcall recordings
+            // invoke the build method. After this, the static drawcalls-Wrapper Visualizer
+            // is filled with drawcall recordings
             klasse.getMethod("build").invoke(o);
-            //get the now filled drawcalls
+            // get the now filled drawcalls
             DrawCalls drawCalls = Visualizer.getDrawCalls();
 
             return drawCalls;
@@ -107,7 +117,7 @@ public class Compiler {
                     "Loading error: Could not find the compiled 'GraphvizApp' class. Check for package declaration mismatches.",
                     e);
         } catch (InvocationTargetException e) {
-            //the user's code itself threw an exception
+            // the user's code itself threw an exception
             throw new CompilationException(
                     "Runtime error in user code: " + e.getTargetException().toString(), e);
         } catch (InstantiationException | IllegalAccessException e) {
@@ -116,5 +126,71 @@ public class Compiler {
                     e);
         }
 
+    }
+
+    // Adds the Visualizer.record() calls after every line inside the build()
+    // method, that is after the collection.register(...)
+    private static String addRecordCalls(String code) {
+        String methodHeader = "public void build() {";
+        int startIdx = code.indexOf(methodHeader);
+
+        // if the build() method doesn't exist, return original code
+        if (startIdx == -1)
+            return code;
+
+        // Identify the boundaries of the build() method body
+        int bodyStart = startIdx + methodHeader.length();
+        int braceCount = 1;
+        int bodyEnd = -1;
+
+        for (int i = bodyStart; i < code.length(); i++) {
+            if (code.charAt(i) == '{')
+                braceCount++;
+            else if (code.charAt(i) == '}')
+                braceCount--;
+
+            if (braceCount == 0) {
+                bodyEnd = i;
+                break;
+            }
+        }
+
+        if (bodyEnd == -1)
+            return code; // Safety check for malformed code
+        
+        // Split the code into Head (imports/class), Body (build method), and Tail
+        // (rest of class)
+        String head = code.substring(0, bodyStart);
+        String body = code.substring(bodyStart, bodyEnd);
+        String tail = code.substring(bodyEnd);
+
+        // Find the Visualizer.register call to use as a pivot
+        String registerKey = "Visualizer.register";
+        int registerIdx = body.indexOf(registerKey);
+
+        if (registerIdx == -1) {
+            // If no register is found, don't start recording
+            return head + body + tail;
+        }
+
+        // Find the semicolon of the register line to start processing AFTER it
+        int startRecordingIdx = body.indexOf(";", registerIdx) + 1;
+
+        String setupPart = body.substring(0, startRecordingIdx);
+        String activePart = body.substring(startRecordingIdx);
+
+        // Pattern: [Target] [Lookahead]
+        // Lookahead :( ? [Direction to look to] [Logic] [When to stop looking])
+        // Uses Negative Lookahead (?!) to avoid semicolons inside parentheses
+        String regex = ";(?!.*\\))";
+
+        String modifiedActivePart = activePart.replaceAll(regex, ";" + recordCallReplacement);
+        modifiedActivePart = activePart.replaceAll("(?m)$", recordCallReplacement);
+        // Reconstruct the full string
+        return head + setupPart + modifiedActivePart + tail;
+    }
+
+    public static String getRecordCallReplacement(){
+        return recordCallReplacement;
     }
 }

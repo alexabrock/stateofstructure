@@ -17,6 +17,9 @@ import org.fife.ui.rsyntaxtextarea.Theme;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
 import com.hhu.ui.Colors;
+import com.hhu.util.compiler.Compiler;
+
+import java.util.regex.Pattern;
 
 /*
  * Returns the CodePanel. A Swing Representation of a given Code-String
@@ -29,20 +32,13 @@ class CodePanelBuilder {
 
     private CodePanelBuilder() {
     }
-
-    /*
-     * Returns a JPanel, that holds a Syntax-Highlighted form of the given Code with
-     * no line highlighted.
-     */
-    public static JPanel create(String code) {
-        return create(code, -1);
-    }
-
     /*
      * Returns a JPanel, that holds a Syntax-Highlighted form of the given Code with the given line highlighted.
      */
     public static JPanel create(String code, int lineNumber) {
-        RSyntaxTextArea textArea = createTextArea(code, lineNumber);
+        String newCode = removeRecordCalls(code);
+
+        RSyntaxTextArea textArea = createTextArea(newCode, lineNumber);
         RTextScrollPane scrollPane = new RTextScrollPane(textArea);
 
         JLabel headline = new JLabel("Source Code", SwingConstants.CENTER);
@@ -60,6 +56,9 @@ class CodePanelBuilder {
         return panel;
     }
 
+    private static String removeRecordCalls(String code) {
+        return code.replace(Compiler.getRecordCallReplacement(), "");
+    }
     /*
      * Returns a Syntax-Highlighted TextArea of a given String
      */

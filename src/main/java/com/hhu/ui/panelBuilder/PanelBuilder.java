@@ -25,10 +25,6 @@ public class PanelBuilder {
         return MemoryPanelBuilder.create(collection);
     }
 
-    public static JPanel createCodePanel(String code) {
-        ThemeStyler.applyDarkTheme();
-        return CodePanelBuilder.create(code);
-    }
 
     public static JLabel createNameLabel(String name) {
         JLabel label = new JLabel(name, SwingConstants.CENTER);
