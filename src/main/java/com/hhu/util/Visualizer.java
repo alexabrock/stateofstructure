@@ -6,12 +6,12 @@ import com.hhu.ui.application.Application;
 public class Visualizer {
     private static DrawCalls drawCalls;
 
-    //changes the Datastructure to be Visualized. If changed, the old Visualizations are forgotten.
+    //changes the Datastructure to be visualized. If changed, the old visualizations are forgotten.
     public static void register(Object collection) {
         drawCalls = new DrawCalls(collection);
     }
 
-    //Captures the state of a Datastructure
+    //Captures the state of a datastructure
     public static void record() {
         if (drawCalls != null) {
             drawCalls.record();
