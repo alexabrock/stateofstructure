@@ -1,6 +1,8 @@
 package com.hhu.util.compiler;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -33,11 +35,17 @@ public class Compiler {
             Files.createDirectories(outputDir);
 
             String classpath = System.getProperty("java.class.path");
-            compiler.run(null, null, null,
+
+            ByteArrayOutputStream errorStream = new ByteArrayOutputStream();
+
+            int compilationResult = compiler.run(null, null, 
+                    errorStream,
                     "-classpath", classpath,
                     "-d", outputDir.toString(),
                     path.toString());
-
+            if (compilationResult != 0) {
+                throw new CompilationException("Syntax Error in User Code:\n\n" + errorStream.toString());
+            }
             /*
              * URLClassLoader loader = URLClassLoader.newInstance(new URL[] {
              * new File(".").toURI().toURL() });
@@ -86,25 +94,27 @@ public class Compiler {
         } catch (NoSuchMethodException e) {
             throw new CompilationException(
                     """
-                            CompilationException: Expected execution entry method not found.
-
-                            Required signature:
-                                public void build()
+                            Execution failed: The method 'public void build()' was not found.
+                            Make sure the provided code defines a class named 'GraphvizApp' with a 'build()' method.
                             """, e);
         } catch (ClassCastException e) {
             throw new CompilationException(
-                    "CompilationException: build-Method did not record any Visualizations.", e);
+                    "Result error: The build process did not produce valid visualization data (DrawCalls).", e);
         } catch (IOException e) {
-            throw new CompilationException("File error while writing source code into a File", e);
-
+            throw new CompilationException(
+                    "Environment error: Failed to write source file or create output directory.", e);
         } catch (ClassNotFoundException e) {
-            throw new CompilationException("Class loading failed (classpath/package mismatch)", e);
-
+            throw new CompilationException(
+                    "Loading error: Could not find the compiled 'GraphvizApp' class. Check for package declaration mismatches.",
+                    e);
         } catch (InvocationTargetException e) {
-            throw new CompilationException("User code threw exception: " + e.getTargetException(), e);
-
+            //the user's code itself threw an exception
+            throw new CompilationException(
+                    "Runtime error in user code: " + e.getTargetException().toString(), e);
         } catch (InstantiationException | IllegalAccessException e) {
-            throw new CompilationException("Reflection setup failed (constructor/method issue)", e);
+            throw new CompilationException(
+                    "Reflection error: Could not instantiate 'GraphvizApp'. Ensure it has a public no-args constructor.",
+                    e);
         }
 
     }
