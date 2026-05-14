@@ -1,6 +1,7 @@
 package com.hhu.util;
 
 import java.nio.file.Path;
+import java.util.Optional;
 
 /* Returns information about the Calling Class
     since it only checks if the class is called GraphvizApp, 
@@ -10,20 +11,21 @@ import java.nio.file.Path;
 public class Caller {
     /*
      * Returns the String-representation of the class, that called DrawCalls.record
-     * Assumption: Caller Class is named GraphVizApp 
      */
     static String findCallerClass() {
         StackWalker walker = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE);
 
-        Path path = walker.walk(stream -> stream
-                .filter(f -> f.getClassName().contains("GraphvizApp"))
+        Optional<Path> path = walker.walk(stream -> stream
+                .filter(Caller::isNotUtilityClass)
                 .findFirst()
-                .map(StackWalker.StackFrame::getDeclaringClass)
-                .map(Class::getName)
-                .map(name -> "src/main/java/" + name.replace(".", "/") + ".java")
-                .map(Path::of)
-                .orElse(null));
-        return FileManager.fileToString(path);
+                .map(f -> {
+                    String name = f.getDeclaringClass().getName();
+                    // Check test or main 
+                    String baseDir = name.endsWith("Test") ? "src/test/java/" : "src/main/java/";
+                    return Path.of(baseDir + name.replace(".", "/") + ".java");
+                }));
+
+        return path.map(FileManager::fileToString).orElse("");
     }
 
     /*
@@ -32,15 +34,19 @@ public class Caller {
     static int findCallerLine() {
         StackWalker walker = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE);
 
-        int lineNumber = walker.walk(stream -> stream
-                .filter(f -> f.getClassName().contains("GraphvizApp"))
+        return walker.walk(stream -> stream
+                .filter(Caller::isNotUtilityClass)
                 .findFirst()
-                .map(StackWalker.StackFrame::getLineNumber)
+                .map(f -> f.getLineNumber() - 1) //fix off by 1 error
                 .orElse(-1));
-
-        // fix off by 1 error
-        return lineNumber - 1;
-
+    }
+    
+    private static boolean isNotUtilityClass(StackWalker.StackFrame frame) {
+        String name = frame.getClassName();
+        return !name.equals(Caller.class.getName()) &&
+                !name.equals(DrawCalls.class.getName()) &&
+                !name.equals(Visualizer.class.getName()) &&
+                !name.contains("java.lang.StackWalker"); // Ensure we skip internal walker frames
     }
 
 }
