@@ -5,10 +5,6 @@ import com.hhu.util.Visualizer;
 
 public class GraphvizApp {
 
-    public static void main(String[] args) {
-        startExample();
-    }
-
     public void build() {
         Stack<String> stack = new Stack<>();
         Visualizer.register(stack);
@@ -24,21 +20,5 @@ public class GraphvizApp {
 
         stack.pop();
         Visualizer.record();
-    }
-
-    static void startExample() {
-        LinkedList<String> list = new LinkedList<>();
-        Visualizer.register(list);
-
-        list.add("Lotte");
-        Visualizer.record();
-
-        list.add("Dieter");
-        Visualizer.record();
-
-        list.add("Alexa");
-        Visualizer.record();
-
-        Visualizer.show();
     }
 }
