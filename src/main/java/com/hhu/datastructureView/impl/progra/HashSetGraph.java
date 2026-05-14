@@ -6,7 +6,7 @@ import static guru.nidi.graphviz.model.Factory.graph;
 
 import java.lang.reflect.Field;
 
-import com.hhu.datastructures.prograDatastructures.generic.PrograHashSet;
+import com.hhu.prograDatastructures.generic.PrograHashSet;
 
 import guru.nidi.graphviz.attribute.Shape;
 import guru.nidi.graphviz.model.Graph;

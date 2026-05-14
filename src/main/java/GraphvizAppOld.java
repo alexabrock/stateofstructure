@@ -7,9 +7,9 @@ import java.util.Stack;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import com.hhu.datastructures.prograDatastructures.generic.BinarySearchTree;
-import com.hhu.datastructures.prograDatastructures.generic.PrograHashSet;
-import com.hhu.datastructures.prograDatastructures.generic.PrograLinkedList;
+import com.hhu.prograDatastructures.generic.BinarySearchTree;
+import com.hhu.prograDatastructures.generic.PrograHashSet;
+import com.hhu.prograDatastructures.generic.PrograLinkedList;
 import com.hhu.util.Visualizer;
 
 public class GraphvizAppOld {

@@ -6,8 +6,8 @@ import static guru.nidi.graphviz.model.Factory.graph;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 
-import com.hhu.datastructures.prograDatastructures.generic.BinarySearchTree;
 import com.hhu.datastructureView.impl.TreeGraphUtils;
+import com.hhu.prograDatastructures.generic.BinarySearchTree;
 
 import guru.nidi.graphviz.model.Graph;
 

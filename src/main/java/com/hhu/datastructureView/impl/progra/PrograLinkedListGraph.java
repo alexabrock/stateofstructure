@@ -10,7 +10,7 @@ import static guru.nidi.graphviz.model.Factory.to;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.hhu.datastructures.prograDatastructures.generic.PrograLinkedList;
+import com.hhu.prograDatastructures.generic.PrograLinkedList;
 
 import guru.nidi.graphviz.attribute.Rank;
 import guru.nidi.graphviz.attribute.Shape;
