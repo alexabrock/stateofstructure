@@ -44,7 +44,7 @@ public class TreeSetGraphTest {
         MutableGraph graph = createMutableGraph();
 
         assertTrue(graph.nodes().stream()
-                .anyMatch(n -> n.get("label") != null && n.get("label").toString().equals("Lzxcotte")));
+                .anyMatch(n -> n.get("label") != null && n.get("label").toString().equals("Lotte")));
 
         assertTrue(graph.nodes().stream()
                 .anyMatch(n -> n.get("label") != null && n.get("label").toString().equals("Dieter")));
