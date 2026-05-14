@@ -4,8 +4,6 @@ import static guru.nidi.graphviz.attribute.Attributes.attr;
 import static guru.nidi.graphviz.model.Factory.node;
 
 import guru.nidi.graphviz.attribute.Shape;
-import guru.nidi.graphviz.attribute.Style;
-
 import guru.nidi.graphviz.model.Node;
 
 /* Builds unique Nodes, that will not be Merged by GraphViz */
