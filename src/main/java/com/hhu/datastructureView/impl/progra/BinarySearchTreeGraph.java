@@ -1,4 +1,4 @@
-package com.hhu.datastructureView.impl.progra.generic;
+package com.hhu.datastructureView.impl.progra;
 
 import static guru.nidi.graphviz.attribute.Attributes.attr;
 import static guru.nidi.graphviz.model.Factory.graph;
