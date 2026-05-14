@@ -6,6 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import com.hhu.ui.panelBuilder.ThemeStyler;
+import com.hhu.ui.panelBuilder.TutorialPanel;
 
 /*
  * returns a Panel, that holds the buttons. Initializes those buttons to replace
@@ -21,6 +22,7 @@ class NavigationPanel {
     private JButton prevButton;
     private JButton nextButton;
     private JButton compileButton;
+    private JButton helpButton;
 
     NavigationPanel(
             DrawCallHandler drawCallHandler,
@@ -35,6 +37,7 @@ class NavigationPanel {
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 24, 8));
         ThemeStyler.styleToolbar(buttonPanel);
 
+        helpButton = createButton("Help");
         compileButton = createButton("Compile");
         prevButton = createButton("Previous");
         nextButton = createButton("Next");
@@ -43,6 +46,7 @@ class NavigationPanel {
         refreshNavigationButtons();
         initializeButtonActions(centerPanel);
 
+        buttonPanel.add(helpButton);
         buttonPanel.add(compileButton);
         buttonPanel.add(prevButton);
         buttonPanel.add(nextButton);
@@ -53,7 +57,7 @@ class NavigationPanel {
     void refreshNavigationButtons() {
         updateButtons(prevButton, nextButton, drawCallHandler);
     }
-    
+
     static void updateButtons(JButton prev, JButton next, DrawCallHandler drawCallHandler) {
         prev.setEnabled(drawCallHandler.hasPreviousStep());
         next.setEnabled(drawCallHandler.hasNextStep());
@@ -65,12 +69,17 @@ class NavigationPanel {
         return button;
     }
 
-    //centerPanel is needed, since the compiler, which is linked to the compile Button, 
-    //replaces the text from the codePanel in the centerPanel
+    // centerPanel is needed, since the compiler, which is linked to the compile
+    // Button,
+    // replaces the text from the codePanel in the centerPanel
     private void initializeButtonActions(JPanel centerPanel) {
         prevButton.addActionListener(e -> showPreviousStep(centerPanel));
         nextButton.addActionListener(e -> showNextStep(centerPanel));
         compileButton.addActionListener(e -> createCompilationController().compile(centerPanel, compileButton));
+        helpButton.addActionListener(e -> {
+            TutorialPanel tutorial = new TutorialPanel(centerPanel);
+            tutorial.setVisible(true);
+        });
     }
 
     private CompilationController createCompilationController() {
