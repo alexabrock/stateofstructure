@@ -1,8 +1,8 @@
-package com.hhu.util.graphBuilder.impl.javaUtil;
+package com.hhu.datastructureView.graphBuilder.impl.javaUtil;
 
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
+import java.util.TreeSet;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -11,35 +11,36 @@ import com.hhu.datastructureView.GraphBuilder;
 
 import guru.nidi.graphviz.model.MutableGraph;
 
-public class ArrayListGraphTest {
-    private ArrayList<String> list;
+public class TreeSetGraphTest {
+    private TreeSet<String> set;
 
     @Before
     public void setUp() {
-        list = new ArrayList<>();
+        set = new TreeSet<>();
     }
-    
+
     private MutableGraph createMutableGraph() {
-        return (MutableGraph) GraphBuilder.buildGraph(list);
+        return (MutableGraph) GraphBuilder.buildGraph(set);
     }
 
     @Test
     public void graphContainsSingleStringElement() {
-        list.add("a");
+        set.add("a");
 
         MutableGraph graph = createMutableGraph();
 
         assertTrue(graph.nodes().stream()
                 .anyMatch(n -> n.get("label") != null && n.get("label").toString().equals("a")));
     }
-    
+
     @Test
     public void graphContainsMultipleStringElements() {
-        list.add("Lotte");
-        list.add("Dieter");
-        list.add("Alexa");
-        list.add("Holland");
 
+        set.add("Lotte");
+        set.add("Dieter");
+        set.add("Alexa");
+        set.add("Holland");
+        
         MutableGraph graph = createMutableGraph();
 
         assertTrue(graph.nodes().stream()
@@ -62,5 +63,4 @@ public class ArrayListGraphTest {
 
         assertTrue(graph.nodes().isEmpty());
     }
-
 }

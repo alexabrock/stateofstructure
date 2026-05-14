@@ -1,43 +1,44 @@
-package com.hhu.util.graphBuilder.impl.progra;
+package com.hhu.datastructureView.graphBuilder.impl.javaUtil;
 
 import static org.junit.Assert.assertTrue;
+
+import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import com.hhu.datastructureView.GraphBuilder;
-import com.hhu.prograDatastructures.generic.BinarySearchTree;
 
 import guru.nidi.graphviz.model.MutableGraph;
 
-public class PrograBinarySearchTreeGraphTest {
-    private BinarySearchTree<String> tree;
+public class ArrayListGraphTest {
+    private ArrayList<String> list;
 
     @Before
     public void setUp() {
-        tree = new BinarySearchTree<>();
+        list = new ArrayList<>();
     }
-
+    
     private MutableGraph createMutableGraph() {
-        return (MutableGraph) GraphBuilder.buildGraph(tree);
+        return (MutableGraph) GraphBuilder.buildGraph(list);
     }
 
     @Test
     public void graphContainsSingleStringElement() {
-        tree.insert("a");
+        list.add("a");
 
         MutableGraph graph = createMutableGraph();
 
         assertTrue(graph.nodes().stream()
                 .anyMatch(n -> n.get("label") != null && n.get("label").toString().equals("a")));
     }
-
+    
     @Test
     public void graphContainsMultipleStringElements() {
-        tree.insert("Lotte");
-        tree.insert("Dieter");
-        tree.insert("Alexa");
-        tree.insert("Holland");
+        list.add("Lotte");
+        list.add("Dieter");
+        list.add("Alexa");
+        list.add("Holland");
 
         MutableGraph graph = createMutableGraph();
 

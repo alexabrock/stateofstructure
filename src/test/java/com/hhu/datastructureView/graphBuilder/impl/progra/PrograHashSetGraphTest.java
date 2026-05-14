@@ -1,32 +1,30 @@
-package com.hhu.util.graphBuilder.impl.javaUtil;
+package com.hhu.datastructureView.graphBuilder.impl.progra;
 
 import static org.junit.Assert.assertTrue;
-
-import java.util.Stack;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import com.hhu.datastructureView.GraphBuilder;
+import com.hhu.prograDatastructures.generic.PrograHashSet;
 
-//Mutable graph, weil man so schön an die einzelnen Nodes zum testen kommt
 import guru.nidi.graphviz.model.MutableGraph;
 
-public class StackGraphTest {
-    private Stack<String> stack;
+public class PrograHashSetGraphTest {
+    private PrograHashSet<String> set;
 
     @Before
     public void setUp() {
-        stack = new Stack<>();
+        set = new PrograHashSet<>();
     }
 
     private MutableGraph createMutableGraph() {
-        return (MutableGraph) GraphBuilder.buildGraph(stack);
+        return (MutableGraph) GraphBuilder.buildGraph(set);
     }
 
     @Test
     public void graphContainsSingleStringElement() {
-        stack.add("a");
+        set.insert("a");
 
         MutableGraph graph = createMutableGraph();
 
@@ -36,10 +34,10 @@ public class StackGraphTest {
 
     @Test
     public void graphContainsMultipleStringElements() {
-        stack.add("Lotte");
-        stack.add("Dieter");
-        stack.add("Alexa");
-        stack.add("Holland");
+        set.insert("Lotte");
+        set.insert("Dieter");
+        set.insert("Alexa");
+        set.insert("Holland");
 
         MutableGraph graph = createMutableGraph();
 

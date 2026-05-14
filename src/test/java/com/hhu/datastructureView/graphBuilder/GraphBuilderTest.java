@@ -1,4 +1,4 @@
-package com.hhu.util.graphBuilder;
+package com.hhu.datastructureView.graphBuilder;
 
 import static org.junit.Assert.assertEquals;
 
