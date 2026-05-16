@@ -1,4 +1,3 @@
-import java.util.LinkedList;
 import java.util.Stack;
 
 import com.hhu.util.Visualizer;

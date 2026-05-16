@@ -19,8 +19,6 @@ import org.fife.ui.rtextarea.RTextScrollPane;
 import com.hhu.ui.Colors;
 import com.hhu.util.compiler.Compiler;
 
-import java.util.regex.Pattern;
-
 /*
  * Returns the CodePanel. A Swing Representation of a given Code-String
  */
