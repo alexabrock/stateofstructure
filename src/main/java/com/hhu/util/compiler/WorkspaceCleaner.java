@@ -12,11 +12,11 @@ public class WorkspaceCleaner {
             "src",
             "main",
             "java");
-    private static final Path DEFAULT_GRAPHVIZ_APP = Path.of(
+    private static final Path DEFAULT_APP = Path.of(
             "src",
             "main",
             "resources",
-            "GraphvizAppDefault.txt");
+            "StateOfStructureDefault.txt");
 
     public void registerShutdownCleanup() {
         Runtime.getRuntime().addShutdownHook(new Thread(this::cleanup));
@@ -24,17 +24,17 @@ public class WorkspaceCleaner {
 
     private void cleanup() {
         try {
-            Files.deleteIfExists(COMPILED_CLASSES_DIR.resolve("GraphvizApp.class"));
-            restoreDefaultGraphvizApp();
+            Files.deleteIfExists(COMPILED_CLASSES_DIR.resolve("StateOfStructure.class"));
+            restoreDefaultClass();
         } catch (Exception ignored) {
         }
     }
 
-    private void restoreDefaultGraphvizApp() throws java.io.IOException {
-        if (Files.exists(DEFAULT_GRAPHVIZ_APP)) {
+    private void restoreDefaultClass() throws java.io.IOException {
+        if (Files.exists(DEFAULT_APP)) {
             Files.writeString(
-                    COMPILED_CLASSES_DIR.resolve("GraphvizApp.java"),
-                    Files.readString(DEFAULT_GRAPHVIZ_APP));
+                    COMPILED_CLASSES_DIR.resolve("StateOfStructure.java"),
+                    Files.readString(DEFAULT_APP));
         }
     }
 }

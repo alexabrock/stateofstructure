@@ -1,11 +1,10 @@
-import java.util.LinkedList;
 import java.util.Stack;
 
 import com.hhu.util.Visualizer;
 
-public class GraphvizApp {
+public class StateOfStructure {
 
-    public void build() {
+    public void main() {
         Stack<String> stack = new Stack<>();
         Visualizer.register(stack);
         stack.push("Hello");

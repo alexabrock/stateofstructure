@@ -25,7 +25,7 @@ public class Compiler {
     public static DrawCalls compile(String code) {
 
         try {
-            Path path = Path.of("src", "main", "java", "GraphvizApp.java");
+            Path path = Path.of("src", "main", "java", "StateOfStructure.java");
 
             code = addRecordCalls(code);
 
@@ -74,7 +74,7 @@ public class Compiler {
                     Compiler.class.getClassLoader()) {
                 @Override
                 protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
-                    if (name.equals("GraphvizApp")) {
+                    if (name.equals("StateOfStructure")) {
                         Class<?> c = findLoadedClass(name);
                         if (c == null)
                             c = findClass(name); // look in outputDir first. Does not ask parent.
@@ -89,12 +89,12 @@ public class Compiler {
                 }
             };
 
-            Class<?> klasse = Class.forName("GraphvizApp", true, loader);
+            Class<?> klasse = Class.forName("StateOfStructure", true, loader);
 
             Object o = klasse.getConstructor().newInstance();
             // invoke the build method. After this, the static drawcalls-Wrapper Visualizer
             // is filled with drawcall recordings
-            klasse.getMethod("build").invoke(o);
+            klasse.getMethod("main").invoke(o);
             // get the now filled drawcalls
             DrawCalls drawCalls = Visualizer.getDrawCalls();
 
@@ -103,8 +103,8 @@ public class Compiler {
         } catch (NoSuchMethodException e) {
             throw new CompilationException(
                     """
-                            Execution failed: The method 'public void build()' was not found.
-                            Make sure the provided code defines a class named 'GraphvizApp' with a 'build()' method.
+                            Execution failed: The method 'public void main()' was not found.
+                            Make sure the provided code defines a class named 'StateOfStructure' with a 'main()' method.
                             """, e);
         } catch (ClassCastException e) {
             throw new CompilationException(
@@ -131,12 +131,25 @@ public class Compiler {
     // Adds the Visualizer.record() calls after every line inside the build()
     // method, that is after the collection.register(...)
     private static String addRecordCalls(String code) {
-        String methodHeader = "public void build() {";
+        String methodHeader = "public void main() {";
         int startIdx = code.indexOf(methodHeader);
 
+
         // if the build() method doesn't exist, return original code
-        if (startIdx == -1)
+        if (startIdx == -1) {
+            // method shouldn't be static
+            int staticIdx = code.indexOf("public static void main() {");
+            if (staticIdx != -1) {
+                throw new CompilationException(
+                        """
+                                Execution failed: The main method should not be static.
+                                
+                                Make sure the provided code defines a class named 'StateOfStructure' with a not static 'main()' method.
+                                """);
+                
+            }
             return code;
+        }   
 
         // Identify the boundaries of the build() method body
         int bodyStart = startIdx + methodHeader.length();
@@ -157,7 +170,7 @@ public class Compiler {
 
         if (bodyEnd == -1)
             return code; // Safety check for malformed code
-        
+
         // Split the code into Head (imports/class), Body (build method), and Tail
         // (rest of class)
         String head = code.substring(0, bodyStart);
@@ -190,7 +203,7 @@ public class Compiler {
         return head + setupPart + modifiedActivePart + tail;
     }
 
-    public static String getRecordCallReplacement(){
+    public static String getRecordCallReplacement() {
         return recordCallReplacement;
     }
 }
