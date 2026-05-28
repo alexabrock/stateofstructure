@@ -30,7 +30,7 @@ public class ThemeStyler {
             return;
         }
 
-        FlatDarkLaf.setup();
+       // FlatDarkLaf.setup();
         initialized = true;
     }
 
@@ -63,7 +63,7 @@ public class ThemeStyler {
      */
     public static void styleHeadline(JLabel label) {
         label.setFont(HEADLINE_FONT);
-        label.setForeground(Color.WHITE);
+        label.setForeground(Color.BLACK);
     }
     
     /*
@@ -77,9 +77,16 @@ public class ThemeStyler {
      * sets the font, margin and size of the button
      */
     public static void styleNavigationButton(JButton button) {
-        button.setFont(button.getFont().deriveFont(Font.BOLD, 18f));
-        button.setMargin(new Insets(10, 24, 10, 24));
+        button.setFont(button.getFont().deriveFont(Font.BOLD, 16f));
         button.setPreferredSize(new Dimension(160, 56));
+
+        button.setBackground(Color.WHITE);
+        button.setForeground(new Color(26, 26, 26));
+        button.setFocusPainted(false);
+
+        // Erstellt einen hauchdünnen, modernen Rahmen statt des klobigen
+        // Swing-Standards
+        button.setBorder(BorderFactory.createLineBorder(new Color(218, 220, 224), 1));
     }
 
 }

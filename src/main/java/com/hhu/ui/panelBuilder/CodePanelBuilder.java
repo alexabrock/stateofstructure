@@ -104,7 +104,7 @@ class CodePanelBuilder {
             //get darkMode theme from Libary
             Theme theme = Theme.load(CodePanelBuilder.class.getResourceAsStream(
                     "/org/fife/ui/rsyntaxtextarea/themes/monokai.xml"));
-            theme.apply(textArea);
+           // theme.apply(textArea);
         } catch (IOException e) {
             //Fallback colors
             textArea.setBackground(Colors.TEXT_BACKGROUND_COLOR);
