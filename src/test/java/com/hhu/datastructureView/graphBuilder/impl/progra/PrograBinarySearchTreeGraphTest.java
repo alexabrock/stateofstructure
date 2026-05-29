@@ -6,16 +6,16 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.hhu.datastructureView.GraphBuilder;
-import com.hhu.prograDatastructures.generic.BinarySearchTree;
+import com.hhu.prograDatastructures.generic.PrograBinarySearchTree;
 
 import guru.nidi.graphviz.model.MutableGraph;
 
 public class PrograBinarySearchTreeGraphTest {
-    private BinarySearchTree<String> tree;
+    private PrograBinarySearchTree<String> tree;
 
     @Before
     public void setUp() {
-        tree = new BinarySearchTree<>();
+        tree = new PrograBinarySearchTree<>();
     }
 
     private MutableGraph createMutableGraph() {

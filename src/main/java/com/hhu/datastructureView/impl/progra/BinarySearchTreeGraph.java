@@ -7,14 +7,14 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 
 import com.hhu.datastructureView.impl.TreeGraphUtils;
-import com.hhu.prograDatastructures.generic.BinarySearchTree;
+import com.hhu.prograDatastructures.generic.PrograBinarySearchTree;
 
 import guru.nidi.graphviz.model.Graph;
 
 /* Builds a GraphViz Graph for Progra BinarySearchTrees */
 public class BinarySearchTreeGraph {
 
-    public static Graph buildGraph(BinarySearchTree<?> tree) {
+    public static Graph buildGraph(PrograBinarySearchTree<?> tree) {
 
         try {
             if (tree.size() == 0) {
@@ -22,7 +22,7 @@ public class BinarySearchTreeGraph {
             }
 
             // Zugriff auf root node
-            Field rootField = BinarySearchTree.class.getDeclaredField("root");
+            Field rootField = PrograBinarySearchTree.class.getDeclaredField("root");
             rootField.setAccessible(true);
             Object root = rootField.get(tree);
 

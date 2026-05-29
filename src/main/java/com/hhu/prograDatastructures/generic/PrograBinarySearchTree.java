@@ -1,6 +1,6 @@
 package com.hhu.prograDatastructures.generic;
 
-public class BinarySearchTree<T extends Comparable<T>> {
+public class PrograBinarySearchTree<T extends Comparable<T>> {
 
     private class BinaryNode {
         private T element;

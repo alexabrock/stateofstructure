@@ -14,7 +14,7 @@ import java.util.TreeSet;
 import org.junit.Test;
 
 import com.hhu.datastructureView.GraphBuilder;
-import com.hhu.prograDatastructures.generic.BinarySearchTree;
+import com.hhu.prograDatastructures.generic.PrograBinarySearchTree;
 import com.hhu.prograDatastructures.generic.PrograHashSet;
 import com.hhu.prograDatastructures.generic.PrograLinkedList;
 
@@ -69,7 +69,7 @@ public class GraphBuilderTest {
 
     @Test
     public void testUseBinarySearchTreeRenderer() {
-        BinarySearchTree<?> collection = new BinarySearchTree<>();
+        PrograBinarySearchTree<?> collection = new PrograBinarySearchTree<>();
         confirmGraphName(collection, "binarySearchTreeGraph");
     }
 

@@ -16,7 +16,7 @@ import com.hhu.datastructureView.impl.javaUtil.TreeSetGraph;
 import com.hhu.datastructureView.impl.progra.BinarySearchTreeGraph;
 import com.hhu.datastructureView.impl.progra.HashSetGraph;
 import com.hhu.datastructureView.impl.progra.PrograLinkedListGraph;
-import com.hhu.prograDatastructures.generic.BinarySearchTree;
+import com.hhu.prograDatastructures.generic.PrograBinarySearchTree;
 import com.hhu.prograDatastructures.generic.PrograHashSet;
 import com.hhu.prograDatastructures.generic.PrograLinkedList;
 
@@ -56,7 +56,7 @@ public class GraphBuilder {
             case PrograLinkedList<?> list ->
                 PrograLinkedListGraph.buildGraph(list);
 
-            case BinarySearchTree<?> tree -> 
+            case PrograBinarySearchTree<?> tree -> 
                 BinarySearchTreeGraph.buildGraph(tree);
 
             case PrograHashSet<?> set -> 

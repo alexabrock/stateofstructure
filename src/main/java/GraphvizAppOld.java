@@ -7,7 +7,7 @@ import java.util.Stack;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import com.hhu.prograDatastructures.generic.BinarySearchTree;
+import com.hhu.prograDatastructures.generic.PrograBinarySearchTree;
 import com.hhu.prograDatastructures.generic.PrograHashSet;
 import com.hhu.prograDatastructures.generic.PrograLinkedList;
 import com.hhu.util.Visualizer;
@@ -49,7 +49,7 @@ public class GraphvizAppOld {
     }
 
     static void startBinarySearchTreeApplication() {
-        BinarySearchTree<String> treeSet = new BinarySearchTree<>();
+        PrograBinarySearchTree<String> treeSet = new PrograBinarySearchTree<>();
         Visualizer.register(treeSet);
 
         treeSet.insert("Hello");
