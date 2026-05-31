@@ -1,6 +1,7 @@
 package com.hhu.datastructureView;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.Stack;
@@ -8,13 +9,14 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 import com.hhu.datastructureView.impl.javaUtil.ArrayListGraph;
+import com.hhu.datastructureView.impl.javaUtil.HashSetGraph;
 import com.hhu.datastructureView.impl.javaUtil.LinkedHashSetGraph;
 import com.hhu.datastructureView.impl.javaUtil.LinkedListGraph;
 import com.hhu.datastructureView.impl.javaUtil.StackGraph;
 import com.hhu.datastructureView.impl.javaUtil.TreeMapGraph;
 import com.hhu.datastructureView.impl.javaUtil.TreeSetGraph;
 import com.hhu.datastructureView.impl.progra.BinarySearchTreeGraph;
-import com.hhu.datastructureView.impl.progra.HashSetGraph;
+import com.hhu.datastructureView.impl.progra.PrograHashSetGraph;
 import com.hhu.datastructureView.impl.progra.PrograLinkedListGraph;
 import com.hhu.prograDatastructures.generic.PrograBinarySearchTree;
 import com.hhu.prograDatastructures.generic.PrograHashSet;
@@ -51,6 +53,9 @@ public class GraphBuilder {
             case TreeSet<?> set ->
                 TreeSetGraph.buildGraph(set);
 
+            case HashSet<?> set -> 
+                HashSetGraph.buildGraph(set);
+
             /* Progra */
 
             case PrograLinkedList<?> list ->
@@ -60,7 +65,7 @@ public class GraphBuilder {
                 BinarySearchTreeGraph.buildGraph(tree);
 
             case PrograHashSet<?> set -> 
-                HashSetGraph.buildGraph(set);
+                PrograHashSetGraph.buildGraph(set);
 
             default ->
                 throw new IllegalArgumentException(
