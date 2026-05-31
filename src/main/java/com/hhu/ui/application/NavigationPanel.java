@@ -5,8 +5,8 @@ import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import com.hhu.ui.panelBuilder.ThemeStyler;
 import com.hhu.ui.panelBuilder.TutorialPanel;
+import com.hhu.util.ThemeStyler;
 
 /*
  * returns a Panel, that holds the buttons. Initializes those buttons to replace

@@ -49,6 +49,12 @@
         <artifactId>flatlaf</artifactId>
         <version>3.4</version>
     </dependency>
+    <!-- Libary for LightMode-->
+    <dependency>
+        <groupId>com.formdev</groupId>
+        <artifactId>flatlaf-intellij-themes</artifactId>
+        <version>3.4</version>
+    </dependency>
 
     <dependency>
         <groupId>junit</groupId>

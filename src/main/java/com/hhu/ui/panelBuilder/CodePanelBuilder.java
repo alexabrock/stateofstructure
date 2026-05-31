@@ -17,6 +17,7 @@ import org.fife.ui.rsyntaxtextarea.Theme;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
 import com.hhu.ui.Colors;
+import com.hhu.util.ThemeStyler;
 import com.hhu.util.compiler.Compiler;
 
 /*

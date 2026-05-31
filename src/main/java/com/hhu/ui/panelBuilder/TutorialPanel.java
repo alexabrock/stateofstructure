@@ -16,11 +16,13 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
+import com.hhu.util.ThemeStyler;
+
 public class TutorialPanel extends JPanel {
     private final CardLayout cardLayout = new CardLayout();
     private final JPanel slideContainer = new JPanel(cardLayout);
     private int currentSlide = 1;
-    private final int totalSlides = 3;
+    private final int totalSlides = 4;
 
     public TutorialPanel(JPanel parent) {
         // 1. Find the top-level Window to attach the Dialog
@@ -39,40 +41,43 @@ public class TutorialPanel extends JPanel {
         dialog.add(createControlPanel(dialog), BorderLayout.SOUTH);
 
         // 5. Display Settings
-        dialog.pack(); // Sizes dialog to fit content
-        dialog.setSize(500, 400);
+        dialog.pack(); 
+        dialog.setSize(1000, 800);
         dialog.setLocationRelativeTo(parent); // Centers over the parent panel
         dialog.setVisible(true);
     }
 
     private void setupSlides() {
-        slideContainer.add(createSlide("Welcome to Visualizer",
-                "This tool helps you see your data structures in real-time."), "1");
+        slideContainer.add(
+                createPrettySlide("welcome.png"), "1");
+        slideContainer.add(
+                createPrettySlide("recording.png"), "2");
+                
+        slideContainer.add(
+                createPrettySlide("navigation.png"), "3");
 
-        slideContainer.add(createSlide("Recording State",
-                "Use <b>Visualizer.record()</b> inside your loops to capture steps."), "2");
-
-        slideContainer.add(createSlide("Navigation",
-                "Use the 'Next' and 'Prev' buttons in the app to walk through code execution."), "3");
+        slideContainer.add(
+                createPrettySlide("compileButton.png"), "4");
                 
     }
 
-    private JPanel createPrettySlide(String title, String description, String imagePath) {
-        JPanel card = new JPanel(new BorderLayout(15, 15));
+    private JPanel createPrettySlide(String imagePath) {
+        JPanel card = new JPanel(new BorderLayout());
         card.setBackground(Color.WHITE);
-        card.setBorder(BorderFactory.createEmptyBorder(25, 25, 25, 25));
 
-        // Header with custom font
-        JLabel lblTitle = new JLabel(title);
-        lblTitle.setFont(new Font("SansSerif", Font.BOLD, 22));
-        lblTitle.setForeground(new Color(52, 73, 94));
+        java.net.URL imgUrl = getClass().getClassLoader().getResource(imagePath);
+        if (imgUrl != null) {
+            javax.swing.ImageIcon icon = new javax.swing.ImageIcon(imgUrl);
 
-        // Description using HTML for line-wrapping
-        JLabel lblDesc = new JLabel("<html><body style='width: 300px'>" + description + "</body></html>");
-        lblDesc.setFont(new Font("SansSerif", Font.PLAIN, 14));
+            // Zielbreite festlegen
+            int targetWidth = 900;
+            // Höhe proportional berechnen
+            int targetHeight = (int) (targetWidth * 1232.0 / 1654.0);
 
-        card.add(lblTitle, BorderLayout.NORTH);
-        card.add(lblDesc, BorderLayout.CENTER);
+            java.awt.Image img = icon.getImage().getScaledInstance(targetWidth, targetHeight,
+                    java.awt.Image.SCALE_SMOOTH);
+            card.add(new JLabel(new javax.swing.ImageIcon(img)), BorderLayout.CENTER);
+        }
 
         return card;
     }
@@ -94,12 +99,17 @@ public class TutorialPanel extends JPanel {
         JPanel controls = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
         JButton prevBtn = new JButton("Previous");
+        prevBtn.setEnabled(false);
         JButton nextBtn = new JButton("Next");
 
         prevBtn.addActionListener(e -> {
             if (currentSlide > 1) {
                 currentSlide--;
                 cardLayout.show(slideContainer, String.valueOf(currentSlide));
+                prevBtn.setEnabled(currentSlide > 1);
+                if (currentSlide != totalSlides) {
+                    nextBtn.setText("Next");
+                }
             }
         });
 
@@ -107,10 +117,21 @@ public class TutorialPanel extends JPanel {
             if (currentSlide < totalSlides) {
                 currentSlide++;
                 cardLayout.show(slideContainer, String.valueOf(currentSlide));
-            } else {
-                dialog.dispose(); // Close on last slide
+
+                if (currentSlide == totalSlides) {
+                    nextBtn.setText("Close");
+                }
+                if (currentSlide > 1) {
+                    prevBtn.setEnabled(true);
+                }
+            }
+            else {
+                dialog.dispose();
             }
         });
+
+        ThemeStyler.styleNavigationButton(prevBtn);
+        ThemeStyler.styleNavigationButton(nextBtn);
 
         controls.add(prevBtn);
         controls.add(nextBtn);

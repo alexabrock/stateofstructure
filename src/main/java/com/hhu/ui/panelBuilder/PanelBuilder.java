@@ -4,6 +4,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import com.hhu.util.ThemeStyler;
+
 /*
  * Returns a JPanel from an Object
  */
@@ -16,15 +18,14 @@ public class PanelBuilder {
      */
 
     public static JPanel createDatastructurePanel(Object collection) {
-        ThemeStyler.applyDarkTheme();
+        ThemeStyler.applyTheme();
         return DataStructurePanelBuilder.create(collection);
     }
 
     public static JPanel createMemoryPanel(Object collection) {
-        ThemeStyler.applyDarkTheme();
+        ThemeStyler.applyTheme();
         return MemoryPanelBuilder.create(collection);
     }
-
 
     public static JLabel createNameLabel(String name) {
         JLabel label = new JLabel(name, SwingConstants.CENTER);
@@ -34,7 +35,7 @@ public class PanelBuilder {
     }
 
     public static JPanel createCodePanel(String code, int lineNumber) {
-        ThemeStyler.applyDarkTheme();
+        ThemeStyler.applyTheme();
         return CodePanelBuilder.create(code, lineNumber);
     }
 }

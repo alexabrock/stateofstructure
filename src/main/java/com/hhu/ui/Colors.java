@@ -3,9 +3,6 @@ package com.hhu.ui;
 import java.awt.Color;
 
 public class Colors {
-
-
-
     // DARK MODE COLORS
 
     // Memory Colors 
@@ -28,14 +25,14 @@ public class Colors {
     // LIGHT MODE COLORS 
 
     // Memory Colors 
-    public static final String BG_COLORM = "#eeeeee";
+    public static final String BG_COLORM = "#f2f2f2";
     public static final String FG_COLORM = "#1A1A1A";
     public static final String EDGE_COLORM = "#7F7F7F";
-    public static final String NODE_FILL_COLORM = "#eeeeee"; // FFF9E6
-    public static final String NODE_BORDER_COLORM = "#B38F00";
+    public static final String NODE_FILL_COLORM = "#fff0bf"; // FFF9E6
+    public static final String NODE_BORDER_COLORM = "#fff0bf"; // eabb00
 
     // Datastructure Colors 
-    public static final String BG_COLORD = "#eeeeee";
+    public static final String BG_COLORD = "#f2f2f2";
     public static final String FG_COLORD = "#1A1A1A";
     public static final String EDGE_COLORD = "#7F7F7F";
     public static final String NODE_FILL_COLORD = "#CBE7F5";

@@ -9,6 +9,7 @@ import javax.swing.SwingConstants;
 import org.atpfivt.ljv.LJV;
 
 import com.hhu.ui.Colors;
+import com.hhu.util.ThemeStyler;
 
 /*
 * Builds the Memory Panel. An abstract vizualisation of a given collection in the Java-Heap.

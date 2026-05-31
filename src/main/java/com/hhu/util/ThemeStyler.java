@@ -1,4 +1,4 @@
-package com.hhu.ui.panelBuilder;
+package com.hhu.util;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -10,13 +10,20 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.intellijthemes.FlatArcIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatArcOrangeIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatGradiantoMidnightBlueIJTheme;
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.hhu.ui.Colors;
 
-    /*
-     * Handles the styling of Swing-Components in the view Package.
-     */
+/*
+ * Handles the styling of Swing-Components in the view Package.
+ */
 public class ThemeStyler {
 
     private static boolean initialized;
@@ -25,12 +32,11 @@ public class ThemeStyler {
     private ThemeStyler() {
     }
 
-    public static void applyDarkTheme() {
+    public static void applyTheme() {
         if (initialized) {
             return;
         }
-
-       // FlatDarkLaf.setup();
+        FlatLightLaf.setup();
         initialized = true;
     }
 
@@ -65,7 +71,7 @@ public class ThemeStyler {
         label.setFont(HEADLINE_FONT);
         label.setForeground(Color.BLACK);
     }
-    
+
     /*
      * adds a border around the Panel
      */

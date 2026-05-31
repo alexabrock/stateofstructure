@@ -10,9 +10,9 @@ import javax.swing.SwingUtilities;
 
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
-import com.hhu.ui.panelBuilder.ThemeStyler;
 import com.hhu.util.DrawCalls;
 import com.hhu.util.DrawStep;
+import com.hhu.util.ThemeStyler;
 import com.hhu.util.compiler.WorkspaceCleaner;
 
 public class Application {
@@ -40,12 +40,12 @@ public class Application {
             return;
         }
 
-        ThemeStyler.applyDarkTheme();
+        ThemeStyler.applyTheme();
 
         SwingUtilities.invokeLater(() -> new Application(givenDrawCalls).show());
     }
-    
-    static void updateButtons(JButton prev,JButton next) {
+
+    static void updateButtons(JButton prev, JButton next) {
         if (currentState == null) {
             prev.setEnabled(false);
             next.setEnabled(false);
@@ -53,7 +53,7 @@ public class Application {
         }
         NavigationPanel.updateButtons(prev, next, currentState);
     }
-    
+
     /*
      * returns the very outer shell of the Application.
      */
@@ -88,6 +88,7 @@ public class Application {
     static void replacePanels(JPanel residesIn, DrawStep step) {
         newDrawStepView().showStep(residesIn, step);
     }
+
     static RSyntaxTextArea findSyntaxTextArea(Component root) {
         return new CodePanelScroller().findSyntaxTextArea(root);
     }
@@ -107,7 +108,6 @@ public class Application {
         return new DrawStepPanel(new CodePanelScroller());
     }
 
-    
     private void show() {
         /*
          * need to initialize these, so the button logik is cleaner (button can just

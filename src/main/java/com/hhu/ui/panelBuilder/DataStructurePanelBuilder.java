@@ -10,6 +10,7 @@ import javax.swing.SwingConstants;
 
 import com.hhu.datastructureView.GraphBuilder;
 import com.hhu.ui.Colors;
+import com.hhu.util.ThemeStyler;
 
 import guru.nidi.graphviz.model.Graph;
 
