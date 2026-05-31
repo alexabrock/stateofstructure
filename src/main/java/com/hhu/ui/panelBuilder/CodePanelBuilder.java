@@ -3,7 +3,6 @@ package com.hhu.ui.panelBuilder;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.Insets;
-import java.io.IOException;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -13,7 +12,6 @@ import javax.swing.text.BadLocationException;
 
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
-import org.fife.ui.rsyntaxtextarea.Theme;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
 import com.hhu.ui.Colors;
@@ -31,8 +29,10 @@ class CodePanelBuilder {
 
     private CodePanelBuilder() {
     }
+
     /*
-     * Returns a JPanel, that holds a Syntax-Highlighted form of the given Code with the given line highlighted.
+     * Returns a JPanel, that holds a Syntax-Highlighted form of the given Code with
+     * the given line highlighted.
      */
     public static JPanel create(String code, int lineNumber) {
         String newCode = removeRecordCalls(code);
@@ -45,7 +45,7 @@ class CodePanelBuilder {
 
         JPanel panel = new JPanel(new BorderLayout(0, 8));
         panel.setBorder(new TitledBorder("Code"));
-        ThemeStyler.styleModernCard(panel);
+        ThemeStyler.styleCodeCard(panel);
 
         panel.add(headline, BorderLayout.NORTH);
         panel.add(scrollPane, BorderLayout.CENTER);
@@ -58,6 +58,7 @@ class CodePanelBuilder {
     private static String removeRecordCalls(String code) {
         return code.replace(Compiler.getRecordCallReplacement(), "");
     }
+
     /*
      * Returns a Syntax-Highlighted TextArea of a given String
      */
@@ -70,7 +71,6 @@ class CodePanelBuilder {
         textArea.setCodeFoldingEnabled(true);
         textArea.setEditable(true);
         textArea.setAntiAliasingEnabled(true);
-        applyDarkSyntaxTheme(textArea);
         textArea.setFont(CODE_FONT);
         textArea.setMargin(new Insets(10, 10, 10, 50));
         textArea.setHighlightCurrentLine(false);
@@ -96,27 +96,10 @@ class CodePanelBuilder {
             e.printStackTrace();
         }
     }
-    
-    /*
-     * Changes the Colors to be using DarkMode
-     */
-    private static void applyDarkSyntaxTheme(RSyntaxTextArea textArea) {
-        try {
-            //get darkMode theme from Libary
-            Theme theme = Theme.load(CodePanelBuilder.class.getResourceAsStream(
-                    "/org/fife/ui/rsyntaxtextarea/themes/monokai.xml"));
-           // theme.apply(textArea);
-        } catch (IOException e) {
-            //Fallback colors
-            textArea.setBackground(Colors.TEXT_BACKGROUND_COLOR);
-            textArea.setForeground(Colors.TEXT_FOREGROUND_COLOR);
-            textArea.setCaretColor(Colors.CARET_COLOR);
-        }
-    }
 
     private static Font createFont() {
         Font fira = new Font("Fira Code", Font.PLAIN, 18);
-        //check if FiraCode exists, otherwise take MONOSPACED
+        // check if FiraCode exists, otherwise take MONOSPACED
         return fira.getFamily().equalsIgnoreCase("Fira Code")
                 ? fira
                 : new Font(Font.MONOSPACED, Font.PLAIN, 18);

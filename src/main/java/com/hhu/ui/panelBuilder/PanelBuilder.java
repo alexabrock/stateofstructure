@@ -13,8 +13,7 @@ public class PanelBuilder {
     private PanelBuilder() {
     }
     /*
-     * The repeaded applyDarkTheme calls are needed, so the individual panels are in
-     * darkMode.
+     * The repeaded applyTheme calls are needed, so the individual panels are themed
      */
 
     public static JPanel createDatastructurePanel(Object collection) {
@@ -31,6 +30,7 @@ public class PanelBuilder {
         JLabel label = new JLabel(name, SwingConstants.CENTER);
         ThemeStyler.styleHeadline(label);
         label.setFont(label.getFont().deriveFont(50f));
+      
         return label;
     }
 

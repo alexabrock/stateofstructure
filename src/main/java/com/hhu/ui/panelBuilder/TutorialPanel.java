@@ -2,18 +2,14 @@ package com.hhu.ui.panelBuilder;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.Window;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import com.hhu.util.ThemeStyler;
@@ -63,8 +59,6 @@ public class TutorialPanel extends JPanel {
 
     private JPanel createPrettySlide(String imagePath) {
         JPanel card = new JPanel(new BorderLayout());
-        card.setBackground(Color.WHITE);
-
         java.net.URL imgUrl = getClass().getClassLoader().getResource(imagePath);
         if (imgUrl != null) {
             javax.swing.ImageIcon icon = new javax.swing.ImageIcon(imgUrl);
@@ -80,19 +74,6 @@ public class TutorialPanel extends JPanel {
         }
 
         return card;
-    }
-
-    private JPanel createSlide(String title, String content) {
-        JPanel panel = new JPanel(new BorderLayout());
-        panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
-
-        JLabel titleLabel = new JLabel("<html><h2>" + title + "</h2></html>", SwingConstants.CENTER);
-        JLabel contentLabel = new JLabel("<html><div style='text-align: center;'>" + content + "</div></html>",
-                SwingConstants.CENTER);
-
-        panel.add(titleLabel, BorderLayout.NORTH);
-        panel.add(contentLabel, BorderLayout.CENTER);
-        return panel;
     }
 
     private JPanel createControlPanel(JDialog dialog) {

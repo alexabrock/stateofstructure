@@ -43,18 +43,13 @@
         <artifactId>rsyntaxtextarea</artifactId>
         <version>3.3.3</version>
     </dependency>
-    <!-- Libary for DarkMode-->
+    <!-- Libary for Modernized Swing-->
     <dependency>
         <groupId>com.formdev</groupId>
         <artifactId>flatlaf</artifactId>
         <version>3.4</version>
     </dependency>
-    <!-- Libary for LightMode-->
-    <dependency>
-        <groupId>com.formdev</groupId>
-        <artifactId>flatlaf-intellij-themes</artifactId>
-        <version>3.4</version>
-    </dependency>
+
 
     <dependency>
         <groupId>junit</groupId>

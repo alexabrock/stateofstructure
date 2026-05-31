@@ -3,22 +3,14 @@ package com.hhu.util;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Insets;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
 
-import com.formdev.flatlaf.FlatDarkLaf;
-import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
-import com.formdev.flatlaf.intellijthemes.FlatArcIJTheme;
-import com.formdev.flatlaf.intellijthemes.FlatArcOrangeIJTheme;
-import com.formdev.flatlaf.intellijthemes.FlatGradiantoMidnightBlueIJTheme;
-import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.hhu.ui.Colors;
 
 /*
@@ -40,10 +32,16 @@ public class ThemeStyler {
         initialized = true;
     }
 
+    public static void styleApplicationBackground(JPanel panel) {
+        panel.setBackground(Colors.APPLICATION_BACKGROUND);
+        panel.setOpaque(true);
+    }
+
     /*
      * adds a border around the Panel
      */
-    public static void styleModernCard(JPanel panel) {
+    public static void stylePanel(JPanel panel) {
+        styleApplicationBackground(panel);
         panel.setBorder(
                 BorderFactory.createCompoundBorder(
                         BorderFactory.createLineBorder(Colors.LINE_BORDER, 2),
@@ -54,6 +52,7 @@ public class ThemeStyler {
      * adds a border around the Panel
      */
     public static void styleToolbar(JPanel panel) {
+        styleApplicationBackground(panel);
         panel.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
     }
 
@@ -61,6 +60,7 @@ public class ThemeStyler {
      * adds a border around the Panel
      */
     public static void styleCenterPanel(JPanel panel) {
+        styleApplicationBackground(panel);
         panel.setBorder(BorderFactory.createEmptyBorder(16, 16, 16, 16));
     }
 
@@ -69,7 +69,12 @@ public class ThemeStyler {
      */
     public static void styleHeadline(JLabel label) {
         label.setFont(HEADLINE_FONT);
-        label.setForeground(Color.BLACK);
+        label.setForeground(Colors.FONT);
+    }
+
+    public static void styleCodeCard(JPanel panel) {
+        stylePanel(panel);
+        panel.setBackground(Colors.CODE_PANEL_BACKGROUND);
     }
 
     /*
@@ -87,11 +92,8 @@ public class ThemeStyler {
         button.setPreferredSize(new Dimension(160, 56));
 
         button.setBackground(Color.WHITE);
-        button.setForeground(new Color(26, 26, 26));
+        button.setForeground(Colors.FONT);
         button.setFocusPainted(false);
-
-        // Erstellt einen hauchdünnen, modernen Rahmen statt des klobigen
-        // Swing-Standards
         button.setBorder(BorderFactory.createLineBorder(new Color(218, 220, 224), 1));
     }
 
