@@ -5,11 +5,15 @@ import com.hhu.util.Visualizer;
 public class StateOfStructure {
 
     public void main() {
-        Stack<String> stack = new Stack<>();
+        Stack<Integer> stack = new Stack<>();
         Visualizer.register(stack);
-        stack.push("Hello");
-        stack.push("Progra");
-        stack.push("!");
-        stack.pop();
+        for(int i = 0; i<4;i++){
+        	stack.push(i);
+
+        }
+        for(int i = 0; i<4;i++){
+        	stack.pop();
+            
+        }
     }
 }
