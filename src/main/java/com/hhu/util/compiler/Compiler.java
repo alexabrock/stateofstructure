@@ -7,6 +7,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Optional;
 
 import javax.tools.JavaCompiler;
 import javax.tools.ToolProvider;
@@ -15,27 +16,33 @@ import com.hhu.util.DrawCalls;
 import com.hhu.util.Visualizer;
 
 /* 
-Generates a new Java File with the given Sting as content. 
+Generates a new Java File with the given Sting as content in a Temp directory. 
 Expects, that the class the given String contains defines the Method 
     'public void build()'
  */
 public class Compiler {
-    private final static String recordCallReplacement = "Visualizer.record();";
+    private final static String RECORD_CALL = "Visualizer.record();";
+    private static final String USER_CLASS_NAME = "StateOfStructure";
+    private static final Path WORKSPACE_DIR = Path.of(System.getProperty("java.io.tmpdir"), "stateofstructure"); //temp directory
+    private static final Path USER_SOURCE_FILE = WORKSPACE_DIR.resolve(USER_CLASS_NAME + ".java");
+    private static final Path COMPILED_CLASSES_DIR = WORKSPACE_DIR.resolve("classes");
 
     public static DrawCalls compile(String code) {
 
         try {
-            Path path = Path.of("src", "main", "java", "StateOfStructure.java");
+            Files.createDirectories(WORKSPACE_DIR);
+            Files.createDirectories(COMPILED_CLASSES_DIR);
 
             code = addRecordCalls(code);
 
-            Files.writeString(path, code);
+            Files.writeString(USER_SOURCE_FILE, code);
 
             JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
 
-            // Compile into isolated dir, not target/classes
-            Path outputDir = Path.of("target", "user-compiled");
-            Files.createDirectories(outputDir);
+            if (compiler == null) {
+                throw new CompilationException(
+                        "Environment error: No Java compiler was found. Please run StateOfStructure with a JDK, not a JRE.");
+            }
 
             String classpath = System.getProperty("java.class.path");
 
@@ -44,8 +51,9 @@ public class Compiler {
             int compilationResult = compiler.run(null, null,
                     errorStream,
                     "-classpath", classpath,
-                    "-d", outputDir.toString(),
-                    path.toString());
+                    "-d", COMPILED_CLASSES_DIR.toString(),
+                    USER_SOURCE_FILE.toString());
+
             if (compilationResult != 0) {
                 throw new CompilationException("Syntax Error in User Code:\n\n" + errorStream.toString());
             }
@@ -69,12 +77,12 @@ public class Compiler {
              * It now does child-first (aka load the class yourself) for GraphvizApp
              * But still delegated all other classes parent-first.
              */
-            URLClassLoader loader = new URLClassLoader(
-                    new URL[] { outputDir.toUri().toURL() }, // path to .class file location
+            try (URLClassLoader loader = new URLClassLoader(
+                    new URL[] { COMPILED_CLASSES_DIR.toUri().toURL() }, // path to .class file location
                     Compiler.class.getClassLoader()) {
                 @Override
                 protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
-                    if (name.equals("StateOfStructure")) {
+                    if (name.equals(USER_CLASS_NAME)) {
                         Class<?> c = findLoadedClass(name);
                         if (c == null)
                             c = findClass(name); // look in outputDir first. Does not ask parent.
@@ -87,18 +95,19 @@ public class Compiler {
                     }
                     return super.loadClass(name, resolve); // normal parent-first for everything else
                 }
-            };
+            }) {
 
-            Class<?> klasse = Class.forName("StateOfStructure", true, loader);
+                Class<?> klasse = Class.forName(USER_CLASS_NAME, true, loader);
 
-            Object o = klasse.getConstructor().newInstance();
-            // invoke the build method. After this, the static drawcalls-Wrapper Visualizer
-            // is filled with drawcall recordings
-            klasse.getMethod("main").invoke(o);
-            // get the now filled drawcalls
-            DrawCalls drawCalls = Visualizer.getDrawCalls();
+                Object o = klasse.getConstructor().newInstance();
+                // invoke the build method. After this, the static drawcalls-Wrapper Visualizer
+                // is filled with drawcall recordings
+                klasse.getMethod("main").invoke(o);
+                // get the now filled drawcalls
+                DrawCalls drawCalls = Visualizer.getDrawCalls();
 
-            return drawCalls;
+                return drawCalls;
+            }
 
         } catch (NoSuchMethodException e) {
             throw new CompilationException(
@@ -114,22 +123,21 @@ public class Compiler {
                     "Environment error: Failed to write source file or create output directory.", e);
         } catch (ClassNotFoundException e) {
             throw new CompilationException(
-                    "Loading error: Could not find the compiled 'GraphvizApp' class. Check for package declaration mismatches.",
+                    "Loading error: Could not find the compiled 'StateOfStructure' class. Check for package declaration mismatches.",
                     e);
         } catch (InvocationTargetException e) {
-            // the user's code itself threw an exception
             throw new CompilationException(
                     "Runtime error in user code: " + e.getTargetException().toString(), e);
         } catch (InstantiationException | IllegalAccessException e) {
             throw new CompilationException(
-                    "Reflection error: Could not instantiate 'GraphvizApp'. Ensure it has a public no-args constructor.",
+                    "Reflection error: Could not instantiate 'StateOfStructure'. Ensure it has a public no-args constructor.",
                     e);
         }
 
     }
 
-    // Adds the Visualizer.record() calls after every line inside the build()
-    // method, that is after the collection.register(...)
+    /* Adds the Visualizer.record() calls after every line inside the build()
+    method, that is after the collection.register(...) */
     private static String addRecordCalls(String code) {
         String methodHeader = "public void main() {";
         int startIdx = code.indexOf(methodHeader);
@@ -137,7 +145,7 @@ public class Compiler {
 
         // if the build() method doesn't exist, return original code
         if (startIdx == -1) {
-            // method shouldn't be static
+            // & method shouldn't be static
             int staticIdx = code.indexOf("public static void main() {");
             if (staticIdx != -1) {
                 throw new CompilationException(
@@ -162,7 +170,7 @@ public class Compiler {
             else if (code.charAt(i) == '}')
                 braceCount--;
 
-            if (braceCount == 0) {
+            if (braceCount == 0) { //found the last closing brace
                 bodyEnd = i;
                 break;
             }
@@ -170,40 +178,46 @@ public class Compiler {
 
         if (bodyEnd == -1)
             return code; // Safety check for malformed code
-
+        
         // Split the code into Head (imports/class), Body (build method), and Tail
         // (rest of class)
         String head = code.substring(0, bodyStart);
         String body = code.substring(bodyStart, bodyEnd);
         String tail = code.substring(bodyEnd);
 
-        // Find the Visualizer.register call to use as a pivot
-        String registerKey = "Visualizer.register";
-        int registerIdx = body.indexOf(registerKey);
+        // Find the Visualizer.register call in the main method
+        int registerIdx = body.indexOf("Visualizer.register");
 
         if (registerIdx == -1) {
-            // If no register is found, don't start recording
-            return head + body + tail;
+            throw new CompilationException("""
+                                            No 'Visualizer.register(your datastructure)' found in code.
+
+                                            Register a datastructure to start the visualization.""");
         }
 
         // Find the semicolon of the register line to start processing AFTER it
         int startRecordingIdx = body.indexOf(";", registerIdx) + 1;
 
+        //split the body
         String setupPart = body.substring(0, startRecordingIdx);
         String activePart = body.substring(startRecordingIdx);
 
-        // Pattern: [Target] [Lookahead]
-        // Lookahead :( ? [Direction to look to] [Logic] [When to stop looking])
-        // Uses Negative Lookahead (?!) to avoid semicolons inside parentheses
-        String regex = ";(?!.*\\))";
-
-        String modifiedActivePart = activePart.replaceAll(regex, ";" + recordCallReplacement);
-        modifiedActivePart = activePart.replaceAll("(?m)$", recordCallReplacement);
+        String modifiedActivePart = activePart.replaceAll("(?m)$", RECORD_CALL);
         // Reconstruct the full string
         return head + setupPart + modifiedActivePart + tail;
     }
 
     public static String getRecordCallReplacement() {
-        return recordCallReplacement;
+        return RECORD_CALL;
     }
+    static Path getWorkspaceDir() {
+        return WORKSPACE_DIR;
+    }
+
+    public static Optional<Path> getGeneratedSourcePath(String className) {
+        return USER_CLASS_NAME.equals(className) ? Optional.of(USER_SOURCE_FILE) : Optional.empty();
+
+    }
+
+
 }
