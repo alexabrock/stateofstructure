@@ -17,9 +17,9 @@ import guru.nidi.graphviz.model.Node;
 
 /* Builds a GraphViz Graph for Stacks */
 public class StackGraph {
-    
+
     public static Graph buildGraph(Stack<?> stack) {
-        
+
         if (stack.isEmpty()) {
             return graph("stackGraph");
         }
@@ -33,7 +33,7 @@ public class StackGraph {
         Graph topRank = graph("topRank")
                 .graphAttr().with(Rank.inSubgraph(RankType.SAME))
                 .with(topPointer, nodes.get(stack.size() - 1));
-                
+
         // rank=same subgraph for bottom pointer & bottom element linkage
         Graph bottomRank = graph("bottomRank")
                 .graphAttr().with(Rank.inSubgraph(RankType.SAME))
@@ -43,13 +43,14 @@ public class StackGraph {
                 .graphAttr().with(Rank.dir(BOTTOM_TO_TOP))
                 .nodeAttr().with(Shape.RECTANGLE)
                 .graphAttr().with(
-                        //Attributes.attr("nodesep", "0"), // horizontal spacing
+                        // Attributes.attr("nodesep", "0"), // horizontal spacing
                         Attributes.attr("ranksep", "0") // vertical spacing
                 );
 
         for (int i = 1; i < stack.size(); i++) {
             LinkSource link = nodes.get(i - 1).link(nodes.get(i))
-                    .with(Attributes.attr("style", "dashed")); //color not-top stack items in dashed line 
+                    .with(Attributes.attr("style", "dashed")); // color not-top stack items in
+                                                               // dashed line
             g = g.with(link);
         }
 

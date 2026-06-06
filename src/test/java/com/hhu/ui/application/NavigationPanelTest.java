@@ -40,13 +40,13 @@ public class NavigationPanelTest {
     }
 
     @Test
-    public void createshouldContainThreeButtons() {
+    public void createshouldContain4Buttons() {
         JPanel centerPanel = new JPanel();
 
         JPanel result = navigationPanel.create(centerPanel);
 
         //compile, next & prev
-        assertEquals(3, result.getComponentCount());
+        assertEquals(4, result.getComponentCount());
     }
 
     @Test

@@ -15,6 +15,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import com.hhu.util.ThemeStyler;
+
 import guru.nidi.graphviz.engine.Format;
 import guru.nidi.graphviz.engine.Graphviz;
 
@@ -25,20 +27,22 @@ class GraphPanelRenderer {
 
     private GraphPanelRenderer() {
     }
+
     /*
      * transforms an image into a zoomable JPanel
      */
     static JPanel create(String title, String dot) {
 
         BufferedImage image = Graphviz.fromString(dot).width(1500).render(Format.PNG).toImage();
-        
+
         JPanel imagePanel = new JPanel(new BorderLayout());
+        ThemeStyler.styleApplicationBackground(imagePanel);
         imagePanel.add(new ScaledImagePanel(image), BorderLayout.CENTER);
 
         JLabel headline = new JLabel(title, SwingConstants.CENTER);
         ThemeStyler.styleHeadline(headline);
         JPanel panel = new JPanel(new BorderLayout(0, 8));
-        ThemeStyler.styleModernCard(panel);
+        ThemeStyler.stylePanel(panel);
 
         panel.add(imagePanel, BorderLayout.CENTER);
         panel.add(headline, BorderLayout.NORTH);

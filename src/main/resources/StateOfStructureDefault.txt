@@ -1,0 +1,29 @@
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Stack;
+import java.util.TreeMap;
+import java.util.TreeSet;
+
+import com.hhu.prograDatastructures.generic.PrograBinarySearchTree;
+import com.hhu.prograDatastructures.generic.PrograHashSet;
+import com.hhu.prograDatastructures.generic.PrograLinkedList;
+import com.hhu.util.Visualizer;
+
+
+public class StateOfStructure {
+
+    public void main() {
+        Stack<Integer> stack = new Stack<>();
+        Visualizer.register(stack);
+        for(int i = 0; i<4;i++){
+        	stack.push(i);
+
+        }
+        for(int i = 0; i<4;i++){
+        	stack.pop();
+            
+        }
+    }
+}

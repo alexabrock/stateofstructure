@@ -1,9 +1,8 @@
-package com.hhu.ui.panelBuilder;
+package com.hhu.util;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Insets;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -11,12 +10,12 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 import com.hhu.ui.Colors;
 
-    /*
-     * Handles the styling of Swing-Components in the view Package.
-     */
+/*
+ * Handles the styling of Swing-Components in the view Package.
+ */
 public class ThemeStyler {
 
     private static boolean initialized;
@@ -25,19 +24,24 @@ public class ThemeStyler {
     private ThemeStyler() {
     }
 
-    public static void applyDarkTheme() {
+    public static void applyTheme() {
         if (initialized) {
             return;
         }
-
-        FlatDarkLaf.setup();
+        FlatLightLaf.setup();
         initialized = true;
+    }
+
+    public static void styleApplicationBackground(JPanel panel) {
+        panel.setBackground(Colors.APPLICATION_BACKGROUND);
+        panel.setOpaque(true);
     }
 
     /*
      * adds a border around the Panel
      */
-    public static void styleModernCard(JPanel panel) {
+    public static void stylePanel(JPanel panel) {
+        styleApplicationBackground(panel);
         panel.setBorder(
                 BorderFactory.createCompoundBorder(
                         BorderFactory.createLineBorder(Colors.LINE_BORDER, 2),
@@ -48,6 +52,7 @@ public class ThemeStyler {
      * adds a border around the Panel
      */
     public static void styleToolbar(JPanel panel) {
+        styleApplicationBackground(panel);
         panel.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
     }
 
@@ -55,6 +60,7 @@ public class ThemeStyler {
      * adds a border around the Panel
      */
     public static void styleCenterPanel(JPanel panel) {
+        styleApplicationBackground(panel);
         panel.setBorder(BorderFactory.createEmptyBorder(16, 16, 16, 16));
     }
 
@@ -63,9 +69,14 @@ public class ThemeStyler {
      */
     public static void styleHeadline(JLabel label) {
         label.setFont(HEADLINE_FONT);
-        label.setForeground(Color.WHITE);
+        label.setForeground(Colors.FONT);
     }
-    
+
+    public static void styleCodeCard(JPanel panel) {
+        stylePanel(panel);
+        panel.setBackground(Colors.CODE_PANEL_BACKGROUND);
+    }
+
     /*
      * adds a border around the Panel
      */
@@ -77,9 +88,13 @@ public class ThemeStyler {
      * sets the font, margin and size of the button
      */
     public static void styleNavigationButton(JButton button) {
-        button.setFont(button.getFont().deriveFont(Font.BOLD, 18f));
-        button.setMargin(new Insets(10, 24, 10, 24));
+        button.setFont(button.getFont().deriveFont(Font.BOLD, 16f));
         button.setPreferredSize(new Dimension(160, 56));
+
+        button.setBackground(Color.WHITE);
+        button.setForeground(Colors.FONT);
+        button.setFocusPainted(false);
+        button.setBorder(BorderFactory.createLineBorder(new Color(218, 220, 224), 1));
     }
 
 }

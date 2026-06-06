@@ -9,8 +9,8 @@ import java.awt.Insets;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.hhu.ui.panelBuilder.ThemeStyler;
 import com.hhu.util.DrawStep;
+import com.hhu.util.ThemeStyler;
 
 /*
  * Builds and updates the center area that renders the current DrawStep.

@@ -21,7 +21,7 @@ class MemoryPanelBuilder {
      * Returns a JPanel, that holds the Memory-Representation of the given Collection. Uses LJV to do so.
      */
     static JPanel create(Object collection) {
-        String dot = applyDarkMode(createDot(collection));
+        String dot = colorize(createDot(collection));
 
         try {
             
@@ -31,7 +31,6 @@ class MemoryPanelBuilder {
             // if something went wrong, a Panel with the error is returned
             JLabel error = new JLabel("Could not render LJV DOT: " + ex.getMessage(), SwingConstants.CENTER);
             JPanel panel = new JPanel(new BorderLayout());
-            ThemeStyler.styleModernCard(panel);
             panel.add(error, BorderLayout.CENTER);
             return panel;
         }
@@ -62,10 +61,9 @@ class MemoryPanelBuilder {
     }
 
     /*
-     * clinks into the by LJV generated dot and modifies the colors to support
-     * darkMode
+     * clinks into the by LJV generated dot and modifies the colors 
      */
-    static String applyDarkMode(String dot) {
+    static String colorize(String dot) {
 
         String themedAttributes = String.format(
                 "%n  graph [bgcolor=\"%s\", fontcolor=\"%s\"];%n"

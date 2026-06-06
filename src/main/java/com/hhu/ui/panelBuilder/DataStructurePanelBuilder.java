@@ -27,23 +27,22 @@ class DataStructurePanelBuilder {
      */
     static JPanel create(Object collection) {
         try {
-            Graph graph = applyDarkMode(GraphBuilder.buildGraph(collection));
+            Graph graph = colorize(GraphBuilder.buildGraph(collection));
             return GraphPanelRenderer.create("Datastructure Visualization", graph.toString());
 
         } catch (RuntimeException ex) {
             // if something went wrong, a Panel with the error is returned
             JLabel error = new JLabel("Could not render Datastructure Visualization: " + ex.getMessage(), SwingConstants.CENTER);
             JPanel panel = new JPanel(new BorderLayout());
-            ThemeStyler.styleModernCard(panel);
             panel.add(error, BorderLayout.CENTER);
             return panel;
         }
     }
     
     /*
-     * Adds  darkMode colors to a finished Graph
+     * Adds colors to a finished Graph
      */
-    static Graph applyDarkMode(Graph graph) {
+    static Graph colorize(Graph graph) {
         return graph
                 .graphAttr().with(
                         attr("bgcolor", Colors.BG_COLORD),

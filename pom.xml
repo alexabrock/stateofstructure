@@ -37,31 +37,19 @@
         <version>1.2.13</version>
     </dependency>
 
-
-    <!-- Libary for Graph visualization. Graphstream-->
-    <dependency>
-      <groupId>org.graphstream</groupId>
-      <artifactId>gs-core</artifactId>
-      <version>2.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.graphstream</groupId>
-      <artifactId>gs-ui-swing</artifactId>
-      <version>2.0</version>
-    </dependency>
-
   <!-- Libary for Code Formatting-->
     <dependency>
         <groupId>com.fifesoft</groupId>
         <artifactId>rsyntaxtextarea</artifactId>
         <version>3.3.3</version>
     </dependency>
-    <!-- Libary for DarkMode-->
+    <!-- Libary for Modernized Swing-->
     <dependency>
         <groupId>com.formdev</groupId>
         <artifactId>flatlaf</artifactId>
         <version>3.4</version>
     </dependency>
+
 
     <dependency>
         <groupId>junit</groupId>
@@ -80,6 +68,14 @@
   </dependencies>
 
   <build>
+  <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>**/*</include>
+        </includes>
+      </resource>
+    </resources>
   <plugins>
 
     <plugin>
@@ -140,7 +136,11 @@
       <configuration>
         <transformers>
           <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-            <mainClass>com.hhu.Main</mainClass>
+              <mainClass>Main</mainClass>
+              <manifestEntries>
+                <Add-Opens>java.base/java.lang java.base/java.util java.base/java.util.concurrent.atomic</Add-Opens>
+                <Enable-Native-Access>ALL-UNNAMED</Enable-Native-Access>
+              </manifestEntries>
           </transformer>
         </transformers>
       </configuration>
