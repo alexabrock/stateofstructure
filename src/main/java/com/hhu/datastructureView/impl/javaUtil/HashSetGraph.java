@@ -11,7 +11,7 @@ import guru.nidi.graphviz.attribute.Shape;
 import guru.nidi.graphviz.model.Graph;
 import guru.nidi.graphviz.model.Node;
 
-/* Returns a GraphViz Graph for HashSet  */
+/** Returns a GraphViz Graph for HashSet */
 public class HashSetGraph {
 
     public static Graph buildGraph(HashSet<?> set) {
@@ -53,5 +53,3 @@ public class HashSetGraph {
     }
 
 }
-
-

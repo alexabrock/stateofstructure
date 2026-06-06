@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 
 import com.hhu.ui.panelBuilder.PanelBuilder;
 
-/* Handles iteration & state recording logic for a List of DrawSteps*/
+/** Handles iteration & state recording logic for a List of DrawSteps */
 public class DrawCalls {
 
     private LinkedList<DrawStep> drawCalls = new LinkedList<>();

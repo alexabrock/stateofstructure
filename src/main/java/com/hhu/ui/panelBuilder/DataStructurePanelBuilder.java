@@ -13,14 +13,15 @@ import com.hhu.ui.Colors;
 
 import guru.nidi.graphviz.model.Graph;
 
-/*
-* Builds the DataStructure Panel. An simplified vizualisation of a given collection.
-*/
+/**
+ * Builds the DataStructure Panel. An simplified vizualisation of a given
+ * collection.
+ */
 class DataStructurePanelBuilder {
     private DataStructurePanelBuilder() {
     }
-    
-    /*
+
+    /**
      * Returns a JPanel, that holds the Datastructure-Representation of the given
      * Collection.
      * To do so, it calls a Builder from GraphBuilderFactory.
@@ -32,14 +33,15 @@ class DataStructurePanelBuilder {
 
         } catch (RuntimeException ex) {
             // if something went wrong, a Panel with the error is returned
-            JLabel error = new JLabel("Could not render Datastructure Visualization: " + ex.getMessage(), SwingConstants.CENTER);
+            JLabel error = new JLabel("Could not render Datastructure Visualization: " + ex.getMessage(),
+                    SwingConstants.CENTER);
             JPanel panel = new JPanel(new BorderLayout());
             panel.add(error, BorderLayout.CENTER);
             return panel;
         }
     }
-    
-    /*
+
+    /**
      * Adds colors to a finished Graph
      */
     static Graph colorize(Graph graph) {

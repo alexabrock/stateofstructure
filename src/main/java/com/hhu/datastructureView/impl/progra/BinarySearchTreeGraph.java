@@ -11,7 +11,7 @@ import com.hhu.prograDatastructures.generic.PrograBinarySearchTree;
 
 import guru.nidi.graphviz.model.Graph;
 
-/* Builds a GraphViz Graph for Progra BinarySearchTrees */
+/** Builds a GraphViz Graph for Progra BinarySearchTrees */
 public class BinarySearchTreeGraph {
 
     public static Graph buildGraph(PrograBinarySearchTree<?> tree) {

@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.hhu.ui.Colors;
 
-/*
+/**
  * Handles the styling of Swing-Components in the view Package.
  */
 public class ThemeStyler {
@@ -37,8 +37,8 @@ public class ThemeStyler {
         panel.setOpaque(true);
     }
 
-    /*
-     * adds a border around the Panel
+    /**
+     * Adds a border around the Panel
      */
     public static void stylePanel(JPanel panel) {
         styleApplicationBackground(panel);
@@ -48,24 +48,24 @@ public class ThemeStyler {
                         BorderFactory.createEmptyBorder(12, 12, 12, 12)));
     }
 
-    /*
-     * adds a border around the Panel
+    /**
+     * Adds a border around the Panel
      */
     public static void styleToolbar(JPanel panel) {
         styleApplicationBackground(panel);
         panel.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
     }
 
-    /*
-     * adds a border around the Panel
+    /**
+     * Adds a border around the Panel
      */
     public static void styleCenterPanel(JPanel panel) {
         styleApplicationBackground(panel);
         panel.setBorder(BorderFactory.createEmptyBorder(16, 16, 16, 16));
     }
 
-    /*
-     * sets font and font-color of the Panel
+    /**
+     * Sets font and font-color of the Panel
      */
     public static void styleHeadline(JLabel label) {
         label.setFont(HEADLINE_FONT);
@@ -77,15 +77,15 @@ public class ThemeStyler {
         panel.setBackground(Colors.CODE_PANEL_BACKGROUND);
     }
 
-    /*
-     * adds a border around the Panel
+    /**
+     * Adds a border around the Panel
      */
     public static void styleScrollPane(JComponent component) {
         component.setBorder(BorderFactory.createEmptyBorder());
     }
 
-    /*
-     * sets the font, margin and size of the button
+    /**
+     * Sets the font, margin and size of the button
      */
     public static void styleNavigationButton(JButton button) {
         button.setFont(button.getFont().deriveFont(Font.BOLD, 16f));

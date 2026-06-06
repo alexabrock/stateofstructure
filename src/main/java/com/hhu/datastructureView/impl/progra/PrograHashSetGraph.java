@@ -11,7 +11,8 @@ import com.hhu.prograDatastructures.generic.PrograHashSet;
 import guru.nidi.graphviz.attribute.Shape;
 import guru.nidi.graphviz.model.Graph;
 import guru.nidi.graphviz.model.Node;
-/* Returns a GraphViz Graph for Progra HashSet  */
+
+/** Returns a GraphViz Graph for Progra HashSet */
 public class PrograHashSetGraph {
 
     public static Graph buildGraph(PrograHashSet<?> set) {
@@ -22,18 +23,18 @@ public class PrograHashSetGraph {
         // top level graph
         Graph g = graph("hashSetGraph")
                 .nodeAttr().with(Shape.RECTANGLE)
-                //neato = unsortiert, "zufällig" verteilt
+                // neato = unsortiert, "zufällig" verteilt
                 .graphAttr().with(attr("layout", "neato"));
-        
-        //subgraph with elements,  to get a border around the elements
-        Graph elements =graph("cluster_0")
+
+        // subgraph with elements, to get a border around the elements
+        Graph elements = graph("cluster_0")
                 .graphAttr().with(
                         attr("color", "white"),
                         attr("penwidth", "2"));
 
-
         try {
-            //Progra HashSet hat keine get() - Methode, deswegen wird hier das object Array gelesen
+            // Progra HashSet hat keine get() - Methode, deswegen wird hier das object Array
+            // gelesen
             Field objectsField = PrograHashSet.class.getDeclaredField("objects");
             objectsField.setAccessible(true);
             Object[] objects = (Object[]) objectsField.get(set);

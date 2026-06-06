@@ -15,15 +15,17 @@ import javax.tools.ToolProvider;
 import com.hhu.util.DrawCalls;
 import com.hhu.util.Visualizer;
 
-/* 
-Generates a new Java File with the given Sting as content in a Temp directory. 
-Expects, that the class the given String contains defines the Method 
-    'public void build()'
+/**
+ * Generates a new Java File with the given Sting as content in a Temp
+ * directory.
+ * Expects, that the class the given String contains defines the Method
+ * 'public void build()'
  */
 public class Compiler {
     private final static String RECORD_CALL = "Visualizer.record();";
     private static final String USER_CLASS_NAME = "StateOfStructure";
-    private static final Path WORKSPACE_DIR = Path.of(System.getProperty("java.io.tmpdir"), "stateofstructure"); //temp directory
+    private static final Path WORKSPACE_DIR = Path.of(System.getProperty("java.io.tmpdir"), "stateofstructure"); // temp
+                                                                                                                 // directory
     private static final Path USER_SOURCE_FILE = WORKSPACE_DIR.resolve(USER_CLASS_NAME + ".java");
     private static final Path COMPILED_CLASSES_DIR = WORKSPACE_DIR.resolve("classes");
 
@@ -103,10 +105,9 @@ public class Compiler {
                 // invoke the build method. After this, the static drawcalls-Wrapper Visualizer
                 // is filled with drawcall recordings
                 klasse.getMethod("main").invoke(o);
-                // get the now filled drawcalls
-                DrawCalls drawCalls = Visualizer.getDrawCalls();
 
-                return drawCalls;
+                // get the now filled drawcalls & return
+                return Visualizer.getDrawCalls();
             }
 
         } catch (NoSuchMethodException e) {
@@ -136,28 +137,27 @@ public class Compiler {
 
     }
 
-    /* Adds the Visualizer.record() calls after every line inside the build()
-    method, that is after the collection.register(...) */
+    /**
+     * Adds the Visualizer.record() calls after every line inside the build()
+     * method, that is after the collection.register(...)
+     */
     private static String addRecordCalls(String code) {
         String methodHeader = "public void main() {";
         int startIdx = code.indexOf(methodHeader);
 
-
         // if the build() method doesn't exist, return original code
         if (startIdx == -1) {
             // & method shouldn't be static
-            int staticIdx = code.indexOf("public static void main() {");
-            if (staticIdx != -1) {
+            if (code.contains("public static void main() {")) {
                 throw new CompilationException(
                         """
                                 Execution failed: The main method should not be static.
-                                
+
                                 Make sure the provided code defines a class named 'StateOfStructure' with a not static 'main()' method.
                                 """);
-                
             }
             return code;
-        }   
+        }
 
         // Identify the boundaries of the build() method body
         int bodyStart = startIdx + methodHeader.length();
@@ -170,7 +170,7 @@ public class Compiler {
             else if (code.charAt(i) == '}')
                 braceCount--;
 
-            if (braceCount == 0) { //found the last closing brace
+            if (braceCount == 0) { // found the last closing brace
                 bodyEnd = i;
                 break;
             }
@@ -178,7 +178,7 @@ public class Compiler {
 
         if (bodyEnd == -1)
             return code; // Safety check for malformed code
-        
+
         // Split the code into Head (imports/class), Body (build method), and Tail
         // (rest of class)
         String head = code.substring(0, bodyStart);
@@ -190,26 +190,26 @@ public class Compiler {
 
         if (registerIdx == -1) {
             throw new CompilationException("""
-                                            No 'Visualizer.register(your datastructure)' found in code.
+                    No 'Visualizer.register(your datastructure)' found in code.
 
-                                            Register a datastructure to start the visualization.""");
+                    Register a datastructure to start the visualization.""");
         }
 
         // Find the semicolon of the register line to start processing AFTER it
         int startRecordingIdx = body.indexOf(";", registerIdx) + 1;
 
-        //split the body
+        // split the body
         String setupPart = body.substring(0, startRecordingIdx);
         String activePart = body.substring(startRecordingIdx);
 
-        String modifiedActivePart = activePart.replaceAll("(?m)$", RECORD_CALL);
-        // Reconstruct the full string
-        return head + setupPart + modifiedActivePart + tail;
+        // Reconstruct the full string & add record calls
+        return head + setupPart + activePart.replaceAll("(?m)$", RECORD_CALL) + tail;
     }
 
     public static String getRecordCallReplacement() {
         return RECORD_CALL;
     }
+
     static Path getWorkspaceDir() {
         return WORKSPACE_DIR;
     }
@@ -218,6 +218,4 @@ public class Compiler {
         return USER_CLASS_NAME.equals(className) ? Optional.of(USER_SOURCE_FILE) : Optional.empty();
 
     }
-
-
 }

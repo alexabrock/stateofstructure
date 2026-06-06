@@ -8,8 +8,8 @@ import javax.swing.JPanel;
 import com.hhu.ui.panelBuilder.TutorialPanel;
 import com.hhu.util.ThemeStyler;
 
-/*
- * returns a Panel, that holds the buttons. Initializes those buttons to replace
+/**
+ * Returns a Panel, that holds the buttons. Initializes those buttons to replace
  * the Panels, that are nested inside the centerPanel, with the next or previous
  * DrawStep
  */

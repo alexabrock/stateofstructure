@@ -6,15 +6,13 @@ import javax.swing.SwingConstants;
 
 import com.hhu.util.ThemeStyler;
 
-/*
+/**
  * Returns a JPanel from an Object
  */
 public class PanelBuilder {
     private PanelBuilder() {
     }
-    /*
-     * The repeaded applyTheme calls are needed, so the individual panels are themed
-     */
+    // The repeaded applyTheme calls are needed, so the individual panels are themed
 
     public static JPanel createDatastructurePanel(Object collection) {
         ThemeStyler.applyTheme();
@@ -30,7 +28,6 @@ public class PanelBuilder {
         JLabel label = new JLabel(name, SwingConstants.CENTER);
         ThemeStyler.styleHeadline(label);
         label.setFont(label.getFont().deriveFont(50f));
-      
         return label;
     }
 

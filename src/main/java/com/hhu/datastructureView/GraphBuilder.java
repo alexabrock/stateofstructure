@@ -24,16 +24,15 @@ import com.hhu.prograDatastructures.generic.PrograLinkedList;
 
 import guru.nidi.graphviz.model.Graph;
 
-
 public class GraphBuilder {
-    
-    /* Matches a Builder to a Collection */
-        
+
+    /** Matches a Builder to a Collection */
+
     public static Graph buildGraph(Object collection) {
-        /* Pattern Matching Switch. Bindet den Case direkt an den Cast */
+        // Pattern Matching Switch. Bindet den Case direkt an den Cast
         return switch (collection) {
 
-            /* Java.util */
+            // Java.util
 
             case Stack<?> stack ->
                 StackGraph.buildGraph(stack);
@@ -53,18 +52,18 @@ public class GraphBuilder {
             case TreeSet<?> set ->
                 TreeSetGraph.buildGraph(set);
 
-            case HashSet<?> set -> 
+            case HashSet<?> set ->
                 HashSetGraph.buildGraph(set);
 
-            /* Progra */
+            // Progra
 
             case PrograLinkedList<?> list ->
                 PrograLinkedListGraph.buildGraph(list);
 
-            case PrograBinarySearchTree<?> tree -> 
+            case PrograBinarySearchTree<?> tree ->
                 BinarySearchTreeGraph.buildGraph(tree);
 
-            case PrograHashSet<?> set -> 
+            case PrograHashSet<?> set ->
                 PrograHashSetGraph.buildGraph(set);
 
             default ->

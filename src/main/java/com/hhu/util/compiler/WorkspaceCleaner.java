@@ -6,9 +6,9 @@ import java.util.Comparator;
 import java.util.stream.Stream;
 
 public class WorkspaceCleaner {
-    /*
-     * * Deletes the temporary workspace used for user-provided source files and
-     * compiled classes. 
+    /**
+     * Deletes the temporary workspace used for user-provided source files and
+     * compiled classes.
      */
     public void registerShutdownCleanup() {
         Runtime.getRuntime().addShutdownHook(new Thread(this::cleanup));
@@ -16,10 +16,10 @@ public class WorkspaceCleaner {
 
     private void cleanup() {
         Path workspaceDir = Compiler.getWorkspaceDir();
-        if (!Files.exists(workspaceDir)) 
+        if (!Files.exists(workspaceDir))
             return;
-    
-        try (Stream<Path> paths = Files.walk(workspaceDir)) { //paths is closed automatically after  try/catch
+
+        try (Stream<Path> paths = Files.walk(workspaceDir)) { // paths is closed automatically after try/catch
             paths.sorted(Comparator.reverseOrder())
                     .forEach(path -> {
                         try {
@@ -29,6 +29,6 @@ public class WorkspaceCleaner {
                     });
         } catch (Exception ignored) {
         }
-        
+
     }
 }

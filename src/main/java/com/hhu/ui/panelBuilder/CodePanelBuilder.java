@@ -18,7 +18,7 @@ import com.hhu.ui.Colors;
 import com.hhu.util.ThemeStyler;
 import com.hhu.util.compiler.Compiler;
 
-/*
+/**
  * Returns the CodePanel. A Swing Representation of a given Code-String
  */
 class CodePanelBuilder {
@@ -30,7 +30,7 @@ class CodePanelBuilder {
     private CodePanelBuilder() {
     }
 
-    /*
+    /**
      * Returns a JPanel, that holds a Syntax-Highlighted form of the given Code with
      * the given line highlighted.
      */
@@ -59,7 +59,7 @@ class CodePanelBuilder {
         return code.replace(Compiler.getRecordCallReplacement(), "");
     }
 
-    /*
+    /**
      * Returns a Syntax-Highlighted TextArea of a given String
      */
     private static RSyntaxTextArea createTextArea(String code, int lineNumber) {
@@ -82,7 +82,7 @@ class CodePanelBuilder {
         return textArea;
     }
 
-    /*
+    /**
      * Adds a lineHighlight at a given line
      */
     private static void highlightLine(RSyntaxTextArea textArea, int lineNumber) {

@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import com.hhu.util.DrawStep;
 import com.hhu.util.ThemeStyler;
 
-/*
+/**
  * Builds and updates the center area that renders the current DrawStep.
  */
 class DrawStepPanel {
@@ -23,7 +23,7 @@ class DrawStepPanel {
         this.codePanelScroller = codePanelScroller;
     }
 
-    /*
+    /**
      * returns a Panel that holds the center part of the Application and a headline
      * specifically, it holds the codePanel, the memoryPanel, the datastructurePanel
      * and the datastructureName, which is the headline.
@@ -47,7 +47,7 @@ class DrawStepPanel {
         return centerPanel;
     }
 
-    /*
+    /**
      * removes the current Panels in residesIn and replaces them with the panels
      * stored inside the DrawStep.
      * Also updates the scrollPosition of the CodePanel to match the new highlited
@@ -80,7 +80,7 @@ class DrawStepPanel {
         panel.add(replacement, position);
     }
 
-    /*
+    /**
      * Nests the memory and datastructure panel together, so the two scale together,
      * but seperate from the codePanel.
      * The memory panel should always be twice as large as the datastructure panel.
@@ -91,7 +91,7 @@ class DrawStepPanel {
 
         visualizationPanel.add(memoryPanel, constraints);
 
-        //new constraints, so the datastructurePanel is half as big as the memoryPanel
+        // new constraints, so the datastructurePanel is half as big as the memoryPanel
         constraints.gridx = 1;
         constraints.weightx = 1;
         visualizationPanel.add(datastructurePanel, constraints);

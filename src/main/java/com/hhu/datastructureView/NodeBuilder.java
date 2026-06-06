@@ -6,17 +6,15 @@ import static guru.nidi.graphviz.model.Factory.node;
 import guru.nidi.graphviz.attribute.Shape;
 import guru.nidi.graphviz.model.Node;
 
-/* Builds unique Nodes, that will not be Merged by GraphViz */
+/** Builds unique Nodes, that will not be Merged by GraphViz */
 public class NodeBuilder {
     public static Node getNode(String label) {
         // eindeutige Node-ID
         String id = java.util.UUID.randomUUID().toString();
 
-        Node node = node(id).with(attr("label", label));
-
-        return node;
+        return node(id).with(attr("label", label));
     }
-    
+
     // needs to be unique, since graphviz merges Nodes with the same Name
     public static Node nullNode() {
         return getNode("")

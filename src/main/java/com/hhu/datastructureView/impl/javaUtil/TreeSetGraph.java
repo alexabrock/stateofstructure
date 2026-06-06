@@ -12,7 +12,7 @@ import com.hhu.datastructureView.impl.TreeGraphUtils;
 
 import guru.nidi.graphviz.model.Graph;
 
-/* Builds a GraphViz Graph for TreeSets*/
+/** Builds a GraphViz Graph for TreeSets */
 public class TreeSetGraph {
 
     public static Graph buildGraph(TreeSet<?> set) {

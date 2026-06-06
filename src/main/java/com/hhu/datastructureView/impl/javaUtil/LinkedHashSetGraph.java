@@ -13,7 +13,7 @@ import guru.nidi.graphviz.attribute.Shape;
 import guru.nidi.graphviz.model.Graph;
 import guru.nidi.graphviz.model.Node;
 
-/* Builds a GraphViz Graph for LinkedHashSets */
+/** Builds a GraphViz Graph for LinkedHashSets */
 public class LinkedHashSetGraph {
 
     // Not using NodeBuilder, since Nodes shouldn't enter the HashSet twice.
@@ -24,8 +24,8 @@ public class LinkedHashSetGraph {
 
         Graph g = graph("linkedHashSetGraph").directed()
                 .graphAttr().with(
-                attr("layout", "fdp"),
-                attr("K", "0.7"))
+                        attr("layout", "fdp"),
+                        attr("K", "0.7"))
                 .nodeAttr().with(Shape.RECTANGLE);
 
         // Graph with just the elements of the HashSet, to get them to be next to each

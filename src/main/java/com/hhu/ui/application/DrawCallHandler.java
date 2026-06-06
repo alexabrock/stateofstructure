@@ -3,7 +3,10 @@ package com.hhu.ui.application;
 import com.hhu.util.DrawCalls;
 import com.hhu.util.DrawStep;
 
-/* Holds the currently displayed DrawCalls and exposes navigation through its DrawSteps. */
+/**
+ * Holds the currently displayed DrawCalls and exposes navigation through its
+ * DrawSteps.
+ */
 class DrawCallHandler {
 
     private DrawCalls drawCalls;

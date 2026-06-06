@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 
 import com.hhu.ui.Colors;
 
-/* Creates the very outer shell of the Application.*/
+/** Creates the very outer shell of the Application. */
 class ApplicationFrame {
 
     private static final String TITLE = "State to Structure";
@@ -25,5 +25,5 @@ class ApplicationFrame {
         frame.setLocationRelativeTo(null);
         return frame;
     }
-    
+
 }

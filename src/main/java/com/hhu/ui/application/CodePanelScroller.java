@@ -13,8 +13,9 @@ import javax.swing.text.BadLocationException;
 
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
-/*
- * Finds the source-code editor in Swing components and scrolls it to the highlighted line.
+/**
+ * Finds the source-code editor in Swing components and scrolls it to the
+ * highlighted line.
  */
 class CodePanelScroller {
 

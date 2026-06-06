@@ -3,7 +3,10 @@ package com.hhu.util;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-/* filled with JPanels that capture the Memory View, the Datastructure View the Name and the Code View from a state of a Collection*/
+/**
+ * Filled with JPanels that capture the Memory View, the Datastructure View the
+ * Name and the Code View from a state of a Collection
+ */
 public class DrawStep {
     private JPanel memory;
     private JPanel datastructure;

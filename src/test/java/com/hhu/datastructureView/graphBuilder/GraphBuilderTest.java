@@ -22,7 +22,7 @@ import guru.nidi.graphviz.model.Graph;
 
 public class GraphBuilderTest {
 
-    /* Java.util */
+    // Java.util 
     @Test
     public void testUseListRenderer() {
         Collection<?> collection = new LinkedList<>();
@@ -59,7 +59,7 @@ public class GraphBuilderTest {
         confirmGraphName(collection, "treeSetGraph");
     }
     
-    /* Progra */
+    // Progra 
 
     @Test
     public void testUsePrograLinkedListRenderer() {

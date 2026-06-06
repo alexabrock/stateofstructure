@@ -20,16 +20,16 @@ import com.hhu.util.ThemeStyler;
 import guru.nidi.graphviz.engine.Format;
 import guru.nidi.graphviz.engine.Graphviz;
 
-/*
-     * Recieves an Image and renders a zoomable JPanel from that image.
-     */
+/**
+ * Recieves an Image and renders a zoomable JPanel from that image.
+ */
 class GraphPanelRenderer {
 
     private GraphPanelRenderer() {
     }
 
-    /*
-     * transforms an image into a zoomable JPanel
+    /**
+     * Transforms an image into a zoomable JPanel
      */
     static JPanel create(String title, String dot) {
 
@@ -50,7 +50,8 @@ class GraphPanelRenderer {
         return panel;
     }
 
-    /*
+    /**
+     * A nested class, that handles zooming and dragging for ImagePanels.
      * Only used, for the zoom of the datastructure and memory panel
      */
     private static final class ScaledImagePanel extends JPanel {

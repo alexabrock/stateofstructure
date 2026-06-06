@@ -10,21 +10,23 @@ import org.atpfivt.ljv.LJV;
 
 import com.hhu.ui.Colors;
 
-/*
-* Builds the Memory Panel. An abstract vizualisation of a given collection in the Java-Heap.
+/**
+ * Builds the Memory Panel. An abstract vizualisation of a given collection in
+ * the Java-Heap.
  */
 class MemoryPanelBuilder {
     private MemoryPanelBuilder() {
     }
 
-    /*
-     * Returns a JPanel, that holds the Memory-Representation of the given Collection. Uses LJV to do so.
+    /**
+     * Returns a JPanel, that holds the Memory-Representation of the given
+     * Collection. Uses LJV to do so.
      */
     static JPanel create(Object collection) {
         String dot = colorize(createDot(collection));
 
         try {
-            
+
             return GraphPanelRenderer.create("Memory Visualization", dot);
 
         } catch (RuntimeException ex) {
@@ -36,7 +38,7 @@ class MemoryPanelBuilder {
         }
     }
 
-    /*
+    /**
      * Ignores Fields, that are not relevant to the state of the datastructure, are
      * always null unless accessed first or add unneccessary noise to the
      * datastructure-vizualisation.
@@ -60,8 +62,8 @@ class MemoryPanelBuilder {
                 .drawGraph(collection);
     }
 
-    /*
-     * clinks into the by LJV generated dot and modifies the colors 
+    /**
+     * Clinks into the by LJV generated dot and modifies the colors
      */
     static String colorize(String dot) {
 
@@ -77,17 +79,13 @@ class MemoryPanelBuilder {
                 Colors.EDGE_COLORM,
                 Colors.FG_COLORM);
 
-
         // After the first brace in the dot is where the styling of the graph happens
         int firstBrace = dot.indexOf('{');
         if (firstBrace < 0) {
             return dot;
         }
 
-        
-        /*
-         * dot... { + themed attributes + ... dot
-         */
+        // dot... { + themed attributes + ... dot
         String graph = dot.substring(0, firstBrace + 1)
                 + themedAttributes
                 + dot.substring(firstBrace + 1);
