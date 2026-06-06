@@ -14,7 +14,7 @@ import com.hhu.ui.Colors;
 import guru.nidi.graphviz.model.Graph;
 
 /**
- * Builds the DataStructure Panel. An simplified vizualisation of a given
+ * Builds the DataStructure Panel. A simplified vizualization of a given
  * collection.
  */
 class DataStructurePanelBuilder {

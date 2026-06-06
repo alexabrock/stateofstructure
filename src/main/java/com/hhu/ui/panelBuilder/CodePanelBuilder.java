@@ -83,7 +83,7 @@ class CodePanelBuilder {
     }
 
     /**
-     * Adds a lineHighlight at a given line
+     * Adds a line Highlight at a given line
      */
     private static void highlightLine(RSyntaxTextArea textArea, int lineNumber) {
         if (lineNumber < 0) {

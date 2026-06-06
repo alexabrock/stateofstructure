@@ -19,12 +19,12 @@ public class Colors {
 
     // code colors
     public static final Color LINE_HIGHLIGHT = new Color(250, 220, 233);
-    public static Color CARET_COLOR = new Color(255, 255, 255);
-    public static Color TEXT_BACKGROUND_COLOR = new Color(42, 42, 42);
-    public static Color TEXT_FOREGROUND_COLOR = new Color(219, 220, 222);
+    public static final Color CARET_COLOR = new Color(255, 255, 255);
+    public static final Color TEXT_BACKGROUND_COLOR = new Color(42, 42, 42);
+    public static final Color TEXT_FOREGROUND_COLOR = new Color(219, 220, 222);
 
     // theme styler
-    public static Color LINE_BORDER = new Color(200, 211, 217);
+    public static final Color LINE_BORDER = new Color(200, 211, 217);
 
     // application colors
     public static final Color APPLICATION_BACKGROUND = Color.WHITE;
