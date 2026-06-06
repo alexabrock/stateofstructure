@@ -56,7 +56,7 @@ public class TreeGraphUtils {
 
             g = buildRecursive(g, left, cache, valueFieldName);
         } else {
-            g = g.with(currentNode.link(to(nullNode(value))));
+            g = g.with(currentNode.link(to(nullNode())));
         }
 
         // rechten Knoten erstellen
@@ -71,7 +71,7 @@ public class TreeGraphUtils {
 
             g = buildRecursive(g, right, cache, valueFieldName);
         } else {
-            g = g.with(currentNode.link(to(nullNode(value))));
+            g = g.with(currentNode.link(to(nullNode())));
         }
 
         return g;

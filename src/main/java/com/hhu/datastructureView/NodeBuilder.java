@@ -18,7 +18,7 @@ public class NodeBuilder {
     }
     
     // needs to be unique, since graphviz merges Nodes with the same Name
-    public static Node nullNode(Object key) {
+    public static Node nullNode() {
         return getNode("")
                 .with(Shape.RECTANGLE)
                 .with(attr("width", 0.25), attr("height", 0.05));

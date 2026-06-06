@@ -8,7 +8,7 @@ public class Colors {
     public static final String FG_COLORM = "#002867"; //Font
     public static final String EDGE_COLORM = "#7F7F7F";
     public static final String NODE_FILL_COLORM = "#ffeec4";
-    public static final String NODE_BORDER_COLORM = "#ffeec4"; // ffc83d
+    public static final String NODE_BORDER_COLORM = "#ffc83d"; // ffc83d
 
     // Datastructure Colors
     public static final String BG_COLORD = "#ffffff";

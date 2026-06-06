@@ -81,7 +81,7 @@ public class TreeMapGraph {
 
             g = buildRecursive(g, left, cache);
         } else {
-            g = g.with(currentNode.link(to(nullNode(key))));
+            g = g.with(currentNode.link(to(nullNode())));
         }
 
         // rechten Knoten erstellen
@@ -94,7 +94,7 @@ public class TreeMapGraph {
 
             g = buildRecursive(g, right, cache);
         } else {
-            g = g.with(currentNode.link(to(nullNode(key))));
+            g = g.with(currentNode.link(to(nullNode())));
         }
 
         return g;

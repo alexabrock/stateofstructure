@@ -46,7 +46,7 @@ class CompilationController {
     private SwingWorker<DrawCalls, Void> createWorker(JPanel centerPanel, JButton compileButton, String code) {
         return new SwingWorker<>() {
             @Override
-            protected DrawCalls doInBackground() throws InterruptedException {
+            protected DrawCalls doInBackground(){
                 return Compiler.compile(code);
             }
 
