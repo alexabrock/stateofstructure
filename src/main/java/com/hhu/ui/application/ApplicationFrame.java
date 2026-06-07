@@ -1,6 +1,8 @@
 package com.hhu.ui.application;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -11,8 +13,6 @@ import com.hhu.ui.Colors;
 class ApplicationFrame {
 
     private static final String TITLE = "State to Structure";
-    private static final int WIDTH = 2500;
-    private static final int HEIGHT = 1200;
 
     JFrame create(JPanel centerPanel, JPanel buttonPanel) {
         JFrame frame = new JFrame(TITLE);
@@ -21,8 +21,13 @@ class ApplicationFrame {
         frame.setLayout(new BorderLayout());
         frame.add(centerPanel, BorderLayout.CENTER);
         frame.add(buttonPanel, BorderLayout.SOUTH);
-        frame.setSize(WIDTH, HEIGHT);
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int width = (int) (screenSize.width * 0.85);
+        int height = (int) (screenSize.height * 0.85);
+
+        frame.setSize(width, height);
         frame.setLocationRelativeTo(null);
+
         return frame;
     }
 
