@@ -51,11 +51,16 @@
     </dependency>
 <!-- Library for zoomable Swing image panels. -->
     <dependency>
-      <groupId>org.swinglabs.swingx</groupId>
-      <artifactId>swingx-core</artifactId>
-      <version>1.6.5-1</version>
+      <groupId>org.apache.xmlgraphics</groupId>
+      <artifactId>batik-swing</artifactId>
+      <version>1.17</version>
     </dependency>
-
+    <!-- Library for displaying Graphviz SVGs in Swing. -->
+    <dependency>
+        <groupId>org.apache.xmlgraphics</groupId>
+        <artifactId>batik-swing</artifactId>
+        <version>1.17</version>
+    </dependency>
     <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
