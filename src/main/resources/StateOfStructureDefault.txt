@@ -19,11 +19,9 @@ public class StateOfStructure {
         Visualizer.register(stack);
         for(int i = 0; i<4;i++){
         	stack.push(i);
-
         }
         for(int i = 0; i<4;i++){
         	stack.pop();
-            
         }
     }
 }
