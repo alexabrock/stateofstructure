@@ -11,8 +11,7 @@ Before running the project, install:
 
 1. **A JDK that supports the configured Java version**  
    The project is configured with Maven compiler release `25`.
-2. **Maven** or the Windows Maven Wrapper included as `mvnw.cmd`.
-3. **Graphviz**  
+2. **Graphviz**  
 StateOfStructure uses Graphviz to render visual representations of data structures. Install it from the official [Graphviz download page](https://graphviz.org/download/) and make sure the Graphviz executables are available on your system path.
 
 ## How the tool works
