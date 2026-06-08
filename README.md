@@ -171,3 +171,48 @@ StateOfStructure is a Swing desktop application and needs a graphical environmen
 ## Educational purpose
 
 StateOfStructure is designed to support learning. It does not replace a textbook, lecture, or debugger. Instead, it gives students an interactive bridge between code and concept: each operation is connected to the visible state that it creates.
+
+
+## Screenshots
+
+### ArrayList
+
+![ArrayList](images/ArrayList.png)
+
+### HashSet
+
+![HashSet](images/HashSet.png)
+
+### LinkedHashSet
+
+![LinkedHashSet](images/LinkedHashSet.png)
+
+### LinkedList
+
+![LinkedList](images/LinkedList.png)
+
+### Stack
+
+![Stack](images/Stack.png)
+
+### TreeMap
+
+![TreeMap](images/TreeMap.png)
+
+### TreeSet
+
+![TreeSet](images/TreeSet.png)
+
+## Course-specific Structures
+
+### PrograBinarySearchTree
+
+![PrograBinarySearchTree](images/PrograBinarySearchTree.png)
+
+### PrograHashSet
+
+![PrograHashSet](images/PrograHashSet.png)
+
+### PrograLinkedList
+
+![PrograLinkedList](images/PrograLinkedList.png)
