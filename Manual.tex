@@ -1,0 +1,260 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{longtable}
+
+\geometry{margin=2.5cm}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    pdftitle={StateOfStructure Documentation},
+    pdfauthor={Alexa Katharina-Ronja Brockmöller}
+}
+
+\lstdefinestyle{javaStyle}{
+    language=Java,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue}\bfseries,
+    commentstyle=\color{gray},
+    stringstyle=\color{teal},
+    breaklines=true,
+    frame=single,
+    columns=fullflexible
+}
+
+\title{StateOfStructure\\\large Documentation}
+\author{Alexa Katharina-Ronja Brockmöller}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Introduction}
+StateOfStructure is an educational desktop tool for students in computer science courses. Its purpose is to make the 
+changing state of data structures visible while Java code is executed. Many students can read an operation such as 
+\texttt{push}, \texttt{add}, \texttt{remove}, or \texttt{put}, but still struggle to imagine the resulting internal structure. 
+StateOfStructure addresses this problem by recording intermediate states and presenting them as navigable visual steps.
+
+The tool is useful for programming courses, data-structure courses, algorithm courses, and practical tutorials. 
+It helps students connect source code with concrete state changes in lists, stacks, sets, maps, trees, and 
+course-specific data structures.
+
+\section{Learning Goals}
+
+StateOfStructure supports the following learning goals:
+
+\begin{itemize}[noitemsep]
+    \item understanding how individual Java statements change a data structure;
+    \item observing data structures step by step instead of only seeing a final result;
+    \item comparing a logical data-structure visualization with an object-oriented memory visualization;
+    \item improving debugging intuition by connecting code lines to runtime state;
+    \item experimenting with small Java examples in a safe, focused environment.
+\end{itemize}
+
+\section{Prerequisites}
+
+Before using StateOfStructure, install the following software:
+
+\begin{enumerate}
+    \item A Java Development Kit (JDK). The Maven configuration currently targets Java release \texttt{25}.
+    \item Maven, or the Windows Maven Wrapper included in the repository as \texttt{mvnw.cmd}.
+    \item Graphviz. Graphviz is required for rendering graph images. It can be downloaded from the official \href{https://graphviz.org/download/}{Graphviz download page}.
+\end{enumerate}
+
+After installing Graphviz, ensure that the Graphviz executables are available on the system path. If Graphviz is not available, graph rendering may fail even if the Java project compiles successfully.
+
+\section{Starting the Application}
+
+On Windows, run:
+
+\begin{lstlisting}[language=bash]
+.\mvnw.cmd clean compile exec:exec
+\end{lstlisting}
+
+On macOS or Linux, run:
+
+\begin{lstlisting}[language=bash]
+mvn clean compile exec:exec
+\end{lstlisting}
+
+StateOfStructure is a Swing desktop application. Therefore, it needs a graphical desktop environment. It is not intended to be used only inside a headless terminal session.
+
+\section{Basic Workflow}
+
+The main workflow is:
+
+\begin{enumerate}
+    \item Start the application.
+    \item Edit the Java example in the code panel.
+    \item Create a supported data structure.
+    \item Register the data structure with \texttt{Visualizer.register(...)}.
+    \item Add operations that mutate the structure.
+    \item Click \textbf{Compile}.
+    \item Use \textbf{Previous} and \textbf{Next} to inspect the recorded states.
+\end{enumerate}
+
+The tool compiles the user code, records states, and updates the interface with a sequence of visualization steps.
+
+\section{Example Program}
+
+A minimal example is shown below.
+
+\begin{lstlisting}[language=Java]
+import java.util.Stack;
+import com.hhu.util.Visualizer;
+
+public class StateOfStructure {
+
+    public void main() {
+        Stack<Integer> stack = new Stack<>();
+        Visualizer.register(stack);
+
+        stack.push(1);
+        stack.push(2);
+        stack.pop();
+    }
+}
+\end{lstlisting}
+
+This example creates a stack, registers it for visualization, pushes two elements, and removes one element. StateOfStructure records the changes and allows the student to move through the resulting states.
+
+\section{Rules for User Programs}
+
+User programs must follow these conventions so that the tool can compile and execute them correctly:
+
+\begin{itemize}[noitemsep]
+    \item The class must be named \texttt{StateOfStructure}.
+    \item The method signature must be \texttt{public void main()}.
+    \item The code must call \texttt{Visualizer.register(dataStructure)} before the operations that should be recorded.
+    \item The registered object should be one of the supported data structures.
+\end{itemize}
+
+
+\section{Supported Data Structures}
+\begin{center}
+    \begin{tabular}{p{0.4\textwidth}}
+        \toprule
+        \textbf{Data structure} \\
+        \midrule
+        \texttt{ArrayList} \\
+        \texttt{LinkedList} \\
+        \texttt{Stack} \\
+        \texttt{HashSet} \\
+        \texttt{LinkedHashSet} \\
+        \texttt{TreeSet} \\
+        \texttt{TreeMap} \\
+        \texttt{PrograLinkedList} \\
+        \texttt{PrograHashSet} \\
+        \texttt{PrograBinarySearchTree} \\
+        \bottomrule
+    \end{tabular}
+\end{center}
+
+\section{Interface Overview}
+
+The graphical interface contains several panels and controls:
+
+\begin{description}
+    \item[Code panel] Shows the Java example and highlights the relevant code context for the current step.
+    \item[Data-structure panel] Shows a logical visualization of the registered data structure.
+    \item[Memory panel] Shows an object/memory-oriented view of the registered data structure.
+    \item[Compile button] Compiles the current source code and rebuilds the visualization sequence.
+    \item[Previous button] Moves to the previous recorded state.
+    \item[Next button] Moves to the next recorded state.
+    \item[Help button] Opens an in-application tutorial.
+\end{description}
+
+Graph panels support zooming with the mouse wheel, dragging for panning, and double-clicking for zoom toggling.
+
+\section{Internal Architecture}
+
+StateOfStructure is organized into four main areas.
+
+\subsection{Visualization API}
+
+The \texttt{Visualizer} class is the simple API used by student examples. It stores the active recording object and delegates state recording to the internal draw-call logic. A user program only needs to call \texttt{Visualizer.register(...)}. The application then records the states needed for visualization.
+
+\subsection{Compilation Pipeline}
+
+The compiler component writes the edited user code into a temporary workspace and compiles it with the Java compiler from the JDK. It then loads the compiled \texttt{StateOfStructure} class and invokes its non-static \texttt{main} method.
+To make step-by-step visualization possible, the compiler augments the user code by adding recording calls after relevant statements in the \texttt{main} method. This allows students to write normal-looking data-structure operations while the tool captures the intermediate states automatically.
+
+\subsection{How State Recording Works}
+
+At startup, the program reads the default Java snippet from the resources directory. The internal compiler component then prepares the code for execution. It searches for the user method \texttt{public void main()} and for the first call to \texttt{Visualizer.register(...)}. 
+
+
+After the registered data structure is found, the tool automatically inserts recording calls after later lines in the method body. Conceptually, the student writes this:
+
+\begin{lstlisting}[language=Java]
+stack.push(1);
+stack.push(2);
+stack.pop();
+\end{lstlisting}
+
+The tool treats it like this during execution:
+
+\begin{lstlisting}[language=Java]
+stack.push(1); Visualizer.record();
+stack.push(2); Visualizer.record();
+stack.pop(); Visualizer.record();
+\end{lstlisting}
+
+Each call to \texttt{Visualizer.record()} creates a new step in the visual timeline. The timeline can then be explored through the navigation controls in the user interface.
+
+\subsection{Graph Construction}
+
+The graph builder layer maps supported Java and course-specific data structures to specialized graph builders. These builders create graph descriptions, which are rendered through Graphviz. This separation makes it possible to add more data structures later without rewriting the user interface.
+
+\subsection{User Interface}
+
+The user interface is implemented with Java Swing. It displays the current recorded step and provides navigation controls. Each recorded step contains the panels needed to show code, memory, and data-structure information together.
+
+\section{Testing}
+
+The test suite can be executed with:
+
+\begin{lstlisting}[language=bash]
+mvn clean install
+\end{lstlisting}
+
+On Windows, use:
+
+\begin{lstlisting}[language=bash]
+.\mvnw.cmd clean install
+\end{lstlisting}
+
+The tests cover utility logic, draw-call behavior, UI components, and graph builders for supported data structures.
+
+\section{Troubleshooting}
+
+\subsection{Graphviz Problems}
+
+If visualizations do not render, first verify that Graphviz is installed and available on the command line. Restart the terminal or IDE after changing the system path.
+
+\subsection{No Java Compiler Found}
+
+If the application reports that no Java compiler was found, the program is probably running with a JRE instead of a JDK. Install a JDK and ensure that the application uses it.
+
+
+\section{Extending the Tool}
+
+To add support for another data structure, the project should be extended in the graph builder layer. A new builder should translate the structure into a graph representation, and the central graph dispatch logic should be updated to call the new builder for the new type.
+
+\section{Conclusion}
+
+StateOfStructure helps students understand data structures by connecting Java code to visual state changes. It encourages experimentation, supports step-by-step reasoning, and provides an approachable bridge between abstract theory and concrete runtime behavior.
+
+
+
+\end{document}
