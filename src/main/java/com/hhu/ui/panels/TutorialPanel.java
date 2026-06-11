@@ -14,13 +14,13 @@ import javax.swing.SwingUtilities;
 
 import com.hhu.util.ThemeStyler;
 
-public class TutorialPanel extends JPanel {
+class TutorialPanel extends JPanel {
     private final CardLayout cardLayout = new CardLayout();
     private final JPanel slideContainer = new JPanel(cardLayout);
     private int currentSlide = 1;
     private final int totalSlides = 4;
 
-    public TutorialPanel(JPanel parent) {
+    TutorialPanel(JPanel parent) {
         // 1. Find the top-level Window to attach the Dialog
         Window parentWindow = SwingUtilities.windowForComponent(parent);
         JFrame frame = (parentWindow instanceof JFrame) ? (JFrame) parentWindow : null;

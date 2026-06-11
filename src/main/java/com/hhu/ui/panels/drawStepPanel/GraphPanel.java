@@ -33,7 +33,7 @@ import guru.nidi.graphviz.engine.Graphviz;
 /**
  * Renders Graphviz DOT as a zoomable and pannable SVG panel.
  */
-public class GraphPanel {
+class GraphPanel {
 
     private GraphPanel() {
     }
@@ -41,7 +41,7 @@ public class GraphPanel {
     /**
      * * Transforms a DOT graph into a zoomable and pannable JPanel.
      */
-    public static JPanel create(String title, String dot) {
+    static JPanel create(String title, String dot) {
         SvgGraphCanvas canvas = new SvgGraphCanvas();
         canvas.load(Graphviz.fromString(dot).render(Format.SVG).toString());
 

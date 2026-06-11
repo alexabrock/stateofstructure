@@ -24,8 +24,7 @@ import com.hhu.util.Visualizer;
 public class Compiler {
     private final static String RECORD_CALL = "Visualizer.record();";
     private static final String USER_CLASS_NAME = "StateOfStructure";
-    private static final Path WORKSPACE_DIR = Path.of(System.getProperty("java.io.tmpdir"), "stateofstructure"); // temp
-                                                                                                                 // directory
+    private static final Path WORKSPACE_DIR = Path.of(System.getProperty("java.io.tmpdir"), "stateofstructure"); // temp directory
     private static final Path USER_SOURCE_FILE = WORKSPACE_DIR.resolve(USER_CLASS_NAME + ".java");
     private static final Path COMPILED_CLASSES_DIR = WORKSPACE_DIR.resolve("classes");
 
