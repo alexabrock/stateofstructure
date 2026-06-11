@@ -7,31 +7,31 @@ import com.hhu.util.DrawStep;
  * Holds the currently displayed DrawCalls and exposes navigation through its
  * DrawSteps.
  */
-class DrawCallHandler {
+public class DrawCallHandler {
 
     private DrawCalls drawCalls;
 
-    DrawCallHandler(DrawCalls drawCalls) {
+    public DrawCallHandler(DrawCalls drawCalls) {
         this.drawCalls = drawCalls;
     }
 
-    DrawStep nextStep() {
+    public DrawStep nextStep() {
         return drawCalls.nextStep();
     }
 
-    DrawStep previousStep() {
+    public DrawStep previousStep() {
         return drawCalls.prevStep();
     }
 
-    boolean hasNextStep() {
+    public boolean hasNextStep() {
         return drawCalls.hasNextStep();
     }
 
-    boolean hasPreviousStep() {
+    public boolean hasPreviousStep() {
         return drawCalls.hasPrevStep();
     }
 
-    void replaceDrawCalls(DrawCalls drawCalls) {
+    public void replaceDrawCalls(DrawCalls drawCalls) {
         this.drawCalls = drawCalls;
     }
 }

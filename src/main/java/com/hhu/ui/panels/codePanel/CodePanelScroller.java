@@ -1,4 +1,4 @@
-package com.hhu.ui.application;
+package com.hhu.ui.panels.codePanel;
 
 import java.awt.Component;
 import java.awt.Container;
@@ -17,7 +17,7 @@ import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
  * Finds the source-code editor in Swing components and scrolls it to the
  * highlighted line.
  */
-class CodePanelScroller {
+public class CodePanelScroller {
 
     private static final int SCROLL_RETRIES = 4;
     private static final String TARGET_LINE_PROPERTY = "codepanel.targetLineNumber";
@@ -29,14 +29,14 @@ class CodePanelScroller {
      * the calculation of the position. Therefore, this method cannot be inside
      * CodePanelBuilder (The Class that builds the SyntaxTextArea)
      */
-    void scrollToHighlightedLine(JPanel codePanel) {
+    public void scrollToHighlightedLine(JPanel codePanel) {
         RSyntaxTextArea textArea = findSyntaxTextArea(codePanel);
         if (textArea != null) {
             scrollToTargetLine(textArea, SCROLL_RETRIES);
         }
     }
 
-    String readCode(Component root) {
+    public String readCode(Component root) {
         RSyntaxTextArea codeArea = findSyntaxTextArea(root);
         if (codeArea == null) {
             return "";
@@ -44,7 +44,7 @@ class CodePanelScroller {
         return codeArea.getText();
     }
 
-    RSyntaxTextArea findSyntaxTextArea(Component root) {
+    public RSyntaxTextArea findSyntaxTextArea(Component root) {
         Deque<Component> stack = new ArrayDeque<>();
         stack.push(root);
 

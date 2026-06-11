@@ -1,4 +1,4 @@
-package com.hhu.ui.application;
+package com.hhu.ui.panels.drawStepPanel;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -9,17 +9,18 @@ import java.awt.Insets;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.hhu.ui.panels.codePanel.CodePanelScroller;
 import com.hhu.util.DrawStep;
 import com.hhu.util.ThemeStyler;
 
 /**
  * Builds and updates the center area that renders the current DrawStep.
  */
-class DrawStepPanel {
+public class DrawStepPanel {
 
     private final CodePanelScroller codePanelScroller;
 
-    DrawStepPanel(CodePanelScroller codePanelScroller) {
+    public DrawStepPanel(CodePanelScroller codePanelScroller) {
         this.codePanelScroller = codePanelScroller;
     }
 
@@ -28,7 +29,7 @@ class DrawStepPanel {
      * specifically, it holds the codePanel, the memoryPanel, the datastructurePanel
      * and the datastructureName, which is the headline.
      */
-    JPanel createCenterPanel(DrawStep step) {
+    public JPanel createCenterPanel(DrawStep step) {
         JPanel codePanel = step.codePanel();
         JPanel memoryPanel = step.memory();
         JPanel datastructurePanel = step.datastructure();
@@ -53,7 +54,7 @@ class DrawStepPanel {
      * Also updates the scrollPosition of the CodePanel to match the new highlited
      * line.
      */
-    void showStep(JPanel centerPanel, DrawStep step) {
+    public void showStep(JPanel centerPanel, DrawStep step) {
         BorderLayout layout = (BorderLayout) centerPanel.getLayout();
 
         // replace visualization area (memory + datastructure)
@@ -85,7 +86,7 @@ class DrawStepPanel {
      * but seperate from the codePanel.
      * The memory panel should always be twice as large as the datastructure panel.
      */
-    JPanel createVisualizationPanel(JPanel memoryPanel, JPanel datastructurePanel) {
+    public JPanel createVisualizationPanel(JPanel memoryPanel, JPanel datastructurePanel) {
         JPanel visualizationPanel = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = createMemoryPanelConstraints();
 

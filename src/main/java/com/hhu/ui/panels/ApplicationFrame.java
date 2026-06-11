@@ -1,4 +1,4 @@
-package com.hhu.ui.application;
+package com.hhu.ui.panels;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -10,11 +10,11 @@ import javax.swing.JPanel;
 import com.hhu.ui.Colors;
 
 /** Creates the very outer shell of the Application. */
-class ApplicationFrame {
+public class ApplicationFrame {
 
     private static final String TITLE = "State to Structure";
 
-    JFrame create(JPanel centerPanel, JPanel buttonPanel) {
+    public JFrame create(JPanel centerPanel, JPanel buttonPanel) {
         JFrame frame = new JFrame(TITLE);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setBackground(Colors.APPLICATION_BACKGROUND);

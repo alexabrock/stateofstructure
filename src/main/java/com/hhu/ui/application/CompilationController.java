@@ -7,6 +7,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingWorker;
 
+import com.hhu.ui.panels.codePanel.CodePanelScroller;
+import com.hhu.ui.panels.drawStepPanel.DrawStepPanel;
 import com.hhu.util.DrawCalls;
 import com.hhu.util.compiler.Compiler;
 
@@ -16,7 +18,7 @@ import com.hhu.util.compiler.Compiler;
  * and without SwingWorker, the calculation can't happen in the background and
  * the Application freezes until the compilation is done.
  */
-class CompilationController {
+public class CompilationController {
 
     private static final String COMPILE_LABEL = "Compile";
     private static final String COMPILING_LABEL = "Compiling...";
@@ -26,7 +28,7 @@ class CompilationController {
     private final CodePanelScroller codePanelScroller;
     private final Runnable afterCompilation;
 
-    CompilationController(
+    public CompilationController(
             DrawCallHandler drawCallHandler,
             DrawStepPanel drawStepView,
             CodePanelScroller codePanelScroller,
@@ -37,7 +39,7 @@ class CompilationController {
         this.afterCompilation = afterCompilation;
     }
 
-    void compile(JPanel centerPanel, JButton compileButton) {
+    public void compile(JPanel centerPanel, JButton compileButton) {
         String code = codePanelScroller.readCode(centerPanel);
         markCompilationStarted(compileButton);
         createWorker(centerPanel, compileButton, code).execute();

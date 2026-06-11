@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 
 import org.junit.Test;
 
+import com.hhu.ui.panels.ApplicationFrame;
+
 public class ApplicationFrameTest {
     @Test
     public void createReturnsAFrame() {

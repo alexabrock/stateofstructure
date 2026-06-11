@@ -1,4 +1,4 @@
-package com.hhu.ui.panelBuilder;
+package com.hhu.ui.panels.drawStepPanel;
 
 import java.awt.BorderLayout;
 import java.awt.Cursor;
@@ -18,39 +18,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
-import java.awt.BorderLayout;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseWheelEvent;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Rectangle2D;
-import java.io.StringReader;
-
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-
-import javax.swing.SwingUtilities;
-
-import org.apache.batik.anim.dom.SAXSVGDocumentFactory;
-import org.apache.batik.swing.JSVGCanvas;
-import org.apache.batik.swing.gvt.GVTTreeRendererAdapter;
-import org.apache.batik.swing.gvt.GVTTreeRendererEvent;
-import org.apache.batik.swing.svg.GVTTreeBuilderAdapter;
-import org.apache.batik.swing.svg.GVTTreeBuilderEvent;
-import org.apache.batik.util.XMLResourceDescriptor;
-import org.w3c.dom.svg.SVGDocument;
-
-import com.hhu.ui.Colors;
-import com.hhu.util.ThemeStyler;
-
-import guru.nidi.graphviz.engine.Format;
-import guru.nidi.graphviz.engine.Graphviz;
 import org.apache.batik.anim.dom.SAXSVGDocumentFactory;
 import org.apache.batik.swing.JSVGCanvas;
 import org.apache.batik.swing.svg.GVTTreeBuilderAdapter;
@@ -66,15 +33,15 @@ import guru.nidi.graphviz.engine.Graphviz;
 /**
  * Renders Graphviz DOT as a zoomable and pannable SVG panel.
  */
-class GraphPanelRenderer {
+public class GraphPanel {
 
-    private GraphPanelRenderer() {
+    private GraphPanel() {
     }
 
     /**
      * * Transforms a DOT graph into a zoomable and pannable JPanel.
      */
-    static JPanel create(String title, String dot) {
+    public static JPanel create(String title, String dot) {
         SvgGraphCanvas canvas = new SvgGraphCanvas();
         canvas.load(Graphviz.fromString(dot).render(Format.SVG).toString());
 

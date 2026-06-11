@@ -1,4 +1,4 @@
-package com.hhu.ui.panelBuilder;
+package com.hhu.ui.panels;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;

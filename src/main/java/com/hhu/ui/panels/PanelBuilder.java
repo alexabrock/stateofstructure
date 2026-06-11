@@ -1,9 +1,12 @@
-package com.hhu.ui.panelBuilder;
+package com.hhu.ui.panels;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import com.hhu.ui.panels.codePanel.CodePanelBuilder;
+import com.hhu.ui.panels.drawStepPanel.DataStructurePanelBuilder;
+import com.hhu.ui.panels.drawStepPanel.MemoryPanelBuilder;
 import com.hhu.util.ThemeStyler;
 
 /**

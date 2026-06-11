@@ -1,4 +1,4 @@
-package com.hhu.ui.panelBuilder;
+package com.hhu.ui.panels.drawStepPanel;
 
 import java.awt.BorderLayout;
 
@@ -14,7 +14,7 @@ import com.hhu.ui.Colors;
  * Builds the Memory Panel. An abstract vizualisation of a given collection in
  * the Java-Heap.
  */
-class MemoryPanelBuilder {
+public class MemoryPanelBuilder {
     private MemoryPanelBuilder() {
     }
 
@@ -22,12 +22,12 @@ class MemoryPanelBuilder {
      * Returns a JPanel, that holds the Memory-Representation of the given
      * Collection. Uses LJV to do so.
      */
-    static JPanel create(Object collection) {
+    public static JPanel create(Object collection) {
         String dot = colorize(createDot(collection));
 
         try {
 
-            return GraphPanelRenderer.create("Memory Visualization", dot);
+            return GraphPanel.create("Memory Visualization", dot);
 
         } catch (RuntimeException ex) {
             // if something went wrong, a Panel with the error is returned

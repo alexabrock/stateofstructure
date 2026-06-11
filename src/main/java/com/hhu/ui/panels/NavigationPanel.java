@@ -1,11 +1,14 @@
-package com.hhu.ui.application;
+package com.hhu.ui.panels;
 
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import com.hhu.ui.panelBuilder.TutorialPanel;
+import com.hhu.ui.application.CompilationController;
+import com.hhu.ui.application.DrawCallHandler;
+import com.hhu.ui.panels.codePanel.CodePanelScroller;
+import com.hhu.ui.panels.drawStepPanel.DrawStepPanel;
 import com.hhu.util.ThemeStyler;
 
 /**
@@ -13,7 +16,7 @@ import com.hhu.util.ThemeStyler;
  * the Panels, that are nested inside the centerPanel, with the next or previous
  * DrawStep
  */
-class NavigationPanel {
+public class NavigationPanel {
 
     private final DrawCallHandler drawCallHandler;
     private final DrawStepPanel drawStepPanel;
@@ -24,7 +27,7 @@ class NavigationPanel {
     private JButton compileButton;
     private JButton helpButton;
 
-    NavigationPanel(
+    public NavigationPanel(
             DrawCallHandler drawCallHandler,
             DrawStepPanel drawStepPanel,
             CodePanelScroller codePanelScroller) {
@@ -33,7 +36,7 @@ class NavigationPanel {
         this.codePanelScroller = codePanelScroller;
     }
 
-    JPanel create(JPanel centerPanel) {
+    public JPanel create(JPanel centerPanel) {
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 24, 8));
         ThemeStyler.styleToolbar(buttonPanel);
 
@@ -54,11 +57,11 @@ class NavigationPanel {
         return buttonPanel;
     }
 
-    void refreshNavigationButtons() {
+    public void refreshNavigationButtons() {
         updateButtons(prevButton, nextButton, drawCallHandler);
     }
 
-    static void updateButtons(JButton prev, JButton next, DrawCallHandler drawCallHandler) {
+    public static void updateButtons(JButton prev, JButton next, DrawCallHandler drawCallHandler) {
         prev.setEnabled(drawCallHandler.hasPreviousStep());
         next.setEnabled(drawCallHandler.hasNextStep());
     }

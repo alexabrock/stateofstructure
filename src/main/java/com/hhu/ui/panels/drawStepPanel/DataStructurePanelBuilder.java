@@ -1,4 +1,4 @@
-package com.hhu.ui.panelBuilder;
+package com.hhu.ui.panels.drawStepPanel;
 
 import static guru.nidi.graphviz.attribute.Attributes.attr;
 
@@ -17,7 +17,7 @@ import guru.nidi.graphviz.model.Graph;
  * Builds the DataStructure Panel. A simplified vizualization of a given
  * collection.
  */
-class DataStructurePanelBuilder {
+public class DataStructurePanelBuilder {
     private DataStructurePanelBuilder() {
     }
 
@@ -26,10 +26,10 @@ class DataStructurePanelBuilder {
      * Collection.
      * To do so, it calls a Builder from GraphBuilderFactory.
      */
-    static JPanel create(Object collection) {
+    public static JPanel create(Object collection) {
         try {
             Graph graph = colorize(GraphBuilder.buildGraph(collection));
-            return GraphPanelRenderer.create("Datastructure Visualization", graph.toString());
+            return GraphPanel.create("Datastructure Visualization", graph.toString());
 
         } catch (RuntimeException ex) {
             // if something went wrong, a Panel with the error is returned

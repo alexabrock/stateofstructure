@@ -1,4 +1,4 @@
-package com.hhu.ui.panelBuilder;
+package com.hhu.ui.panels.codePanel;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
@@ -21,7 +21,7 @@ import com.hhu.util.compiler.Compiler;
 /**
  * Returns the CodePanel. A Swing Representation of a given Code-String
  */
-class CodePanelBuilder {
+public class CodePanelBuilder {
 
     static final String TARGET_LINE_PROPERTY = "codepanel.targetLineNumber";
 

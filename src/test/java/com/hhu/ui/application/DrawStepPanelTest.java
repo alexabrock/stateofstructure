@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 
 import org.junit.Test;
 
+import com.hhu.ui.panels.codePanel.CodePanelScroller;
+import com.hhu.ui.panels.drawStepPanel.DrawStepPanel;
 import com.hhu.util.DrawStep;
 
 public class DrawStepPanelTest {

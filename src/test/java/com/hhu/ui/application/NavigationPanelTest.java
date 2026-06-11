@@ -13,6 +13,10 @@ import javax.swing.JPanel;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.hhu.ui.panels.NavigationPanel;
+import com.hhu.ui.panels.codePanel.CodePanelScroller;
+import com.hhu.ui.panels.drawStepPanel.DrawStepPanel;
+
 public class NavigationPanelTest {
     private DrawCallHandler drawCallHandler;
     private DrawStepPanel drawStepPanel;
