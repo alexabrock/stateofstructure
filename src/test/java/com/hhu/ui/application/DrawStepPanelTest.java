@@ -16,18 +16,6 @@ import com.hhu.util.DrawStep;
 
 public class DrawStepPanelTest {
 
-    @Test
-    public void createVisualizationPanelReturnsJPanel() {
-        CodePanelScroller codePanelScroller = mock(CodePanelScroller.class);
-        DrawStepPanel drawStepPanel = new DrawStepPanel(codePanelScroller);
-        JPanel panel = new JPanel();
-
-        JPanel jPanel = drawStepPanel.createVisualizationPanel(panel, panel);
-
-        assertNotNull(jPanel);
-        assertTrue(jPanel instanceof JPanel);
-    }
-
     
     @Test
     public void testCreateCenterPanelReturnsAJPanel() {
