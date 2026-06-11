@@ -16,8 +16,6 @@ import com.hhu.util.ThemeStyler;
 public class DrawStepPanel {
 
     private final CodePanelScroller codePanelScroller;
-
-    // Speichert die letzte Position der Trennlinien (-1 = noch keine manuelle Anpassung)
     private int leftDividerLocation = -1;
     private int rightDividerLocation = -1;
 
@@ -25,6 +23,11 @@ public class DrawStepPanel {
         this.codePanelScroller = codePanelScroller;
     }
 
+    /**
+     * returns a Panel that holds the center part of the Application and a headline
+     * specifically, it holds the codePanel, the memoryPanel, the datastructurePanel
+     * and the datastructureName, which is the headline.
+     */
     public JPanel createCenterPanel(DrawStep step) {
         JPanel centerPanel = new JPanel(new BorderLayout(8, 8));
         ThemeStyler.styleCenterPanel(centerPanel);
@@ -40,6 +43,12 @@ public class DrawStepPanel {
         return centerPanel;
     }
 
+    /**
+     * removes the current Panels in residesIn and replaces them with the panels
+     * stored inside the DrawStep.
+     * Also updates the scrollPosition of the CodePanel to match the new highlited
+     * line.
+     */
     public void showStep(JPanel centerPanel, DrawStep step) {
         BorderLayout layout = (BorderLayout) centerPanel.getLayout();
 
@@ -63,16 +72,20 @@ public class DrawStepPanel {
         panel.add(replacement, position);
     }
 
+    /**
+     * Nests the code, memory and datastructure panel together, so they can be
+     * resized during runtime.
+     */
     private JPanel createWorkspacePanel(JPanel codePanel, JPanel memoryPanel, JPanel datastructurePanel) {
-        // Rechtes SplitPane: Trennt Memory und Datastructure
+        // right splitPane:  Memory & Datastructure
         JSplitPane rightSplit = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, memoryPanel, datastructurePanel);
         rightSplit.setResizeWeight(0.5); // 50:50
         rightSplit.setDividerSize(8);
 
-        // Linkes SplitPane: Trennt Code von dem rechten SplitPane
+        // left splitPane: Code & right splitPane
         JSplitPane leftSplit = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, codePanel, rightSplit);
         leftSplit.setDividerSize(8);
-        leftSplit.setResizeWeight(0.33); // 1/3 zu 2/3
+        leftSplit.setResizeWeight(0.33); // 33:77
 
         leftSplit.addPropertyChangeListener(JSplitPane.DIVIDER_LOCATION_PROPERTY, evt -> {
             leftDividerLocation = leftSplit.getDividerLocation();
