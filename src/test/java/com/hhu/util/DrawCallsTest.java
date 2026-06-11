@@ -35,7 +35,6 @@ public class DrawCallsTest {
     }
 
     @Test
-    @Ignore
     public void correctIfOneRecord() {
         drawCalls.record();
 
