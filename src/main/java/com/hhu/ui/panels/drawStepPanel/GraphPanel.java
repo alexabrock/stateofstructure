@@ -3,6 +3,8 @@ package com.hhu.ui.panels.drawStepPanel;
 import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -11,7 +13,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 import java.io.StringReader;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,6 +25,8 @@ import javax.swing.SwingUtilities;
 
 import org.apache.batik.anim.dom.SAXSVGDocumentFactory;
 import org.apache.batik.swing.JSVGCanvas;
+import org.apache.batik.swing.gvt.GVTTreeRendererAdapter;
+import org.apache.batik.swing.gvt.GVTTreeRendererEvent;
 import org.apache.batik.swing.svg.GVTTreeBuilderAdapter;
 import org.apache.batik.swing.svg.GVTTreeBuilderEvent;
 import org.apache.batik.util.XMLResourceDescriptor;
@@ -30,20 +37,23 @@ import com.hhu.util.ThemeStyler;
 import guru.nidi.graphviz.engine.Format;
 import guru.nidi.graphviz.engine.Graphviz;
 
-/**
- * Renders Graphviz DOT as a zoomable and pannable SVG panel.
- */
 class GraphPanel {
+
+    // Speichert den letzten Snapshot für jeden Bereich separat anhand des Titels
+    private static final Map<String, BufferedImage> snapshots = new ConcurrentHashMap<>();
 
     private GraphPanel() {
     }
 
-    /**
-     * * Transforms a DOT graph into a zoomable and pannable JPanel.
-     */
     static JPanel create(String title, String dot) {
-        SvgGraphCanvas canvas = new SvgGraphCanvas();
-        canvas.load(Graphviz.fromString(dot).render(Format.SVG).toString());
+        String svg = Graphviz.fromString(dot)
+                .width(800)
+                .height(600)
+                .render(Format.SVG)
+                .toString();
+
+        SvgGraphCanvas canvas = new SvgGraphCanvas(title);
+        canvas.load(svg);
 
         JPanel imagePanel = new JPanel(new BorderLayout());
         ThemeStyler.styleApplicationBackground(imagePanel);
@@ -61,23 +71,21 @@ class GraphPanel {
         return panel;
     }
 
-    /**
-     * * Batik can only fit the SVG after the GVT tree exists and after Swing has
-     * assigned a component size. This wrapper keeps the original graph bounds and
-     * recomputes the view transform whenever one of those values changes.
-     */
     private static final class SvgGraphCanvas extends JSVGCanvas {
         private static final double MIN_ZOOM = 0.2;
         private static final double MAX_ZOOM = 5.0;
         private static final double WHEEL_ZOOM_BASE = 1.1;
-        private static final double FIT_PADDING = 24.0;
+
+        private final String slotTitle;
+        private boolean ready = false;
 
         private double zoomFactor = 1.0;
         private double offsetX = 0.0;
         private double offsetY = 0.0;
         private Point dragAnchor;
 
-        private SvgGraphCanvas() {
+        private SvgGraphCanvas(String slotTitle) {
+            this.slotTitle = slotTitle;
             setDocumentState(JSVGCanvas.ALWAYS_STATIC);
             setRecenterOnResize(false);
             setDisableInteractions(true);
@@ -94,6 +102,27 @@ class GraphPanel {
                     });
                 }
             });
+
+            addGVTTreeRendererListener(new GVTTreeRendererAdapter() {
+                @Override
+                public void gvtRenderingCompleted(GVTTreeRendererEvent e) {
+                    SwingUtilities.invokeLater(() -> {
+                        ready = true;
+                        repaint();
+
+                        int w = getWidth();
+                        int h = getHeight();
+                        if (w > 0 && h > 0) {
+                            BufferedImage img = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+                            Graphics2D g2 = img.createGraphics();
+                            SvgGraphCanvas.super.paint(g2);
+                            g2.dispose();
+                            snapshots.put(slotTitle, img);
+                        }
+                    });
+                }
+            });
+
             addComponentListener(new ComponentAdapter() {
                 @Override
                 public void componentResized(ComponentEvent event) {
@@ -101,6 +130,17 @@ class GraphPanel {
                 }
             });
             installMouseInteraction();
+        }
+
+        @Override
+        public void paint(Graphics g) {
+            BufferedImage lastSnapshot = snapshots.get(slotTitle);
+
+            if (!ready && lastSnapshot != null) {
+                g.drawImage(lastSnapshot, 0, 0, getWidth(), getHeight(), null);
+            } else {
+                super.paint(g);
+            }
         }
 
         private void load(String svg) {
@@ -119,7 +159,6 @@ class GraphPanel {
                 @Override
                 public void mouseClicked(MouseEvent event) {
                     if (event.getClickCount() == 2) {
-
                         resetView();
                         applyViewTransform();
                     }
@@ -225,10 +264,13 @@ class GraphPanel {
         }
 
         private double getFitScale(Rectangle2D graphBounds) {
-            double availableWidth = Math.max(1.0, getWidth() - FIT_PADDING * 2.0);
-            double availableHeight = Math.max(1.0, getHeight() - FIT_PADDING * 2.0);
-            double widthScale = availableWidth / graphBounds.getWidth();
-            double heightScale = availableHeight / graphBounds.getHeight();
+            double targetWidth = 800.0;
+            double targetHeight = 600.0;
+            double availableWidth = Math.max(1.0, getWidth() );
+            double availableHeight = Math.max(1.0, getHeight());
+            double widthScale = availableWidth / targetWidth;
+            double heightScale = availableHeight / targetHeight;
+
             return Math.min(widthScale, heightScale);
         }
 
