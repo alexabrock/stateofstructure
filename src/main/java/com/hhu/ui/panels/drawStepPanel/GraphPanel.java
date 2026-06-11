@@ -51,6 +51,9 @@ class GraphPanel {
                 .height(600)
                 .render(Format.SVG)
                 .toString();
+                
+        // Behebt den Apache Batik Fehler, indem "transparent" durch "none" ersetzt wird
+        svg = svg.replace("\"transparent\"", "\"none\"").replace(":transparent", ":none");
 
         SvgGraphCanvas canvas = new SvgGraphCanvas(title);
         canvas.load(svg);
@@ -86,7 +89,7 @@ class GraphPanel {
 
         private SvgGraphCanvas(String slotTitle) {
             super(null, true, false);
-            
+
             this.slotTitle = slotTitle;
             setDocumentState(JSVGCanvas.ALWAYS_STATIC);
             setRecenterOnResize(false);
