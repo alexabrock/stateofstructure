@@ -85,6 +85,8 @@ class GraphPanel {
         private Point dragAnchor;
 
         private SvgGraphCanvas(String slotTitle) {
+            super(null, true, false);
+            
             this.slotTitle = slotTitle;
             setDocumentState(JSVGCanvas.ALWAYS_STATIC);
             setRecenterOnResize(false);
