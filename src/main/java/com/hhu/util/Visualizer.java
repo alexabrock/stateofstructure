@@ -6,6 +6,9 @@ import com.hhu.ui.application.Application;
 public class Visualizer {
     private static DrawCalls drawCalls;
 
+    private Visualizer() {
+    }
+
     //changes the Datastructure to be visualized. If changed, the old visualizations are forgotten.
     public static void register(Object collection) {
         drawCalls = new DrawCalls(collection);
