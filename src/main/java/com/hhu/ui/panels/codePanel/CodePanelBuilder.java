@@ -93,6 +93,7 @@ public class CodePanelBuilder {
         try {
             textArea.addLineHighlight(lineNumber, Colors.LINE_HIGHLIGHT);
         } catch (BadLocationException e) {
+            //ignore & do nothing
         }
     }
 
