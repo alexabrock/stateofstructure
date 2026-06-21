@@ -7,7 +7,7 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 
 import com.hhu.datastructureview.impl.TreeGraphUtils;
-import com.hhu.progradatastructuresSD.generic.PrograBinarySearchTree;
+import com.hhu.progradatastructures.generic.PrograBinarySearchTree;
 
 import guru.nidi.graphviz.model.Graph;
 

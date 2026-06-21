@@ -18,9 +18,9 @@ import com.hhu.datastructureview.impl.javautil.TreeSetGraph;
 import com.hhu.datastructureview.impl.progra.BinarySearchTreeGraph;
 import com.hhu.datastructureview.impl.progra.PrograHashSetGraph;
 import com.hhu.datastructureview.impl.progra.PrograLinkedListGraph;
-import com.hhu.progradatastructuresSD.generic.PrograBinarySearchTree;
-import com.hhu.progradatastructuresSD.generic.PrograHashSet;
-import com.hhu.progradatastructuresSD.generic.PrograLinkedList;
+import com.hhu.progradatastructures.generic.PrograBinarySearchTree;
+import com.hhu.progradatastructures.generic.PrograHashSet;
+import com.hhu.progradatastructures.generic.PrograLinkedList;
 
 import guru.nidi.graphviz.model.Graph;
 

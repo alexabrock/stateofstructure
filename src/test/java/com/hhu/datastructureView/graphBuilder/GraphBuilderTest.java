@@ -14,9 +14,9 @@ import java.util.TreeSet;
 import org.junit.Test;
 
 import com.hhu.datastructureview.GraphBuilder;
-import com.hhu.progradatastructuresSD.generic.PrograBinarySearchTree;
-import com.hhu.progradatastructuresSD.generic.PrograHashSet;
-import com.hhu.progradatastructuresSD.generic.PrograLinkedList;
+import com.hhu.progradatastructures.generic.PrograBinarySearchTree;
+import com.hhu.progradatastructures.generic.PrograHashSet;
+import com.hhu.progradatastructures.generic.PrograLinkedList;
 
 import guru.nidi.graphviz.model.Graph;
 

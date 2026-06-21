@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.hhu.datastructureview.GraphBuilder;
-import com.hhu.progradatastructuresSD.generic.PrograBinarySearchTree;
+import com.hhu.progradatastructures.generic.PrograBinarySearchTree;
 
 import guru.nidi.graphviz.model.MutableGraph;
 

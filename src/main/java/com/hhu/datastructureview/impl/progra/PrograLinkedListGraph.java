@@ -6,7 +6,7 @@ import static guru.nidi.graphviz.model.Factory.graph;
 import static guru.nidi.graphviz.model.Factory.node;
 import static guru.nidi.graphviz.model.Factory.to;
 
-import com.hhu.progradatastructuresSD.generic.PrograLinkedList;
+import com.hhu.progradatastructures.generic.PrograLinkedList;
 
 import guru.nidi.graphviz.attribute.Rank;
 import guru.nidi.graphviz.attribute.Shape;
