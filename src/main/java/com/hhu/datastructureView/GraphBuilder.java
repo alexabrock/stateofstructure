@@ -1,4 +1,4 @@
-package com.hhu.datastructureView;
+package com.hhu.datastructureview;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -8,19 +8,19 @@ import java.util.Stack;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import com.hhu.datastructureView.impl.javaUtil.ArrayListGraph;
-import com.hhu.datastructureView.impl.javaUtil.HashSetGraph;
-import com.hhu.datastructureView.impl.javaUtil.LinkedHashSetGraph;
-import com.hhu.datastructureView.impl.javaUtil.LinkedListGraph;
-import com.hhu.datastructureView.impl.javaUtil.StackGraph;
-import com.hhu.datastructureView.impl.javaUtil.TreeMapGraph;
-import com.hhu.datastructureView.impl.javaUtil.TreeSetGraph;
-import com.hhu.datastructureView.impl.progra.BinarySearchTreeGraph;
-import com.hhu.datastructureView.impl.progra.PrograHashSetGraph;
-import com.hhu.datastructureView.impl.progra.PrograLinkedListGraph;
-import com.hhu.prograDatastructures.generic.PrograBinarySearchTree;
-import com.hhu.prograDatastructures.generic.PrograHashSet;
-import com.hhu.prograDatastructures.generic.PrograLinkedList;
+import com.hhu.datastructureview.impl.javautil.ArrayListGraph;
+import com.hhu.datastructureview.impl.javautil.HashSetGraph;
+import com.hhu.datastructureview.impl.javautil.LinkedHashSetGraph;
+import com.hhu.datastructureview.impl.javautil.LinkedListGraph;
+import com.hhu.datastructureview.impl.javautil.StackGraph;
+import com.hhu.datastructureview.impl.javautil.TreeMapGraph;
+import com.hhu.datastructureview.impl.javautil.TreeSetGraph;
+import com.hhu.datastructureview.impl.progra.BinarySearchTreeGraph;
+import com.hhu.datastructureview.impl.progra.PrograHashSetGraph;
+import com.hhu.datastructureview.impl.progra.PrograLinkedListGraph;
+import com.hhu.progradatastructures.generic.PrograBinarySearchTree;
+import com.hhu.progradatastructures.generic.PrograHashSet;
+import com.hhu.progradatastructures.generic.PrograLinkedList;
 
 import guru.nidi.graphviz.model.Graph;
 

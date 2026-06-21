@@ -1,4 +1,4 @@
-package com.hhu.datastructureView.graphBuilder;
+package com.hhu.datastructureview.graphBuilder;
 
 import static org.junit.Assert.assertEquals;
 
@@ -13,10 +13,10 @@ import java.util.TreeSet;
 
 import org.junit.Test;
 
-import com.hhu.datastructureView.GraphBuilder;
-import com.hhu.prograDatastructures.generic.PrograBinarySearchTree;
-import com.hhu.prograDatastructures.generic.PrograHashSet;
-import com.hhu.prograDatastructures.generic.PrograLinkedList;
+import com.hhu.datastructureview.GraphBuilder;
+import com.hhu.progradatastructures.generic.PrograBinarySearchTree;
+import com.hhu.progradatastructures.generic.PrograHashSet;
+import com.hhu.progradatastructures.generic.PrograLinkedList;
 
 import guru.nidi.graphviz.model.Graph;
 

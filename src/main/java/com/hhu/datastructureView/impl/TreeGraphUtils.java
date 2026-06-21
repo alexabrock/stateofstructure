@@ -1,7 +1,7 @@
-package com.hhu.datastructureView.impl;
+package com.hhu.datastructureview.impl;
 
-import static com.hhu.datastructureView.NodeBuilder.getNode;
-import static com.hhu.datastructureView.NodeBuilder.nullNode;
+import static com.hhu.datastructureview.NodeBuilder.getNode;
+import static com.hhu.datastructureview.NodeBuilder.nullNode;
 import static guru.nidi.graphviz.model.Factory.to;
 
 import java.lang.reflect.Field;

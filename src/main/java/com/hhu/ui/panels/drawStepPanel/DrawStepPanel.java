@@ -1,4 +1,4 @@
-package com.hhu.ui.panels.drawStepPanel;
+package com.hhu.ui.panels.drawsteppanel;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -6,7 +6,7 @@ import java.awt.Component;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
-import com.hhu.ui.panels.codePanel.CodePanelScroller;
+import com.hhu.ui.panels.codepanel.CodePanelScroller;
 import com.hhu.util.DrawStep;
 import com.hhu.util.ThemeStyler;
 

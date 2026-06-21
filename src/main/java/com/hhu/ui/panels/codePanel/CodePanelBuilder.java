@@ -1,4 +1,4 @@
-package com.hhu.ui.panels.codePanel;
+package com.hhu.ui.panels.codepanel;
 
 import java.awt.BorderLayout;
 import java.awt.Font;

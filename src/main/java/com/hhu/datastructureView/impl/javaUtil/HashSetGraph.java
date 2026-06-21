@@ -1,6 +1,6 @@
-package com.hhu.datastructureView.impl.javaUtil;
+package com.hhu.datastructureview.impl.javautil;
 
-import static com.hhu.datastructureView.NodeBuilder.getNode;
+import static com.hhu.datastructureview.NodeBuilder.getNode;
 import static guru.nidi.graphviz.attribute.Attributes.attr;
 import static guru.nidi.graphviz.model.Factory.graph;
 

@@ -12,10 +12,10 @@ import java.util.TreeSet;
 
 import org.junit.Test;
 
-import com.hhu.datastructureView.GraphBuilder;
-import com.hhu.prograDatastructures.generic.PrograBinarySearchTree;
-import com.hhu.prograDatastructures.generic.PrograHashSet;
-import com.hhu.prograDatastructures.generic.PrograLinkedList;
+import com.hhu.datastructureview.GraphBuilder;
+import com.hhu.progradatastructures.generic.PrograBinarySearchTree;
+import com.hhu.progradatastructures.generic.PrograHashSet;
+import com.hhu.progradatastructures.generic.PrograLinkedList;
 
 public class MemoryViewTest {
     //Test, if every Memory view works. Not testing in detail, since using

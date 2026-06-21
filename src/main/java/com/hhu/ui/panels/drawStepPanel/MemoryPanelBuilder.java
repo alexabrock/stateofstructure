@@ -1,4 +1,4 @@
-package com.hhu.ui.panels.drawStepPanel;
+package com.hhu.ui.panels.drawsteppanel;
 
 import java.awt.BorderLayout;
 

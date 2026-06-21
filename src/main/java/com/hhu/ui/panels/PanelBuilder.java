@@ -4,9 +4,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import com.hhu.ui.panels.codePanel.CodePanelBuilder;
-import com.hhu.ui.panels.drawStepPanel.DataStructurePanelBuilder;
-import com.hhu.ui.panels.drawStepPanel.MemoryPanelBuilder;
+import com.hhu.ui.panels.codepanel.CodePanelBuilder;
+import com.hhu.ui.panels.drawsteppanel.DataStructurePanelBuilder;
+import com.hhu.ui.panels.drawsteppanel.MemoryPanelBuilder;
 import com.hhu.util.ThemeStyler;
 
 /**

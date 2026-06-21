@@ -1,4 +1,4 @@
-package com.hhu.ui.panels.drawStepPanel;
+package com.hhu.ui.panels.drawsteppanel;
 
 import static guru.nidi.graphviz.attribute.Attributes.attr;
 
@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import com.hhu.datastructureView.GraphBuilder;
+import com.hhu.datastructureview.GraphBuilder;
 import com.hhu.ui.Colors;
 
 import guru.nidi.graphviz.model.Graph;

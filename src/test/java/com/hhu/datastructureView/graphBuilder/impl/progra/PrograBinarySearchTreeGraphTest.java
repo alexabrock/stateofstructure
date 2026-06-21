@@ -1,12 +1,12 @@
-package com.hhu.datastructureView.graphBuilder.impl.progra;
+package com.hhu.datastructureview.graphBuilder.impl.progra;
 
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.hhu.datastructureView.GraphBuilder;
-import com.hhu.prograDatastructures.generic.PrograBinarySearchTree;
+import com.hhu.datastructureview.GraphBuilder;
+import com.hhu.progradatastructures.generic.PrograBinarySearchTree;
 
 import guru.nidi.graphviz.model.MutableGraph;
 

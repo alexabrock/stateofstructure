@@ -1,4 +1,4 @@
-package com.hhu.datastructureView.impl.javaUtil;
+package com.hhu.datastructureview.impl.javautil;
 
 import static guru.nidi.graphviz.attribute.Attributes.attr;
 import static guru.nidi.graphviz.model.Factory.graph;
@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import com.hhu.datastructureView.impl.TreeGraphUtils;
+import com.hhu.datastructureview.impl.TreeGraphUtils;
 
 import guru.nidi.graphviz.model.Graph;
 

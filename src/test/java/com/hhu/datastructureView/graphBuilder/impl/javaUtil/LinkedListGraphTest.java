@@ -1,4 +1,4 @@
-package com.hhu.datastructureView.graphBuilder.impl.javaUtil;
+package com.hhu.datastructureview.graphBuilder.impl.javaUtil;
 
 import static org.junit.Assert.assertTrue;
 
@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.hhu.datastructureView.GraphBuilder;
+import com.hhu.datastructureview.GraphBuilder;
 
 //Mutable graph, weil man so schön an die einzelnen Nodes zum testen kommt
 import guru.nidi.graphviz.model.MutableGraph;

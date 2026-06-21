@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.junit.Test;
 
-import com.hhu.ui.panels.codePanel.CodePanelScroller;
+import com.hhu.ui.panels.codepanel.CodePanelScroller;
 
 public class CodePanelScrollerTest {
     @Test

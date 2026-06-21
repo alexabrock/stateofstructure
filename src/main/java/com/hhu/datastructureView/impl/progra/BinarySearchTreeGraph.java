@@ -1,4 +1,4 @@
-package com.hhu.datastructureView.impl.progra;
+package com.hhu.datastructureview.impl.progra;
 
 import static guru.nidi.graphviz.attribute.Attributes.attr;
 import static guru.nidi.graphviz.model.Factory.graph;
@@ -6,8 +6,8 @@ import static guru.nidi.graphviz.model.Factory.graph;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 
-import com.hhu.datastructureView.impl.TreeGraphUtils;
-import com.hhu.prograDatastructures.generic.PrograBinarySearchTree;
+import com.hhu.datastructureview.impl.TreeGraphUtils;
+import com.hhu.progradatastructures.generic.PrograBinarySearchTree;
 
 import guru.nidi.graphviz.model.Graph;
 

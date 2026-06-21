@@ -1,12 +1,12 @@
-package com.hhu.datastructureView.impl.progra;
+package com.hhu.datastructureview.impl.progra;
 
-import static com.hhu.datastructureView.NodeBuilder.getNode;
+import static com.hhu.datastructureview.NodeBuilder.getNode;
 import static guru.nidi.graphviz.attribute.Attributes.attr;
 import static guru.nidi.graphviz.model.Factory.graph;
 
 import java.lang.reflect.Field;
 
-import com.hhu.prograDatastructures.generic.PrograHashSet;
+import com.hhu.progradatastructures.generic.PrograHashSet;
 
 import guru.nidi.graphviz.attribute.Shape;
 import guru.nidi.graphviz.model.Graph;

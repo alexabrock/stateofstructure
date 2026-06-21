@@ -1,4 +1,4 @@
-package com.hhu.datastructureView;
+package com.hhu.datastructureview;
 
 import static guru.nidi.graphviz.attribute.Attributes.attr;
 import static guru.nidi.graphviz.model.Factory.node;

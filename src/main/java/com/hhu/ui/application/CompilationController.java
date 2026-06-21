@@ -7,8 +7,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingWorker;
 
-import com.hhu.ui.panels.codePanel.CodePanelScroller;
-import com.hhu.ui.panels.drawStepPanel.DrawStepPanel;
+import com.hhu.ui.panels.codepanel.CodePanelScroller;
+import com.hhu.ui.panels.drawsteppanel.DrawStepPanel;
 import com.hhu.util.DrawCalls;
 import com.hhu.util.compiler.Compiler;
 
