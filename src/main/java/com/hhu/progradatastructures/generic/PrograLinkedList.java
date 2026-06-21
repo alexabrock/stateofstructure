@@ -1,4 +1,4 @@
-package com.hhu.progradatastructuresSD.generic;
+package com.hhu.progradatastructures.generic;
 
 public class PrograLinkedList<T extends Comparable<T>> {
 
