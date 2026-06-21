@@ -1,4 +1,4 @@
-package com.hhu.progradatastructures.generic;
+package com.hhu.progradatastructuresSD.generic;
 
 public class PrograBinarySearchTree<T extends Comparable<T>> {
 

@@ -1,4 +1,4 @@
-package com.hhu.progradatastructures.generic;
+package com.hhu.progradatastructuresSD.generic;
 
 public class PrograHashSet<T>{
     //kleine size, weil Progra HashSet kein resizing supportet, mit großem Array aber die Visualisierung kaputt geht

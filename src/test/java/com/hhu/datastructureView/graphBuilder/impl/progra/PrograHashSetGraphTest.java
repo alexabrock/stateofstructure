@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.hhu.datastructureview.GraphBuilder;
-import com.hhu.progradatastructures.generic.PrograHashSet;
+import com.hhu.progradatastructuresSD.generic.PrograHashSet;
 
 import guru.nidi.graphviz.model.MutableGraph;
 
