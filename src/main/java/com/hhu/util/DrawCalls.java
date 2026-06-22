@@ -10,7 +10,7 @@ import com.hhu.ui.panels.PanelBuilder;
 /** Handles iteration & state recording logic for a List of DrawSteps */
 public class DrawCalls {
 
-    private LinkedList<DrawStep> drawCalls = new LinkedList<>();
+    private LinkedList<DrawStep> steps = new LinkedList<>();
     private Object collection;
     // -1, damit mit nextStep() das 1. (0.) Element returnt wird
     private int currentStepIndex = -1;
@@ -20,7 +20,7 @@ public class DrawCalls {
     }
 
     public boolean hasNextStep() {
-        return currentStepIndex < drawCalls.size() - 1;
+        return currentStepIndex < steps.size() - 1;
     }
 
     public boolean hasPrevStep() {
@@ -30,21 +30,21 @@ public class DrawCalls {
     public DrawStep nextStep() {
 
         if (!hasNextStep()) {
-            return drawCalls.getLast();
+            return steps.getLast();
         }
 
         currentStepIndex++;
-        return drawCalls.get(currentStepIndex);
+        return steps.get(currentStepIndex);
     }
 
     public DrawStep prevStep() {
 
         if (!hasPrevStep()) {
-            return drawCalls.getFirst();
+            return steps.getFirst();
         }
 
         currentStepIndex--;
-        return drawCalls.get(currentStepIndex);
+        return steps.get(currentStepIndex);
     }
 
     void record() {
@@ -57,6 +57,6 @@ public class DrawCalls {
         String code = Caller.findCallerClass();
         JPanel codePanel = PanelBuilder.createCodePanel(code, lineNumber);
 
-        drawCalls.add(new DrawStep(memory, datastructure, collectionName, codePanel));
+        steps.add(new DrawStep(memory, datastructure, collectionName, codePanel));
     }
 }
