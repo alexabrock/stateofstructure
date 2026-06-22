@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 
 import com.hhu.ui.Colors;
 
@@ -16,7 +17,7 @@ public class ApplicationFrame {
 
     public JFrame create(JPanel centerPanel, JPanel buttonPanel) {
         JFrame frame = new JFrame(TITLE);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.getContentPane().setBackground(Colors.APPLICATION_BACKGROUND);
         frame.setLayout(new BorderLayout());
         frame.add(centerPanel, BorderLayout.CENTER);
