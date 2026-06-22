@@ -45,17 +45,18 @@ public class DataStructurePanelBuilder {
      * Adds colors to a finished Graph
      */
     static Graph colorize(Graph graph) {
+        final String FONTCOLOR = "fontcolor";
         return graph
                 .graphAttr().with(
                         attr("bgcolor", Colors.BG_COLORD),
-                        attr("fontcolor", Colors.FG_COLORD))
+                        attr(FONTCOLOR, Colors.FG_COLORD))
                 .nodeAttr().with(
-                        attr("fontcolor", Colors.FG_COLORD),
+                        attr(FONTCOLOR, Colors.FG_COLORD),
                         attr("color", Colors.NODE_BORDER_COLORD),
                         attr("style", "filled"),
                         attr("fillcolor", Colors.NODE_FILL_COLORD))
                 .linkAttr().with(
                         attr("color", Colors.EDGE_COLORD),
-                        attr("fontcolor", Colors.FG_COLORD));
+                        attr(FONTCOLOR, Colors.FG_COLORD));
     }
 }
