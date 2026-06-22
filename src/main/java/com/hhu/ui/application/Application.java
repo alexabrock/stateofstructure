@@ -14,6 +14,7 @@ import com.hhu.util.DrawCalls;
 import com.hhu.util.DrawStep;
 import com.hhu.util.ThemeStyler;
 import com.hhu.util.compiler.WorkspaceCleaner;
+import java.util.logging.Logger;
 
 public class Application {
 
@@ -22,6 +23,7 @@ public class Application {
     private final DrawStepPanel drawStepView;
     private final ApplicationFrame applicationFrame;
     private final WorkspaceCleaner workspaceCleaner;
+    private static final Logger logger = Logger.getLogger(Application.class.getName());
 
     private Application(DrawCalls drawCalls) {
         applicationState = new DrawCallHandler(drawCalls);
@@ -34,7 +36,7 @@ public class Application {
     public static void start(DrawCalls givenDrawCalls) {
         // Swing needs this
         if (GraphicsEnvironment.isHeadless()) {
-            System.out.println("Headless environment detected ");
+            logger.severe("Headless environment detected");
             return;
         }
 
