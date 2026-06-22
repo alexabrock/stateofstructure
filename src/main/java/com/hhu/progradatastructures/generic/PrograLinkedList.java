@@ -15,6 +15,7 @@ public class PrograLinkedList<T extends Comparable<T>> {
     private Node head;
 
     public PrograLinkedList() {
+      // start empty list
     }
 
     public void add(T element) {
