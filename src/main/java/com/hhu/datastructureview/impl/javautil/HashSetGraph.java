@@ -46,7 +46,7 @@ public class HashSetGraph {
             }
 
         } catch (NoSuchFieldException | IllegalAccessException e) {
-            throw new RuntimeException("Failed to reflect HashSet internals: " + e.getMessage());
+            throw new IllegalStateException("Failed to reflect HashSet internals: " + e.getMessage());
         }
 
         return g.with(elements);
