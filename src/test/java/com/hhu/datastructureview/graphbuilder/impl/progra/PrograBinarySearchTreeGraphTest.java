@@ -1,4 +1,4 @@
-package com.hhu.datastructureview.graphBuilder.impl.progra;
+package com.hhu.datastructureview.graphbuilder.impl.progra;
 
 import static org.junit.Assert.assertTrue;
 

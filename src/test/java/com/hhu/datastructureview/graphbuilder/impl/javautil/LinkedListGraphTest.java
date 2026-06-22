@@ -1,4 +1,4 @@
-package com.hhu.datastructureview.graphBuilder.impl.javaUtil;
+package com.hhu.datastructureview.graphbuilder.impl.javautil;
 
 import static org.junit.Assert.assertTrue;
 
