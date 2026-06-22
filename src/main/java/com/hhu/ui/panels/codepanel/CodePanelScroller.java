@@ -118,7 +118,7 @@ public class CodePanelScroller {
 
     private int clampToDocumentLine(RSyntaxTextArea textArea, int line) {
         int maxLineIndex = textArea.getLineCount() - 1;
-        return Math.max(0, Math.min(line, maxLineIndex));
+        return Math.clamp(0, line, maxLineIndex);
     }
 
     private int calculateCenteredScrollY(RSyntaxTextArea textArea, Rectangle visibleRect, Rectangle2D lineBounds) {
