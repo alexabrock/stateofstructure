@@ -49,7 +49,7 @@ public class PrograHashSetGraph {
             }
 
         } catch (NoSuchFieldException | IllegalAccessException | IllegalArgumentException e) {
-            throw new RuntimeException("Failed to reflect HashSet internals for graph visualization. " + e);
+            throw new IllegalStateException("Failed to reflect HashSet internals for graph visualization. " + e);
         }
 
         return g.with(elements);
