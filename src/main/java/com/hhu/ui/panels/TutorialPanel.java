@@ -18,12 +18,12 @@ class TutorialPanel extends JPanel {
     private final CardLayout cardLayout = new CardLayout();
     private final JPanel slideContainer = new JPanel(cardLayout);
     private int currentSlide = 1;
-    private final int totalSlides = 4;
+    private static final int  TOTAL_SLIDES = 4;
 
     TutorialPanel(JPanel parent) {
         // 1. Find the top-level Window to attach the Dialog
         Window parentWindow = SwingUtilities.windowForComponent(parent);
-        JFrame frame = (parentWindow instanceof JFrame) ? (JFrame) parentWindow : null;
+        JFrame frame = (parentWindow instanceof JFrame f) ? f : null;
 
         // 2. Create the Modal Dialog
         JDialog dialog = new JDialog(frame, "Getting Started", true);
@@ -88,18 +88,18 @@ class TutorialPanel extends JPanel {
                 currentSlide--;
                 cardLayout.show(slideContainer, String.valueOf(currentSlide));
                 prevBtn.setEnabled(currentSlide > 1);
-                if (currentSlide != totalSlides) {
+                if (currentSlide != TOTAL_SLIDES) {
                     nextBtn.setText("Next");
                 }
             }
         });
 
         nextBtn.addActionListener(e -> {
-            if (currentSlide < totalSlides) {
+            if (currentSlide < TOTAL_SLIDES) {
                 currentSlide++;
                 cardLayout.show(slideContainer, String.valueOf(currentSlide));
 
-                if (currentSlide == totalSlides) {
+                if (currentSlide == TOTAL_SLIDES) {
                     nextBtn.setText("Close");
                 }
                 if (currentSlide > 1) {
