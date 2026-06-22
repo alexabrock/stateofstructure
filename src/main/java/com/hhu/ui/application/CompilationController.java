@@ -67,7 +67,7 @@ public class CompilationController {
                      * The wrapped EXception is retrieved by e.getCause
                      */
                     showCompilationError(centerPanel, e.getCause().getMessage());
-                } catch (InterruptedException e) {
+                } catch (InterruptedException _) {
                     // InterruptedException is thrown if the done() Thread is interrupted 
                     Thread.currentThread().interrupt();
                     showCompilationError(centerPanel, "Compilation interrupted");
