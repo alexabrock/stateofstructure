@@ -24,10 +24,12 @@ public class WorkspaceCleaner {
                     .forEach(path -> {
                         try {
                             Files.deleteIfExists(path);
-                        } catch (Exception ignored) {
+                        } catch (Exception _) {
+                            //ignored, application is closed now
                         }
                     });
-        } catch (Exception ignored) {
+        } catch (Exception _) {
+            //ignored, application is closed now
         }
 
     }
