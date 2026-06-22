@@ -81,7 +81,7 @@ public class CodePanelScroller {
             if (targetView != null) {
                 textArea.scrollRectToVisible(targetView);
             }
-        } catch (BadLocationException ignored) {
+        } catch (BadLocationException _) {
             // Outside document range = nothing to scroll
         }
     }
@@ -129,6 +129,6 @@ public class CodePanelScroller {
 
         // Confirm it's valid scroll position so we don't go out of bounds
         int maxPossibleScroll = textArea.getHeight() - (int) visibleRect.getHeight();
-        return Math.max(0, Math.min((int) centeredY, maxPossibleScroll));
+        return Math.clamp(0, (int) centeredY, maxPossibleScroll);
     }
 }
