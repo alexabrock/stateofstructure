@@ -4,7 +4,8 @@ public class PrograBinarySearchTree<T extends Comparable<T>> {
 
     private class BinaryNode {
         private T element;
-        private BinaryNode left, right;
+        private BinaryNode left;
+        private BinaryNode right;
 
         private BinaryNode(T element) {
             this.element = element;
