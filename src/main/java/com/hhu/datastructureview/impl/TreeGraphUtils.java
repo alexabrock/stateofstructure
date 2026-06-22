@@ -68,7 +68,7 @@ public class TreeGraphUtils {
         return cached;
     }
 
-    private static String createLabel(Object entry, Field[] fields) throws Exception {
+    private static String createLabel(Object entry, Field[] fields) throws IllegalAccessException {
         StringBuilder label = new StringBuilder(String.valueOf(fields[0].get(entry)));
         for (int i = 1; i < fields.length; i++) {
             label.append(", ").append(fields[i].get(entry));
@@ -76,7 +76,7 @@ public class TreeGraphUtils {
         return label.toString();
     }
 
-    private static Field[] getFields(Class<?> clazz, String[] names) throws Exception {
+    private static Field[] getFields(Class<?> clazz, String[] names) throws NoSuchFieldException {
         Field[] fields = new Field[names.length];
         for (int i = 0; i < names.length; i++) {
             fields[i] = getField(clazz, names[i]);
@@ -84,7 +84,8 @@ public class TreeGraphUtils {
         return fields;
     }
 
-    private static Field getField(Class<?> clazz, String name) throws Exception {
+    @SuppressWarnings("java:S3011") // Erlaubt den Zugriff auf private Felder für die Visualisierung
+    private static Field getField(Class<?> clazz, String name) throws NoSuchFieldException {
         Field field = clazz.getDeclaredField(name);
         field.setAccessible(true);
         return field;
