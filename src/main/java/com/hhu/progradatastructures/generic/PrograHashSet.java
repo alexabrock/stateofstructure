@@ -35,7 +35,6 @@ public class PrograHashSet<T>{
 
     public boolean contains(T object) {
         int index = Math.abs(object.hashCode() % SIZE);
-        //         return objects[index] != null;
         while (objects[index] != null && !objects[index].equals(object)) {
             // lineares Sondieren
             index++;

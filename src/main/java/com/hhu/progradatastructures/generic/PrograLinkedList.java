@@ -99,17 +99,9 @@ public class PrograLinkedList<T extends Comparable<T>> {
             T currentElement = get(currentIndex);
             int newPosition = currentIndex;
             while (newPosition > 0 && get(newPosition - 1).compareTo(currentElement) > 0) {
-                // original Insertion Sort: numbers[newPosition] = numbers[newPosition - 1];
-                // Wir müssen also im Node-Element an newPosition den gespeicherten Wert auf den
-                // von
-                // der Node an newPosition-1 setzen. Dafür haben wir uns eine set-Methode (siehe
-                // unten) geschrieben.
                 set(newPosition, get(newPosition - 1));
                 newPosition--;
             }
-            // original: numbers[newPosition] = currentNumber;
-            // Also Node-Element an newPosition finden und dort den Wert auf currentNumber
-            // setzen
             Node targetNode = findNodeAt(newPosition);
             targetNode.value = currentElement;
         }
