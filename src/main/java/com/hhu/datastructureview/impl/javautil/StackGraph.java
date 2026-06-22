@@ -62,4 +62,8 @@ public class StackGraph {
 
                 return g;
         }
+
+        private StackGraph() {
+                /* This utility class should not be instantiated */
+        }
 }

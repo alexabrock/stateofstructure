@@ -71,4 +71,8 @@ public class GraphBuilder {
                         "Unbekannte Collection: " + collection.getClass().getName());
         };
     }
+
+    private GraphBuilder() {
+        /* This utility class should not be instantiated */
+    }
 }

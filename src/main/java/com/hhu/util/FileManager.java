@@ -39,4 +39,8 @@ public class FileManager {
                 : (classLoader != null ? classLoader.getResourceAsStream(name)
                         : FileManager.class.getClassLoader().getResourceAsStream(name));
     }
+
+    private FileManager() {
+        /* This utility class should not be instantiated */
+    }
 }

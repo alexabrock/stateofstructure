@@ -52,4 +52,8 @@ public class HashSetGraph {
         return g.with(elements);
     }
 
+    private HashSetGraph() {
+        /* This utility class should not be instantiated */
+    }
+
 }

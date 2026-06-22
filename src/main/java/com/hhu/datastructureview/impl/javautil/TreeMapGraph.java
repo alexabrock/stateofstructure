@@ -41,4 +41,8 @@ public class TreeMapGraph {
             throw new RuntimeException("Could not inspect TreeMap structure", e);
         }
     }
+
+    private TreeMapGraph() {
+        /* This utility class should not be instantiated */
+    }
 }

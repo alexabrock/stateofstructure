@@ -44,4 +44,8 @@ public class LinkedListGraph {
                 node("tail").with(Shape.PLAIN).link(to(previousNode)));
         return g;
     }
+
+    private LinkedListGraph() {
+        /* This utility class should not be instantiated */
+    }
 }

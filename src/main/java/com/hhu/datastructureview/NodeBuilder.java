@@ -21,4 +21,8 @@ public class NodeBuilder {
                 .with(Shape.RECTANGLE)
                 .with(attr("width", 0.25), attr("height", 0.05));
     }
+
+    private NodeBuilder() {
+        /* This utility class should not be instantiated */
+    }
 }

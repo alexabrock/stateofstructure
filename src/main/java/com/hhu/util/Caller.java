@@ -47,4 +47,8 @@ public class Caller {
         return !name.contains("java.lang.StackWalker") &&
                 !Set.of(Caller.class.getName(), DrawCalls.class.getName(), Visualizer.class.getName()).contains(name);
     }
+
+    private Caller() {
+        /* This utility class should not be instantiated */
+    }
 }

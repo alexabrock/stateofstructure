@@ -55,4 +55,8 @@ public class PrograHashSetGraph {
         return g.with(elements);
     }
 
+    private PrograHashSetGraph() {
+        /* This utility class should not be instantiated */
+    }
+
 }

@@ -41,4 +41,8 @@ public class BinarySearchTreeGraph {
             throw new RuntimeException("Could not inspect BinarySearchTree structure", e);
         }
     }
+
+    private BinarySearchTreeGraph() {
+        /* This utility class should not be instantiated */
+    }
 }

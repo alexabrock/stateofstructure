@@ -47,4 +47,8 @@ public class TreeSetGraph {
             throw new RuntimeException("Could not inspect TreeSet structure", e);
         }
     }
+
+    private TreeSetGraph() {
+        /* This utility class should not be instantiated */
+    }
 }

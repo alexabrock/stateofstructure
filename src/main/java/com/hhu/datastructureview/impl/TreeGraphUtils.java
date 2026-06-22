@@ -89,4 +89,8 @@ public class TreeGraphUtils {
         field.setAccessible(true);
         return field;
     }
+
+    private TreeGraphUtils() {
+        /* This utility class should not be instantiated */
+    }
 }

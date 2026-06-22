@@ -74,4 +74,8 @@ public class LinkedHashSetGraph {
         g = g.with(elements);
         return g;
     }
+
+    private LinkedHashSetGraph() {
+        /* This utility class should not be instantiated */
+    }
 }

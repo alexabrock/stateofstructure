@@ -37,4 +37,8 @@ public class ArrayListGraph {
         }
         return g;
     }
+
+    private ArrayListGraph() {
+        /* This utility class should not be instantiated */
+    }
 }

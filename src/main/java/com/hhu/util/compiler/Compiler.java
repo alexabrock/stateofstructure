@@ -217,4 +217,8 @@ public class Compiler {
         return USER_CLASS_NAME.equals(className) ? Optional.of(USER_SOURCE_FILE) : Optional.empty();
 
     }
+
+    private Compiler() {
+        /* This utility class should not be instantiated */
+    }
 }

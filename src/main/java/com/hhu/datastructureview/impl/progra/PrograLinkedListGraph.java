@@ -39,4 +39,8 @@ public class PrograLinkedListGraph {
         g = g.with(node("head").with(Shape.PLAIN).link(to(firstNode)));
         return g;
     }
+
+    private PrograLinkedListGraph() {
+        /* This utility class should not be instantiated */
+    }
 }
