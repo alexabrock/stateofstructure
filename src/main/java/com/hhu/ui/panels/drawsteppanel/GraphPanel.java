@@ -29,6 +29,7 @@ import org.apache.batik.swing.gvt.GVTTreeRendererAdapter;
 import org.apache.batik.swing.gvt.GVTTreeRendererEvent;
 import org.apache.batik.swing.svg.GVTTreeBuilderAdapter;
 import org.apache.batik.swing.svg.GVTTreeBuilderEvent;
+import org.apache.batik.swing.svg.JSVGComponent;
 import org.apache.batik.util.XMLResourceDescriptor;
 import org.w3c.dom.svg.SVGDocument;
 
@@ -91,7 +92,7 @@ class GraphPanel {
             super(null, true, false);
 
             this.slotTitle = slotTitle;
-            setDocumentState(JSVGCanvas.ALWAYS_STATIC);
+            setDocumentState(JSVGComponent.ALWAYS_STATIC);
             setRecenterOnResize(false);
             setDisableInteractions(true);
             setOpaque(false);
@@ -196,8 +197,8 @@ class GraphPanel {
             if (graphBounds == null) {
                 return;
             }
-            double oldScale = getTotalScale(graphBounds);
-            double newZoomFactor = clamp(zoomFactor * Math.pow(WHEEL_ZOOM_BASE, -event.getPreciseWheelRotation()),
+            double oldScale = getTotalScale();
+            double newZoomFactor = Math.clamp(zoomFactor * Math.pow(WHEEL_ZOOM_BASE, -event.getPreciseWheelRotation()),
                     MIN_ZOOM, MAX_ZOOM);
             if (Double.compare(newZoomFactor, zoomFactor) == 0) {
                 return;
@@ -207,7 +208,7 @@ class GraphPanel {
             double graphY = toGraphY(event.getY(), graphBounds, oldScale);
 
             zoomFactor = newZoomFactor;
-            double newScale = getTotalScale(graphBounds);
+            double newScale = getTotalScale();
             offsetX = event.getX() - getCenteredX(graphBounds, newScale)
                     - ((graphX - graphBounds.getX()) * newScale);
             offsetY = event.getY() - getCenteredY(graphBounds, newScale)
@@ -240,7 +241,7 @@ class GraphPanel {
                 return;
             }
 
-            double scale = getTotalScale(graphBounds);
+            double scale = getTotalScale();
             AffineTransform transform = new AffineTransform();
             transform.translate(getCenteredX(graphBounds, scale) + offsetX, getCenteredY(graphBounds, scale) + offsetY);
             transform.scale(scale, scale);
@@ -264,11 +265,11 @@ class GraphPanel {
             return ((canvasY - getCenteredY(graphBounds, scale) - offsetY) / scale) + graphBounds.getY();
         }
 
-        private double getTotalScale(Rectangle2D graphBounds) {
-            return getFitScale(graphBounds) * zoomFactor;
+        private double getTotalScale() {
+            return getFitScale() * zoomFactor;
         }
 
-        private double getFitScale(Rectangle2D graphBounds) {
+        private double getFitScale() {
             double targetWidth = 800.0;
             double targetHeight = 600.0;
             double availableWidth = Math.max(1.0, getWidth() );
@@ -285,10 +286,6 @@ class GraphPanel {
 
         private double getCenteredY(Rectangle2D graphBounds, double scale) {
             return (getHeight() - graphBounds.getHeight() * scale) / 2.0;
-        }
-
-        private static double clamp(double value, double min, double max) {
-            return Math.max(min, Math.min(max, value));
         }
     }
 }
