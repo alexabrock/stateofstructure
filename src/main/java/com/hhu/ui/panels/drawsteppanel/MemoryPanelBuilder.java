@@ -86,10 +86,8 @@ public class MemoryPanelBuilder {
         }
 
         // dot... { + themed attributes + ... dot
-        String graph = dot.substring(0, firstBrace + 1)
+        return dot.substring(0, firstBrace + 1)
                 + themedAttributes
                 + dot.substring(firstBrace + 1);
-
-        return graph;
     }
 }
