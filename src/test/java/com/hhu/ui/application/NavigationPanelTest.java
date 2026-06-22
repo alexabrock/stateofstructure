@@ -85,8 +85,6 @@ public class NavigationPanelTest {
         JButton prev = new JButton();
         JButton next = new JButton();
 
-        DrawCallHandler drawCallHandler = mock(DrawCallHandler.class);
-
         when(drawCallHandler.hasPreviousStep()).thenReturn(false);
 
         NavigationPanel.updateButtons(prev, next, drawCallHandler);
@@ -98,8 +96,6 @@ public class NavigationPanelTest {
     public void testButtonPrevEnabled() {
         JButton prev = new JButton();
         JButton next = new JButton();
-
-        DrawCallHandler drawCallHandler = mock(DrawCallHandler.class);
 
         when(drawCallHandler.hasPreviousStep()).thenReturn(true);
 
@@ -113,8 +109,6 @@ public class NavigationPanelTest {
         JButton prev = new JButton();
         JButton next = new JButton();
 
-        DrawCallHandler drawCallHandler = mock(DrawCallHandler.class);
-
         when(drawCallHandler.hasNextStep()).thenReturn(false);
 
         NavigationPanel.updateButtons(prev, next, drawCallHandler);
@@ -126,8 +120,6 @@ public class NavigationPanelTest {
     public void testButtonNextEnabled() {
         JButton prev = new JButton();
         JButton next = new JButton();
-
-        DrawCallHandler drawCallHandler = mock(DrawCallHandler.class);
 
         when(drawCallHandler.hasNextStep()).thenReturn(true);
 
