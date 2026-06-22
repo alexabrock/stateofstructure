@@ -18,7 +18,7 @@ public class FileManager {
                 jarPath = jarPath.substring(1);
 
             if (!jarPath.isBlank()) {
-                InputStream inputStream = getStream(jarPath);
+                InputStream inputStream = FileManager.class.getResourceAsStream("/" + jarPath);
                 if (inputStream != null) {
                     try (inputStream) {
                         return new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
@@ -30,14 +30,6 @@ public class FileManager {
         } catch (IOException e) {
             throw new IllegalStateException("Could not read file or bundled resource: " + path, e);
         }
-    }
-
-    private static InputStream getStream(String name) {
-        InputStream inputStream = FileManager.class.getResourceAsStream("/" + name);
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        return inputStream != null ? inputStream
-                : (classLoader != null ? classLoader.getResourceAsStream(name)
-                        : FileManager.class.getClassLoader().getResourceAsStream(name));
     }
 
     private FileManager() {
