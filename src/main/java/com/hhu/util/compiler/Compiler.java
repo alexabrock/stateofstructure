@@ -59,8 +59,6 @@ public class Compiler {
                 throw new CompilationException("Syntax Error in User Code:\n\n" + errorStream.toString());
             }
             /*
-             * URLClassLoader loader = URLClassLoader.newInstance(new URL[] {
-             * new File(".").toURI().toURL() });
              * The default ClassLoader doesn't reload a class once it got compiled and
              * loaded.
              * We want the ClassLoader to always reload the GraphVizApp as if it has never
