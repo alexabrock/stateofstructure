@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.hhu.datastructureview.GraphBuilder;
+import com.hhu.datastructureview.graphbuilder.impl.LabelChecker;
 
 import guru.nidi.graphviz.model.MutableGraph;
 
@@ -30,9 +31,7 @@ public class LinkedHashSetGraphTest {
 
         MutableGraph graph = createMutableGraph();
 
-        assertTrue(
-                graph.nodes().stream()
-                        .anyMatch(n -> n.name().toString().equals("a")));
+        LabelChecker.checkContainsNames(graph.nodes(), "a");
     }
 
     @Test
@@ -43,10 +42,8 @@ public class LinkedHashSetGraphTest {
         hashSet.add("Holland");
 
         MutableGraph graph = createMutableGraph();
-        assertTrue(graph.nodes().stream().anyMatch(n -> n.name().toString().equals("Lotte")));
-        assertTrue(graph.nodes().stream().anyMatch(n -> n.name().toString().equals("Dieter")));
-        assertTrue(graph.nodes().stream().anyMatch(n -> n.name().toString().equals("Alexa")));
-        assertTrue(graph.nodes().stream().anyMatch(n -> n.name().toString().equals("Holland")));
+        
+        LabelChecker.checkContainsNames(graph.nodes(), "Lotte", "Dieter", "Alexa", "Holland");
     }
 
     @Test

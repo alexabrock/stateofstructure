@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.hhu.datastructureview.GraphBuilder;
+import com.hhu.datastructureview.graphbuilder.impl.LabelChecker;
 
 //Mutable graph, weil man so schön an die einzelnen Nodes zum testen kommt
 import guru.nidi.graphviz.model.MutableGraph;
@@ -30,8 +31,7 @@ public class TreeMapGraphTest {
 
         MutableGraph graph = createMutableGraph();
 
-        assertTrue(graph.nodes().stream()
-                .anyMatch(n -> n.get("label") != null && n.get("label").toString().equals("a, 1")));
+        LabelChecker.checkContainsLabels(graph.nodes(), "a, 1");
     }
 
     @Test

@@ -9,6 +9,8 @@ import org.junit.Test;
 
 import com.hhu.datastructureview.GraphBuilder;
 
+import com.hhu.datastructureview.graphbuilder.impl.LabelChecker;
+
 import guru.nidi.graphviz.model.MutableGraph;
 
 public class TreeSetGraphTest {
@@ -29,8 +31,7 @@ public class TreeSetGraphTest {
 
         MutableGraph graph = createMutableGraph();
 
-        assertTrue(graph.nodes().stream()
-                .anyMatch(n -> n.get("label") != null && n.get("label").toString().equals("a")));
+        LabelChecker.checkContainsLabels(graph.nodes(), "a");
     }
 
     @Test
@@ -43,17 +44,7 @@ public class TreeSetGraphTest {
         
         MutableGraph graph = createMutableGraph();
 
-        assertTrue(graph.nodes().stream()
-                .anyMatch(n -> n.get("label") != null && n.get("label").toString().equals("Lotte")));
-
-        assertTrue(graph.nodes().stream()
-                .anyMatch(n -> n.get("label") != null && n.get("label").toString().equals("Dieter")));
-
-        assertTrue(graph.nodes().stream()
-                .anyMatch(n -> n.get("label") != null && n.get("label").toString().equals("Alexa")));
-
-        assertTrue(graph.nodes().stream()
-                .anyMatch(n -> n.get("label") != null && n.get("label").toString().equals("Holland")));
+        LabelChecker.checkContainsLabels(graph.nodes(), "Lotte", "Dieter", "Alexa", "Holland");
     }
 
     @Test
