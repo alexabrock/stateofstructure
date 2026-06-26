@@ -23,7 +23,7 @@ public class CodePanelScroller {
     private static final String TARGET_LINE_PROPERTY = "codepanel.targetLineNumber";
 
     /*
-     * Changes the scroll Positon of the codePanel to be the highlited line.
+     * Changes the scroll Position of the codePanel to be the highlighted line.
      *
      * Needs to happen after frame.setVisible, since the panelHeight is needed for
      * the calculation of the position. Therefore, this method cannot be inside
@@ -101,7 +101,7 @@ public class CodePanelScroller {
             return null;
         }
 
-        // make sure line isnt negative or higher than number of existing lines
+        // make sure line isn't negative or higher than number of existing lines
         int safeLine = clampToDocumentLine(textArea, target);
 
         // turn LineStart into Geometric Coordinates (Pixels on Screen)
@@ -128,7 +128,7 @@ public class CodePanelScroller {
         double centeredY = lineBounds.getY() - (visibleRect.getHeight() / 2) + (lineBounds.getHeight() / 2);
 
         // Confirm it's valid scroll position so we don't go out of bounds
-        int maxPossibleScroll = textArea.getHeight() - (int) visibleRect.getHeight();
-        return Math.clamp(0, (int) centeredY, maxPossibleScroll);
+        int maxPossibleScroll = Math.max(0, textArea.getHeight() - (int) visibleRect.getHeight());
+        return Math.clamp((int) centeredY, 0, maxPossibleScroll);
     }
 }
