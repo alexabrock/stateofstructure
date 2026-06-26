@@ -3,6 +3,7 @@ package com.hhu.util.compiler;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.file.Files;
@@ -58,43 +59,8 @@ public class Compiler {
             if (compilationResult != 0) {
                 throw new CompilationException("Syntax Error in User Code:\n\n" + errorStream.toString());
             }
-            /*
-             * The default ClassLoader doesn't reload a class once it got compiled and
-             * loaded.
-             * We want the ClassLoader to always reload the GraphVizApp as if it has never
-             * seen it bevore
-             * (thus not chaching any state).
-             * 
-             * Normally, the Classloader loads classes parent-first. Every Classloader,
-             * except the very toplevel one, has a parent.
-             * When asked to load a class, it recursevely askes their parent
-             * "Have you already loaded this class?"
-             * Only if no parent has seen the class, the bottom-level Classloader will load
-             * the class itself.
-             * 
-             * By overwriting loadClass this behaviour is changed.
-             * It now does child-first (aka load the class yourself) for GraphvizApp
-             * But still delegated all other classes parent-first.
-             */
-            try (URLClassLoader loader = new URLClassLoader(
-                    new URL[] { COMPILED_CLASSES_DIR.toUri().toURL() }, // path to .class file location
-                    Compiler.class.getClassLoader()) {
-                @Override
-                protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
-                    if (name.equals(USER_CLASS_NAME)) {
-                        Class<?> c = findLoadedClass(name);
-                        if (c == null)
-                            c = findClass(name); // look in outputDir first. Does not ask parent.
-                                                 // asking parent-first for GraphVisApp
-                                                 // resulted in not having the newest .class file, once it
-                                                 // had been recompiled
-                        if (resolve)
-                            resolveClass(c);
-                        return c;
-                    }
-                    return super.loadClass(name, resolve); // normal parent-first for everything else
-                }
-            }) {
+            
+            try (URLClassLoader loader = createChildFirstClassLoader()) {
 
                 Class<?> klasse = Class.forName(USER_CLASS_NAME, true, loader);
 
@@ -132,6 +98,46 @@ public class Compiler {
                     e);
         }
 
+    }
+
+    private static URLClassLoader createChildFirstClassLoader() throws MalformedURLException {
+        /*
+         * The default ClassLoader doesn't reload a class once it got compiled and
+         * loaded.
+         * We want the ClassLoader to always reload the GraphVizApp as if it has never
+         * seen it bevore
+         * (thus not chaching any state).
+         * 
+         * Normally, the Classloader loads classes parent-first. Every Classloader,
+         * except the very toplevel one, has a parent.
+         * When asked to load a class, it recursevely askes their parent
+         * "Have you already loaded this class?"
+         * Only if no parent has seen the class, the bottom-level Classloader will load
+         * the class itself.
+         * 
+         * By overwriting loadClass this behaviour is changed.
+         * It now does child-first (aka load the class yourself) for GraphvizApp
+         * But still delegated all other classes parent-first.
+         */
+        return new URLClassLoader(
+                new URL[] { COMPILED_CLASSES_DIR.toUri().toURL() }, // path to .class file location
+                Compiler.class.getClassLoader()) {
+            @Override
+            protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
+                if (name.equals(USER_CLASS_NAME)) {
+                    Class<?> c = findLoadedClass(name);
+                    if (c == null)
+                        c = findClass(name); // look in outputDir first. Does not ask parent.
+                                             // asking parent-first for GraphVisApp
+                                             // resulted in not having the newest .class file, once it
+                                             // had been recompiled
+                    if (resolve)
+                        resolveClass(c);
+                    return c;
+                }
+                return super.loadClass(name, resolve); // normal parent-first for everything else
+            }
+        };
     }
 
     /**
