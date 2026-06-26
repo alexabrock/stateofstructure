@@ -50,13 +50,13 @@ public class DrawCalls {
     void record() {
 
         JPanel memory = PanelBuilder.createMemoryPanel(collection);
-        JPanel datastructure = PanelBuilder.createDatastructurePanel(collection);
+        JPanel dataStructure = PanelBuilder.createDatastructurePanel(collection);
         JLabel collectionName = PanelBuilder.createNameLabel(collection.getClass().getSimpleName());
 
         int lineNumber = Caller.findCallerLine();
         String code = Caller.findCallerClass();
         JPanel codePanel = PanelBuilder.createCodePanel(code, lineNumber);
 
-        steps.add(new DrawStep(memory, datastructure, collectionName, codePanel));
+        steps.add(new DrawStep(memory, dataStructure, collectionName, codePanel));
     }
 }
