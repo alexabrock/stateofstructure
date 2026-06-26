@@ -15,7 +15,7 @@ public class NodeBuilder {
         return node(id).with(attr("label", label));
     }
 
-    // needs to be unique, since graphviz merges Nodes with the same Name
+    // needs to be unique, since Graphviz merges Nodes with the same Name
     public static Node nullNode() {
         return getNode("")
                 .with(Shape.RECTANGLE)

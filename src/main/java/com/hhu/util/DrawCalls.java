@@ -50,7 +50,7 @@ public class DrawCalls {
     void record() {
 
         JPanel memory = PanelBuilder.createMemoryPanel(collection);
-        JPanel dataStructure = PanelBuilder.createDatastructurePanel(collection);
+        JPanel dataStructure = PanelBuilder.createDataStructurePanel(collection);
         JLabel collectionName = PanelBuilder.createNameLabel(collection.getClass().getSimpleName());
 
         int lineNumber = Caller.findCallerLine();

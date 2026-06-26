@@ -25,8 +25,8 @@ public class DrawStepPanel {
 
     /**
      * returns a Panel that holds the center part of the Application and a headline
-     * specifically, it holds the codePanel, the memoryPanel, the datastructurePanel
-     * and the datastructureName, which is the headline.
+     * specifically, it holds the codePanel, the memoryPanel, the dataStructurePanel
+     * and the dataStructureName, which is the headline.
      */
     public JPanel createCenterPanel(DrawStep step) {
         JPanel centerPanel = new JPanel(new BorderLayout(8, 8));
@@ -37,7 +37,7 @@ public class DrawStepPanel {
         JPanel codePanel = step.codePanel();
         codePanelScroller.scrollToHighlightedLine(codePanel);
 
-        JPanel workspacePanel = createWorkspacePanel(codePanel, step.memory(), step.datastructure());
+        JPanel workspacePanel = createWorkspacePanel(codePanel, step.memory(), step.dataStructure());
         centerPanel.add(workspacePanel, BorderLayout.CENTER);
 
         return centerPanel;
@@ -46,7 +46,7 @@ public class DrawStepPanel {
     /**
      * removes the current Panels in residesIn and replaces them with the panels
      * stored inside the DrawStep.
-     * Also updates the scrollPosition of the CodePanel to match the new highlited
+     * Also updates the scrollPosition of the CodePanel to match the new highlighted
      * line.
      */
     public void showStep(JPanel centerPanel, DrawStep step) {
@@ -57,7 +57,7 @@ public class DrawStepPanel {
         JPanel newCodePanel = step.codePanel();
         codePanelScroller.scrollToHighlightedLine(newCodePanel);
 
-        JPanel workspacePanel = createWorkspacePanel(newCodePanel, step.memory(), step.datastructure());
+        JPanel workspacePanel = createWorkspacePanel(newCodePanel, step.memory(), step.dataStructure());
         replace(centerPanel, layout, BorderLayout.CENTER, workspacePanel);
 
         centerPanel.revalidate();
@@ -73,12 +73,12 @@ public class DrawStepPanel {
     }
 
     /**
-     * Nests the code, memory and datastructure panel together, so they can be
+     * Nests the code, memory and data structure panel together, so they can be
      * resized during runtime.
      */
-    private JPanel createWorkspacePanel(JPanel codePanel, JPanel memoryPanel, JPanel datastructurePanel) {
-        // right splitPane:  Memory & Datastructure
-        JSplitPane rightSplit = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, memoryPanel, datastructurePanel);
+    private JPanel createWorkspacePanel(JPanel codePanel, JPanel memoryPanel, JPanel dataStructurePanel) {
+        // right splitPane:  Memory & Data structure
+        JSplitPane rightSplit = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, memoryPanel, dataStructurePanel);
         rightSplit.setResizeWeight(0.5); // 50:50
         rightSplit.setDividerSize(8);
 

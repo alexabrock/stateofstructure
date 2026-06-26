@@ -25,7 +25,7 @@ public class DrawStepPanelTest {
         
         when(drawStep.codePanel()).thenReturn(new JPanel());
         when(drawStep.memory()).thenReturn(new JPanel());
-        when(drawStep.datastructure()).thenReturn(new JPanel());
+        when(drawStep.dataStructure()).thenReturn(new JPanel());
         when(drawStep.name()).thenReturn(new JLabel("test"));
 
         JPanel jPanel = drawStepPanel.createCenterPanel(drawStep);

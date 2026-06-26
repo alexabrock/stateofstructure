@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -44,17 +43,17 @@ public class NavigationPanelTest {
     }
 
     @Test
-    public void createshouldContain4Buttons() {
+    public void createShouldContain4Buttons() {
         JPanel centerPanel = new JPanel();
 
         JPanel result = navigationPanel.create(centerPanel);
 
-        //compile, next & prev
+        // compile, next & prev
         assertEquals(4, result.getComponentCount());
     }
 
     @Test
-    public void createshouldContainCompileButton() {
+    public void createShouldContainCompileButton() {
         JPanel centerPanel = new JPanel();
 
         JPanel result = navigationPanel.create(centerPanel);
@@ -63,7 +62,7 @@ public class NavigationPanelTest {
     }
 
     @Test
-    public void createshouldContainPreviousButton() {
+    public void createShouldContainPreviousButton() {
         JPanel centerPanel = new JPanel();
 
         JPanel result = navigationPanel.create(centerPanel);
@@ -72,7 +71,7 @@ public class NavigationPanelTest {
     }
 
     @Test
-    public void createshouldContainNextButton() {
+    public void createShouldContainNextButton() {
         JPanel centerPanel = new JPanel();
 
         JPanel result = navigationPanel.create(centerPanel);
@@ -128,5 +127,4 @@ public class NavigationPanelTest {
         assertTrue(next.isEnabled());
     }
 
-    
 }

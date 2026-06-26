@@ -13,7 +13,7 @@ import com.hhu.util.DrawCalls;
 import com.hhu.util.compiler.Compiler;
 
 /*
- * Compiles the Text inside the codePanel and updated the Appliation.drawStep
+ * Compiles the Text inside the codePanel and updated the Application.drawStep
  * It uses the SwingWorker, since the calculation of the Graphs takes a while
  * and without SwingWorker, the calculation can't happen in the background and
  * the Application freezes until the compilation is done.
@@ -61,7 +61,7 @@ public class CompilationController {
                             );
                 } catch (ExecutionException e) {
                     /*
-                     * Incase the doInBackground went wrong, a ExecutionException is thrown.
+                     * If the doInBackground went wrong, a ExecutionException is thrown.
                      * The ExecutionException is a wrapper around, in this case, a
                      * CompilationException.
                      * The wrapped EXception is retrieved by e.getCause
@@ -81,7 +81,7 @@ public class CompilationController {
     }
 
     private void showCompiledDrawCalls(JPanel centerPanel, DrawCalls drawCalls) {
-        // forget the old Datastructure vizualisation, if the Code is recompiled
+        // forget the old data structure visualization, if the Code is recompiled
         applicationState.replaceDrawCalls(drawCalls);
         drawStepView.showStep(centerPanel, applicationState.nextStep());
     }

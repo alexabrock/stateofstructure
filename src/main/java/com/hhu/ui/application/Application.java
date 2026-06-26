@@ -47,8 +47,8 @@ public class Application {
 
     private void show() {
         /*
-         * need to initialize these, so the button logik is cleaner (button can just
-         * replace the existing code panels and doesnt need to check if they exist)
+         * need to initialize these, so the button logic is cleaner (button can just
+         * replace the existing code panels and doesn't need to check if they exist)
          */
         DrawStep firstStep = applicationState.nextStep();
         JPanel centerPanel = drawStepView.createCenterPanel(firstStep);

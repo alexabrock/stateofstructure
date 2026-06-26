@@ -27,7 +27,7 @@ public class TreeMapGraph {
         try {
             Field rootField = TreeMap.class.getDeclaredField("root");
             rootField.setAccessible(true);
-            // root is an Entry<K,V>, wich is a private nested class
+            // root is an Entry<K,V>, which is a private nested class
             Object root = rootField.get(map);
 
             return TreeGraphUtils.buildRecursive(

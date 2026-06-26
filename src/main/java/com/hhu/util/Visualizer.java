@@ -9,12 +9,12 @@ public class Visualizer {
     private Visualizer() {
     }
 
-    //changes the Datastructure to be visualized. If changed, the old visualizations are forgotten.
+    //changes the data structure to be visualized. If changed, the old visualizations are forgotten.
     public static void register(Object collection) {
         drawCalls = new DrawCalls(collection);
     }
 
-    //Captures the state of a datastructure
+    //Captures the state of a data structure
     public static void record() {
         if (drawCalls != null) {
             drawCalls.record();

@@ -14,7 +14,7 @@ import com.hhu.ui.Colors;
 import guru.nidi.graphviz.model.Graph;
 
 /**
- * Builds the DataStructure Panel. A simplified vizualization of a given
+ * Builds the DataStructure Panel. A simplified visualization of a given
  * collection.
  */
 public class DataStructurePanelBuilder {
@@ -22,18 +22,18 @@ public class DataStructurePanelBuilder {
     }
 
     /**
-     * Returns a JPanel, that holds the Datastructure-Representation of the given
+     * Returns a JPanel, that holds the data structure-Representation of the given
      * Collection.
      * To do so, it calls a Builder from GraphBuilderFactory.
      */
     public static JPanel create(Object collection) {
         try {
             Graph graph = colorize(GraphBuilder.buildGraph(collection));
-            return GraphPanel.create("Datastructure Visualization", graph.toString());
+            return GraphPanel.create("Data Structure Visualization", graph.toString());
 
         } catch (RuntimeException ex) {
             // if something went wrong, a Panel with the error is returned
-            JLabel error = new JLabel("Could not render Datastructure Visualization: " + ex.getMessage(),
+            JLabel error = new JLabel("Could not render Data Structure Visualization: " + ex.getMessage(),
                     SwingConstants.CENTER);
             JPanel panel = new JPanel(new BorderLayout());
             panel.add(error, BorderLayout.CENTER);

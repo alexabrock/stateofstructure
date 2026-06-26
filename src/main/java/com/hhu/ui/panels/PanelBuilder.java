@@ -15,9 +15,9 @@ import com.hhu.util.ThemeStyler;
 public class PanelBuilder {
     private PanelBuilder() {
     }
-    // The repeaded applyTheme calls are needed, so the individual panels are themed
+    // The repeated applyTheme calls are needed, so the individual panels are themed
 
-    public static JPanel createDatastructurePanel(Object collection) {
+    public static JPanel createDataStructurePanel(Object collection) {
         ThemeStyler.applyTheme();
         return DataStructurePanelBuilder.create(collection);
     }

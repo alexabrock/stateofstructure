@@ -46,13 +46,13 @@ public class Compiler {
                         "Environment error: No Java compiler was found. Please run StateOfStructure with a JDK, not a JRE.");
             }
 
-            String classpath = System.getProperty("java.class.path");
+            String classPath = System.getProperty("java.class.path");
 
             ByteArrayOutputStream errorStream = new ByteArrayOutputStream();
 
             int compilationResult = compiler.run(null, null,
                     errorStream,
-                    "-classpath", classpath,
+                    "-classpath", classPath,
                     "-d", COMPILED_CLASSES_DIR.toString(),
                     USER_SOURCE_FILE.toString());
 
@@ -105,17 +105,17 @@ public class Compiler {
          * The default ClassLoader doesn't reload a class once it got compiled and
          * loaded.
          * We want the ClassLoader to always reload the GraphVizApp as if it has never
-         * seen it bevore
-         * (thus not chaching any state).
+         * seen it before
+         * (thus not remembering any state).
          * 
          * Normally, the Classloader loads classes parent-first. Every Classloader,
          * except the very toplevel one, has a parent.
-         * When asked to load a class, it recursevely askes their parent
+         * When asked to load a class, it recursively asks their parent
          * "Have you already loaded this class?"
          * Only if no parent has seen the class, the bottom-level Classloader will load
          * the class itself.
          * 
-         * By overwriting loadClass this behaviour is changed.
+         * By overwriting loadClass this behavior is changed.
          * It now does child-first (aka load the class yourself) for GraphvizApp
          * But still delegated all other classes parent-first.
          */
@@ -193,9 +193,9 @@ public class Compiler {
 
         if (registerIdx == -1) {
             throw new CompilationException("""
-                    No 'Visualizer.register(your datastructure)' found in code.
+                    No 'Visualizer.register(your data structure)' found in code.
 
-                    Register a datastructure to start the visualization.""");
+                    Register a data structure to start the visualization.""");
         }
 
         // Find the semicolon of the register line to start processing AFTER it

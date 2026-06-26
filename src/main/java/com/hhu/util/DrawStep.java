@@ -4,18 +4,18 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
- * Filled with JPanels that capture the Memory View, the Datastructure View the
+ * Filled with JPanels that capture the Memory View, the Data structure View the
  * Name and the Code View from a state of a Collection
  */
 public class DrawStep {
     private JPanel memory;
-    private JPanel datastructure;
+    private JPanel dataStructure;
     private JLabel name;
     private JPanel codePanel;
 
-    public DrawStep(JPanel memory, JPanel datastructure, JLabel name, JPanel codePanel) {
+    public DrawStep(JPanel memory, JPanel dataStructure, JLabel name, JPanel codePanel) {
         this.memory = memory;
-        this.datastructure = datastructure;
+        this.dataStructure = dataStructure;
         this.name = name;
         this.codePanel = codePanel;
     }
@@ -28,8 +28,8 @@ public class DrawStep {
         return memory;
     }
 
-    public JPanel datastructure() {
-        return datastructure;
+    public JPanel dataStructure() {
+        return dataStructure;
     }
 
     public JLabel name() {

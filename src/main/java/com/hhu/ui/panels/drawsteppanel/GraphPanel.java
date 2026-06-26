@@ -52,7 +52,7 @@ class GraphPanel {
                 .height(600)
                 .render(Format.SVG)
                 .toString();
-                
+
         // Behebt den Apache Batik Fehler, indem "transparent" durch "none" ersetzt wird
         svg = svg.replace("\"transparent\"", "\"none\"").replace(":transparent", ":none");
 
@@ -75,6 +75,7 @@ class GraphPanel {
         return panel;
     }
 
+    //Needed, since already existing Zoom behavior did not satisfy
     private static final class SvgGraphCanvas extends JSVGCanvas {
         private static final double MIN_ZOOM = 0.2;
         private static final double MAX_ZOOM = 5.0;

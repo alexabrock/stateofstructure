@@ -39,9 +39,9 @@ public class MemoryPanelBuilder {
     }
 
     /**
-     * Ignores Fields, that are not relevant to the state of the datastructure, are
-     * always null unless accessed first or add unneccessary noise to the
-     * datastructure-vizualisation.
+     * Ignores Fields, that are not relevant to the state of the data structure, are
+     * always null unless accessed first or add unnecessary noise to the
+     * data structure-visualization.
      */
     private static String createDot(Object collection) {
         return new LJV()

@@ -25,7 +25,7 @@ public class TreeGraphUtils {
         Class<?> entryClass = entry.getClass();
 
         // get Fields
-        //the label field is called different things in the datastructure
+        //the label field is called different things in the data structure
         Field[] labelFields = getFields(entryClass, labelFieldNames);
         //all trees call this left and right
         Field leftField = getField(entryClass, "left");
