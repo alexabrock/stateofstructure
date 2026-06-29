@@ -2,17 +2,14 @@ package com.hhu.datastructureview.graphbuilder.impl.progra;
 
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.TreeSet;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import com.hhu.datastructureview.GraphBuilder;
-import com.hhu.progradatastructures.generic.PrograHashSet;
-
 import com.hhu.datastructureview.graphbuilder.impl.LabelChecker;
+import com.hhu.progradatastructures.generic.PrograHashSet;
 
 import guru.nidi.graphviz.model.MutableGraph;
 

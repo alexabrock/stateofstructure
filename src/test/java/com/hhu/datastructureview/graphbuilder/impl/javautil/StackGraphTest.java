@@ -3,14 +3,12 @@ package com.hhu.datastructureview.graphbuilder.impl.javautil;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Stack;
-import java.util.TreeMap;
 import java.util.TreeSet;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import com.hhu.datastructureview.GraphBuilder;
-
 import com.hhu.datastructureview.graphbuilder.impl.LabelChecker;
 
 //Mutable graph, weil man so schön an die einzelnen Nodes zum testen kommt

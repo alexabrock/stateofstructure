@@ -3,14 +3,12 @@ package com.hhu.datastructureview.graphbuilder.impl.javautil;
 import static org.junit.Assert.assertTrue;
 
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.TreeSet;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import com.hhu.datastructureview.GraphBuilder;
-
 import com.hhu.datastructureview.graphbuilder.impl.LabelChecker;
 
 import guru.nidi.graphviz.model.MutableGraph;

@@ -3,7 +3,6 @@ package com.hhu.datastructureview.graphbuilder.impl.javautil;
 import static org.junit.Assert.assertTrue;
 
 import java.util.LinkedHashSet;
-import java.util.Stack;
 import java.util.TreeSet;
 
 import org.junit.Before;

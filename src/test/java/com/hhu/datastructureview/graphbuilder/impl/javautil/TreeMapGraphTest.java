@@ -10,7 +10,6 @@ import org.junit.Test;
 
 import com.hhu.datastructureview.GraphBuilder;
 import com.hhu.datastructureview.graphbuilder.impl.LabelChecker;
-import com.hhu.progradatastructures.generic.PrograHashSet;
 
 //Mutable graph, weil man so schön an die einzelnen Nodes zum testen kommt
 import guru.nidi.graphviz.model.MutableGraph;
