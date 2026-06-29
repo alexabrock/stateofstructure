@@ -18,7 +18,7 @@ public class LabelChecker {
         }
     }
     
-    // Für den Fall, dass direkt der Node-Name geprüft wird (Klasse benutzt Node builder nicht, weil sie nur unique Nodes beinhalten darf (Sets))
+    // Für den Fall, dass direkt der Node-Name geprüft wird (Klasse benutzt Node builder nicht, weil sie nur unique Nodes beinhalten darf (LinkedHashSets))
     public static void checkContainsNames(Collection<MutableNode> nodes, String... expectedNames) {
         for (String name : expectedNames) {
             boolean found = nodes.stream().anyMatch(n -> n.name() != null && n.name().toString().equals(name));
