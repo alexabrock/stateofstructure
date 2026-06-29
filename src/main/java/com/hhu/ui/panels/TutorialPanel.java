@@ -18,7 +18,7 @@ class TutorialPanel extends JPanel {
     private final CardLayout cardLayout = new CardLayout();
     private final JPanel slideContainer = new JPanel(cardLayout);
     private int currentSlide = 1;
-    private static final int  TOTAL_SLIDES = 4;
+    private static final int TOTAL_SLIDES = 6;
 
     TutorialPanel(JPanel parent) {
         // 1. Find the top-level Window to attach the Dialog
@@ -36,8 +36,7 @@ class TutorialPanel extends JPanel {
         // 4. Setup Control Buttons
         dialog.add(createControlPanel(dialog), BorderLayout.SOUTH);
 
-        // 5. Display Settings
-        dialog.pack(); 
+        dialog.pack();
         dialog.setSize(1000, 800);
         dialog.setLocationRelativeTo(parent); // Centers over the parent panel
         dialog.setVisible(true);
@@ -48,13 +47,17 @@ class TutorialPanel extends JPanel {
                 createPrettySlide("welcome.png"), "1");
         slideContainer.add(
                 createPrettySlide("recording.png"), "2");
-                
+
         slideContainer.add(
                 createPrettySlide("navigation.png"), "3");
 
         slideContainer.add(
                 createPrettySlide("compileButton.png"), "4");
-                
+        slideContainer.add(
+                createPrettySlide("graphviz.png"), "5");
+        slideContainer.add(
+                createPrettySlide("repo.png"), "6");
+
     }
 
     private JPanel createPrettySlide(String imagePath) {
@@ -105,8 +108,7 @@ class TutorialPanel extends JPanel {
                 if (currentSlide > 1) {
                     prevBtn.setEnabled(true);
                 }
-            }
-            else {
+            } else {
                 dialog.dispose();
             }
         });
