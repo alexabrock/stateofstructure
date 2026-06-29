@@ -2,6 +2,10 @@ package com.hhu.datastructureview.graphbuilder.impl.progra;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.TreeSet;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -43,6 +47,22 @@ public class PrograHashSetGraphTest {
         MutableGraph graph = createMutableGraph();
 
         LabelChecker.checkContainsLabels(graph.nodes(), "Lotte", "Dieter", "Alexa", "Holland");
+    }
+
+    @Test
+    public void graphContainsNestedDataStructure() {
+        TreeSet<String> set = new TreeSet<>();
+        set.add("Lotte");
+        set.add("Dieter");
+        set.add("Alexa");
+        set.add("Holland");
+
+        PrograHashSet<TreeSet<String>> nested = new PrograHashSet<>();
+        nested.insert(set);
+
+        MutableGraph graph = (MutableGraph) GraphBuilder.buildGraph(nested);
+
+        LabelChecker.checkContainsLabels(graph.nodes(), set.toString());
     }
 
     @Test

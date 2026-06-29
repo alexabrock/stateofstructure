@@ -10,6 +10,7 @@ import org.junit.Test;
 import com.hhu.datastructureview.GraphBuilder;
 
 import com.hhu.datastructureview.graphbuilder.impl.LabelChecker;
+import com.hhu.progradatastructures.generic.PrograHashSet;
 
 import guru.nidi.graphviz.model.MutableGraph;
 
@@ -41,10 +42,27 @@ public class TreeSetGraphTest {
         set.add("Dieter");
         set.add("Alexa");
         set.add("Holland");
-        
+
         MutableGraph graph = createMutableGraph();
 
         LabelChecker.checkContainsLabels(graph.nodes(), "Lotte", "Dieter", "Alexa", "Holland");
+    }
+    
+    @Test
+    public void graphContainsNestedDataStructure() {
+        TreeSet<String> sset = new TreeSet<>();
+        sset.add("Lotte");
+        sset.add("Dieter");
+        sset.add("Alexa");
+        sset.add("Holland");
+
+        // Comparator übergeben
+        TreeSet<TreeSet<String>> nested = new TreeSet<>((set1, set2) -> Integer.compare(set1.size(), set2.size()));
+        nested.add(sset);
+
+        MutableGraph graph = (MutableGraph) GraphBuilder.buildGraph(nested);
+
+        LabelChecker.checkContainsLabels(graph.nodes(), sset.toString());
     }
 
     @Test

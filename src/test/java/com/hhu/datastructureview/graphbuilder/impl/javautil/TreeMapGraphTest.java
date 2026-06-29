@@ -3,12 +3,14 @@ package com.hhu.datastructureview.graphbuilder.impl.javautil;
 import static org.junit.Assert.assertTrue;
 
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import com.hhu.datastructureview.GraphBuilder;
 import com.hhu.datastructureview.graphbuilder.impl.LabelChecker;
+import com.hhu.progradatastructures.generic.PrograHashSet;
 
 //Mutable graph, weil man so schön an die einzelnen Nodes zum testen kommt
 import guru.nidi.graphviz.model.MutableGraph;
@@ -41,7 +43,7 @@ public class TreeMapGraphTest {
         tree.put("Dieter", 2);
         tree.put("Alexa", 3);
         tree.put("Holland", 4);
-        
+
         MutableGraph graph = createMutableGraph();
 
         assertTrue(graph.nodes().stream()
@@ -55,6 +57,22 @@ public class TreeMapGraphTest {
 
         assertTrue(graph.nodes().stream()
                 .anyMatch(n -> n.get("label") != null && n.get("label").toString().equals("Holland, 4")));
+    }
+    
+    @Test
+    public void graphContainsNestedDataStructure() {
+        TreeSet<String> set = new TreeSet<>();
+        set.add("Lotte");
+        set.add("Dieter");
+        set.add("Alexa");
+        set.add("Holland");
+
+        TreeMap<String, TreeSet<String>> nested = new TreeMap<>();
+        nested.put("Key1", set);
+
+        MutableGraph graph = (MutableGraph) GraphBuilder.buildGraph(nested);
+
+        LabelChecker.checkContainsLabels(graph.nodes(), "Key1, "+ set.toString());
     }
     
 

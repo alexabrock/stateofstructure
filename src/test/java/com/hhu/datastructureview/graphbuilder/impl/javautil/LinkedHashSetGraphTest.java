@@ -3,6 +3,8 @@ package com.hhu.datastructureview.graphbuilder.impl.javautil;
 import static org.junit.Assert.assertTrue;
 
 import java.util.LinkedHashSet;
+import java.util.Stack;
+import java.util.TreeSet;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,8 +44,24 @@ public class LinkedHashSetGraphTest {
         hashSet.add("Holland");
 
         MutableGraph graph = createMutableGraph();
-        
+
         LabelChecker.checkContainsNames(graph.nodes(), "Lotte", "Dieter", "Alexa", "Holland");
+    }
+    
+    @Test
+    public void graphContainsNestedDataStructure() {
+        TreeSet<String> set = new TreeSet<>();
+        set.add("Lotte");
+        set.add("Dieter");
+        set.add("Alexa");
+        set.add("Holland");
+
+        LinkedHashSet<TreeSet<String>> nested = new LinkedHashSet<>();
+        nested.add(set);
+
+        MutableGraph graph = (MutableGraph) GraphBuilder.buildGraph(nested);
+
+        LabelChecker.checkContainsNames(graph.nodes(), set.toString());
     }
 
     @Test

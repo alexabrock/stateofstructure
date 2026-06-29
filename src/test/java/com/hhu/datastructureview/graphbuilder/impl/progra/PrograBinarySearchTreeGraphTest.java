@@ -2,12 +2,14 @@ package com.hhu.datastructureview.graphbuilder.impl.progra;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.TreeSet;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import com.hhu.datastructureview.GraphBuilder;
 import com.hhu.progradatastructures.generic.PrograBinarySearchTree;
-
+import com.hhu.progradatastructures.generic.PrograHashSet;
 import com.hhu.datastructureview.graphbuilder.impl.LabelChecker;
 
 import guru.nidi.graphviz.model.MutableGraph;
@@ -44,6 +46,10 @@ public class PrograBinarySearchTreeGraphTest {
 
         LabelChecker.checkContainsLabels(graph.nodes(), "Lotte", "Dieter", "Alexa", "Holland");
     }
+
+    // graphContainsNestedDataStructure() macht hier keinen Sinn, weil
+    // datenstrukturen nicht miteinander comparable sind, PrograLinkedList aber nur
+    // add(<T extends Comparable<T>> t) kann
 
     @Test
     public void graphEmpty() {

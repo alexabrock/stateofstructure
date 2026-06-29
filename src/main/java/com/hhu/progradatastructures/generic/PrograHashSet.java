@@ -1,7 +1,7 @@
 package com.hhu.progradatastructures.generic;
 
 public class PrograHashSet<T>{
-    //kleine size, weil Progra HashSet kein resizing supportet, mit großem Array aber die Visualisierung kaputt geht
+    //kleine size, weil Progra HashSet kein resizing supported, mit großem Array aber die Visualisierung kaputt geht
     private final static int SIZE = 15;
     private Object[] objects = new Object[SIZE];
     // man kann leider keine Arrays mit generischen Typ anlegen

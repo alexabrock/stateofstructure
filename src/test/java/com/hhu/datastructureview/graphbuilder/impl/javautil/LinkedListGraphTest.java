@@ -3,6 +3,8 @@ package com.hhu.datastructureview.graphbuilder.impl.javautil;
 import static org.junit.Assert.assertTrue;
 
 import java.util.LinkedList;
+import java.util.Stack;
+import java.util.TreeSet;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -45,6 +47,22 @@ public class LinkedListGraphTest {
 
         MutableGraph graph = createMutableGraph();
         LabelChecker.checkContainsLabels(graph.nodes(), "Lotte", "Dieter", "Alexa", "Holland");
+    }
+
+    @Test
+    public void graphContainsNestedDataStructure() {
+        TreeSet<String> set = new TreeSet<>();
+        set.add("Lotte");
+        set.add("Dieter");
+        set.add("Alexa");
+        set.add("Holland");
+
+        LinkedList<TreeSet<String>> nested = new LinkedList<>();
+        nested.add(set);
+
+        MutableGraph graph = (MutableGraph) GraphBuilder.buildGraph(nested);
+
+        LabelChecker.checkContainsLabels(graph.nodes(), set.toString());
     }
 
     @Test
