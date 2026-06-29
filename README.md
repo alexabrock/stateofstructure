@@ -14,6 +14,17 @@ Before running the project, install:
 2. **Graphviz**  
 StateOfStructure uses Graphviz to render visual representations of data structures. Install it from the official [Graphviz download page](https://graphviz.org/download/) and make sure the Graphviz executables are available on your system path.
 
+# Starting the Application
+
+After downloading the latest release from the official [GitHub repository](https://github.com/alexabrock/stateofstructure/releases), you can launch the application by running the following command in your terminal:
+
+```bash
+java -jar stateofstructure-1.0-SNAPSHOT.jar 
+```
+Ensure that you have Java Runtime Environment (JRE) installed and that your terminal is navigated to the directory containing the downloaded file.
+
+From State to Structure is a Swing desktop application. Therefore, it needs a graphical desktop environment. It is not intended to be used only inside a headless terminal session.
+
 ## How the tool works
 
 The workflow is simple:
@@ -67,43 +78,6 @@ StateOfStructure currently contains graph builders for these structures:
 - `PrograBinarySearchTree`
 - `PrograHashSet`
 - `PrograLinkedList`
-
-## Running the application
-
-### Windows
-
-```powershell
-.\mvnw.cmd clean compile exec:exec
-```
-
-
-### macOS / Linux
-
-```bash
-mvn clean compile exec:exec
-```
-
-## Running tests
-
-### Windows
-
-```powershell
-.\mvnw.cmd clean install
-```
-
-### macOS / Linux
-
-```bash
-mvn clean install
-```
-
-## Build a packaged JAR
-
-```bash
-mvn clean package
-```
-
-The Maven Shade plugin creates a runnable shaded artifact during the package phase.
 
 ## How to write examples for the application
 
