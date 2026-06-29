@@ -11,7 +11,7 @@ import com.hhu.ui.panels.PanelBuilder;
 public class DrawCalls {
 
     private LinkedList<DrawStep> steps = new LinkedList<>();
-    private Object collection;
+    private final Object collection;
     // -1, damit mit nextStep() das 1. (0.) Element returnt wird
     private int currentStepIndex = -1;
 
