@@ -48,18 +48,18 @@ public class PrograHashSetGraphTest {
 
     @Test
     public void graphContainsNestedDataStructure() {
-        TreeSet<String> set = new TreeSet<>();
-        set.add("Lotte");
-        set.add("Dieter");
-        set.add("Alexa");
-        set.add("Holland");
+        TreeSet<String> sset = new TreeSet<>();
+        sset.add("Lotte");
+        sset.add("Dieter");
+        sset.add("Alexa");
+        sset.add("Holland");
 
         PrograHashSet<TreeSet<String>> nested = new PrograHashSet<>();
-        nested.insert(set);
+        nested.insert(sset);
 
         MutableGraph graph = (MutableGraph) GraphBuilder.buildGraph(nested);
 
-        LabelChecker.checkContainsLabels(graph.nodes(), set.toString());
+        LabelChecker.checkContainsLabels(graph.nodes(), sset.toString());
     }
 
     @Test
