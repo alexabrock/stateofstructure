@@ -11,7 +11,7 @@ import org.atpfivt.ljv.LJV;
 import com.hhu.ui.Colors;
 
 /**
- * Builds the Memory Panel. An abstract vizualisation of a given collection in
+ * Builds the Memory Panel. An abstract visualization of a given collection in
  * the Java-Heap.
  */
 public class MemoryPanelBuilder {
@@ -24,7 +24,13 @@ public class MemoryPanelBuilder {
      */
     public static JPanel create(Object collection) {
         String dot = colorize(createDot(collection));
-
+        //Bugfix: empty Arraylist
+        // Even though the empty graph builder works, the LJV cannot render the empty
+        // Array
+        // that gets displayed when the List is empty (has no capacity, tries to render a
+        // html table without any content)
+        // replaces empty html table tag
+        dot = dot.replaceAll("<tr>\\s*</tr>", "<tr><td>&lt;empty&gt;</td></tr>");
         try {
 
             return GraphPanel.create("Memory Visualization", dot);
